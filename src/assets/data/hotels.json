@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Temban Blaise Ayim",
+    "location": {
+      "departure_town": "Toyo",
+      "arrival_town": "New York",
+      "departure_date": "23/12/2022",
+      "arrival_date": "23/12/2022",
+      "document": true,
+      "computer": true,
+      "qty": 60,
+      "coordinates": {
+        "lat": "48.87171698",
+        "long": "2.34947227"
+      }
+    },
+    "phone": "065465165",
+    "doc": [
+      "document",
+      "none"
+    ],
+    "pc": [
+      "pc",
+      "none"
+    ],
+    "pricing": {
+      "doc": {
+        "document": 265,
+        "none": 150
+      },
+      "pc": {
+        "pc": 20,
+        "none": 0
+      }
+    },
+    "rating": {
+      "delivery": 4,
+      "punctuality": 4,
+      "stat": 4,
+      "honesty": 4
+    },
+    "desc": "Hôtel l'Echiquier Opéra Paris offers luxury accommodations in the heart of Paris, i dont want bottles.",
+    "img": "59710428"
+  }
+]
