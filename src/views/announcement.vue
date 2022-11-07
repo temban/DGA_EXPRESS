@@ -11,7 +11,7 @@
   <header>
 
     <!-- here’s the avatar -->
-    <a href="https://tutsplus.com">
+    <a href="https://tutsplus.com"> 
       <img src="@/assets/img/hotels/59710428.jpg">
     </a> 
 

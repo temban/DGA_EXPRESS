@@ -9,7 +9,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">My Reservation</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Réservation du client</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -24,7 +24,7 @@
 				<form id="Highlighted-form" class="col-sm-6 col-sm-offset-3">
                        <div class="form-group">
                               <div class="controls">
-                                <h6>Receiver's Name</h6>
+                                <h6>Nom du destinataire</h6>
                                 <input
                                   v-model="receiver"
                                   id="contact-mail"
@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                               <div class="controls">
-                                <h6>Receiver's Phone Number</h6>
+                                <h6 style="display:flex;width:400px">Numéro de téléphone du destinataire</h6>
                                 <input
                                   v-model="tel"
                                   id="contact-mail"
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                               <div class="controls">
-                                <h6>Receiver's ID Number</h6>
+                                <h6 style="display:flex;width:400px">Numéro d'identification du destinataire</h6>
                                 <input
                                   v-model="cardNumber"
                                   id="contact-mail"
@@ -80,7 +80,7 @@
                             
 					  <div class="controls">
                         <input v-model="annDtouserDtoId" type="hidden">
-						<h6>Total Price</h6><input v-model="totalprice" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+						<h6>Prix Total</h6><input v-model="totalprice" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-money" style="margin-bottom:-30px"></i>
                         
 					  </div>
@@ -88,55 +88,55 @@
                     <div class="form-group">
 					 
 					  <div class=" controls">
-					<h6> Reservation Date</h6><input v-model="date"  id="contact-mail" name="email" class="form-control requiredField Highlighted-label" type="text" readonly>
+					<h6> Date de réservation</h6><input v-model="date"  id="contact-mail" name="email" class="form-control requiredField Highlighted-label" type="text" readonly>
 						<i class="fa fa-calendar"></i>
 					  </div>
 					</div>
                     <div class="form-group">
 					 
 						<div class="controls">
-						<h6>My Description</h6>   <textarea v-model="description" id="contact-message" name="comments" placeholder="Your message" class="form-control requiredField Highlighted-label"  rows="6" readonly></textarea>
+						<h6>La Description</h6>   <textarea v-model="description" id="contact-message" name="comments" placeholder="Your message" class="form-control requiredField Highlighted-label"  rows="6" readonly></textarea>
 						<i class="fa fa-comment"></i>
 						</div>
 					</div><!-- End textarea -->
-                       <hr> 
-                        <h5 class="modal-title" id="exampleModalLabel">Announcement Info</h5>
-
-
+          <div style="display:flex;width:400px"> <hr /> </div>
+                           
+                           <h5 class="modal-title" id="exampleModalLabel" style="display:flex;width:300px">
+                             Informations sur l'annonce </h5>
                        <!-- End name input -->
 						
 					<div class="form-group">
                             
 					  <div class="controls">
-						<h6>Traveller</h6><input v-model="annDtoFirstName" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+						<h6>Voyageur</h6><input v-model="annDtoFirstName" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-user" style="margin-bottom:-30px"></i>
 					  </div>
 					</div><!-- End name input -->
                       <div class="form-group">
                             
 					  <div class="controls">
-						<h6>Departure Town</h6><input v-model="annDtoDeparturetown" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+						<h6>Ville de départ</h6><input v-model="annDtoDeparturetown" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-map-marker" style="margin-bottom:-30px"></i>
 					  </div>
 					</div><!-- End name input -->
                     <div class="form-group">
                             
 					  <div class="controls">
-						<h6>Arrival town</h6><input v-model="annDtodestinationtown" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+						<h6>ville de destination</h6><input v-model="annDtodestinationtown" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-map-marker" style="margin-bottom:-30px"></i>
 					  </div>
 					</div><!-- End name input -->
 					<div class="form-group">
                             
 					  <div class="controls">
-						<h6>Departure Date</h6><input v-model="annDtoDeparturedate" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+						<h6>Date de départ</h6><input v-model="annDtoDeparturedate" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-calendar" style="margin-bottom:-30px"></i>
 					  </div>
 					</div><!-- End name input -->
                     <div class="form-group">
 					
 					  <div class="controls">
-					<h6>Arrival Date</h6> <input v-model="annDtoArrivaldate" id="contact-name" name="contactName"  class="form-control requiredField Highlighted-label" data-new-placeholder="Your name" type="text" readonly>
+					<h6>Date d'arrivée</h6> <input v-model="annDtoArrivaldate" id="contact-name" name="contactName"  class="form-control requiredField Highlighted-label" data-new-placeholder="Your name" type="text" readonly>
 						<i class="fa fa-calendar"></i>
 					  </div>
 					</div>
@@ -144,17 +144,43 @@
 					  <div class="form-group">
 					
 					  <div class=" controls">
-                    <h6>Announcement kilo Qty</h6>  <input v-model="annDtoQty" id="contact-mail" name="email" class="form-control requiredField Highlighted-label"  type="email"  readonly>
+                    <h6>Qté de kilo disponible</h6>  <input v-model="annDtoQty" id="contact-mail" name="email" class="form-control requiredField Highlighted-label"  type="email"  readonly>
 						<i class="fa fa-balance-scale" aria-hidden="true"></i>
 					  </div>
 			
                     <div class="form-group1">
 					  <div class="controls">
-					<h6>Announcement price /kg</h6> <input v-model="annDtoPrice" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+					<h6>prix /kg</h6> <input v-model="annDtoPrice" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
 						<i class="fa fa-money"></i>
 					  </div>
 					</div>
 		            </div>
+
+                <div class="form-group">
+					
+          <div class=" controls">
+                  <h6>Qté de kilo disponible</h6>  <input v-model="annDtoQty" id="contact-mail" name="email" class="form-control requiredField Highlighted-label"  type="email"  readonly>
+          <i class="fa fa-balance-scale" aria-hidden="true"></i>
+          </div>
+              </div>
+
+              <div class="form-group">
+					
+          <div class=" controls">
+                  <h6>Method de Paiement</h6>  
+                  <a v-if="cop" style="position:absolute; right:-163px; top:-2px"><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
+                                                               
+                                                                <a style="position:absolute; right:-163px; top:-2px" v-else><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
+                                                                      
+                  <input v-model="paymentMethod" id="contact-mail" name="email" class="form-control requiredField Highlighted-label"  type="email"  readonly>
+                  <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+<i class="fa fa-mobile" style="font-size:35px" v-else></i>
+          </div>
+              </div>
+
+            
                     <!-- End email input -->
 					<div class="form-group">
 					 
@@ -287,17 +313,17 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Recent Comments</h4>
+                    <h4 class="card-title">{{firstname+ " " +lastname}}</h4>
                     <table class="table">
                         <thead>
-                           <tr> <th scope="col">Owner</th>
-              <th scope="col">Source Town</th>
-              <th scope="col">Destination Town</th>
+                           <tr> <th scope="col">Propriétaire</th>
+              <th scope="col">ville de départ</th>
+              <th scope="col">ville de destination</th>
                  <th scope="col">Documents</th>
-              <th scope="col"> Reserved Qty</th>
-                 <th scope="col">Computers</th>
-               <th scope="col"> Confirmation Status</th>
-        
+              <th scope="col"> Quantité réservée</th>
+                 <th scope="col">Ordinateur</th>
+               <th scope="col">Confirmation</th>
+               <th class="font-w700">Suivi</th>
           <th  scope="col"> Action</th>
         </tr>
       </thead>
@@ -321,7 +347,29 @@
                               <td v-else>
                               <span class="badge badge-warning font-weight-100">Pending...</span>
                             </td>
-     
+
+                            <td v-if="user.track === 'complete' "> 
+<a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(user)">
+<img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
+    image-resolution: 3000000dpi;
+    background-color: #000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    max-height: 100%;
+    height: 50px; 
+    width: 45px;
+    margin-bottom: -15px;
+    margin-top: 0px; 
+    border: 2px solid black;
+  " />
+</a>
+ 
+</td>
+<td v-else>
+<span class="badge badge-warning font-weight-100">En Cour...</span>
+</td>
                         <td>
             <form>
                  <!-- <button  v-on:click="view(user.id)" data-target="#exampleModal" data-toggle="modal" style="height:45px; width:40px;  margin-right:5px;" type="button" class="btn btn-sm btn-info mr-1" disabled><i class="fa fa-eye" style="font-size:20px"></i></button>--> 
@@ -374,6 +422,8 @@ export default {
       users: [],
       userId:localStorage.getItem('userId'),
          id: this.$route.params.id,
+         firstname: this.$route.params.firstName,
+      lastname: this.$route.params.lastName,
       date:'',
       totalprice:'',
    description:'',
@@ -389,8 +439,10 @@ export default {
   annDtoStatus:"",
   annDtouserDtoId:"",
 cardNumber:'',
+cop: false,
       tel:'',
       receiver:'',
+      paymentMethod:''
     }
   },
      components: {
@@ -398,6 +450,9 @@ cardNumber:'',
   },
 
    async created() {
+
+
+    
    var axios = require('axios');
 
 var config = {
@@ -424,6 +479,21 @@ axios(config)
 
   },
   methods: {
+    copyText() {
+      navigator.clipboard.writeText(this.paymentMethod).then(() => {
+        this.cop = true;
+        alert('text copied: ' + this.paymentMethod)
+      })
+    },
+
+    sendPaymentProof(item){
+console.log("items", item)
+let sendPaymentProof = [];
+sendPaymentProof = item;
+localStorage.setItem("sendPaymentProof", JSON.stringify(sendPaymentProof))
+window.location.href="/employeeSendRevPaymentProof"
+
+},
 
 
 lockedAnn(){
@@ -475,6 +545,7 @@ axios(config)
         this.totalprice =  res.data.totalprice
         this.receiver = res.data.receiver;
           this.cardNumber =  res.data.receivernumbercni;
+          this.paymentMethod = res.data.announcementDto.paymentMethod;
           this.tel =  res.data.tel;
         //localStorage.setItem('refresh-token', refreshtoken);
         //localStorage.setItem('access-token', accesstoken);
@@ -492,20 +563,20 @@ window.location.href = "/"
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     width: 7000,
-    confirmButton: 'btn btn-success',
+    confirmButton: 'btn btn-success ml-3',
     cancelButton: 'btn btn-danger'
   },
   buttonsStyling: false
 })
 
 swalWithBootstrapButtons.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Yes, delete it!',
-  cancelButtonText: 'No, cancel!',
-  reverseButtons: true
+  title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas revenir en arrière!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui,  Supprimer',
+                cancelButtonText: 'Non, Annuler!',
+                reverseButtons: true
 }).then((result) => {
   if (result.isConfirmed) {
 
@@ -531,20 +602,11 @@ axios(config)
 
     swalWithBootstrapButtons.fire(
 
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
+      'supprimé!',
+                        'Cette Reservation a été supprimé.',
+                        'success'
     )
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-    swalWithBootstrapButtons.fire(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-    )
-  }
+  } 
 })
       },
 
@@ -724,5 +786,13 @@ axios(config)
 #Highlighted-form.no-placeholder .error-message {
     top:0;
 }
+.mye{
+  height: 42px;
+  background: #D1D1D1;
 
+
+}
+.cop {
+  color: #0f0;
+}
 </style>

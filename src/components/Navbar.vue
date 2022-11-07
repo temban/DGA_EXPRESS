@@ -3,12 +3,15 @@
 
     <section class="navigation">
   <div class="nav-container">
-    <div class="brand">
-      <a href="/">Accueil</a>
-    </div>
+   
     <nav>
       <div class="nav-mobile"><a id="navbar-toggle" href="#!"><span></span></a></div>
       <ul class="nav-list">
+
+        <li class="brand">
+      <a href="/">Accueil</a>
+        </li>
+        
         <!-- <li>
           
           <a href="#!">Home</a>
@@ -16,30 +19,20 @@
         <li>
           <a href="#!">About</a>
         </li> -->
-        <li>
-         
-          <a >Les Voyages</a>
-          <ul class="navbar-dropdown">
-            <li v-if="isLogged === true">
+        <li >
+              <a  href="/Announcements">Tous les Voyages</a>
+            </li>
+        
+        <li v-if="isLogged === true">
               <a  href="/MyAnnouncements">Ajouter un Voyage</a>
             </li>
-            <li >
-              <a href="/Announcements">Tous les Voyages</a>
+            <li>
+              <a  href="/MarketPlace">Tous les Articles</a>
             </li>
-          </ul>
-        </li>
-        
-        <li>
-          <a >Marketplace</a>
-          <ul class="navbar-dropdown">
-            <li v-if="isLogged === true">
+        <li v-if="isLogged === true">
               <a href="/MyArticles">Ajouter un Article</a>
             </li>
-            <li>
-              <a href="/MarketPlace">Tous les Articles</a>
-            </li>
-          </ul>
-        </li>
+           
         <li>
           <a href="/About">À propos de nous</a>
         </li>
@@ -168,7 +161,7 @@ export default {
 }
 .brand {
     position: absolute;
-    padding-left: 10px;
+    left: 0;
     float: left; 
     line-height: 55px;
     font-size: 1.6em;
@@ -199,13 +192,11 @@ nav ul li a,nav ul li a:visited {
     padding: 0 20px;
     line-height: 55px;
     color: rgb(10, 10, 10);
-    background: rgb(233, 244, 253) ;
     text-decoration: none;
     
 }
 nav ul li a{
     background: transparent;
-    color: #FFF;
     
 }
 nav ul li a:hover, nav ul li a:visited:hover {

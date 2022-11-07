@@ -177,6 +177,9 @@ export default {
   name: "marketPlaceNav",
   data() {
     return {
+      newValidated:"",
+      addReservation:"",
+      confirmReservation:"",
       total: 0,
       basket: [],
       quantities: [],
@@ -218,6 +221,248 @@ export default {
       deep: true,
     },
   },
+  mounted(){
+    document.getElementById('span').style.display = 'none';
+    document.getElementById('money').style.display = 'none';
+    
+    function notifications() {
+         
+      document.getElementById("money").innerHTML = localStorage.getItem("notificationSizeValidated")
+      if(localStorage.getItem("notificationSizeValidated") !== null){
+    document.getElementById('money').style.display = 'block';
+  } else{
+    document.getElementById('money').style.display = 'none';
+  }
+
+      if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
+    document.getElementById('span').style.display = 'block';
+  } else{
+    document.getElementById('span').style.display = 'none';
+  }
+   
+}setInterval(notifications, 1000)
+
+
+
+    if(localStorage.getItem("notificationSizeValidated") !== null){
+    
+    this.newValidated = localStorage.getItem("notificationSizeValidated");
+    
+  } 
+  else{
+    this.newValidated = 0;
+  } 
+
+  if(localStorage.getItem("addreservation") !== null){
+    
+    this.addReservation = localStorage.getItem("addreservation");
+    this.notif = true;
+  } 
+  else{
+    this.addReservation = 0;
+  } 
+  if(localStorage.getItem("confirmReservation") !== null){
+    
+    this.confirmReservation = localStorage.getItem("confirmReservation");
+    this.notif = true;
+  } 
+  else{
+    this.confirmReservation = 0;
+    
+  } 
+
+
+
+console.log(localStorage.getItem("notificationSizeValidated"))
+  var x = 0;
+  var y = 0;
+  
+let notif = (title, body) => {
+     const options = {
+       body: body,
+       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
+       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
+     };
+     const n = new Notification(title, options)
+     console.log(n);
+   }
+
+function myFunction() {
+
+  x++;
+  y++;
+ 
+ 
+}setInterval(myFunction, 1000)
+
+// setTimeout(function(){
+//     window.location.reload();
+// }, 10000);
+
+
+  function validated(size, content){
+    
+            var btn = document.getElementById("newValidated");
+            btn.innerHTML = size; 
+            x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =size;
+            localStorage.setItem("notificationSizeValidated", para.innerHTML =size);
+            x.appendChild(para); 
+
+            var btn1 = document.getElementById("pack");
+            btn1.innerHTML = content; 
+             y = document.createElement("article1");
+            var para1 = document.createElement("p1");
+            var css = para1.innerHTML =content;
+            localStorage.setItem("item", {css});
+            console.log(css)
+            y.appendChild(para1); 
+            
+        }
+
+        function addreservation( content){
+    
+    var btn = document.getElementById("addreservation");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("addreservation", para.innerHTML =content);
+            
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+        function confirm( content){
+    
+    var btn = document.getElementById("confirmReservation");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("confirmReservation", para.innerHTML =content);
+            this.notif = true;
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+        var axios = require('axios');
+var config = {
+  method: 'get',
+  url: 'http://46.105.36.240:3000/profile',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  },
+};
+
+ axios(config)
+.then(res => {
+    this.userID  = res.data.id;
+    console.log('profile: ',res.data.id);
+
+    $(document).ready(function(){
+ 
+
+ var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=' + res.data.id;
+ var accessPoint = new EventSource(urlEndpoint);
+
+
+ accessPoint.addEventListener("validationSuggest", function (event){
+  var newValidated = JSON.parse( event.data);
+   if (Notification.permission === "granted") {
+    
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<newValidated.notificationSize; i++){
+  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
+  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
+  }
+  
+  })
+
+  accessPoint.addEventListener("addReservation", function (event){
+  var addReservation = JSON.parse( event.data);
+  console.log("travels",addReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "dinied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(addReservation.notificationSize, addReservation.newNotification[addReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<addReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  addreservation(addReservation.notificationSize)
+  }
+  
+  })
+
+
+
+  accessPoint.addEventListener("confirmReservation", function (event){
+  var confirmReservation = JSON.parse( event.data);
+  console.log("confirmReservation",confirmReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(confirmReservation.notificationSize, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<confirmReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  confirm(confirmReservation.notificationSize)
+  }
+  
+  })
+})
+
+  
+      })
+.catch(function (error) {
+  console.log(error);
+});
+
+
+
+
+},
 
   async created() {
  var axios = require('axios');

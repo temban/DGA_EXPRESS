@@ -16,7 +16,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Announcement</h5>
+                <h5 class="modal-title" id="exampleModalLabel">L'annonce du client</h5>
                 <button
                   type="button"
                   class="close"
@@ -45,7 +45,7 @@
                             >
                               <div class="form-group">
                                 <div class="controls">
-                                  <h6>Departure Date</h6>
+                                  <h6>Date de départ</h6>
                                   <input
                                     v-model="departuredate"
                                     id="contact-name"
@@ -67,7 +67,7 @@
                               <!-- End name input -->
                               <div class="form-group">
                                 <div class="controls">
-                                  <h6>Arrival Date</h6>
+                                  <h6>Date d'arrivée</h6>
                                   <input
                                     v-model="arrivaldate"
                                     id="contact-name"
@@ -88,7 +88,7 @@
 
  <div class="form-group">
                               <div class="controls">
-                                <h6>Departure Town</h6>
+                                <h6>Ville de départ</h6>
                                 <input v-model="departuretown " id="contact-name" name="contactName" class="
                                     form-control
                                     requiredField
@@ -99,7 +99,7 @@
                             </div>
                             <div class="form-group">
                               <div class="controls">
-                                <h6>Destination Town</h6>
+                                <h6>Ville de destination</h6>
                                 <input v-model="destinationtown" id="contact-name" name="contactName" class="
                                     form-control
                                     requiredField
@@ -109,6 +109,26 @@
                               </div>
                             </div> 
 
+                            <div class="form-group">
+                              <div class="controls">
+                                <h6>Method de Paiement</h6>
+                                <input
+                                  v-model="paymentMethod"
+                                  id="contact-name"
+                                  name="contactName"
+                                  class="
+                                    form-control
+                                    requiredField
+                                    Highlighted-label
+                                  "
+                                  data-new-placeholder="Your name"
+                                  type="text"
+                                  readonly
+                                />
+                                <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+                                   <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                                 </div>
+                            </div>
 
     <a :href="tiket" target="_blank" rel="noopener noreferrer"><div style="display: flex; align-items: center; justify-content: center"
           class="createButton"><i
@@ -119,7 +139,7 @@
               margin-left: -22px;
             "
           ></i>
-          <span style="font-size: 20px; margin-left: 10px">Flied Ticket</span>
+          <span style="font-size: 20px; margin-left: 10px">Billet d'avion</span>
           </div></a>
 
               <a :href="passport" target="_blank" rel="noopener noreferrer"><div style="display: flex; align-items: center; justify-content: center"
@@ -131,7 +151,7 @@
               margin-left: -22px;
             "
           ></i>
-          <span style="font-size: 20px; margin-left: 10px">Passport</span>
+          <span style="font-size: 20px; margin-left: 10px">Passport/CNI</span>
           </div></a>
 
               <a :href="covid" target="_blank" rel="noopener noreferrer"><div style="display: flex; align-items: center; justify-content: center"
@@ -197,16 +217,16 @@
 
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Recent Comments</h4>
+            <h4 class="card-title">{{firstname + " " + lastname}}</h4>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Source Town</th>
-                  <th scope="col">Destination Town</th>
+                  <th scope="col">Ville de départ</th>
+                  <th scope="col">Ville d'arrivée</th>
                   <th scope="col" style="margin-left: -600px">Documents</th>
-                  <th scope="col">Qty</th>
+                  <th scope="col">Quantité</th>
                   <th scope="col">Computer</th>
-                  <th scope="col">Price/Kg</th>
+                  <th scope="col">Prix/Kg</th>
                   <th scope="col">Validation</th>
                   <th style="margin-left: 40px" scope="col">Action</th>
                 </tr>
@@ -266,7 +286,8 @@
                         <i class="fa fa-eye" style="font-size: 20px"></i>
                       </button>
 
-                            <button v-if="!user.validation"  v-on:click="confirmTravel(user.id)" style="height: 45px; width: 40px" type="button"
+                      
+                            <button v-if="!user.validation"  v-on:click="valid(user.id)" style="height: 45px; width: 40px" type="button"
                   class="btn btn-sm btn-success mr-1">
                   <i class="fa fa-check" style="font-size: 20px"></i>
                 </button>
@@ -308,10 +329,13 @@ export default {
   name: "MyAnnoucements",
   data() {
     return {
+      paymentMethod:'',
       loading: true,
       users: [],
       users1: [],
       id: this.$route.params.id,
+      firstname: this.$route.params.firstName,
+      lastname: this.$route.params.lastName,
       departuredate: "",
       arrivaldate: "",
       departuretown: "",
@@ -366,67 +390,43 @@ export default {
       });
   },
   methods: {
-    confirmTravel(id) {
+    valid(id) {
       Swal.fire({
-        title: "Validate Travel",
-        showDenyButton: true,
+        title: "Valider le voyage",
+        showDenyButton: false,
         showCancelButton: true,
-        confirmButtonText: "Save",
-        denyButtonText: `Don't save`,
+        confirmButtonText: "Valider",
+        denyButtonText: ``,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          var axios = require("axios");
-          var config = {
-            method: "get",
-            url: "http://46.105.36.240:3000/announcement/" + id + "/users",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("access-token"),
-            },
-          };
 
-          axios(config)
-            .then((res) => {
-              res.data.validation = true;
-              var data0 = JSON.stringify(res.data);
-              var config0 = {
-                method: "put",
-                url: "http://46.105.36.240:3000/update/announcement",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization:
-                    "Bearer " + localStorage.getItem("access-token"),
-                },
-                data: data0,
-              };
+var axios = require('axios');
+var config = {
+  method: 'get',
+  url: 'http://46.105.36.240:3000/admin/dashboard/validation/'+ id,
+  headers: { 
+    Authorization: "Bearer " + localStorage.getItem("access-token"),
+     'Content-Type': 'application/json',
+  },
+};
 
-              axios(config0)
-                .then(function (response) {
-                    console.log(response);  
+axios(config)
+.then(function (response) {
+  window.location.reload();
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
 
-                })
-                .catch(function (error) {
-                    Swal.fire("Saved!", "", "success");
-                    window.location.reload();
-                  console.log(error);
-                  
-                });
 
-              //localStorage.setItem('refresh-token', refreshtoken);
-              //localStorage.setItem('access-token', accesstoken);
-            })
-            .catch(function (error) {
-                Swal.fire("Failed!", "Something went wrong!.", "error");
-              console.log(error);
-            });
           
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
         }
       });
     },
-
     createAnn() {
       window.location.href = "/createAnnouncement";
     },
@@ -451,6 +451,7 @@ export default {
           this.departuretown = res.data.departuretown;
           this.quantity = res.data.quantity;
           this.covidtest = res.data.covidtest;
+          this.paymentMethod = res.data.paymentMethod;
           this.computer = res.data.computer;
           this.restriction = res.data.restriction;
           this.document = res.data.document;
@@ -495,7 +496,7 @@ export default {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           width: 7000,
-          confirmButton: "btn btn-success",
+          confirmButton: "btn btn-success ml-3",
           cancelButton: "btn btn-danger",
         },
         buttonsStyling: false,
@@ -503,13 +504,13 @@ export default {
 
       swalWithBootstrapButtons
         .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
+          title: 'Êtes-vous sûr?',
+          text: "Vous ne pourrez pas revenir en arrière!",
+          icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel!",
-          reverseButtons: true,
+          confirmButtonText: 'Oui,  Supprimer',
+                cancelButtonText: 'Non, Annuler!',
+          reverseButtons: true
         })
         .then((result) => {
           if (result.isConfirmed) {
@@ -533,18 +534,9 @@ export default {
               });
 
             swalWithBootstrapButtons.fire(
-              "Deleted!",
-              "Your file has been deleted.",
-              "success"
-            );
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelled",
-              "Your imaginary file is safe :)",
-              "error"
+              'supprimé!',
+'Ce Voyage a été supprimé.',
+'success'
             );
           }
         });

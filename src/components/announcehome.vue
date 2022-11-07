@@ -18,7 +18,7 @@
           </button>
         </div>
         <div class="login-choice"><span>ou S'identifier avec</span></div>
-        <SocialLogin />
+       
     </form>
     <div class="footer">
        <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
@@ -105,20 +105,14 @@ Inscrivez-vous ici</u></a></p>
                   >
                     {{ firstName + " " + lastName }}
                   </h5>
-                 <span v-if="stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
+                  <div style="position:relative; margin-left:160px; ">
+                          <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">{{level/this.travellength}}/10</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+  </svg>
+</div></div>
                 </div>
                 <div class="card-body">
                  
@@ -214,8 +208,7 @@ Inscrivez-vous ici</u></a></p>
                                       border-radius: 0.5rem;
                                       box-shadow: 0 0.125rem 0.5rem
                                           rgba(0, 0, 0, 0.3),
-                                        0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
-                                    "
+                                        0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2);"
                                   >
                                     {{ comment.content }}
                                   </p>
@@ -319,23 +312,17 @@ Inscrivez-vous ici</u></a></p>
           
            <a  data-target="#exampleModal"
                     data-toggle="modal">
-           <h4 style="text-transform: capitalize" class="mb-2">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
+           <h4 style="text-transform: capitalize" class="mb-4">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
 
            </a> 
-                 <span v-if="user.userDto.stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                 <span v-if="user.userDto.stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="user.userDto.stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="user.userDto.stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="user.userDto.stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
+           <!-- <div style="position:relative; margin-left:160px; ">
+                          <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">{{level}}/5</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+  </svg>
+</div></div> -->
             <div class="d-flex justify-content-between text-center mt-1 mb-1">
               <div>
                 <p class="mb-0 h6" >De</p>
@@ -354,7 +341,7 @@ Inscrivez-vous ici</u></a></p>
                    <div>
                   <i class="fas fa-weight-hanging mr-2 text-primary"></i>
             <span >{{ user.quantity }}Kg  ---------->  {{ user.price }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b>/Kg</span>
-            <span class="mx-2"></span>
+            
             </div>
          
          <div >
@@ -372,7 +359,6 @@ Inscrivez-vous ici</u></a></p>
 
          <div style="margin-left:-20px">
             <!-- pc -->
-             <span class="mx-2"></span>
             <span v-if="user.computer">
             <i class="fas fa-laptop mr-2 text-primary"></i>
               <span>Ordinateur------->{{ subInfo.computerPrice}}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
@@ -472,23 +458,17 @@ Inscrivez-vous ici</u></a></p>
 
            <a  data-target="#exampleModal"
                     data-toggle="modal">
-           <h4 style="text-transform: capitalize" class="mb-2">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
+           <h4 style="text-transform: capitalize" class="mb-4">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
 
            </a> 
-                 <span v-if="user.userDto.stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                 <span v-if="user.userDto.stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="user.userDto.stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="user.userDto.stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="user.userDto.stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
+           <!-- <div style="position:relative; margin-left:160px; ">
+                          <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">{{level}}/5</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+  </svg>
+</div></div> -->
             <div class="d-flex justify-content-between text-center mt-1 mb-1">
               <div>
                 <p class="mb-0 h6" >De</p>
@@ -507,7 +487,7 @@ Inscrivez-vous ici</u></a></p>
                    <div>
                   <i class="fas fa-weight-hanging mr-2 text-primary"></i>
             <span >{{ user.quantity }}Kg  -------->  {{ user.price }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b>/Kg</span>
-            <span class="mx-2"></span>
+           
             </div>
          
          <div >
@@ -525,10 +505,9 @@ Inscrivez-vous ici</u></a></p>
 
          <div style="margin-left:-20px">
             <!-- pc -->
-             <span class="mx-2"></span>
             <span v-if="user.computer">
             <i class="fas fa-laptop mr-2 text-primary"></i>
-              <span>Ordinanteur------->{{ subInfo.computerPrice}}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
+              <span>Ordinanteur------->{{ subInfo.computerPrice}}<b style="color: rgb(63, 167, 247);">{{subInfo.currency}}</b></span>
             </span>
             <!--   <span v-else>
               <p>No Computer</p>
@@ -629,23 +608,17 @@ Inscrivez-vous ici</u></a></p>
           
            <a  data-target="#exampleModal"
                     data-toggle="modal">
-           <h4 style="text-transform: capitalize" class="mb-2">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
+           <h4 style="text-transform: capitalize" class="mb-4">{{ user.userDto.firstName + " "+  user.userDto.lastName}}</h4>
 
            </a> 
-                 <span v-if="user.userDto.stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                 <span v-if="user.userDto.stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="user.userDto.stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="user.userDto.stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="user.userDto.stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
+           <!-- <div style="position:relative; margin-left:160px; ">
+                          <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">{{level}}/5</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+  </svg>
+</div></div> -->
             <div class="d-flex justify-content-between text-center mt-1 mb-1">
               <div>
                 <p class="mb-0 h6" >De</p>
@@ -664,7 +637,7 @@ Inscrivez-vous ici</u></a></p>
                    <div>
                   <i class="fas fa-weight-hanging mr-2 text-primary"></i>
             <span >{{ user.quantity }}Kg  ---------->  {{ user.price }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b>/Kg</span>
-            <span class="mx-2"></span>
+            
             </div>
          
          <div >
@@ -672,7 +645,7 @@ Inscrivez-vous ici</u></a></p>
                    <!-- document -->
             <span v-if="user.document">
              <i class="fas fa-file-invoice mr-2 text-primary"></i>
-            <span>Document(s)------>{{  subInfo.documentPrice}}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
+            <span>Document(s)------>{{subInfo.documentPrice}}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
             </span>
                  <!--    <span v-else>
               <p>No Documents</p>
@@ -682,10 +655,9 @@ Inscrivez-vous ici</u></a></p>
 
          <div style="margin-left:-20px">
             <!-- pc -->
-             <span class="mx-2"></span>
             <span v-if="user.computer">
             <i class="fas fa-laptop mr-2 text-primary"></i>
-              <span>Ordinateur------->{{ subInfo.computerPrice }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
+              <span>Ordinateur------->{{subInfo.computerPrice }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b></span>
             </span>
             <!--   <span v-else>
               <p>No Computer</p>
@@ -705,7 +677,6 @@ Inscrivez-vous ici</u></a></p>
                  <button v-if="isLogged === false"  v-b-modal.modal-multi-4  type="button"  style="height:38px; float:right ;"  class="btn btn-primary btn-rounded btn-sm btn-floating">
               Reserver
             </button>
-          
           
           <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Reserver</router-link>
 
@@ -859,13 +830,14 @@ Inscrivez-vous ici</u></a></p>
 </template>
 
 <script>
-import SocialLogin from "@/components/SocialLogin";
+   import $ from "jquery";
 import axios from 'axios'
 import Swal from 'sweetalert2'
   export default { 
       name: "announcementsVue",
     data() {
       return {
+        level:"",
         login:false,
         articlelength:'',
          loading: true,
@@ -904,13 +876,34 @@ import Swal from 'sweetalert2'
       }
     },  
      components: {
-        SocialLogin
+      
   },
 
  
     async mounted() {
+      var $grades = $('.grade');
 
+$grades.each(function() {
+  var $grade = $(this);
+  var $foreground = $grade.find('.grade__icon__foreground');
+  var scorePercentage = $grade.data('grade-score') * 10;
+  var foregroundCircumference = 2 * Math.PI * parseInt($foreground.attr('r'));
+  var foregroundDashOffset = foregroundCircumference - ((foregroundCircumference * scorePercentage) / 100);
+    
+  $foreground.css('stroke-dasharray', foregroundCircumference);
+  $foreground.css('stroke-dashoffset', foregroundCircumference);
   
+  setTimeout(function() {
+    $grade.addClass('animate');
+    $foreground.css('stroke-dashoffset', foregroundDashOffset);
+  }, 1000);
+});
+
+//       this.$notify({
+//   group: 'foo',
+//   title: 'Important message',
+//   text: 'Hello user! This is a notification!'
+// });
         
           var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
@@ -1047,6 +1040,7 @@ var config = {
 
 axios(config)
 .then(res => {
+  this.level= res.data.userDto.level;
        this.profileimgage= res.data.userDto.profileimgage;
           this.pic = 'http://46.105.36.240:3000/'+  this.profileimgage,
         this.AnnUserId = res.data.userDto.id;
@@ -1224,7 +1218,7 @@ axios(config)
 }
 </script>
 
-<style>
+<style lang="scss">
 body{
     background:#e8f6f8;
 }
@@ -1385,7 +1379,7 @@ body{
 }
 body {
 	background-color: var(--white);
-	background: url("https://lp-cms-production.imgix.net/image_browser/Boss.jpg?auto=format&q=40&ar=16%3A9&fit=crop&w=1247");
+	background: url(../assets/img/air-transport-1.jpg);
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -1399,5 +1393,47 @@ body::before{
     height: 100%;
     width:100%; 
     background: rgba(0, 0, 0, 0.3) 
+}
+.grade {
+  position: relative;
+  width: 80px;
+  max-width: 40%;
+  font-size: 17px;
+  &--blue {
+    color: #EFF2F7;
+  }
+  &--red {
+    color: #EFF2F7;
+  }
+  
+  &__score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+  }
+  
+  &__icon {
+    transform: rotate(270deg);
+    
+    &__background {
+      fill: none;
+      stroke-width: 10px;
+      stroke: gainsboro;
+    }
+    
+    &__foreground {
+      fill: none;
+      stroke-width: 10px;
+      stroke: currentColor;
+      
+      .animate & {
+        transition: stroke-dashoffset 1s ease;
+      }
+    }
+  }
 }
 </style>

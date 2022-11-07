@@ -79,11 +79,11 @@
                 <h2>
                     Contact
                 </h2>
-                &nbsp;&nbsp;&nbsp;&nbsp;- Douala : +237682774250
-                &nbsp;&nbsp;&nbsp;&nbsp;- Yaoundé: +237675851499
-                &nbsp;&nbsp;&nbsp;&nbsp;- BRuxelle: +32465860367
-                &nbsp;&nbsp;&nbsp;&nbsp;- Namur : +32 465 853983
-                &nbsp;&nbsp;&nbsp;&nbsp;- WAthsapp : ces contacts sont tous des numéros wathsapp
+                &nbsp;&nbsp;&nbsp;&nbsp;- Douala : +237 678 786 731
+                &nbsp;&nbsp;&nbsp;&nbsp;- Yaoundé: +237 675 851 499
+                &nbsp;&nbsp;&nbsp;&nbsp;- Bruxelle: +324 658 60367
+                &nbsp;&nbsp;&nbsp;&nbsp;- Namur : +32 465 853983    
+                &nbsp;&nbsp;&nbsp;&nbsp;- WhatsApp : Ces contacts sont tous des numéros Whatsapp
 
             </div>
         </div>

@@ -48,10 +48,10 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .about{
 	cursor: pointer;
-	background-color: #d8d8d8;
+	background-color: #dff5fa;
 	color: #0099ff;
 	padding-top: 20px;
 	padding-bottom: 30px;

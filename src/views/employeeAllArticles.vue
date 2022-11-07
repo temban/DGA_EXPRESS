@@ -32,10 +32,8 @@
                             <td><span class="font-w600">{{ item.price }}</span></td>
                             <td>
 
-                                <span v-if="item.status == `ENABLED`" class="font-w600 text-success">{{ item.status
-                                }}</span>
-                                <span v-if="item.status == `DISABLED`" class="font-w600 text-danger">{{ item.status
-                                }}</span>
+                                <span v-if="item.status == `ENABLED`" class="font-w600 text-success">{{"Visible"}}</span>
+                                <span v-if="item.status == `DISABLED`" class="font-w600 text-danger">{{"Supprimé"}}</span>
                             </td>
 
 
@@ -98,7 +96,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> Adresse</h6><input v-model="location"
+                                                                <h6> Ville</h6><input v-model="location"
                                                                     id="contact-mail" name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -125,6 +123,32 @@
                                                                 <i class="fa fa-money"></i>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                <div class="controls">
+                                  <h6>Method de Paiement</h6>
+                                  <a v-if="cop" style="position:absolute; right:-163px; top:-2px"><i v-on:click="copyText()" class="fa fa-copy mye"
+         style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
+                                                               
+        <a style="position:absolute; right:-163px; top:-2px" v-else><i v-on:click="copyText()" class="fa fa-copy mye" 
+        style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
+                
+                                  <input
+                                    v-model="paymentMethod"
+                                    id="contact-mail"
+                                    name="email"
+                                    class="
+                                      form-control
+                                      requiredField
+                                      Highlighted-label
+                                    "
+                                    type="email"
+                                    readonly
+                                  />
+                                   <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+                                   <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                                </div>
+                              </div>
 
                                                         <div class="form-group">
 
@@ -199,6 +223,7 @@ export default {
     data() {
         return {
             articles: [],
+            cop:false,
             id: '',
             date: '',
             path: [],
@@ -211,7 +236,8 @@ export default {
             user: {},
             userName: "",
             phone:"",
-            email:""
+            email:"",
+            paymentMethod:''
         }
     },
     async created() {
@@ -223,24 +249,37 @@ export default {
             method: 'GET',
             headers: myHeaders0,
             redirect: 'follow'
-        };
+        }; 
 
         fetch("http://46.105.36.240:3000/articles", requestOptions0)
             .then(response => response.text())
-            .then(result => { this.articles = JSON.parse(result); })
+            .then(result => { 
+                
+                this.articles = JSON.parse(result); 
+            console.log("tesssss", this.articles)
+            })
             .catch(error => console.log('error', error));
     },
     methods: {
+        copyText() {
+      navigator.clipboard.writeText(this.paymentMethod).then(() => {
+        this.cop = true;
+        alert('text copied: ' + this.paymentMethod)
+      })
+    },
+    
+
         view(item) {
             this.name = item.name
-            this.cathegory = item.cathegory.name
-            this.location = item.location
-            this.quantity = item.quantity
-            this.price = item.price
-            this.description = item.description
-            this.userName = item.user.firstName + " " + item.user.lastName
-            this.phone = item.user.phone
-            this.email = item.user.email
+            this.cathegory = item.cathegory.name;
+            this.location = item.location;
+            this.quantity = item.quantity;
+            this.price = item.price;
+            this.description = item.description;
+            this.userName = item.user.firstName + " " + item.user.lastName;
+            this.phone = item.user.phone;
+            this.email = item.user.email;
+            this.paymentMethod = item.paymentMethod;
 
             var requestOptions5 = {
                 method: 'GET',
@@ -258,8 +297,7 @@ export default {
         deleteArticles(id) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
-                    width: 7000,
-                    confirmButton: 'btn btn-success',
+                    confirmButton: 'btn btn-success ml-3',
                     cancelButton: 'btn btn-danger'
                 },
                 buttonsStyling: false
@@ -470,5 +508,12 @@ export default {
 
 #Highlighted-form.no-placeholder .error-message {
     top: 0;
+}
+
+.mye{
+  height: 50px;
+  background: #D1D1D1;
+
+
 }
 </style>

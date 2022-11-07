@@ -64,7 +64,8 @@
                             <div class="d-flex align-items-center">
                               <div class="m-r-10"><a v-on:click="view(user.id)" data-target="#exampleModal"
                                   data-toggle="modal" style="border-radius:40px;text-transform: uppercase"
-                                  class="btn btn-circle btn-info text-white">{{ user.firstName[0] + "" + user.lastName[0]
+                                  class="btn btn-circle btn-primary text-white"
+                                  >{{ user.firstName[0] + "" + user.lastName[0]
                                   }}</a></div>
                               <div class="">
                                 <h4 class="m-b-0 font-16" style="text-transform: capitalize">{{ user.firstName + " " + user.lastName }}</h4>
@@ -88,19 +89,29 @@
                             <form>
                               <!-- <button  v-on:click="view(user.id)" data-target="#exampleModal" data-toggle="modal" style="height:45px; width:40px;  margin-right:5px;" type="button" class="btn btn-sm btn-info mr-1" disabled><i class="fa fa-eye" style="font-size:20px"></i></button>-->
                               <router-link style="height:40px; width:80px;"
-                                class="btn btn-sm btn-info mr-1"
-                                :to="{ name: 'employeeUserArticle', params: { id: user.id } }">Articles</router-link>
+                              class="btn btn-large btn-primary mr-1"
+                                :to="{ name: 'employeeUserArticle', params: { id: user.id, firstName: user.firstName, lastName: user.lastName } }">Articles</router-link>
+
                               <router-link style="height:40px; width:80px; background-color:orange"
-                                class="btn btn-sm btn-info mr-1"
-                                :to="{ name: 'employeeUserTravel', params: { id: user.id } }">Voyages</router-link>
-                              <router-link style="height:40px; width:110px;" class="btn btn-sm btn-info mr-1"
-                                :to="{ name: 'employeeUserReservation', params: { id: user.id } }">Réservations
+                              class="btn btn-large btn-info mr-1"
+                                :to="{ name: 'employeeUserTravel', params: { id: user.id, firstName: user.firstName, lastName: user.lastName  } }">Voyages</router-link>
+
+                              <router-link style="height:40px; width:115px;" class="btn btn-large btn-primary mr-1"
+                                :to="{ name: 'employeeUserReservation', params: { id: user.id, firstName: user.firstName, lastName: user.lastName } }">Réservations
                               </router-link>
 
-                              <button v-if="user.status ==='ENABLED'" style="height:40px; width:40px;" v-on:click="deleteUser(user.id)" type="button"
+                          
+                              <button style="height:40px; width:100px; " v-on:click="Purches(user)" type="button"
+                              class="btn btn-large btn-success mr-1">Les Ventes</button>
+
+                              <button style="height:40px; width:150px;margin-left: 5px; position: relative;" v-on:click="PaymentHistory(user)" type="button"
+                              class="btn btn-large btn-secondary mr-1">Payment History</button>
+
+
+                              <button v-if="user.status ==='ENABLED'" style="height:40px; width:40px; margin-left: 5px;" v-on:click="deleteUser(user.id)" type="button"
                                 class="btn btn-sm btn-danger"><i class="fa fa-trash" style="font-size:20px"></i></button>
                                 <button v-else style="height:40px; width:40px;" type="button"
-                                class="btn btn-sm btn-danger"><i class="fa fa-lock" style="font-size:20px"></i></button>                 
+                                class="btn btn-large btn-danger mr-1"><i class="fa fa-lock" style="font-size:20px"></i></button>                 
                             </form>
                           </td>
                         </tr>
@@ -130,10 +141,10 @@
                   <div style="height: 500px;width:500px">
                     <img :src="pic" style="
                       image-resolution: 3000000dpi;  background-color: #000;
-                      background-position: center;
+                      background-position: center; 
                       background-size: cover;
                       background-repeat: no-repeat;
-                       max-width: 99.5%;
+                       max-width: 99.5%; 
                         max-height: 100%;
                         height: 500px;width:500px">
                   </div>
@@ -232,7 +243,16 @@
     },
   
     methods: {
-  
+  PaymentHistory(user){
+localStorage.setItem("UserPaymentId", user.id);
+localStorage.setItem("UserPaymentFN", user.firstName);
+localStorage.setItem("UserPaymentLN", user.lastName);
+window.location.href="/employeeUserPayementId"
+  },
+  Purches(user){
+localStorage.setItem("UserPurchesId", user.id);
+window.location.href="/employeeUserPurchase"
+  },
       view(id) {
         var axios = require('axios');
         var config = {
@@ -266,8 +286,7 @@
         console.log(id);
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
-            width: 7000,
-            confirmButton: 'btn btn-success',
+            confirmButton: 'btn btn-success  ml-3',
             cancelButton: 'btn btn-danger'
           },
           buttonsStyling: false
@@ -277,7 +296,7 @@
           title: 'Êtes-vous sûr?',
           text: "Vous ne pourrez pas revenir en arrière!",
           icon: 'warning',
-          showCancelButton: false,
+          showCancelButton: true,
           confirmButtonText: 'Oui,  Supprimer',
                 cancelButtonText: 'Non, Annuler!',
           reverseButtons: true
@@ -308,15 +327,6 @@
               })
               .catch(error => console.log('error', error));
   
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              'Cancelled',
-              'Your imaginary file is safe :)',
-              'error'
-            )
           }
         })
       },

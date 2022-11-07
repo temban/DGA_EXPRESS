@@ -23,74 +23,89 @@
                     </div>
                 </div>
                 <div class="dashboard">
-                    <b-container style="margin-left: 72px; margin-bottom: 30px">
+                 
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="profile-card-4 z-depth-3">
                                         <div class="card">
                                             <div class="card-body text-center bg-primary rounded-top">
-                                                <div>
-                                                     <div v-if="profileimgage===''" class="mt-1 mb-1" >
-              <img src="@/assets/img/hotels/59710428.png" 
-                class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
-                    background-position: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                     max-width: 100%;
-                      max-height: 100%;
-                      height:190px; width: 190px;"  />
-            </div>
-                  <div v-else >
-                    <a :href="pic" target="_blank" rel="noopener noreferrer">
-                      <img
-                        :src="pic"
+                                             
+                                                    <div v-if="profileimgage === ''"  class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" @change="handleFileUpload($event)" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+          <img
+                        src="@/assets/img/hotels/59710428.png"
+                        class="rounded-circle img-fluid"
                         style="
                           border-radius: 160px;
-                          image-resolution: 30dpi;
+                          image-resolution: 3000000dpi;
+                          background-color: #000;
                           background-position: center;
                           background-size: cover;
                           background-repeat: no-repeat;
                           max-width: 100%;
                           max-height: 100%;
-                          height: 220px;
-                          width: 220px;
+                          height: 180px;
+                          width: 180px;
                         "
                       />
-                    </a>
-                  </div>
-                                                    <label>
-                                                        <i class="fa fa-camera"
-                                                            style="font-size:30px;color:orangered"></i>
+        </div>
+    </div>
 
-                                                        <input type="file" @change="handleFileUpload($event)" ref="file"
-                                                            accept="image/gif, image/jpeg, image/png" hidden />
-                                                    </label>
-                                                </div>
+
+                    <div v-else  class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" @change="handleFileUpload($event)" accept=".png, .jpg, .jpeg" />
+            
+            <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+          <a :href="pic" target="_blank" rel="noopener noreferrer">
+
+                        
+<img
+  :src="pic"
+  style="
+    border-radius: 160px;
+    image-resolution: 30dpi;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    max-height: 100%;
+    height: 192px;
+    width: 192px;
+  "
+/>
+</a>
+        </div>
+    </div>
+
+
 
                                                 <header></header>
                                                 <h5 class="mb-1 text-white" style="text-transform: capitalize">
                                                     {{ firstName + " " + lastName }}
                                                 </h5>
                                             </div>
-                                            <div class="card-body">
-                                                <ul class="list-group shadow-none">
-                                                    <li class="list-group-item">
-                                                        <div class="list-icon">
+                                            <div class="card-body" style="position:relative; display:flex; height:50px">
+                                                
+                                                        <div style="position:relative; margin-top:-1px" >
                                                             <i class="fa fa-envelope"></i>
                                                         </div>
-                                                        <div class="list-details">
+                                                        <div class="list-details" style="position:relative; margin-left:20px">
                                                             <span>{{ email }}</span>
                                                         </div>
-                                                    </li>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
-                                    <div class="card z-depth-3"  style="height: 360px">
+                                    <div class="card z-depth-3"  style="height: 350px">
                                         <div class="card-body">
                                             <ul class="nav nav-pills nav-pills-primary nav-justified">
 
@@ -98,12 +113,12 @@
                                                     <a href="javascript:void();" data-target="#messages"
                                                         data-toggle="pill" class="nav-link"><i
                                                             class="icon-envelope-open"></i>
-                                                        <span class="hidden-xs">Update Profile</span></a>
+                                                        <span class="hidden-xs">Mettre à jour le profil</span></a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="javascript:void();" data-target="#edit" data-toggle="pill"
                                                         class="nav-link"><i class="icon-note"></i>
-                                                        <span class="hidden-xs">Change Password</span></a>
+                                                        <span class="hidden-xs">Changer mot de passe</span></a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content p-3">
@@ -111,8 +126,7 @@
                                                     <form>
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">First
-                                                                name</label>
+                                                                class="col-lg-3 col-form-label form-control-label">Prénom</label>
                                                             <div class="col-lg-9">
                                                                 <input v-model="firstName" class="form-control"
                                                                     type="text" required />
@@ -120,8 +134,7 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">Last
-                                                                name</label>
+                                                                class="col-lg-3 col-form-label form-control-label">Nom de famille</label>
                                                             <div class="col-lg-9">
                                                                 <input v-model="lastName" class="form-control"
                                                                     type="text" required />
@@ -130,7 +143,7 @@
                                                         <div class="form-group row">
                                                             <label
                                                                 class="col-lg-3 col-form-label form-control-label">
-                                                                Phone</label> 
+                                                                Numéro portal</label> 
                                                             <div class="col-lg-9">
                                                                 <input v-model="tel" class="form-control"
                                                                     type="tel" required />
@@ -138,7 +151,7 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">Email</label>
+                                                                class="col-lg-3 col-form-label form-control-label">E-mail</label>
                                                             <div class="col-lg-9">
                                                                 <input v-model="email" class="form-control" type="email"
                                                                     required />
@@ -150,7 +163,7 @@
                                                                 class="col-lg-3 col-form-label form-control-label"></label>
                                                             <div class="col-lg-9">
                                                                 <input @click="updateprofile" type="button"
-                                                                    class="btn btn-primary" value="Update" />
+                                                                    class="btn btn-primary" value="Envoyer" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -159,9 +172,8 @@
                                                     <form>
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">Old
-                                                                Password</label>
-                                                            <div class="col-lg-9">
+                                                                class="col-lg-5 col-form-label form-control-label">Ancien mot de passe</label>
+                                                            <div class="col-lg-7">
                                                                 <input v-model="oldpassword" class="form-control"
                                                                     type="text" required />
                                                             </div>
@@ -169,27 +181,25 @@
 
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">New
-                                                                Password</label>
-                                                            <div class="col-lg-9">
+                                                                class="col-lg-5 col-form-label form-control-label">Nouveau mot de passe</label>
+                                                            <div class="col-lg-7">
                                                                 <input v-model="newpassword" class="form-control"
-                                                                    type="password" required />
+                                                                    type="text" required />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label
-                                                                class="col-lg-3 col-form-label form-control-label">Confirm
-                                                                New password</label>
-                                                            <div class="col-lg-9">
-                                                                <input class="form-control" type="password" required />
+                                                                class="col-lg-5 col-form-label form-control-label">Confirmer nouveau mot de passe</label>
+                                                            <div class="col-lg-7">
+                                                                <input class="form-control" type="text" required />
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
+                                                        <div class="form-group row" >
                                                             <label
                                                                 class="col-lg-3 col-form-label form-control-label"></label>
                                                             <div class="col-lg-9">
                                                                 <input @click="updatepassword" type="button"
-                                                                    class="btn btn-primary" value="Save Changes" />
+                                                                    class="btn btn-primary" value="Envoyer" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -200,8 +210,7 @@
                                 </div>
                             </div>
                         </div>
-                    </b-container>
-                    <footerVue />
+                
                 </div>
             </main>
         </div>
@@ -210,12 +219,10 @@
 
 <script>
 import Swal from 'sweetalert2';
-import footerVue from "@/components/footer.vue";
 import employeeNavbarVue from '../components/employeeNavbar.vue'
 export default {
     components: {
         employeeNavbarVue,
-        footerVue
     },
     data() {
         return {
@@ -446,7 +453,7 @@ this.loading = true;
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .disp {
     display: flex;
     align-items: center;
@@ -1613,6 +1620,67 @@ a {
         text-align: center;
         margin-left: -1em;
 
+    }
+}
+
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+    .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+        input {
+            display: none;
+            + label {
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                cursor: pointer;
+                font-weight: normal;
+                transition: all .2s ease-in-out;
+                &:hover {
+                    background: #f1f1f1;
+                    border-color: #d6d6d6;
+                }
+                &:after {
+                    content: "\f030";
+                    font-family: 'FontAwesome';
+                    color: #757575;
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    margin: auto;
+                }
+            }
+        }
+    }
+    .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #f8f8f8;
+        margin-top: -40px;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+        > div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     }
 }
 </style>

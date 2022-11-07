@@ -1,4 +1,4 @@
-<template>
+How to turn off Admit to meeting in Google Meet?<template>
 
 <div>
  <div style="margin-left:60px;">
@@ -275,32 +275,16 @@ tel:'',
     },
 
    mounted(){
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
+    var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-     }
-   })
+fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    .then(response => response.text())
+    .then(result => {
+        if (JSON.parse(result).length!==0) {
+            this.subInfo = JSON.parse(result)[0]
+        } 
+    })
+    .catch(error => console.log('error', error));
  var input = document.getElementById("phone");
     window.intlTelInput(input,({
       // options here 
@@ -998,16 +982,19 @@ input,
   margin-bottom: 12px;
   display: block;
   font-weight: bold;
+  color: #000;
 }
 
 .input-text {
   background-color: var(--white);
   box-sizing: border-box;
-  padding: 15px 12px;
+  padding: 10px 9px;
   font-family: "Montserrat", sans-serif;
   border-radius: 8px;
+  font-size: 18px;
   margin-bottom: 30px;
   border: 2px solid transparent;
+  color: #000;
 }
 
 .input-text:focus-visible,

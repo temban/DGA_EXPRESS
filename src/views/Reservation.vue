@@ -20,7 +20,7 @@
                     background-repeat: no-repeat;
                      max-width: 100%;
                       max-height: 100%;
-                      height:300px; width: 190px;" />
+                      height:300px; width: 300px;" />
                 </div>
 
                 <img v-else :src="'http://46.105.36.240:3000/' + profileimgage" style="border-radius:55px;
@@ -31,25 +31,12 @@
                     flex-shrink: 0;
                      max-width: 100%;
                       max-height: 100%;
-                      height:300px; width: 350px;
+                      height:300px; width: 300px;
                 " />
 
               </div>
               <h4 style="text-transform: capitalize" class="mb-2">{{ firstName + " " + lastName }}</h4>
-              <span v-if="stars > 0" class="fa fa-star checked"></span>
-              <span v-else class="fa fa-star"></span>
-
-              <span v-if="stars > 1" class="fa fa-star checked"></span>
-              <span v-else class="fa fa-star"></span>
-
-              <span v-if="stars > 2" class="fa fa-star checked"></span>
-              <span v-else class="fa fa-star"></span>
-
-              <span v-if="stars > 3" class="fa fa-star checked"></span>
-              <span v-else class="fa fa-star"></span>
-
-              <span v-if="stars > 4" class="fa fa-star checked"></span>
-              <span v-else class="fa fa-star"></span>
+              
               <div style="padding:0 20px 0  20px; margin-top:-100px;"
                 class="d-flex justify-content-between text-center mt-3 mb-2">
                 <div>
@@ -133,24 +120,24 @@
               <div class="row">
                 <div class="column">
                   <div class="form-outline mb-1">
-                    Obligatoire*
+                    <h6 class="mb-0" style=" color:black; font-weight:20px"> Nom du destinataire<span style="color:red">*</span></h6>
                     <input
                       onkeyup="if(this.value.length > 0) document.getElementById('reservation_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"
                       v-model="receiver" type="text" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px"> Nom du destinataire</h6>
+                   
 
                   </div>
                 </div>
                 <div class="column">
                   <div class="form-outline mb-1">
-                    Obligatoire*
+                    <h6 class="mb-0" style=" color:black; font-weight:20px"> Numéro du destinataire <span style="color:red">*</span></h6>
                     <input
                     id="phone" 
               type="tel"
                 name="tel"
                       onkeyup="if(this.value.length > 0) document.getElementById('reservation_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"
                       v-model="tel" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px"> Numéro du destinataire</h6>
+                    
 
                   </div>
                 </div>
@@ -159,20 +146,19 @@
               <div class="row" style="margin-top:10px">
                 <div class="column">
                   <div class="form-outline mb-1">
-                    Obligatoire*
+                    <h6 class="mb-0" style=" color:black; font-weight:20px"> Numéro de carte d'identité du destinataire<span style="color:red">*</span></h6>
                     <input
                       onkeyup="if(this.value.length > 0) document.getElementById('reservation_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"
                       v-model="receivernumbercni" type="text" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px"> Numéro de carte d'identité du destinataire</h6>
                   </div>
                 </div>
                 <div class="column">
                   <div class="form-outline mb-3">
-                    Obligatoire*
+  <h6 class="mb-0" style=" color:black; font-weight:20px"> Respectez l'intervalle de kilo(s) du voyageur <span style="color:red">*</span></h6>
                     <input v-bind="quantity"
                       @change="() => { if (quantitykilo > quantity || quantitykilo < 1) { quantitykilo = 1 } }"
                       v-model="quantitykilo" type="number" id="form4Example2" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px"> Respectez l'intervalle de kilo(s) du voyageur</h6>
+                    
                   </div>
 
                 </div>
@@ -186,11 +172,11 @@
                     <label for="cb1" style="margin-left:5px">Avez-vous des documents ?</label>
                   </div>
                   <div class="form-outline mb-1" v-if="document1">
-                    Obligatoire*
+                    <h6 class="mb-0" style=" color:black; font-weight:20px">Quantité de document(s) <span style="color:red">*</span></h6>
                     <input
                       onkeyup="if(this.value.length > 0) document.getElementById('reservation_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"
                       v-model="quantDocument" type="number" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px">Quantité de document(s)</h6>
+                    
                   </div>
                 </div>
                 <div class="column">
@@ -199,20 +185,20 @@
                     <label for="cb2" style="margin-left:5px">Avez-vous un ordinateur?</label>
                   </div>
                   <div v-if="computer1" class="form-outline mb-3">
-                    Obligatoire*
+                    <h6 class="mb-0" style=" color:black; font-weight:20px">Quantité de PC<span style="color:red">*</span></h6>
                     <input v-model="quantPC" type="number" id="form4Example2" class="form-control" required />
-                    <h6 class="mb-0" style=" color:skyblue; font-weight:20px">Quantité de PC</h6>
+                    
                   </div>
                 </div>
               </div>
 
-              <!-- Message input -->Obligatoire*
+              <!-- Message input --><h6 class="mb-0" style=" color:black; font-weight:20px">La description <span style="color:red">*</span></h6>
               <div class="form-outline mb-3">
 
                 <textarea
                   onkeyup="if(this.value.length > 0) document.getElementById('reservation_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"
                   v-model="description" class="form-control" rows="2" required></textarea>
-                <h6 class="mb-0" style=" color:skyblue; font-weight:20px">La description</h6>
+                
               </div>
 
               <button id="reservation_button" @click="book()" type="button" value="Click to begin!" style=" display:flex;
@@ -278,32 +264,7 @@ export default {
     }
   },
   mounted(){
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
 
-     }
-   })
 
  var input = document.getElementById("phone");
     window.intlTelInput(input,({
@@ -529,5 +490,17 @@ let notif = (title, body) => {
   content: "";
   display: table;
   clear: both;
+}
+
+body {
+	background: url(../assets/img/air-transport-1.jpg);
+  background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	height: 100vh;
+    font-family:  "Times New Roman", Times, serif;
+    font-size: 16px;
 }
 </style>

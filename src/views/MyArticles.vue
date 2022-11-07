@@ -4,7 +4,19 @@
       <lognavVue />
     </div>
     <usersidebarVue />
-
+    <div class="col-md-12">
+      <div class="banner">
+        <div class="messages">
+          <div id="topic-1" class="message-topic"><label style="position:relative; margin-top:10px;">NB</label></div>
+          <div id="message-1" class="message-content">
+            <span>DGA Express recommande FORTEMENT à tous les vendeurs d’expédier les articles
+               aux clients en recommandé et de s’assurer d’avoir un numéro de suivi pour le tracking en temps réel.</span>
+          </div>
+          
+        </div>
+      </div>
+      <hr>
+    </div>
     <div>
       <div>
         <div
@@ -124,7 +136,7 @@
                                     type="email"
                                     readonly
                                   />
-                                  <!-- <i class="fa fa-hospital"></i> -->
+                                  <i class="fa fa-user"></i>
                                 </div>
                               </div>
                               <div class="form-group">
@@ -142,7 +154,7 @@
                                     type="email"
                                     readonly
                                   />
-                                  <!-- <i class="fa fa-hospital"></i> -->
+                                  <i class="fa fa-list-alt"></i>
                                 </div>
                               </div>
                               <div class="form-group">
@@ -160,7 +172,7 @@
                                     type="email"
                                     readonly
                                   />
-                                  <!-- <i class="fa fa-hospital"></i> -->
+                                  <i class="fa fa-map-marker"></i>
                                 </div>
                               </div>
                               <div class="form-group">
@@ -178,7 +190,7 @@
                                     type="email"
                                     readonly
                                   />
-                                  <!-- <i class="fa fa-hospital"></i> -->
+                                  <i class="fa fa-sort-amount-up"></i>
                                 </div>
                               </div>
 
@@ -197,7 +209,26 @@
                                     type="email"
                                     readonly
                                   />
-                                  <!-- <i class="fa fa-hospital"></i> -->
+                                  <i class="fa fa-money"></i>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="controls">
+                                  <h6>Method de Paiement</h6>
+                                  <input
+                                    v-model="article.paymentMethod"
+                                    id="contact-mail"
+                                    name="email"
+                                    class="
+                                      form-control
+                                      requiredField
+                                      Highlighted-label
+                                    "
+                                    type="email"
+                                    readonly
+                                  />
+                                  <i v-if="article.paymentMethod.length >15" class="fa fa-credit-card"></i>
+                                  <i v-else class="fa fa-mobile" style="font-size:35px"></i>
                                 </div>
                               </div>
 
@@ -217,7 +248,7 @@
                                     rows="3"
                                     readonly
                                   ></textarea>
-                                  <!-- <i class="fa fa-comment"></i> -->
+                                  <i class="fa fa-comment"></i>
                                 </div>
                               </div>
                             </form>
@@ -336,6 +367,7 @@ export default {
       path: [],
       mainImage: "",
       article: {
+        paymentMethod:"",
         name: "",
         description: "",
         price: 0,
@@ -357,32 +389,7 @@ export default {
   },
   // Ao criar o componente, é feito uma requisição GET para a API do backend
   async created() {
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
 
-     }
-   })
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
@@ -390,7 +397,7 @@ let notif = (title, body) => {
       "Bearer " + localStorage.getItem("access-token")
     );
 
-    var requestOptions = {
+    var requestOptions = { 
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -628,7 +635,7 @@ let notif = (title, body) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .my-img0 {
   width: 100%;
   height: 100%;
@@ -827,4 +834,133 @@ let notif = (title, body) => {
 #Highlighted-form.no-placeholder .error-message {
   top: 0;
 }
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  height: 60px;
+  
+}
+.banner > div {
+  padding: 0.82rem;
+  height: 60px;
+}
+
+.messages {
+  flex: 1 1 auto;
+  background-color: #e9e9e9;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+}
+.messages div {
+  /*animation: move .5s ease-in-out 0.5s 4 alternate;*/
+  overflow:hidden;
+  border: 1px solid transparent;
+  font-family: Century Gothic, sans-serif;
+  height: 60px;
+}
+.message-topic {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+ 
+}
+.message-content {
+  font-size: 1.22rem;
+}
+#topic-1 {
+  animation: showup-1 20s infinite;
+  border-right: 1px solid #666;
+}
+#message-1 {
+  height:0px;
+  animation: reveal-1 20s infinite;
+}
+#message-1 span {
+  position: relative;
+  animation: slidein-1 20s infinite;
+}
+
+@keyframes showup-1 {
+    0% {opacity:0;border-right-color: transparent;}
+    20% {opacity:1;}
+    35% {border-right-color: #AAA;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+@keyframes reveal-1 {
+    0% {opacity:0;width:0px;height:0;}
+    20% {opacity:1;width:0px;height:30px;}
+    30% {width:1300px; height: 60px;}
+    80% {opacity:1;}
+    100% {opacity:0;width:1300px;height:60px; }
+}
+@keyframes slidein-1 {
+    0% { margin-left:-600px; }
+    20% { margin-left:-600px; }
+    30% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+     opacity: 2;
+  }
+
+  pan
+  {
+    display:block;
+    position:absolute;
+    top:calc(50% - 2px);
+    left:50%;
+    width:50%;
+    height:4px;
+    background:transparent;
+    transform-origin:left;
+    animation:animate 2s linear infinite;
+  }
+  pan:before
+  {
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff000;
+    top:-6px;
+    right:-8px;
+    box-shadow:0 0 20px #fff000;
+  }
+  @keyframes animateC
+  {
+    0%
+    {
+      transform:rotate(0deg);
+    }
+    100%
+    {
+      transform:rotate(360deg);
+    }
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      transform:rotate(45deg);
+    }
+    100%
+    {
+      transform:rotate(405deg);
+    }
+  }
 </style>

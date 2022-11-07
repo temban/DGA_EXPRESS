@@ -86,7 +86,7 @@ export default [
       }
       ,
       {
-        path: '/employeeUserArticle/:id',
+        path: '/employeeUserArticle/:id/:firstName/:lastName',
         name: 'employeeUserArticle',
         component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserArticle.vue')
       }
@@ -98,7 +98,7 @@ export default [
       } 
       ,
       {
-        path: '/employeeUserTravel/:id',
+        path: '/employeeUserTravel/:id/:firstName/:lastName',
         name: 'employeeUserTravel',
         component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserTravel.vue')
       }
@@ -111,7 +111,7 @@ export default [
       
       ,
       {
-        path: '/employeeUserReservation/:id',
+        path: '/employeeUserReservation/:id/:firstName/:lastName',
         name: 'employeeUserReservation',
         component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserReservation.vue')
       }
@@ -237,4 +237,88 @@ export default [
         name: 'contact_us',
         component: () => import(/* webpackChunkName: "about" */ '@/views/contact_us.vue')
       },
+      {
+        path: '/particularUserArticles/:id1',
+        name: 'particularUserArticles',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/particularUserArticles.vue')
+      },
+      {
+        path: '/myReservationCardPayment',
+        name: 'myReservationCardPayment',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/myReservationCardPayment.vue')
+      },
+      {
+        path: '/myArticleCardPayment',
+        name: 'myArticleCardPayment',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/myArticleCardPayment.vue')
+      },
+      {
+        path: '/articlePaymentComplete',
+        name: 'articlePaymentComplete',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/articlePaymentComplete.vue')
+      },
+      {
+        path: '/reservationPayementComplete',
+        name: 'reservationPayementComplete',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/reservationPayementComplete.vue')
+      },
+
+      {
+        path: '/employeeSendRevPaymentProof',
+        name: 'employeeSendRevPaymentProof',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/employeeSendRevPaymentProof.vue')
+      },
+
+      {
+        path: '/employeeSendArtPaymentProof',
+        name: 'employeeSendArtPaymentProof',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/employeeSendArtPaymentProof.vue')
+      },
+
+      
+      {
+        path: '/employeePaymentHistory',
+        name: 'employeePaymentHistory',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/employeePaymentHistory.vue')
+      }, 
+      {
+        path: '/employeeUserPayementId',
+        name: 'employeeUserPayementId',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserPayementId.vue')
+      },
+      {
+        path: '/MyPaymentHistor',
+        name: 'MyPaymentHistor',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/MyPaymentHistor.vue')
+      },
+      {
+        path: '/MyPurchaseArticles',
+        name: 'MyPurchaseArticles',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/MyPurchaseArticles.vue')
+      },
+      { 
+      path: '/employeeUserPurchase',
+      name: 'employeeUserPurchase',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserPurchase.vue')
+    },
+    { 
+      path: '/MyPurches',
+      name: 'MyPurches',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/MyPurches.vue')
+    },
+    { 
+      path: '/employeeUserAllSales',
+      name: 'employeeUserAllSales',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/employeeUserAllSales.vue')
+    },
+    { 
+      path: '/employeeAllPurchases',
+      name: 'employeeAllPurchases',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/employeeAllPurchases.vue')
+    },
+    { 
+      path: '/ClassesOfFood',
+      name: 'ClassesOfFood',
+      component: () => import(/* webpackChunkName: "about" */ '@/views/ClassesOfFood.vue')
+    },
   ] 

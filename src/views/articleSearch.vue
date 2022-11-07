@@ -32,7 +32,35 @@ Inscrivez-vous ici</u></a></p>
   
       </b-modal>
   
+      <b-modal id="modal-multi-payment" title="DGA Express" hide-footer>
+      
+      <div class="popover-container">
+  <div class="popover-header">
+    <span>Moyen de Paiement</span>
+    <h6>5€ (3280 XAF) sera ajouté au prix total à des fins fiscales</h6>
+  </div>
   
+  <div class="payment-buttons">
+
+    <button class="payment-button" @click="momo()">
+      <i class="fa fa-mobile fa-2x" style="font-size:45px; left: 7px; top: 28px; position: absolute;" ></i>
+      <span class="payment-button-text" style="margin-left: 36px;">Mobile Money</span>
+    </button>
+
+    <button class="payment-button"  v-on:click="card()">
+      <i class="fa fa-credit-card fa-2x" style="font-size:35px; left: 5px; top: 30px; position: absolute;" ></i>
+       <span class="payment-button-text" style="margin-left: 55px;">Par Carte</span>
+    </button>
+    
+
+    
+    <div >
+    </div>
+  </div>
+  
+</div>
+ 
+ </b-modal>
       <div class="container">
         <div class="main-body">
   
@@ -211,8 +239,9 @@ Inscrivez-vous ici</u></a></p>
                               Total <span class="">{{  total  }} <b style="color: rgb(63, 167, 247);">{{
                                    subInfo.currency 
                                   }}</b></span>
-                              <button @click="buy(), makePayment()" type="button" style="height:38px; float:right ;"
-                                class="btn btn-warning btn-rounded btn-sm btn-floating"> payer </button>
+                               <button v-b-modal.modal-multi-payment type="button" data-target="#exampleModal"
+      data-toggle="modal" style="height:38px; float:right ;"
+                              class="btn btn-warning btn-rounded btn-sm btn-floating"> Payer </button>
                             </div>
                           </div>
                         </section>
@@ -362,57 +391,85 @@ import footerVue from "@/components/footer.vue"
     },
   
     methods: {
-      buy() {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-  
-        var raw = JSON.stringify({
-          "apikey": "105244761630ded20620d71.99923870",
-          "site_id": "798029",
-          "transaction_id": Math.floor(Math.random() * 100000000).toString(),
-          "mode": "PRODUCTION",
-          "amount": this.total,
-          "currency": "XAF",
-          "alternative_currency": "USD",
-          "description": "Buy The Articcles",
-          "customer_id": this.infoUser.id,
-          "customer_name": `${this.infoUser.firstName} ${this.infoUser.lastName}`,
-          "customer_surname": this.infoUser.pseudo,
-          "customer_email": this.infoUser.email,
-          "customer_phone_number": this.infoUser.email,
-          "customer_address": "Antananarivo",
-          "customer_city": "Antananarivo",
-          "customer_country": "CM",
-          "customer_state": "CM",
-          "customer_zip_code": "065100",
-          "notify_url": "https://webhook.site/"+this.infoUser.id,
-          "return_url": "http://localhost:8080/MarketPlace",
-          "channels": "ALL",
-          "metadata": "user1",
-          "lang": "FR",
-          "invoice_data": {
-            "Donnee1": "",
-            "Donnee2": "",
-            "Donnee3": ""
-          }
-        });
-  
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
-  
-        fetch("https://api-checkout.cinetpay.com/v2/payment", requestOptions)
-          .then(response => response.text())
-          .then(result => {
-            let res = JSON.parse(result)
-            console.log(res)
-            window.open(res.data.payment_url,'_blank');
-          })
-          .catch(error => console.log('error', error));
-      },
+      card(){
+  if( this.subInfo.currency === "XAF"){
+  this.realTotal = (this.total + 3280)/660;
+}else if( this.subInfo.currency === "€"){
+  this.realTotal = this.total + 5;
+}
+
+
+localStorage.setItem("Market-Card-TotalPrice", this.realTotal)
+ window.location.href="/myArticleCardPayment"
+
+     
+},
+   
+momo() {
+
+
+if( this.subInfo.currency === "XAF"){
+  this.realTotal = this.total + 3280;
+}else if( this.subInfo.currency === "€"){
+  this.realTotal = (this.total + 5)*660;
+}
+
+      
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+       
+      var raw = JSON.stringify({
+        "apikey": "105244761630ded20620d71.99923870",
+        "site_id": "798029",
+        "transaction_id": Math.floor(Math.random() * 100000000).toString(),
+        "mode": "PRODUCTION",
+        "amount": this.realTotal,
+        "currency": "XAF",
+        "alternative_currency": "USD",
+        "description": "Buy The Articcles",
+        "customer_id": this.infoUser.id,
+        "customer_name": `${this.infoUser.firstName} ${this.infoUser.lastName}`,
+        "customer_surname": this.infoUser.pseudo,
+        "customer_email": this.infoUser.email,
+        "customer_phone_number": this.infoUser.email,
+        "customer_address": "Antananarivo",
+        "customer_city": "Antananarivo",
+        "customer_country": "CM",
+        "customer_state": "CM",
+        "customer_zip_code": "065100",
+        "notify_url": "https://webhook.site/"+this.infoUser.id,
+        "return_url": "http://localhost:8080/MarketPlace",
+        "channels": "ALL",
+        "metadata": "user1",
+        "lang": "FR",
+        "invoice_data": {
+          "Donnee1": "",
+          "Donnee2": "",
+          "Donnee3": ""
+        }
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("https://api-checkout.cinetpay.com/v2/payment", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          let res = JSON.parse(result)
+          console.log(res)
+          window.open(res.data.payment_url,'_blank');
+        })
+        .catch(error => console.log('error', error));   
+
+   
+    },
+
+
       tchat(art, sender) {
         localStorage.setItem("smsRecieve", JSON.stringify(sender))
         localStorage.setItem("art", JSON.stringify(art))
@@ -559,7 +616,74 @@ import footerVue from "@/components/footer.vue"
     }
   };
   </script>
-  <style>
+  <style lang="scss">
+
+  
+$popover-container-color: #fff;
+$back-button-background: #999;
+$back-button-color: #fff;
+$hover-color: #5d9cec;
+$method-button-color: #999;
+
+
+.popover-container {
+
+  .popover-header {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    
+    .payment-button {
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-width: 40%;
+      margin: 3px;
+      padding: 15px 0 15px 0;
+      border: 1px solid $method-button-color;
+      border-radius: 5px;
+      color: $method-button-color;
+      font-weight: 300;
+      
+      &:last-child {
+        margin: 10px 0;
+      }
+      
+      &:hover {
+        background-color: $hover-color;
+        color: $popover-container-color;
+        cursor: pointer;
+      }
+      
+      &:hover i {
+        color: $popover-container-color;
+      }
+      
+      i {
+        font-size: 30px;
+        position: absolute;
+        top: 60%;
+        transform: translateY(-50%);
+        color: $hover-color;
+      }
+      
+      .payment-button-text {
+        margin: 0 auto;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+
   .imgSlide {
     height: 130px;
   }
@@ -750,19 +874,68 @@ import footerVue from "@/components/footer.vue"
   #Highlighted-form.no-placeholder .error-message {
     top: 0;
   }
-  
   body {
-    background-color: var(--white);
-    background: url("https://image.shutterstock.com/shutterstock/photos/1912682356/display_1500/stock-photo-phone-and-basket-hologram-online-shopping-online-store-application-in-a-smartphone-digital-1912682356.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    height: 100vh;
-  
-    opacity: 3.7;
-  
-  
+	background: url(../assets/img/e-commerce.jpg);
+  background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	height: 100vh;
+    font-family:  "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+     opacity: 2;
+  }
+
+  pan
+  {
+    display:block;
+    position:absolute;
+    top:calc(50% - 2px);
+    left:50%;
+    width:50%;
+    height:4px;
+    background:transparent;
+    transform-origin:left;
+    animation:animate 2s linear infinite;
+  }
+  pan:before
+  {
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff000;
+    top:-6px;
+    right:-8px;
+    box-shadow:0 0 20px #fff000;
+  }
+  @keyframes animateC
+  {
+    0%
+    {
+      transform:rotate(0deg);
+    }
+    100%
+    {
+      transform:rotate(360deg);
+    }
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      transform:rotate(45deg);
+    }
+    100%
+    {
+      transform:rotate(405deg);
+    }
   }
   </style>

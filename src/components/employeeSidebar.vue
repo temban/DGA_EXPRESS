@@ -2,21 +2,7 @@
   <div>
 
     <nav class="main-menu">
-      <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                 <div class="navbar-brand">latest News</div>
-                </div>
-            </div>
-        </nav>
-        <div class="panel panel-primary text-center" >
-          <h4>News Timeline for user <span id="userspan" class="spanStyle"></span></h4>
-        </div>
-        <div class="container pstyle text-center" id="pack">
-            <!-- <div class="panel panel-primary">
-                News Timeline
-            </div> -->
-        </div>
+    
 
       <ul>
         <li>
@@ -32,8 +18,8 @@
           </a>
         </li>
         <li class="has-subnav">
-          <a href="/employeeAllTravels">
-            <i class="fa fa-plane" aria-hidden="false"></i>
+          <a href="#" @click="removeemployeeAllTravels">
+            <i class="fa fa-plane" aria-hidden="false"><span class="icon-button__badge" id="travel">{{travel}}</span></i>
             <span class="nav-text">Tous les voyages</span>
           </a>
         </li>
@@ -50,13 +36,19 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/employeeUserAllSales">
+            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+            <span class="nav-text"> Toutes les ventes </span>
+          </a>
+        </li>
+        <li>
+          <a href="/employeeAllPurchases">
             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
             <span class="nav-text"> Tous les achats </span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/employeePaymentHistory">
             <i class="fa fa-money" aria-hidden="true"></i>
             <span class="nav-text"> Historique de paiement </span>
           </a>
@@ -68,8 +60,8 @@
           </a>
         </li>
         <li class="has-subnav">
-          <a href="/employeeSuggest">
-            <i class="fa fa-question" aria-hidden="true"> <span class="icon-button__badge" >{{num}}</span></i>
+          <a href="#" @click="removeemployeeSuggest">
+            <i class="fa fa-question" aria-hidden="true"> <span class="icon-button__badge" id="suggest">{{suggest}}</span></i>
             <span class="nav-text"> Toutes les suggestions </span>
           </a>
         </li>
@@ -92,100 +84,180 @@ export default {
   name: "employeeSidebar",
   data() {
         return {
-          num:"",
+          suggest:'',
+          travel:'',
           articleData:[],
         }
     },
 mounted(){
+  document.getElementById('travel').style.display = 'none';
+    document.getElementById('suggest').style.display = 'none';
+    
+    function notifications() {
+         
+      document.getElementById("travel").innerHTML = localStorage.getItem("notificationSizeTravel")
+      document.getElementById("suggest").innerHTML = localStorage.getItem("notificationSizeSuggest")
+      
+      if(localStorage.getItem("notificationSizeTravel") !== null){
+    document.getElementById('travel').style.display = 'block';
+  } else{
+    document.getElementById('travel').style.display = 'none';
+  }
 
-  function addBlock(title, content){
-            var a = document.createElement("article");
+      if(localStorage.getItem("notificationSizeSuggest") !== null){
+    document.getElementById('suggest').style.display = 'block';
+  } else{
+    document.getElementById('suggest').style.display = 'none';
+  }
+   
+}setInterval(notifications, 1000)
 
   
-            var h= document.createElement("H3");
-            var t =  document.createTextNode(title);
-            h.appendChild(t);
+  if( localStorage.getItem("notificationSizeTravel") === null){
+    this.travel = 0;
+    // document.getElementById("travel").style.display = "none"
+    
+  } 
+  else{
+    this.travel =localStorage.getItem("notificationSizeTravel");
+  }
 
-            var para = document.createElement("p");
-            para.innerHTML =content;
-            a.appendChild(h);
-            a.appendChild(para); 
-            document.getElementById("pack").appendChild(a)
-        }
-
-
-        $(document).ready(function(){
-
-         var userID = "1b6bad9d-8e08-4c0c-9f32-7aa544996a64";
-           $("#userspan").text(userID);
-            var urlEndpoint ='http://192.168.16.117:4000/subcribe?userId=1b6bad9d-8e08-4c0c-9f32-7aa544996a64';
-            var eventSource = new EventSource(urlEndpoint);
-          
-            eventSource.addEventListener("LatesNews", function (event){
-             var articleData = JSON.parse( event.data);
-             console.log("get", JSON.parse( event.data))
-             for(let i=0; i<JSON.parse( event.data.length); i++){
-              addBlock(articleData.newNotification[i].title, articleData.newNotification[i].content)
-             }
-            })
-        })
+   if(localStorage.getItem("notificationSizeSuggest") === null){
+    this.suggest = 0;
+    // document.getElementById("suggest").style.display = "none"
+  
+  } 
+  else{
+    this.suggest = localStorage.getItem("notificationSizeSuggest");
+  } 
 
 
-
-
-
-
-  let notif = (title, body) => {
+console.log("travel", localStorage.getItem("notificationSizeTravel"))
+  var x = 0;
+  
+let notif = (title, body) => {
      const options = {
        body: body,
        icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
        badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
      };
      const n = new Notification(title, options)
-     console.log("n",n);
+     console.log(n);
    }
-   
-var axios = require('axios');
-var config = {
-  method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
-  headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-  },
-};
-   axios(config)
-   .then(res => {
-this.currenUser = res.data.id;
-let url = 'http://192.168.16.117:4000/subcribe?userId='+this.currenUser;
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-      this.articleData = JSON.parse(event.data)  
-      console.log("notif if", this.articleData)
-      this.num =  this.articleData.newNotification.length;
+
+function myFunction() {
+
+  x++;
+}setInterval(myFunction, 1000)
+
+
+  function suggest( content){
+    
+    var btn = document.getElementById("suggest");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("notificationSizeSuggest", para.innerHTML =content);
+            
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+
+        function travel( content){
+    
+    var btn = document.getElementById("travel");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("notificationSizeTravel", para.innerHTML =content);
+            
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+
+
+$(document).ready(function(){
+
+var userID = "1b6bad9d-8e08-4c0c-9f32-7aa544996a64";
+  $("#userspan").text(userID);
+   var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325';
+   var accessPoint = new EventSource(urlEndpoint);
+
+
+   accessPoint.addEventListener("LatesNews", function (event){
+    var newSuggestion = JSON.parse( event.data);
+
      if (Notification.permission === "granted") {
-       notif(this.articleData.newNotification.length, this.articleData.newNotification.length)
-         this.num =  this.articleData.newNotification.length;
-       console.log("notif if", this.num)
+      
+     notif(newSuggestion.newNotification[newSuggestion.notificationSize-1].title, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
      
-       localStorage.setItem('notif', this.num)  
-     } else if (Notification.permission !== "dinied") {
+     } else if (Notification.permission !== "denied") {
        Notification.requestPermission().then(perm => {
          if (perm === 'granted') {
-           notif(this.articleData.title, this.articleData.content)
-           console.log("notif else", this.articleData.content.length)
+     notif(newSuggestion.notificationSize, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
          }
        })
 
      }
+
+  
+    for(let i=0; i<newSuggestion.notificationSize; i++){
+     console.log("test", newSuggestion.notificationSize)
+    suggest(newSuggestion.notificationSize, newSuggestion.newNotification[i].content)
+    }
+    
+    })
+
+    accessPoint.addEventListener("announcementNews", function (event){
+    var newTravels = JSON.parse( event.data);
+    console.log("travels",newTravels)
+
+     if (Notification.permission === "granted") {
+      
+     notif(newTravels.newNotification[newTravels.notificationSize-1].title, newTravels.newNotification[newTravels.notificationSize-1].content)
      
-   })
-        //localStorage.setItem('refresh-token', refreshtoken);
-        //localStorage.setItem('access-token', accesstoken);
-      })
+     } else if (Notification.permission !== "dinied") {
+       Notification.requestPermission().then(perm => {
+         if (perm === 'granted') {
+     notif(newTravels.notificationSize, newTravels.newNotification[newTravels.notificationSize-1].content)
+         }
+       })
+
+     }
+
+    
+    for(let i=0; i<newTravels.notificationSize; i++){
+    //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+    travel(newTravels.notificationSize)
+    }
+    
+    })
+})
+
+    
 
 },
   methods: {
+    removeemployeeSuggest(){
+      window.localStorage.removeItem('notificationSizeSuggest');
+      window.location.href = "/employeeSuggest";
+    },
+    removeemployeeAllTravels(){
+      window.localStorage.removeItem('notificationSizeTravel');
+      window.location.href = "/employeeAllTravels";
+    },
     singout() {
       localStorage.removeItem("access-token");
       localStorage.clear();
@@ -242,14 +314,15 @@ nav.main-menu.expanded {
   position: absolute;
   top: -4px;
   right: 5px;
-  width: 35px;
-  height: 35px;
+  min-width: 25px;
+  min-height: 15px;
   background: red;
   color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  padding: 2px;
 }
 
 .main-menu>ul {

@@ -19,14 +19,14 @@
           </button>
         </div>
         <div class="login-choice"><span>ou S'identifier avec</span></div>
-        <SocialLogin />
     </form>
-    <div class="footer">
+    <!-- <div class="footer">
       <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
 Inscrivez-vous ici</u></a></p>
-    </div>
+    </div> -->
   
   </b-modal>
+  
     <div v-if="loading" style="background:rgba(0,0,0,0.3);height:100vh;width:100vw;position:fixed;top:0;left:0;z-index: 100;"> 
          <div class="ring">Loading</div>
     </div>
@@ -64,7 +64,7 @@ Inscrivez-vous ici</u></a></p>
                     <div class="card">
                       <div
                         class="card-body text-center bg-primary rounded-top"
-                        style="height: 300px"
+                        style="height: 335px"
                       >
                         <div v-if="profileimgage === ''" class="mt-1 mb-1">
                           <img
@@ -79,8 +79,8 @@ Inscrivez-vous ici</u></a></p>
                               background-repeat: no-repeat;
                               max-width: 100%;
                               max-height: 100%;
-                              height: 190px;
-                              width: 190px;
+                              height: 200px;
+                                width: 200px;
                             "
                           />
                         </div>
@@ -101,8 +101,8 @@ Inscrivez-vous ici</u></a></p>
                                 background-repeat: no-repeat;
                                 max-width: 100%;
                                 max-height: 100%;
-                                height: 220px;
-                                width: 220px;
+                                height: 200px;
+                                width: 200px;
                               "
                             />
                           </a>
@@ -116,21 +116,15 @@ Inscrivez-vous ici</u></a></p>
                         >
                           {{ firstName + " " + lastName }}
                         </h5>
-                        <div style="padding:10px">
- <span v-if="stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
+                        <div style="position:relative; margin-left:160px; ">
+                          <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">{{level/this.travellength}}/10</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+  </svg>
+</div>
 
-                  <span v-if="stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
                         </div>
                        
                       </div>
@@ -257,8 +251,8 @@ Inscrivez-vous ici</u></a></p>
     <div>
       <lognavVue />
     </div>
-
-    <form
+<div style="position:absolute; margin-left:-20px; width:1000px">
+  <form
       action="#"
       id="header-search-people"
       class="form-area"
@@ -436,6 +430,8 @@ Inscrivez-vous ici</u></a></p>
       </div>
     </form>
 
+</div>
+  
     <div v-if="this.alert.display" class="alert">
       {{ alert.message }}
     </div>
@@ -490,7 +486,7 @@ Inscrivez-vous ici</u></a></p>
                     background-size: cover;
                     background-repeat: no-repeat;
                      max-width: 100%;
-                      max-height: 100%;
+                      max-height: 100%; 
                       height:190px; width: 190px;"/>
             </div>
             </button>
@@ -520,24 +516,10 @@ Inscrivez-vous ici</u></a></p>
             </div>
             </button>
                 <a data-target="#exampleModal" data-toggle="modal">
-                  <h4 style="text-transform: capitalize" class="mb-2">
+                  <h4 style="text-transform: capitalize" class="mb-4">
                     {{ user.userDto.firstName + " " + user.userDto.lastName }}
                   </h4>
                 </a>
-                 <span v-if="user.userDto.stars>0" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                 <span v-if="user.userDto.stars>1" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-                  
-                   <span v-if="user.userDto.stars>2" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                  <span v-if="user.userDto.stars>3" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
-
-                   <span v-if="user.userDto.stars>4" class="fa fa-star checked"></span>
-                  <span v-else class="fa fa-star"></span>
                 <div
                   class="d-flex justify-content-between text-center mt-1 mb-1"
                 >
@@ -595,7 +577,6 @@ Inscrivez-vous ici</u></a></p>
                     }}<b style="color: rgb(63, 167, 247);">{{ subInfo.currency}}</b>/Kg</span
                   >
 
-                  <span class="mx-2"></span>
                 </div>
 
                 <div>
@@ -616,7 +597,6 @@ Inscrivez-vous ici</u></a></p>
 
                 <div style="margin-left: -20px">
                   <!-- pc -->
-                  <span class="mx-2"></span>
                   <span v-if="user.computer">
                     <i class="fas fa-laptop mr-2 text-primary"></i>
                     <span
@@ -805,7 +785,7 @@ Inscrivez-vous ici</u></a></p>
   </div>
 </template>
 <script>
-import SocialLogin from "@/components/SocialLogin";
+  import $ from "jquery";
 import pageNotFoundNoDataVue from "./pageNotFoundNoData.vue";
 import pageNotFoundVue from "./pageNotFound.vue";
 import axios from "axios";
@@ -814,6 +794,7 @@ export default {
   name: "allTravels",
   data() {
     return {
+      level:"",
       login:false,
         stars:'',
       userInput: "",
@@ -861,9 +842,26 @@ export default {
   components: {
     pageNotFoundVue,
     pageNotFoundNoDataVue,
-    SocialLogin
   },
 mounted() {
+  var $grades = $('.grade');
+
+$grades.each(function() {
+  var $grade = $(this);
+  var $foreground = $grade.find('.grade__icon__foreground');
+  var scorePercentage = $grade.data('grade-score') * 10;
+  var foregroundCircumference = 2 * Math.PI * parseInt($foreground.attr('r'));
+  var foregroundDashOffset = foregroundCircumference - ((foregroundCircumference * scorePercentage) / 100);
+    
+  $foreground.css('stroke-dasharray', foregroundCircumference);
+  $foreground.css('stroke-dashoffset', foregroundCircumference);
+  
+  setTimeout(function() {
+    $grade.addClass('animate');
+    $foreground.css('stroke-dashoffset', foregroundDashOffset);
+  }, 1000);
+});
+
  var input = document.getElementById( 'input');
  var input1 = document.getElementById('input1'); 
  let autocomplete = new window.google.maps.places.Autocomplete(input);
@@ -1069,6 +1067,7 @@ mounted() {
           this.price = res.data.price;
           this.document = res.data.document;
           this.computer = res.data.computer;
+          this.level = res.data.userDto.level;
           this.annlength = res.data.length;
         })
         .catch(function (error) {
@@ -1127,7 +1126,7 @@ mounted() {
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "http://192.168.43.44:4000/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1170,7 +1169,59 @@ mounted() {
 };
 </script>
 <style  lang="scss">
+body {
+	background: url(../assets/img/air-transport-1.jpg);
+  background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	height: 100vh;
+    font-family:  "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+    .grade {
+  position: relative;
+  width: 85px;
+  max-width: 40%;
+  font-size: 17px;
+  &--blue {
+    color: #EFF2F7;
+  }
+  &--red {
+    color: #EFF2F7;
+  }
+  
+  &__score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+  }
+  
+  &__icon {
+    transform: rotate(270deg);
     
+    &__background {
+      fill: none;
+      stroke-width: 10px;
+      stroke: gainsboro;
+    }
+    
+    &__foreground {
+      fill: none;
+      stroke-width: 10px;
+      stroke: currentColor;
+      
+      .animate & {
+        transition: stroke-dashoffset 1s ease;
+      }
+    }
+  }
+}
 .h6 {
   font-size: 18px;
   font-weight: 600;

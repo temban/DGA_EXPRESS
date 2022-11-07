@@ -6,7 +6,7 @@
 
 <script>
 
-
+// import $ from "jquery";
 export default {
   name: "App",
   components: {
@@ -17,8 +17,8 @@ export default {
     }
   },
 
-   async created() {
-
+   async mounted() {
+ 
 
 //    var axios = require('axios');
 //var FormData = require('form-data');
@@ -46,7 +46,9 @@ export default {
 //});
 
 
-function refreshtoken() {
+
+
+function refreshtoken() { 
 
 var axios = require('axios');
 
@@ -112,9 +114,59 @@ window.onbeforeunload = () => {
       })
 .catch(function (error) {
   console.log(error);
-   //localStorage.clear()
-//window.location.href = "/"
+//  localStorage.clear()
+// window.location.href = "/"
 });
+
+
+// var x = 0;
+  
+//   function myFunction() {
+  
+//     x++;
+//     function addBlock( content){
+      
+//       var btn = document.getElementById("eventBtn");
+//       btn.innerHTML = 0;
+//           btn.innerHTML = content; 
+         
+  
+//                x = document.createElement("article");
+//               var para = document.createElement("p");
+//               para.innerHTML =content;
+//               x.appendChild(para); 
+//               document.getElementById("pack").appendChild(x)
+//           }
+  
+//           $(document).ready(function(){
+  
+//   var userID = "1b6bad9d-8e08-4c0c-9f32-7aa544996a64";
+//     $("#userspan").text(userID);
+//      var urlEndpoint ='http://192.168.16.117:4000/subcribe?userId=03deabeb-84ab-45c4-b1d3-f3cfa2bb07cd'; 
+//      var eventSource = new EventSource(urlEndpoint);
+   
+//      eventSource.addEventListener("LatesNews", function (event){
+//       var articleData = JSON.parse( event.data);
+  
+  
+  
+      
+//       for(let i=0; i<articleData.notificationSize; i++){
+//        console.log("test",articleData.newNotification[i].title, articleData.newNotification[i].content)
+//       addBlock(articleData.notificationSize, articleData.newNotification[i].content)
+//       }
+      
+//       })
+//   })
+  
+        
+//   }setInterval(myFunction, 1000)
+//   console.log(myFunction)
+  
+  
+  
+        
+  
 
 let notif = (title, body) => {
      const options = {
@@ -125,19 +177,24 @@ let notif = (title, body) => {
      const n = new Notification(title, options)
      console.log(n);
    }
-   axios(config)
-.then(res => {
-this.currenUser = res.data.id;
-let url = 'http://192.168.16.117:4000/subcribe?userId='+this.currenUser;
+  
+let url = 'http://46.105.36.240:3000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f332';
    let ev = new EventSource(url);
+   
+
    ev.addEventListener('LatesNews', function (event) {
      let articleData = JSON.parse(event.data)
+     console.log(articleData);
+       
+
      if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
+      
+     notif(articleData.newNotification[articleData.notificationSize-1].title, articleData.newNotification[articleData.notificationSize-1].content)
+     
      } else if (Notification.permission !== "dinied") {
        Notification.requestPermission().then(perm => {
          if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
+     notif(articleData.notificationSize, articleData.newNotification[articleData.notificationSize-1].content)
          }
        })
 
@@ -145,7 +202,7 @@ let url = 'http://192.168.16.117:4000/subcribe?userId='+this.currenUser;
    })
         //localStorage.setItem('refresh-token', refreshtoken);
         //localStorage.setItem('access-token', accesstoken);
-      })
+
 
 
   },

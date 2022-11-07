@@ -74,7 +74,26 @@
                               </div>
                             </div>
                             
-
+                            <div class="form-group">
+                              <div class="controls">
+                                <h6>Method de Paiement</h6>
+                                <input
+                                  v-model="paymentMethod"
+                                  id="contact-name"
+                                  name="contactName"
+                                  class="
+                                    form-control
+                                    requiredField
+                                    Highlighted-label
+                                  "
+                                  data-new-placeholder="Your name"
+                                  type="text"
+                                  readonly
+                                />
+                                <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+                                   <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                                </div>
+                            </div>
 
 
     <a :href="tiket" target="_blank" rel="noopener noreferrer"><div style="display: flex; align-items: center; justify-content: center"
@@ -202,11 +221,7 @@
                 </button>
                       <button v-else style="height:40px; width:35px;  margin-right:5px;" type="button" class="btn btn-sm btn-danger mr-1">
                       <i class="fas fa-user-lock" style="font-size:18px; margin-right: 5px;"></i></button>
-
-
-
-
-
+                      
                 <button v-on:click="view(item.id)" data-target="#exampleModal" data-toggle="modal"
                   style="height: 45px; width: 40px" type="button" class="btn btn-sm btn-info mr-1">
                   <i class="fa fa-eye" style="font-size: 20px"></i>
@@ -253,12 +268,14 @@ export default {
       tiket: "",
       covid: "",
       price: "",
+      paymentMethod:''
     };
   },
   components: {
     employeeNavbarVue,
   },
   async created() {
+    window.localStorage.removeItem('notificationSizeTravel');
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
@@ -288,7 +305,7 @@ export default {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           width: 7000,
-          confirmButton: "btn btn-success",
+          confirmButton: "btn btn-success ml-3",
           cancelButton: "btn btn-danger",
         },
         buttonsStyling: false,
@@ -297,11 +314,12 @@ export default {
       swalWithBootstrapButtons
         .fire({
           title: 'Êtes-vous sûr?',
-                text: "Vous ne pourrez pas revenir en arrière!",
-                icon: 'warning',
-                confirmButtonText: 'Oui,  Supprimer',
+          text: "Vous ne pourrez pas revenir en arrière!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Oui,  Supprimer',
                 cancelButtonText: 'Non, Annuler!',
-          reverseButtons: true,
+          reverseButtons: true
         })
         .then((result) => {
           if (result.isConfirmed) {
@@ -366,6 +384,7 @@ export default {
           this.computer = res.data.computer;
           this.restriction = res.data.restriction;
           this.document = res.data.document;
+          this.paymentMethod = res.data.paymentMethod;
           this.cni = res.data.cni;
           this.passport = "http://46.105.36.240:3000/passport/" + this.cni;
           this.ticket = res.data.ticket;
@@ -394,54 +413,27 @@ export default {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          var axios = require("axios");
-          var config = {
-            method: "get",
-            url: "http://46.105.36.240:3000/announcement/" + id + "/users",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("access-token"),
-            },
-          };
 
-          axios(config)
-            .then((res) => {
-              res.data.validation = true;
-              var data0 = JSON.stringify(res.data);
-              var config0 = {
-                method: "put",
-                url: "http://46.105.36.240:3000/update/announcement",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization:
-                    "Bearer " + localStorage.getItem("access-token"),
-                },
-                data: data0,
-              };
+var axios = require('axios');
+var config = {
+  method: 'get',
+  url: 'http://46.105.36.240:3000/admin/dashboard/validation/'+ id,
+  headers: { 
+    Authorization: "Bearer " + localStorage.getItem("access-token"),
+     'Content-Type': 'application/json',
+  },
+};
 
-              axios(config0)
-                .then(function (response) {
-                    console.log(response);  
+axios(config)
+.then(function (response) {
+  window.location.reload();
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
 
-                })
-                .catch(function (error) {
-  Swal.fire('Validé!', '', 'success');
-                    window.location.reload();
-                  console.log(error);
-                  
-                });
 
-              //localStorage.setItem('refresh-token', refreshtoken);
-              //localStorage.setItem('access-token', accesstoken);
-            })
-            .catch(function (error) {
-              Swal.fire(
-      'échec!',
-      'Réessayer!.',
-      'error'
-    );
-              console.log(error);
-            });
           
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");

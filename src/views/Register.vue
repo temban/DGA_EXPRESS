@@ -54,27 +54,24 @@ position: relative;
             placeholder="Mot de passe"
             required=""
           />
-          <!-- <span v-if="!login1" class="show-pass" v-on:click="toggleLogin()" style=" float: right;
+       
+                            <i class="far fa-eye" v-on:click="toggleLogin()"  v-if="!login1"  style=" float: right;
         margin-right: 50px;
         margin-top: -50px;
         position: relative;
-        z-index: 2;">
-                            <i class="far fa-eye" style="font-size:25px;"></i>
-                        </span>
+        font-size:25px"></i>
+                       
                         <span v-else class="show-pass" v-on:click="toggleLogin()" style=" float: right;
         margin-right: 50px;
         margin-top: -50px;
-        position: relative;
-        z-index: 2;">
+        position: relative;">
                             <i class="fa fa-eye-slash" style="font-size:25px;"></i>
-                        </span> -->
+                        </span>
         
           <button class="button1" type="submit" style="margin-top:30px">S'identifier   
           <div class="spinner-border text-light spinner-border-sm" role="status" v-if="login">
           <span class="sr-only">Loading...</span></div>
           </button>
-          <div class="login-choice" ><span>ou S'identifier avec</span></div>
-          <SocialLogin />
         </form>
       </div>
 
@@ -248,13 +245,12 @@ position: relative;
                 <u style="color: blue">Termes et Conditions</u></a
               >. </span>
 </span>
-             <div style=" margin-top:-8px;"> <button @click="signup" type="button" class="button">S'inscrire
-             <div class="spinner-border text-light spinner-border-sm" role="status" v-if="login">
+             <div style="position: relative; margin-top:68px;"> <button @click="signup" type="button" class="button">S'inscrire
+             <div class="spinner-border text-light spinner-border-sm" role="status" v-if="loginOn">
           <span class="sr-only">Loading...</span></div>
           </button></div>
           
-          <div class="login-choice"><span>ou S'inscrire avec</span></div>
-          <SocialLogin />
+          
         </form>
       </div>
     </div>
@@ -263,13 +259,13 @@ position: relative;
 
 <script>
 import $ from "jquery";
-import SocialLogin from "@/components/SocialLogin";
 import Swal from "sweetalert2";
 export default {
   name: "loginmodelVue",
   data() {
     return {
       login1: false,
+      loginOn:false,
         login:false,
       loading: false,
       modalShow: false,
@@ -285,35 +281,9 @@ export default {
     };
   },
   components: {
-    SocialLogin,
   },
    mounted(){
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
-
-     }
-   })
+ 
  var input = document.getElementById("phone");
     window.intlTelInput(input,({
       // options here 
@@ -426,7 +396,7 @@ function checkStrength(password) {
         this.state1 = true;
     }
   },
-  toggleLogin(){
+  togglelogin(){
     if(this.login1){
         document.getElementById("loginpass").setAttribute("type","password");
         this.login1 = false;
@@ -458,7 +428,7 @@ function checkStrength(password) {
          Swal.fire("Failed!", "Password is Empty!", "warning");
       }
       else{ 
-      this.login = true;
+      this.loginOn = true;
       let onLogin =()=>{
        event.preventDefault();
       var axios = require("axios");
@@ -548,7 +518,6 @@ function checkStrength(password) {
       axios(config)
         .then(function (response) {
                if (response.status === 200) {
-            Swal.fire("Registration success", "welcome", "success");
             onLogin();
           }
             this.loading = false;
@@ -567,7 +536,7 @@ function checkStrength(password) {
             Swal.fire("Failed!", "Something Went Wrong!.", "error");
           }
         });
-
+ 
       }
     },
 //signup(event) {

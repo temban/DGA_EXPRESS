@@ -39,7 +39,15 @@
 
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/MyPurchaseArticles">
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <span class="nav-text">
+                            Mes Ventes
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/MyPurches">
                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         <span class="nav-text">
                             Mes Achats
@@ -47,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/">
+                    <a href="/MyPaymentHistor">
                         <i class="fa fa-money" aria-hidden="true"></i>
                         <span class="nav-text">
                             Historique de paiement

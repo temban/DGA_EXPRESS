@@ -1007,6 +1007,23 @@
 
                     </p>
                 </div>
+
+
+                <div style="margin-bottom:30px;">
+                    <span class="title">15. MENTIONS LÉGALES</span>
+                    <p>
+                       <span style="color:skyblue">DGA-express</span> est une entreprise à personne physique immatriculée au registre de
+commerce RC/DLA/2022/A/1496/ACE/APME/CFCE DU 22/07/2022 basée au
+Cameroun dans la ville de douala avec un capital de 500.000fcfa ( email :
+<span style="color:skyblue">contact@dga-experss.com</span>
+
+                    </p>
+                </div>
+
+                
+                
+
+
             </div>
         </div>
         <footerVue />

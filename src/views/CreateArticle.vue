@@ -9,6 +9,19 @@
     <usersidebarVue />
 
 
+    <div class="col-md-12">
+      <div class="banner">
+        <div class="messages" >
+          <div id="topic-1" class="message-topic">NB</div>
+          <div id="message-1" class="message-content">
+            <span>Une commission de 15% sera déduite sur le montant de chaque vente effectuée sur la plateforme DGA EXPRESS</span>
+          </div>
+          
+        </div>
+      </div>
+      <hr>
+    </div>
+     
  <b-container>
       <input id="step2" type="checkbox" />
       <input id="step3" type="checkbox" />
@@ -49,7 +62,7 @@ nom d'article"
               </div>
                 <div>
                 <label class="form-label" for="password">Catégories </label>
-               <select style="width:100%; height:50px; border-radius: 10px; margin-bottom:25px" v-model="cate" name="cathegory" class="form-select special-select"
+               <select style="width:100%; height:50px; border-radius: 10px; margin-bottom:25px;padding: 5px 0 5px 20px; font-size: 18px;" v-model="cate" name="cathegory" class="form-select special-select"
                         aria-label="Default select example">
                         <option v-for="item in cates" :value="item" v-bind:key="item.id">{{ item.name }}</option>
                       <input 
@@ -62,7 +75,7 @@ nom d'article"
               </div>
 
                <label style="margin-bottom:5px" class="form-label" for="name">La Description</label>
-            <textarea class="input-text"  v-model="description" name="name"  style="color:black;font-size:1.2em;width:210%" ></textarea>
+            <textarea class="input-text"  v-model="description" name="name"  style="color:black;font-size:1.2em;width:210%; margin-bottom: 100px;" ></textarea>
           
             </div>
 
@@ -80,7 +93,7 @@ nom d'article"
               </div>
 
               <div>
-                <label class="form-label" for="password">Prix </label>
+                <label class="form-label" for="password">Prix <span style="font-weight:bold; color:orangered">  {{this.subInfo.currency}}</span> </label>
                 <input
                 v-model="price"
                   class="input-text"
@@ -90,12 +103,54 @@ nom d'article"
                   placeholder="Enter Price"
                 />
               </div>
+              <h5 style="position:relative; margin-bottom: -15px; margin-left: 10px;" >Je souhaite être payé par?</h5>
+
+
+
+              <div   style="position:relative; display:flex; margin-top: 25px;">
+                <div>
+                  <label class="control control--radio">Mobile Money
+      <input type="radio" name="radio" id="chkPassport" />
+      <div class="control__indicator"></div>
+    </label>
+     <div class="select" id="dvPassport" style="display:none;">
+
+      <input
+      style="width: 230px;"
+                v-model="paymentMethod"
+                  class="input-text"
+                  id="phone" 
+              type="tel"
+                name="tel"
+                  placeholder="+237 670-105-992"
+                />
+    </div>
+                </div>
+   
+
+
+                <div style="position:absolute; left:180px"> 
+
+                  <label class="control control--radio">Carte Bancaire
+      <input type="radio" name="radio" id="chkPassport1" />
+      <div class="control__indicator"></div>
+    </label>
+         <div class="select" id="dvPassport1" style="display:none;" >
+          <input id="credit-card-number" inputmode="numeric" v-model="paymentMethod" style="width: 250px;"
+                  class="input-text" placeholder="4242 4242 4242 4242 4242"/>
+
+        
+    </div>
+                </div>
+
+  </div>
+
               <div class="form-footer">
                 <label
                   @click="onSubmit"
                   for="step2"
                   class="create"
-                  style=" margin-top:270px;  
+                  style="position: absolute;width: 320px; bottom:20px; right: 30px; 
                     display: flex; 
                     align-items: center;
                     justify-content: center;
@@ -232,8 +287,9 @@ nom d'article"
 </template>
 
 <script>
+import $ from 'jquery';
 import Swal from 'sweetalert2';
-import footerVue from "@/components/footer.vue"
+import footerVue from "@/components/footer.vue";
 import usersidebarVue from "../components/usersidebar.vue";
 import lognavVue from '../components/lognav.vue';
 export default {
@@ -253,6 +309,8 @@ export default {
       pic2:'',
       pic3:'',
       loading: false,
+      subInfo:[],
+      paymentMethod:''
     }
   },
   components: {
@@ -262,32 +320,7 @@ export default {
   },
 
   mounted() {
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
 
-     }
-   })
   for (let ref in this.$refs) {
           let autocomplete = new window.google.maps.places.Autocomplete(this.$refs[ref]);
 
@@ -297,6 +330,109 @@ let notif = (title, body) => {
        })
     }
 
+    const ccInputElement = document.querySelector('#credit-card-number');
+
+ccInputElement.format = () => {
+	// split at cursor position
+	let cursorPosition = ccInputElement.selectionStart;
+	let partBeforeCursorPosition = ccInputElement.value.substring(0, cursorPosition);
+	let partAfterCursorPosition = ccInputElement.value.substring(cursorPosition);
+	
+	// remove whitespace, set cursor position accordingly
+	const originalLength = partBeforeCursorPosition.length;
+	partBeforeCursorPosition = partBeforeCursorPosition.replace(/\s/gi, '');
+	cursorPosition -= originalLength - partBeforeCursorPosition.length;
+	partAfterCursorPosition = partAfterCursorPosition.replace(/\s/gi, '');
+	const ccNumber = partBeforeCursorPosition + partAfterCursorPosition;
+	
+	// break into groups of 4 digits
+	const parts = ccNumber.match(/.{1,4}/g);
+	
+	// add spaces, set cursor position accordingly
+	ccInputElement.value = parts?.join(' ') || '';
+	cursorPosition += Math.floor(cursorPosition * 1/4);
+	ccInputElement.setSelectionRange(cursorPosition, cursorPosition);
+};
+
+ccInputElement.addEventListener('input', ccInputElement.format);
+
+ccInputElement.addEventListener('keydown', event => {
+	const cursorPosition = ccInputElement.selectionStart;
+
+	// when the cursor is positioned after a space, deleting applies to the space and the digit before the space
+	if (event.key == 'Backspace') {	
+		// if space before cursor and no selection, remove two characters and set cursor position accordingly
+		if (cursorPosition == ccInputElement.selectionEnd
+				&& ccInputElement.value[cursorPosition - 1] == ' ') {
+			event.preventDefault();
+			const newCursorPosition = cursorPosition - 2;
+			ccInputElement.value = ccInputElement.value.substring(0, newCursorPosition) + ccInputElement.value.substring(cursorPosition);
+			ccInputElement.setSelectionRange(newCursorPosition, newCursorPosition);
+			ccInputElement.format();
+		}
+	}
+	else if (event.key == 'ArrowRight') {
+		if (ccInputElement.value[cursorPosition + 1] == ' ') {
+			const newCursorPosition = cursorPosition + 1;
+			ccInputElement.setSelectionRange(newCursorPosition, newCursorPosition);
+		}
+	}
+	else if (event.key == 'ArrowLeft') {
+		if (ccInputElement.value[cursorPosition - 1] == ' ') {
+			const newCursorPosition = cursorPosition - 1;
+			ccInputElement.setSelectionRange(newCursorPosition, newCursorPosition);
+		}
+	}
+});
+
+    var input = document.getElementById("phone");
+    window.intlTelInput(input,({
+      // options here 
+    }));
+ 
+    $(document).ready(function() {
+        $('.iti__flag-container').click(function() { 
+          var countryCode = $('.iti__selected-flag').attr('title');
+          countryCode = countryCode.replace(/[^0-9]/g,'')
+          $('#phone').val("+"+countryCode+" ");
+       });
+    });
+
+
+
+    $(function () {
+        $("#chkPassport").click(function () {
+            if ($(this).is(":checked")) {
+                $("#dvPassport").show();
+                $("#dvPassport1").hide();
+            } else {
+                $("#dvPassport").hide();
+                $("#AddPassport").show();
+            }
+        });
+    });
+    $(function () {
+        $("#chkPassport1").click(function () {
+            if ($(this).is(":checked")) {
+                $("#dvPassport1").show();
+                $("#dvPassport").hide();
+            } else {
+                $("#dvPassport1").hide();
+                $("#AddPassport1").show();
+            }
+        });
+    });
+
+    var requestOptions1 = { method: 'GET', redirect: 'follow' };
+
+fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    .then(response => response.text())
+    .then(result => {
+        if (JSON.parse(result).length!==0) {
+            this.subInfo = JSON.parse(result)[0]
+        } 
+    })
+    .catch(error => console.log('error', error));
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -486,6 +622,7 @@ await axios(config)
             "quantity": this.quantity,
             "status": "ENABLED",
             "mainImage": "",
+            "paymentMethod": this.paymentMethod,
             "date": ladate.getDate()+"/"+(ladate.getMonth()+1)+"/"+ladate.getFullYear(),
             "location": document.getElementById('location').value,
             "user": JSON.parse(localStorage.getItem('infoUser')),
@@ -1084,11 +1221,13 @@ input,
 .input-text {
   background-color: var(--white);
   box-sizing: border-box;
-  padding: 15px 12px;
+  padding: 10px 9px;
   font-family: "Montserrat", sans-serif;
+  font-size: 18px;
   border-radius: 8px;
   margin-bottom: 30px;
   border: 2px solid transparent;
+  color: #000;
 }
 
 .input-text:focus-visible,
@@ -1428,4 +1567,279 @@ img.preview {
     color: hsl(48, 100%, 67%);
   }
 }
+
+
+
+
+.contain {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+}
+h3 {
+  font-family: 'Alegreya Sans', sans-serif;
+  position: relative;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.control-group1 {
+  display: inline-block;
+  vertical-align: top;
+  background: rgba(180, 215, 254, 0.668);
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding: 30px;
+  width: 500px;
+  height: 250px;
+  margin: 10px;
+  border-radius: 30px;
+}
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #e6e6e6;
+}
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  background: #ccc;
+}
+.control input:checked ~ .control__indicator {
+  background: #2aa1c0;
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: #0e647d;
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 8px;
+  top: 4px;
+  width: 3px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+  border-color: #7b7b7b;
+}
+.control--radio .control__indicator:after {
+  left: 7px;
+  top: 7px;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+.control--radio input:disabled ~ .control__indicator:after {
+  background: #7b7b7b;
+}
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.select select {
+  display: inline-block;
+  width: 40%;
+  cursor: pointer;
+  padding: 10px 15px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  background: #e6e6e6f0;
+  color: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:hover,
+.select select:focus {
+  color: #000;
+  background: rgba(204, 204, 204, 0.749);
+}
+.select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.select__arrow {
+  position: absolute;
+  top: 16px;
+  left: 145px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+.select select:hover ~ .select__arrow,
+.select select:focus ~ .select__arrow {
+  border-top-color: #000;
+}
+.select select:disabled ~ .select__arrow {
+  border-top-color: #ccc;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.custom-field {
+  position: relative;
+  font-size: 18px;
+  border-top: 20px solid transparent;
+  margin-bottom: 45px;
+  display: inline-block;
+  --field-padding: 12px;
+}
+.custom-field input {
+    position: relative;
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: var(--field-padding);
+  border-radius: 5px;
+  width: 390px;
+  outline: none;
+  font-size: 18px;
+  margin-top: -50px;
+ 
+}
+.custom-field .placeholder {
+  position: absolute;
+  left: var(--field-padding);
+  width: calc(100% - (var(--field-padding) * 2));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  top: 14px;
+  line-height: 100%;
+  transform: translateY(-50%);
+  color: #aaa;
+  transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+.custom-field input.dirty + .placeholder,
+.custom-field input:focus + .placeholder,
+.custom-field input:not(:placeholder-shown) + .placeholder {
+  top: -20px;
+  font-size: 14px;
+  color: #222;
+}
+
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  
+}
+.banner > div {
+  padding: 0.82rem;
+}
+
+.messages {
+  flex: 1 1 auto;
+  background-color: #e9e9e9;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+}
+.messages div {
+  /*animation: move .5s ease-in-out 0.5s 4 alternate;*/
+  overflow:hidden;
+  border: 1px solid transparent;
+  font-family: Century Gothic, sans-serif;
+}
+.message-topic {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+}
+.message-content {
+  font-size: 1.22rem;
+}
+#topic-1 {
+  animation: showup-1 7s infinite;
+  border-right: 1px solid #666;
+}
+#message-1 {
+  height:0px;
+  animation: reveal-1 7s infinite;
+}
+#message-1 span {
+  position: relative;
+  margin-right:-50px;
+  animation: slidein-1 7s infinite;
+}
+
+@keyframes showup-1 {
+    0% {opacity:0;border-right-color: transparent;}
+    20% {opacity:1;}
+    35% {border-right-color: #AAA;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+@keyframes reveal-1 {
+    0% {opacity:0;width:0px;height:0;}
+    20% {opacity:1;width:0px;height:30px;}
+    30% {width:1000px;}
+    80% {opacity:1;}
+    100% {opacity:0;width:1000px;height:30px;}
+}
+@keyframes slidein-1 {
+    0% { margin-left:-600px; }
+    20% { margin-left:-600px; }
+    30% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
 </style>

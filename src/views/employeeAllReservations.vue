@@ -10,14 +10,14 @@
                     <thead>
                         <tr class="">
                             <th class="font-w700">Propriétaire</th>
-                            <th class="font-w700">ville de départ</th>
-                            <th class="font-w700">ville de destination</th>
-                            <th class="font-w700">document</th>
-                            <th class="font-w700">quantité</th>
-                            <th class="font-w700">pc</th>
-                            <th class="font-w700">confirmer</th>
+                            <th class="font-w700">Ville de départ</th>
+                            <th class="font-w700">Ville de destination</th>
+                            <th class="font-w700">Document</th>
+                            <th class="font-w700">Quantité réservée</th>
+                            <th class="font-w700">Ordinateur</th>
+                            <th class="font-w700">Confirmation</th>
                             <th class="font-w700">Suivi</th>
-                            <th class="font-w700">actions</th>
+                            <th class="font-w700">Actions</th>
                         </tr>
                     </thead>
                     <tbody style="text-transform: capitalize">
@@ -49,8 +49,10 @@
                             </td>
                             
                  
-                <td v-if="item.confirm"> 
-                  <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="makePayment(user)">
+                <td v-if="item.track === 'complete' && !item.paid"> 
+
+                    
+                    <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(item)">
                     <img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
                         image-resolution: 3000000dpi;
                         background-color: #000;
@@ -59,16 +61,20 @@
                         background-repeat: no-repeat;
                         max-width: 100%;
                         max-height: 100%;
-                        height: 60px;
-                        width: 55px;
-                        margin-bottom: -10px;
-                        margin-top: -10px;
+                        height: 50px; 
+                        width: 45px;
+                        margin-bottom: -15px;
+                        margin-top: 0px;
                         border: 2px solid black;
                       " />
                   </a>
+                  
+                </td>
+                <td v-else-if="item.track === 'complete' && item.paid">
+                  <span class="badge badge-primary font-weight-100">Payé</span>
                 </td>
                 <td v-else>
-                  <span class="badge badge-warning font-weight-100">En attendant...</span>
+                  <span class="badge badge-warning font-weight-100">En Cour...</span>
                 </td>
 
                             <td>
@@ -166,6 +172,15 @@
                                 <i class="fa fa-list-alt"></i>
                               </div>
                             </div>
+                            <div class="form-group">
+                            
+                            <div class="controls">
+                              <input v-model="annDtouserDtoId" type="hidden">
+                              <h6>Prix Total</h6><input v-model="totalprice" id="contact-name" name="contactName" class="form-control requiredField Highlighted-label"  type="text" readonly>
+                              <i class="fa fa-money" style="margin-bottom:-30px"></i>
+                              
+                            </div>
+                          </div><!-- End name input -->
                                                         <div class="form-group">
 
                                                             <div class=" controls">
@@ -252,18 +267,43 @@
                                                                     type="email" readonly>
                                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                             </div>
+                                                        </div>
 
-                                                            <div class="form-group1">
-                                                                <div class="controls">
-                                                                    <h6>prix /kg</h6> <input
-                                                                        v-model="annDtoPrice" id="contact-name"
-                                                                        name="contactName"
-                                                                        class="form-control requiredField Highlighted-label"
-                                                                        type="text" readonly>
-                                                                    <i class="fa fa-money"></i>
-                                                                </div>
+                                                         <div class="form-group">
+
+                                                            <div class=" controls">
+                                                                <h6>prix /kg</h6> <input
+                                                                    v-model="annDtoPrice" id="contact-mail" name="email"
+                                                                    class="form-control requiredField Highlighted-label"
+                                                                    type="email" readonly>
+                                                                <i class="fa fa-money" aria-hidden="true"></i>
                                                             </div>
                                                         </div>
+                                                           
+                                                         <div class="form-group">
+
+                                                            <div class=" controls">
+                                                                <h6>Method de Paiement</h6>   
+                                                                <a v-if="cop" style="position:absolute; right:-163px; top:-4px"><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
+                                                               
+                                                                <a style="position:absolute; right:-163px; top:-4px" v-else><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
+                                                                
+                                                                <!-- <a @click="copyPaymentMethod()" >
+                                                                    <i class="fa fa-copy" style="font-size:30px"></i> </a>  -->
+                                                                 <input
+                                                                    v-model="paymentMethod" id="paymentMethod" name="email"
+                                                                    class="form-control requiredField Highlighted-label"
+                                                                    type="email" readonly>
+                                                                    <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+                                   <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                                                                                 
+                                </div>
+                                                        </div>
+
+                            
+                                                      
                                                         <!-- End email input -->
                                                         <div class="form-group">
 
@@ -305,6 +345,7 @@ export default {
             reservations: [],
             id: '',
             date: '',
+            totalprice:'',
             description: '',
             annDtoDeparturedate: "",
             annDtoArrivaldate: "",
@@ -316,6 +357,8 @@ export default {
             annDtoStatus: "",
             annDtouserDtoId: "",
             cardNumber:'',
+            cop: false,
+            paymentMethod:"",
       tel:'',
       receiver:'',
         }
@@ -337,6 +380,21 @@ export default {
             .catch(error => console.log('error', error));
     },
     methods: {
+        copyText() {
+      navigator.clipboard.writeText(this.paymentMethod).then(() => {
+        this.cop = true;
+        alert('text copied: ' + this.paymentMethod)
+      })
+    },
+sendPaymentProof(item){
+console.log("items", item)
+let sendPaymentProof = [];
+sendPaymentProof = item;
+localStorage.setItem("sendPaymentProof", JSON.stringify(sendPaymentProof))
+window.location.href="/employeeSendRevPaymentProof"
+
+},
+
         makePayment(item) {
         this.total = 100;
         let t = Math.floor(Math.random() * 100000000).toString()
@@ -421,6 +479,8 @@ export default {
                     this.annDtoPrice = res.data.announcementDto.price;
                     this.annDtouserDtoId = res.data.announcementDto.userDto.id;
                     this.receiver = res.data.receiver;
+                    this.totalprice =  res.data.totalprice
+                    this.paymentMethod = res.data.announcementDto.paymentMethod
           this.cardNumber =  res.data.receivernumbercni;
           this.tel =  res.data.tel;
                     //localStorage.setItem('refresh-token', refreshtoken);
@@ -438,7 +498,7 @@ export default {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     width: 7000,
-                    confirmButton: 'btn btn-success',
+                    confirmButton: 'btn btn-success ml-3',
                     cancelButton: 'btn btn-danger'
                 },
                 buttonsStyling: false
@@ -448,6 +508,7 @@ export default {
                title: 'Êtes-vous sûr?',
                 text: "Vous ne pourrez pas revenir en arrière!",
                 icon: 'warning',
+                showCancelButton: true,
                 confirmButtonText: 'Oui,  Supprimer',
                 cancelButtonText: 'Non, Annuler!',
                 reverseButtons: true
@@ -481,16 +542,7 @@ export default {
                         'Cette Reservation a été supprimé.',
                         'success'
                     )
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
+                } 
             })
         },
     },
@@ -651,5 +703,16 @@ export default {
 
 #Highlighted-form.no-placeholder .error-message {
     top: 0;
+}
+
+
+.mye{
+  height: 50px;
+  background: #D1D1D1;
+
+
+}
+.cop {
+  color: #0f0;
 }
 </style>

@@ -2,7 +2,7 @@
 
     <body id="landing" class="sidebar-open">
         <div id="dashboardPage">
-            <employeeNavbarVue />
+            <employeeNavbar />
 
             <main style="margin-left:-200px;margin-right:10px">
                 <div>
@@ -358,7 +358,7 @@
                                     <div class="pourc disp"
                                         style="color:white;border: 2px solid white;height:40px;width: 40px;border-radius: 50%;font-size: 12px;">
                                         {{ anCon }}%
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="bars" style="position: relative;">
                                     <div
@@ -458,11 +458,11 @@
 </template>
 
 <script>
+    import employeeNavbar from '../components/employeeNavbar.vue';
 import Swal from 'sweetalert2';
-import employeeNavbarVue from '../components/employeeNavbar.vue'
 export default {
     components: {
-        employeeNavbarVue,
+        employeeNavbar,
     },
     data() {
         return {
@@ -506,9 +506,23 @@ export default {
             sub: false,
         }
     },
-    async created() {
-        let te = JSON.parse(localStorage.getItem("infoUser"))
-        if (te.pseudo == "Admin") {
+     created() {
+        var axiosprofile = require('axios');
+var configprofile = {
+  method: 'get',
+  url: 'http://46.105.36.240:3000/profile',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  },
+};
+
+axiosprofile(configprofile)
+.then(res => {
+           
+localStorage.setItem('userId', res.data.id);
+localStorage.setItem('pseudo', res.data.pseudo);
+        if (res.data.pseudo == "Admin") {
             this.sub = true
         }
         var axios = require('axios');
@@ -525,7 +539,7 @@ export default {
             data: data
         };
 
-        axios(config).then(res => {
+       axios(config).then(res => {
             this.data = res.data
             let a = this.data
             this.use = a.registeredUsers
@@ -561,6 +575,14 @@ export default {
                 console.log(error);
             });
 
+
+       
+      })
+.catch(function (error) {
+  console.log(error);
+});
+
+     
         var myHeaders0 = new Headers();
         myHeaders0.append("Content-Type", "application/json");
         myHeaders0.append("Authorization", "Bearer " + localStorage.getItem('access-token'));
@@ -579,9 +601,12 @@ export default {
             })
             .catch(error => console.log('error', error));
 
+
+
+
         var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+         fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length !== 0) {

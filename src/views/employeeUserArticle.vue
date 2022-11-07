@@ -6,17 +6,18 @@
         <div class="card card-hover" style="margin-left: 70px;margin-bottom:0px;">
 
             <div class="card-body" style="margin-top:90px;margin-left:50px">
-                <h4 class="card-title text-primary fs-3">Articles User</h4>
+                <h4 class="card-title text-primary fs-3">{{firstName + " " + lastName}}</h4>
                 <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm">
                     <thead>
                         <tr class="">
-                            <th class="font-w700">Owner</th>
-                            <th class="font-w700">Name</th>
-                            <th class="font-w700">Cathery</th>
-                            <th class="font-w700">Location</th>
-                            <th class="font-w700">quantity</th>
-                            <th class="font-w700">price</th>
-                            <th class="font-w700">Status</th>
+                            <th class="font-w700">Propriétaire</th>
+                            <th class="font-w700">Article</th>
+                            <th class="font-w700">Catégorie</th>
+                            <th class="font-w700">Ville</th>
+                            <th class="font-w700">quantité</th>
+                            <th class="font-w700">prix</th>
+                            <th class="font-w700">Statut</th>
+                            <th class="font-w700">Paiement</th>
                             <th class="font-w700">Actions</th>
                         </tr>
                     </thead>
@@ -32,12 +33,30 @@
                             <td><span class="font-w600">{{ item.price }}</span></td>
                             <td>
 
-                                <span v-if="item.status == `ENABLED`" class="font-w600 text-success">{{ item.status
-                                }}</span>
-                                <span v-if="item.status == `DISABLED`" class="font-w600 text-danger">{{ item.status
-                                }}</span>
+                                <span v-if="item.status == `ENABLED`" class="font-w600 text-success">{{"Visible"}}</span>
+                                <span v-if="item.status == `DISABLED`" class="font-w600 text-danger">{{"Supprimé"}}</span>
                             </td>
+                            <td > 
 
+                    
+<a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(item)">
+<img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
+    image-resolution: 3000000dpi;
+    background-color: #000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    max-height: 100%;
+    height: 50px; 
+    width: 45px;
+    margin-bottom: -15px;
+    margin-top: 0px;
+    border: 2px solid black;
+  " />
+</a>
+
+</td>
 
                             <td>
                                 <button v-on:click="view(item)" data-target="#exampleModal" data-toggle="modal"
@@ -59,7 +78,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Article Info</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Informations sur l'article</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -78,7 +97,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> Name</h6><input v-model="name" id="contact-mail"
+                                                                <h6> Article</h6><input v-model="name" id="contact-mail"
                                                                     name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -88,7 +107,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> cathegory</h6><input v-model="cathegory"
+                                                                <h6> Catégorie</h6><input v-model="cathegory"
                                                                     id="contact-mail" name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -98,7 +117,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> location</h6><input v-model="location"
+                                                                <h6> Ville</h6><input v-model="location"
                                                                     id="contact-mail" name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -108,7 +127,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> quantity</h6><input v-model="quantity"
+                                                                <h6> quantité</h6><input v-model="quantity"
                                                                     id="contact-mail" name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -118,7 +137,7 @@
                                                         <div class="form-group">
 
                                                             <div class=" controls">
-                                                                <h6> price</h6><input v-model="price" id="contact-mail"
+                                                                <h6> prix</h6><input v-model="price" id="contact-mail"
                                                                     name="text"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -127,9 +146,35 @@
                                                         </div>
 
                                                         <div class="form-group">
+                                <div class="controls">
+                                  <h6>Method de Paiement</h6>
+                                  <a v-if="cop" style="position:absolute; right:-163px; top:-2px"><i v-on:click="copyText()" class="fa fa-copy mye"
+         style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
+                                                               
+        <a style="position:absolute; right:-163px; top:-2px" v-else><i v-on:click="copyText()" class="fa fa-copy mye" 
+        style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
+                 
+                                  <input
+                                    v-model="paymentMethod"
+                                    id="contact-mail"
+                                    name="email"
+                                    class="
+                                      form-control
+                                      requiredField
+                                      Highlighted-label
+                                    "
+                                    type="email"
+                                    readonly
+                                  />
+                                  <i class="fa fa-credit-card" v-if="paymentMethod.length >15"></i>
+                                   <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                                </div>
+                              </div>
+
+                                                        <div class="form-group">
 
                                                             <div class="controls">
-                                                                <h6>Description</h6> <textarea v-model="description"
+                                                                <h6>La Description</h6> <textarea v-model="description"
                                                                     id="contact-message" name="comments"
                                                                     placeholder="Your message"
                                                                     class="form-control requiredField Highlighted-label"
@@ -144,7 +189,7 @@
                                                         <div class="form-group">
 
                                                             <div class="controls">
-                                                                <h6>name</h6><input v-model="userName" id="contact-name"
+                                                                <h6>Nom</h6><input v-model="userName" id="contact-name"
                                                                     name="contactName"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -153,7 +198,7 @@
                                                             </div>
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <h6>Phone</h6><input v-model="tel" id="contact-name"
+                                                                <h6>Numero</h6><input v-model="tel" id="contact-name"
                                                                     name="contactName"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -162,7 +207,7 @@
                                                          </div>
                                                         <div class="form-group">
                                                             <div class="controls">
-                                                                <h6>Email</h6><input v-model="email" id="contact-name"
+                                                                <h6>E-mail</h6><input v-model="email" id="contact-name"
                                                                     name="contactName"
                                                                     class="form-control requiredField Highlighted-label"
                                                                     type="text" readonly>
@@ -198,14 +243,18 @@ export default {
             date: '',
             path: [],
             name: "",
+            paymentMethod:'',
             cathegory: "",
             location: "",
             quantity: "",
             price: "",
+            cop:false,
             description: "",
             user: {},
             userName: "",
             id: this.$route.params.id,
+            firstName: this.$route.params.firstName,
+            lastName: this.$route.params.lastName,
             tel:"",
             email:""
         }
@@ -227,6 +276,22 @@ export default {
             .catch(error => console.log('error', error));
     },
     methods: {
+        sendPaymentProof(item){
+console.log("items", item)
+let sendPaymentProof = [];
+sendPaymentProof = item;
+localStorage.setItem("sendPaymentProof", JSON.stringify(sendPaymentProof))
+window.location.href="/employeeSendArtPaymentProof"
+
+},
+
+        copyText() {
+      navigator.clipboard.writeText(this.paymentMethod).then(() => {
+        this.cop = true;
+        alert('text copied: ' + this.paymentMethod)
+      })
+    },
+
         view(item) {
             this.name = item.name
             this.cathegory = item.cathegory.name
@@ -237,6 +302,7 @@ export default {
             this.userName = item.user.firstName + " " + item.user.lastName
             this.tel = item.user.phone
             this.email = item.user.email
+            this.paymentMethod = item.paymentMethod;
 
             var requestOptions5 = {
                 method: 'GET',
@@ -254,21 +320,21 @@ export default {
         deleteArticles(id) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
-                    width: 7000,
-                    confirmButton: 'btn btn-success',
+                    width: 720,
+                    confirmButton: 'btn btn-success ml-3',
                     cancelButton: 'btn btn-danger'
                 },
                 buttonsStyling: false
             })
 
             swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
+                title: 'Êtes-vous sûr?',
+          text: "Vous ne pourrez pas revenir en arrière!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Oui,  Supprimer',
+                cancelButtonText: 'Non, Annuler!',
+          reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     var myHeaders = new Headers();
@@ -287,25 +353,16 @@ export default {
                             console.log(result)
                             swalWithBootstrapButtons.fire(
 
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
+                                'supprimé!',
+                        "l'article a été supprimé",
+                        'success'
                             )
                             window.location.reload()
                         })
                         .catch(error => console.log('error', error));
 
 
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
+                } 
             })
         },
     },
@@ -466,5 +523,11 @@ export default {
 
 #Highlighted-form.no-placeholder .error-message {
     top: 0;
+}
+.mye{
+  height: 50px;
+  background: #D1D1D1;
+
+
 }
 </style>

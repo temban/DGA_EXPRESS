@@ -132,6 +132,29 @@
                               </div>
                             </div>
 
+                            <div class="form-group">
+                              <div class="controls">
+                                <h6>Payment Method</h6>
+                                <input
+                                  v-model="paymentMethod"
+                                  id="contact-name"
+                                  name="contactName"
+                                  class="
+                                    form-control
+                                    requiredField
+                                    Highlighted-label
+                                  "
+                                  data-new-placeholder="Your name"
+                                  type="text"
+                                  readonly
+                                />
+                                <i class="fa fa-credit-card" v-if="paymentMethod.length >14"></i>
+                                <i class="fa fa-mobile" style="font-size:35px" v-else></i>
+                              </div>
+                            </div>
+
+                            
+
                 <a :href="tiket" target="_blank" rel="noopener noreferrer"><div style="display: flex; align-items: center; justify-content: center"
           class="createButton"><i
             class="far fa-images"
@@ -339,6 +362,7 @@ export default {
       departuretown: "",
       destinationtown: "",
       quantity: "",
+      paymentMethod:"",
       computer: null,
       restriction: "",
       document: null,
@@ -360,32 +384,8 @@ export default {
   },
   // Ao criar o componente, é feito uma requisição GET para a API do backend
   async created() {
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
-
-     }
-   })
+    window.localStorage.removeItem('notificationSizeValidated');
+    
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append( "Authorization", "Bearer " + localStorage.getItem("access-token") );
@@ -471,6 +471,7 @@ this.error=true
           this.computer = res.data.computer;
           this.restriction = res.data.restriction;
           this.document = res.data.document;
+          this.paymentMethod = res.data.paymentMethod;
           this.cni = res.data.cni;
           this.passport = "http://46.105.36.240:3000/passport/" + this.cni;
           this.ticket = res.data.ticket;
@@ -507,7 +508,6 @@ this.error=true
     deleteUser(id) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-          width: 7000,
           confirmButton: "btn btn-danger ml-3",
           cancelButton: "btn btn-success ",
         },
@@ -568,7 +568,7 @@ this.error=true
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .create {
   display: inline-block;
   outline: 0;
@@ -791,4 +791,58 @@ this.error=true
 #Highlighted-form.no-placeholder .error-message {
   top: 0;
 }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+     opacity: 2;
+  }
+
+  pan
+  {
+    display:block;
+    position:absolute;
+    top:calc(50% - 2px);
+    left:50%;
+    width:50%;
+    height:4px;
+    background:transparent;
+    transform-origin:left;
+    animation:animate 2s linear infinite;
+  }
+  pan:before
+  {
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff000;
+    top:-6px;
+    right:-8px;
+    box-shadow:0 0 20px #fff000;
+  }
+  @keyframes animateC
+  {
+    0%
+    {
+      transform:rotate(0deg);
+    }
+    100%
+    {
+      transform:rotate(360deg);
+    }
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      transform:rotate(45deg);
+    }
+    100%
+    {
+      transform:rotate(405deg);
+    }
+  }
 </style>

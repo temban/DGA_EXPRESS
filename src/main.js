@@ -18,10 +18,20 @@ import CustomGoogleAutocomplete from 'vue-custom-google-autocomplete'
 import VuePlaceAutocomplete from 'vue-place-autocomplete';
 import VueMeta from 'vue-meta'
 import VueSSE from 'vue-sse';
-
+import Notifications from 'vue-notification'
 // using defaults
-Vue.use(VueSSE);
 
+
+import { StripePlugin } from '@vue-stripe/vue-stripe';
+
+const options = {
+  pk: "pk_test_51LjiQQCZjIzC8XowgFCgtd8hxgeaam8Z6ZwVkQrT7Qt6wOAsLufjcyuzmgB9clmzP1Il6nJFJZqhnfqH70s0PnnO00TpSjOsk7",
+};
+
+Vue.use(StripePlugin, options);
+
+Vue.use(VueSSE);
+Vue.use(Notifications);
 // OR specify custom defaults (described below)
 Vue.use(VueSSE, {
   format: 'json',

@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <lognavVue />
-    </div>
     <div v-if="loading"
       style="background:rgba(0,0,0,0.3);height:100vh;width:100vw;position:fixed;top:0;left:0;z-index: 100;">
       <div class="ring">Loading</div>
@@ -25,12 +22,40 @@
          </button>
        </div>
        <div class="login-choice"><span>ou S'identifier avec</span></div>
-       <SocialLogin />
    </form>
-   <div class="footer">
+   <!-- <div class="footer">
       <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
 Inscrivez-vous ici</u></a></p>
-   </div>
+   </div> -->
+  </b-modal>
+
+ <b-modal id="modal-multi-payment" title="DGA Express" hide-footer>
+      
+      <div class="popover-container">
+  <div class="popover-header">
+    <span>Moyen de Paiement</span>
+    <h6>5€ (3280 XAF) sera ajouté au prix total à des fins fiscales</h6>
+  </div>
+  
+  <div class="payment-buttons">
+
+    <button class="payment-button" @click="momo()">
+      <i class="fa fa-mobile fa-2x" style="font-size:45px; left: 7px; top: 28px; position: absolute;" ></i>
+      <span class="payment-button-text" style="margin-left: 36px;">Mobile Money</span>
+    </button>
+
+    <button class="payment-button"  v-on:click="card()">
+      <i class="fa fa-credit-card fa-2x" style="font-size:35px; left: 5px; top: 30px; position: absolute;" ></i>
+       <span class="payment-button-text" style="margin-left: 55px;">Par Carte</span>
+    </button>
+    
+
+    
+    <div >
+    </div>
+  </div>
+  
+</div>
  
  </b-modal>
 
@@ -59,8 +84,19 @@ Inscrivez-vous ici</u></a></p>
                   }}...</span><br />
                 <span class="mb-1 text-muted art-0"><i class="fa fa-money text-warning"></i> {{  item.price  }} <b
                     style="color: rgb(63, 167, 247);">{{  subInfo.currency  }}</b></span>
-                <h6 style="text-transform: capitalize" class="mb-2 text-muted text-art"><i
-                    class="fa fa-user text-warning"></i> {{  item.user.firstName  }}</h6>
+
+                    
+
+                <h6 v-if="
+                      isLogged === true && infoUser.id !== item.user.id
+                    " style="text-transform: capitalize" class="mb-2 text-muted text-art" > <router-link
+                    
+                    :to="{ name: 'particularUserArticles', params: { id1: item.user.id } }"
+                    ><i class="fa fa-user text-warning"></i><span style="margin-left:5px">{{  item.user.firstName}}</span></router-link></h6>
+
+                    <h6 v-else style="text-transform: capitalize" class="mb-2 text-muted text-art"><i
+                      class="fa fa-user text-warning"></i> {{  item.user.firstName  }}</h6>
+
 
 
                 <div style="margin-top:20px" class="mb-2 pb-2">
@@ -200,19 +236,21 @@ Inscrivez-vous ici</u></a></p>
                             <tbody style="text-transform: capitalize">
                               <tr v-for="(item, idx) in basket" v-bind:key="idx">
                                 <td>{{  item.name.slice(0, 14)  }}...</td>
-                                <td><input @change="newTotal" type="number" v-model="quantities[idx]" min="1"
+                                <td><input style="position:relative; max-width: 30px; color:#000" @change="newTotal" type="number" v-model="quantities[idx]" min="1"
                                     :max="item.quantity"></td>
                                 <td>{{  item.quantity  }}</td>
                                 <td>{{  item.price  }}</td>
                                 <td @click="remov(idx)" class="btn text-danger close">&times;</td>
                               </tr>
+                              
                             </tbody>
                           </table>
                           <div class="text-uppercase pb-4">
                             Total <span class="">{{  total  }} <b style="color: rgb(63, 167, 247);">{{
                                  subInfo.currency 
                                 }}</b></span>
-                            <button @click="buy(), makePayment()" type="button" style="height:38px; float:right ;"
+                            <button v-b-modal.modal-multi-payment type="button" data-target="#exampleModal"
+      data-toggle="modal" style="height:38px; float:right ;"
                               class="btn btn-warning btn-rounded btn-sm btn-floating"> Payer </button>
                           </div>
                         </div>
@@ -285,6 +323,8 @@ export default {
       quantities: [],
       employee: [],
       subInfo: [],
+      pic:'',
+      profileimgage:"",
     }
   },
   components: {
@@ -294,13 +334,14 @@ export default {
   },
 
   async mounted() {
-    var requestOptions1 = { method: 'GET', redirect: 'follow' };
+    var requestoptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    fetch("http://46.105.36.240:3000/sub/informations/view", requestoptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
           this.subInfo = JSON.parse(result)[0]
+           
         }
       })
       .catch(error => console.log('error', error));
@@ -322,6 +363,7 @@ export default {
       await fetch("http://46.105.36.240:3000/articles/available")
         .then(response => response.json())
         .then((data) => {
+          console.log("wasasdasdsdasd",data);
           if (data == "") {
             this.loading = false;
             this.errors = true
@@ -333,6 +375,7 @@ export default {
                 this.allArticles[p].mainImage !== ""
               ) {
                 this.articles.push(this.allArticles[p]);
+                
               }
             }
 
@@ -349,25 +392,34 @@ export default {
   },
 
   methods: {
+card(){
+  if( this.subInfo.currency === "XAF"){
+  this.realTotal = (this.total + 3280)/660;
+}else if( this.subInfo.currency === "€"){
+  this.realTotal = this.total + 5;
+}
 
 
-    buy() {
+localStorage.setItem("Market-Card-TotalPrice", this.realTotal)
+ window.location.href="/myArticleCardPayment"
 
-      Swal.fire({
-        title: 'Avis au client',
-        text: "5€ sera ajouté au prix total à des fins fiscales",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, Payer!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-       
+     
+},
+
+    momo() {
+
+
+if( this.subInfo.currency === "XAF"){
+  this.realTotal = this.total + 3280;
+}else if( this.subInfo.currency === "€"){
+  this.realTotal = (this.total + 5)*660;
+}
+
+      
 
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-       this.realTotal = this.total + 3280;
+       
       var raw = JSON.stringify({
         "apikey": "105244761630ded20620d71.99923870",
         "site_id": "798029",
@@ -399,14 +451,14 @@ export default {
         }
       });
 
-      var requestOptions = {
+      var requestoptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
       };
 
-      fetch("https://api-checkout.cinetpay.com/v2/payment", requestOptions)
+      fetch("https://api-checkout.cinetpay.com/v2/payment", requestoptions)
         .then(response => response.text())
         .then(result => {
           let res = JSON.parse(result)
@@ -415,8 +467,7 @@ export default {
         })
         .catch(error => console.log('error', error));   
 
-        }
-      })
+   
     },
 
 
@@ -428,12 +479,12 @@ export default {
     view(item) {
       this.sortCart = "art"
       this.article = item
-      var requestOptions5 = {
+      var requestoptions5 = {
         method: 'GET',
         redirect: 'follow'
       };
 
-      fetch("http://46.105.36.240:3000/article/paths/" + item.id, requestOptions5)
+      fetch("http://46.105.36.240:3000/article/paths/" + item.id, requestoptions5)
         .then(response => response.text())
         .then(result => {
           this.path = JSON.parse(result)
@@ -624,6 +675,7 @@ export default {
       localStorage.setItem("basket", JSON.stringify([this.basket, this.quantities]))
     },
     newTotal() {
+      localStorage.setItem("basket", JSON.stringify([this.basket, this.quantities]))
       this.total = 0
       for (let i = 0; i < this.basket.length; i++) {
         this.total += this.basket[i].price * this.quantities[i]
@@ -632,7 +684,74 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
+
+$popover-container-color: #fff;
+$back-button-background: #999;
+$back-button-color: #fff;
+$hover-color: #5d9cec;
+$method-button-color: #999;
+
+
+.popover-container {
+
+  .popover-header {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    
+    .payment-button {
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-width: 40%;
+      margin: 3px;
+      padding: 15px 0 15px 0;
+      border: 1px solid $method-button-color;
+      border-radius: 5px;
+      color: $method-button-color;
+      font-weight: 300;
+      
+      &:last-child {
+        margin: 10px 0;
+      }
+      
+      &:hover {
+        background-color: $hover-color;
+        color: $popover-container-color;
+        cursor: pointer;
+      }
+      
+      &:hover i {
+        color: $popover-container-color;
+      }
+      
+      i {
+        font-size: 30px;
+        position: absolute;
+        top: 60%;
+        transform: translateY(-50%);
+        color: $hover-color;
+      }
+      
+      .payment-button-text {
+        margin: 0 auto;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+
+
 .imgSlide {
   height: 130px;
 }
@@ -823,18 +942,8 @@ export default {
 #Highlighted-form.no-placeholder .error-message {
   top: 0;
 }
-body {
-    background-color: var(--white);
-    background: url("https://image.shutterstock.com/shutterstock/photos/1912682356/display_1500/stock-photo-phone-and-basket-hologram-online-shopping-online-store-application-in-a-smartphone-digital-1912682356.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    height: 100vh;
+
+
+
   
-    opacity: 3.7;
-  
-  
-  }
 </style>

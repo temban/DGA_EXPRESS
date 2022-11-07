@@ -8,7 +8,7 @@
               <div class="first-name" id="input-first-name">
                   <input type="text" name="fn" id="fn" autocomplete="off" data-placeholder-focus="false" required v-model="ArticleName" 
                   onkeyup="if(this.value.length > 0) document.getElementById('search_button').disabled = false; else document.getElementById('reservation_button').disabled = true;"/>
-                  <label>Article</label>
+                  <label >Article</label>
                   <svg class="icon--check" width="21px" height="17px" viewBox="0 0 21 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
                           <g id="UI-Elements-Forms" transform="translate(-255.000000, -746.000000)" fill-rule="nonzero" stroke="#81B44C" stroke-width="3">
@@ -51,7 +51,7 @@
       </div>
       <div class="col-md-2 no-pad-left-10">
        
-        <router-link  :to="{ name: 'articleSearch', params: { catId: this.catId.id, ArtName: this.ArticleName}}"  >  <button id="search_button" disabled type="submit" class="primary-btn serach-btn">SEARCH
+        <router-link  :to="{ name: 'articleSearch', params: { catId: this.catId.id, ArtName: this.ArticleName}}"  >  <button id="search_button" disabled type="submit" class="primary-btn serach-btn">Recherche
         </button></router-link>
       </div>
   </div>
@@ -148,7 +148,7 @@ form {
   position: absolute;
   margin-top: 7px;
   top: 0;
-  left: 0;
+  left: 60px;
   -webkit-transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
   -o-transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
   transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
@@ -409,7 +409,7 @@ form {
   color: white;
   font-weight: 700;
   letter-spacing: 0.8px;
-  width: 100%;
+  width: 125%;
   height: 60px;
   -o-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;

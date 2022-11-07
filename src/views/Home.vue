@@ -1,7 +1,12 @@
 <template>
 <div>
+  <div>
     <lognav/>
+  </div>
+    
+    <div>
     <sliderVue />
+  </div>
     <announcehomeVue />
  <FunctioningDGAVue/>
   <footerVue />

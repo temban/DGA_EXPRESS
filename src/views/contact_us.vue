@@ -41,6 +41,10 @@
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
+                                <span>Douala : +237678786731</span>
+                            </div>
+                            <div class="d-flex info_single align-items-center">
+                                <i class="fas fa-headset"></i>
                                 <span>Namur : +32 465 853983</span>
                             </div>
                             <div class="d-flex info_single align-items-center">
@@ -49,7 +53,7 @@
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-envelope-open-text"></i>
-                                <span>informatique@dga-express.com</span>
+                                <span>contact@dga-express.com</span>
                             </div>
                             
             
@@ -80,32 +84,6 @@ export default {
   },
    mounted(){
 
-    var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
-
-     }
-   })
 },
   methods: {
     suggestionBox() {
@@ -225,7 +203,6 @@ let notif = (title, body) => {
 }
 .contact_info_sec h4{
     letter-spacing: 1px;
-    padding-bottom: 15px;
 }
 
 .info_single{

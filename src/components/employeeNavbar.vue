@@ -1,5 +1,6 @@
 <template>
     <div>
+        <employeeSidebarVue />
         <!-- Main Menu -->
         <div class="topbar" style="height: 80px;background: linear-gradient(90deg, #fff, blue);">
             <div class="container-fluid" style="margin-left:-30px;height: 160px;">
@@ -16,20 +17,10 @@
                                 <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <div class="user-content">
-                                        <div class="user-name">{{infoUser.firstName+" "+infoUser.lastName}}</div>
-                                        <div class="user-plan">DGA {{infoUser.pseudo}}</div>
+                                        <div class="user-name">{{firstName+" "+lastName}}</div>
+                                        <div class="user-plan">DGA {{pseudo}}</div>
                                     </div>
-                                
-                                    <img class="avatar" src="@/assets/img/hotels/59710428.png" 
-               v-if="infoUser.profileimgage===''" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
-                    background-position: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                     max-width: 100%;
-                      max-height: 100%;
-                      height:70px; width: 70px;"   />
-                                         <img  v-else class="avatar"  :src="pic" style="border-radius: 160px;
+                                    <img v-if="this.profileimgage !==''"  class="avatar"  :src="pic" style="border-radius: 160px;
                     image-resolution: 30000000000000dpi;  
                     background-position: center;
                     background-size: cover;
@@ -39,9 +30,18 @@
                       height:70px; width: 70px;" 
                       
                     /> 
+                    <img class="avatar" v-else src="@/assets/img/hotels/59710428.png" style="border-radius: 160px;
+                    image-resolution: 3000000dpi;  background-color: #000;
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                     max-width: 100%;
+                      max-height: 100%;
+                      height:70px; width: 70px;"   />
+                                 
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li v-if="infoUser.pseudo ==='DGA-EMPLOYEE'"><a href="/employeeProfil" class="animsition-link dropdown-item wave-effect"><i
+                                    <li v-if="pseudo ==='DGA-EMPLOYEE'"><a href="/employeeProfil" class="animsition-link dropdown-item wave-effect"><i
                                                 class="feather icon-user"></i> Profil</a></li>
                                     <li><a @click="singout" class="animsition-link dropdown-item wave-effect"><i
                                                 class="feather icon-log-in"></i>Se déconnecter</a></li>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <employeeSidebarVue />
+      
     </div>
 </template>
 <script>
@@ -65,21 +65,19 @@ export default {
     data() {
         return {
              pic:"",
-            infoUser: {
-                firstName:'',
+             pseudo:"",
+             firstName:'',
                 lastName:"",
                 profileimgage:''
-            }
+            //     infoUser: {
+            //     firstName:'',
+            //     lastName:"",
+            //     profileimgage:''
+            // }
         }
     },
     mounted() {
-        
-        this.infoUser = JSON.parse(localStorage.getItem("infoUser"))
-        
-    },
-
-   async created () {
-       var axios = require('axios');
+        var axios = require('axios');
 var config = {
   method: 'get',
   url: 'http://46.105.36.240:3000/profile',
@@ -89,16 +87,25 @@ var config = {
   },
 };
 
-await axios(config)
+ axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='http://46.105.36.240:3000/'+ this.profileimgage,
+    this.pseudo = res.data.pseudo
+    this.firstName = res.data.firstName;
+    this.lastName = res.data.lastName;
+      this.pic='http://46.105.36.240:3000/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
 .catch(function (error) {
   console.log(error);
 });
+
+        // this.infoUser = JSON.parse(localStorage.getItem("infoUser"))
+        
+    },
+
+    created () {
 
     },
     methods: {

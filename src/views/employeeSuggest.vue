@@ -5,11 +5,10 @@
             <employeeNavbarVue />
             
         </div>
-        <main class="comments" style="margin-left:-150px;padding-top: 100px;">
+        <div class="comments" style="margin-left:-150px;padding-top: 100px;">
             <div class="comment" v-for="(item, i) in suggest.reverse()" v-bind:key="i">
                 <div class="comment-head">
         
-                   <tableEmptyVue/>
          
                     <img class="my-pp" v-if="item.user.profileimgage == ``" src="@/assets/img/hotels/59710428.jpg"
                         alt="profile" />
@@ -40,19 +39,18 @@
                     </div>
                 </div>
             </div>
-<div><input v-model="notifNum"/></div>
-        </main>
+        </div>
     </body>
 </template>
 
 <script>
 // import Swal from 'sweetalert2';
-import tableEmptyVue from "../components/pageNotFoundNoData.vue";
+// import tableEmptyVue from "../components/pageNotFoundNoData.vue";
 import employeeNavbarVue from '../components/employeeNavbar.vue'
 export default {
     components: {
         employeeNavbarVue,
-        tableEmptyVue
+        // tableEmptyVue
     },
     data() {
         return {
@@ -62,51 +60,7 @@ export default {
         }
     },
     async mounted() {
-//         let notif = (title, body) => {
-//      const options = {
-//        body: body,
-//        icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-//        badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-//      };
-//      const n = new Notification(title, options)
-//      console.log(n);
-//    }
-   
-// var axios = require('axios');
-// var config = {
-//   method: 'get',
-//   url: 'http://46.105.36.240:3000/profile',
-//   headers: { 
-//     'Content-Type': 'application/json', 
-//     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-//   },
-// };
-//    axios(config)
-// .then(res => {
-// this.currenUser = res.data.id;
-// let url = 'http://192.168.16.117:4000/subcribe?userId='+this.currenUser;
-//    let ev = new EventSource(url);
-//    ev.addEventListener('LatesNews', function (event) {
-//      let articleData = JSON.parse(event.data)
-//      if (Notification.permission === "granted") {
-//        notif(articleData.title, articleData.content)
-       
-//        console.log("notif if", articleData)
-//      } else if (Notification.permission !== "dinied") {
-//        Notification.requestPermission().then(perm => {
-//          if (perm === 'granted') {
-//            notif(articleData.title, articleData.content)
-//            console.log("notif else", articleData.content.length)
-//          }
-//        })
-
-//      }
-     
-//    })
-//         //localStorage.setItem('refresh-token', refreshtoken);
-//         //localStorage.setItem('access-token', accesstoken);
-//       })
-
+        window.localStorage.removeItem('notificationSizeSuggest');
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", `Bearer ${localStorage.getItem("access-token")}`);
@@ -121,11 +75,8 @@ export default {
             .then(response => response.text())
             .then(result => { 
                 
-                if (JSON.parse(result).length==0) {
-              this.error=true 
-          } else {
             this.suggest = JSON.parse(result); 
-          }
+       
             })
             .catch(error => console.log('error', error));
     },

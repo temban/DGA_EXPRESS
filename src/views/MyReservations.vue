@@ -5,177 +5,36 @@
     </div>
     <usersidebarVue />
 
-    <div>
-      <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Statistics</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="">
-                <div>
-                  <div class="container bootstrap snippets bootdey" style="background: #d9dedf">
-                    <div class="card">
-                      <div class="card-body text-center bg-primary rounded-top" style="height: 300px">
-                        <div v-if="profileimgage === ''" class="mt-1 mb-1">
-                          <img src="@/assets/img/hotels/59710428.png" class="rounded-circle img-fluid" style="
-                              border-radius: 60px;
-                              image-resolution: 3000000dpi;
-                              background-color: #000;
-                              background-position: center;
-                              background-size: cover;
-                              background-repeat: no-repeat;
-                              max-width: 100%;
-                              max-height: 100%;
-                              height: 190px;
-                              width: 190px;
-                            " />
-                        </div>
-                        <div v-else>
-                          <a :href="pic" target="_blank" rel="noopener noreferrer">
-                            <img :src="pic" style="
-                                border-radius: 160px;
-                                image-resolution: 3000000000dpi;
-                                background-color: #000;
-                                background-position: center;
-                                background-size: cover;
-                                background-repeat: no-repeat;
-                                max-width: 100%;
-                                max-height: 100%;
-                                 height: 190px;
-                              width: 190px;
-                              " />
-                          </a>
-                        </div>
-                        <!-- 
-                 <i class="fa fa-camera" style="font-size:48px;color:red"></i>
-                -->
-                        <h5 class="mb-1 text-white" style="text-transform: capitalize">
-                          {{  firstName + " " + lastName  }}
-                        </h5>
-                        <div style="padding-left:40px; padding-right:20px">
-                          <span v-if="stars > 0" class="fa fa-star checked"></span>
-                          <span v-else class="fa fa-star"></span>
+    <b-modal id="modal-multi-payment" title="DGA Express" hide-footer>
+      
+      <div class="popover-container">
+  <div class="popover-header">
+    <span>Moyen de Paiement</span>
+    <h6>5€ (3280 XAF) sera ajouté au prix total à des fins fiscales</h6>
+  </div>
+  
+  <div class="payment-buttons">
 
-                          <span v-if="stars > 1" class="fa fa-star checked"></span>
-                          <span v-else class="fa fa-star"></span>
+    <button class="payment-button" @click="momo()">
+      <i class="fa fa-mobile fa-2x" style="font-size:45px; left: -12px; top: 28px; position: absolute;" ></i>
+      <span class="payment-button-text" style="margin-left: 36px;">Mobile Money</span>
+    </button>
 
-                          <span v-if="stars > 2" class="fa fa-star checked"></span>
-                          <span v-else class="fa fa-star"></span>
+    <button class="payment-button"  v-on:click="card()">
+      <i class="fa fa-credit-card fa-2x"></i>
+       <span class="payment-button-text" style="margin-left: 55px;">Par Carte</span>
+    </button>
+    
 
-                          <span v-if="stars > 3" class="fa fa-star checked"></span>
-                          <span v-else class="fa fa-star"></span>
-
-                          <span v-if="stars > 4" class="fa fa-star checked"></span>
-                          <span v-else class="fa fa-star"></span>
-                        </div>
-
-                      </div>
-                      <div class="card-body">
-                        <div class="row text-center mt-1">
-                          <div v-if="travellength > 0" class="col p-2">
-                            <h4 class="mb-1 line-height-5">
-                              {{  travellength  }}
-                            </h4>
-                            <small class="mb-0 font-weight-bold">Travels</small>
-                          </div>
-
-                          <div v-else class="col p-2">
-                            <h4 class="mb-1 line-height-5">0</h4>
-                            <small class="mb-0 font-weight-bold">Travels</small>
-                          </div>
-
-                          <div v-if="revlength > 0" class="col p-2">
-                            <h4 class="mb-1 line-height-5">{{  revlength  }}</h4>
-                            <small class="mb-0 font-weight-bold">Reservations</small>
-                          </div>
-                          <div v-else class="col p-2">
-                            <h4 class="mb-1 line-height-5">0</h4>
-                            <small class="mb-0 font-weight-bold">Reservations</small>
-                          </div>
-                          <div v-if="articlelength > 0" class="col p-2">
-                            <h4 class="mb-1 line-height-5">{{  articlelength  }}</h4>
-                            <small class="mb-0 font-weight-bold">Articles</small>
-                          </div>
-                          <div v-else class="col p-2">
-                            <h4 class="mb-1 line-height-5">0</h4>
-                            <small class="mb-0 font-weight-bold">Articles</small>
-                          </div>
-                          <div class="col p-2">
-                            <h4 class="mb-1 line-height-5">0</h4>
-                            <small class="mb-0 font-weight-bold">Purches</small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-22" style="margin-top: -20px">
-                      <h6 class="mt-2 mb-3">Recent Activity</h6>
-                      <table class="table table-hover table-striped" style="background-color: #74befb">
-                        <tbody>
-                          <div style="
-                            padding:20px;  
-                              overflow: scroll;
-                              height: 280px;
-                              border-radius: 10px;
-                            ">
-                            <div v-for="comment in comments" :key="comment.id">
-                              <div class="row">
-                                <div class="column1">
-                                  <img v-if="comment.booker.profileimgage !== ''" :src="
-                                    'http://46.105.36.240:3000/' +
-                                    comment.booker.profileimgage
-                                  " style="
-                                      width: 50px;
-                                      height: 50px;
-                                      border-radius: 55px;
-                                    " />
-                                  <img v-else src="@/assets/img/hotels/59710428.png" style="
-                                      width: 50px;
-                                      height: 50px;
-                                      border-radius: 55px;
-                                    " />
-                                </div>
-                                <div class="column2">
-                                  <p style="
-                                      // layout
-                                      position: relative;
-                                      margin: 5px;
-                                      background-color: #fff;
-                                      display: flex;
-                                      width: fit-content;
-                                      max-width: 90%;
-                                      // looks
-                                      color: red;
-                                      padding: 10px;
-                                      font-size: 1em;
-                                      border-radius: 0.5rem;
-                                      box-shadow: 0 0.125rem 0.5rem
-                                          rgba(0, 0, 0, 0.3),
-                                        0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
-                                    ">
-                                    {{  comment.content  }}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    
+    <div >
     </div>
+  </div>
+  
+</div>
+ 
+ </b-modal>
+
 
 
 
@@ -207,13 +66,14 @@
                             annDtoStatus === 'ENABLED'">
                               <div class="controls">
 
-                                <h6 style="display:flex;width:300px">Identifiant de la transaction</h6>
+                                <h6 style="display:flex;width:300px">Code de la transaction</h6>
                                 <input v-model="revId" id="code" name="contactName"
                                   class="form-control requiredField Highlighted-label" type="text" readonly />
                                 <a v-if="cop"><i v-on:click="copyText()" class="fa fa-copy mye"
-                                    style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
+                                    style="font-size:25px;padding-bottom:13px; margin-top: 37px;margin-left: -5px;color:green"></i> </a>
+
                                 <a v-else><i v-on:click="copyText()" class="fa fa-copy mye"
-                                    style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
+                                    style="font-size:25px;padding-bottom:13px; margin-top: 37px;margin-left: -5px;"></i> </a>
                               </div>
                             </div>
                             <!-- End name input -->
@@ -499,8 +359,7 @@
 
     <div style="margin: 30px 0 38px 50%" v-if="loading" class="loader"></div>
 
-    <div class="container">
-      <b-container style="margin-left: 32px; margin-bottom: 30px; background-color: white">
+      <div style="margin-left: 100px; margin-bottom: 30px; background-color: white; width: 90%;">
         <!--<h3 class="mt-2 mb-3 float-left text-primary">My Travel Reservations</h3>
      <button
           @click="createAnn()"
@@ -529,7 +388,7 @@
               <th scope="col">Qté réservée</th>
               <th scope="col">ordinateur</th>
               <th scope="col">Statut</th>
-
+              <th scope="col">Paiement</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -552,7 +411,7 @@
                   style="width: 60px; height: 60px; border-radius: 30px" />
               </a>
 
-              <td>{{  user.announcementDto.departuretown.slice(0, 14)  }}...</td>
+              <td>{{  user.announcementDto.departuretown.slice(0, 14) }}...</td>
               <td>{{  user.announcementDto.destinationtown.slice(0, 14)  }}...</td>
               <td v-if="user.documents" >
                 <div style="position:relative;margin-left:15px">{{user.quantityDocument}}</div> 
@@ -569,15 +428,20 @@
                 <i class="fa fa-remove" style="font-size: 25px; color: red"></i>
               </td>
 
-              <td v-if="userId !== user.userDto.id && user.confirm">
+              <td v-if="userId !== user.userDto.id && user.confirm && user.track !== 'complete'">
                 <span class="badge badge-success font-weight-100">Confirmé</span>
+              </td>
+              <td v-else-if="userId !== user.userDto.id && user.confirm && user.track === 'complete'">
+                <span class="badge badge-primary font-weight-100">Achevé</span>
               </td>
 
               <td v-else-if="userId === user.userDto.id && user.track === 'complete'" >
                 <span class="badge badge-primary font-weight-100">Achevé</span>
             </td>
               <td v-else-if="userId === user.userDto.id && user.confirm">
-                <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="makePayment(user)">
+             
+                <a type="submit" name="learn" value="myimage" style="border-radius: 30px" v-b-modal.modal-multi-payment @click="beforPay(user)"   
+                    >
                   <img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
                       image-resolution: 3000000dpi;
                       background-color: #000;
@@ -590,13 +454,28 @@
                       width: 55px;
                       margin-bottom: -10px;
                       margin-top: -10px;
-                      border: 2px solid black;
-                    " />
+                      border: 2px solid black;"/>  
                 </a>
+                
+    
+
               </td>
               <td v-else>
                 <span class="badge badge-warning font-weight-100">En attente...</span>
               </td>
+              <td v-if="userId === user.announcementDto.userDto.id && user.paid">
+                <span  class="badge badge-primary font-weight-100">vous avez été payés</span>
+
+              </td>
+              <td v-else-if="userId !== user.announcementDto.userDto.id && user.paid">
+                <span  class="badge badge-primary font-weight-100">Le voyageur a été payé</span>
+
+              </td>
+              <td v-else>
+                <span  class="badge badge-warning font-weight-100">EN ATTENTE...</span>
+
+              </td>
+            
               <td>
                 <form>
                   <!-- <button style="height:45px; width:40px;  margin-right:5px;" v-on:click="deleteUser(user.id)" type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" style="font-size:20px"></i></button>
@@ -686,9 +565,9 @@
             </tr>
           </tbody>
         </table>
-      </b-container>
+      </div>
       <!-- Fim tabela -->
-    </div>
+
     <div style="position:relative; margin-bottom:-60px; left:0; right:0"> <footerVue /></div>
     
   </div>
@@ -704,6 +583,8 @@ export default {
   name: "MyReservations",
   data() {
     return {
+      firstName:"",
+      revlength:"",
       pcPrice:"",
       docPric:"",
       total_Rev:"",
@@ -755,56 +636,7 @@ export default {
     tableEmptyVue
   },
 mounted(){
-
-  var userID = Math.floor((Math.random( ) * 1000) +1);
-console.log(userID);
-let notif = (title, body) => {
-     const options = {
-       body: body,
-       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
-       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
-     };
-     const n = new Notification(title, options)
-     console.log(n);
-   }
-   let url = 'http://192.168.16.117:4000/subcribe?userId=130fca97-6797-4b63-ba46-4d9290a595f2';
-   let ev = new EventSource(url);
-   ev.addEventListener('LatesNews', function (event) {
-     let articleData = JSON.parse(event.data)
-     if (Notification.permission === "granted") {
-       notif(articleData.title, articleData.content)
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-           notif(articleData.title, articleData.content)
-         }
-       })
-
-     }
-   })
-  var axios = require("axios");
-
-    var config = {
-      method: "get",
-      url:
-        "http://46.105.36.240:3000/user/" +
-        localStorage.getItem("userId") +
-        "/reservations",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("access-token"),
-      },
-    };
-
-    axios(config)
-      .then((res) => {
-          this.users = res.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      this.infoUser = JSON.parse(localStorage.getItem("infoUser"))
-
+  window.localStorage.removeItem('addreservation');
 },
   async created() {
     var axios = require("axios");
@@ -839,6 +671,7 @@ let notif = (title, body) => {
       this.infoUser = JSON.parse(localStorage.getItem("infoUser"))
   },
   methods: {
+   
     copyText() {
       navigator.clipboard.writeText(this.revId).then(() => {
         this.cop = true;
@@ -1368,25 +1201,159 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
 
 
     },
-    makePayment(item) {
+card(){
+  
+this.carteBancaire();
+this.beforPay();
+},
 
 
+    carteBancaire() {
+      
+  window.location.href = "/myReservationCardPayment";
+},
+    beforPay(item){ 
+
+      var requestOptions1 = { method: "GET", redirect: "follow" };
+
+fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+.then((response) => response.text())
+.then((result) => {
+this.subInfo = JSON.parse(result)[0];
+this.subInfo.computerPrice;
+this.subInfo.documentPrice;
+
+console.log("sub",this.subInfo.currency,   this.subInfo.documentPrice, this.subInfo.computerPrice)
+
+if( this.subInfo.currency ==="XAF"){
+
+var axios = require("axios");
+var config = {
+  method: "get",
+  url: "http://46.105.36.240:3000/reservations/" + item.id,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("access-token"),
+  },
+};
+
+axios(config)
+  .then((res) => { 
+    this.annDtoQty = res.data.announcementDto.quantity;
+    this.annDtoPrice = res.data.announcementDto.price;
+    this.totalprice = res.data.totalprice;
 
 
-      Swal.fire({
-        title: 'Avis au client',
-        text: "5€ sera ajouté au prix total à des fins fiscales",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, Payer!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          var axios = require("axios");
+    this.total_Rev = ((res.data.quantityDocument * this.subInfo.documentPrice) + (res.data.quantityComputer * this.subInfo.computerPrice) + this.totalprice +3280)/660;
+})
+ 
+
+
+.catch((error) => console.log("error", error));
+//localStorage.setItem('refresh-token', refreshtoken);
+    //localStorage.setItem('access-token', accesstoken);
+ 
+
+}else if(this.subInfo.currency ==="€"){
+var axios1 = require("axios");
+var config1 = {
+  method: "get",
+  url: "http://46.105.36.240:3000/reservations/" + item.id,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("access-token"),
+  },
+};
+
+axios1(config1)
+  .then((res) => { 
+    this.annDtoQty = res.data.announcementDto.quantity;
+    this.annDtoPrice = res.data.announcementDto.price;
+    this.totalprice = res.data.totalprice;
+    this.total_Rev = (res.data.quantityDocument * this.subInfo.documentPrice) + (res.data.quantityComputer * this.subInfo.computerPrice) + this.totalprice +5;
+
+  })
+.catch((error) => console.log("error", error));
+//localStorage.setItem('refresh-token', refreshtoken);
+    //localStorage.setItem('access-token', accesstoken);
+ 
+
+}
+
+ 
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  console.log("totalPrice", this.total_Rev);
+  localStorage.setItem("Payment_total_Price", this.total_Rev);
+
+
+      this.totalPrice = this.total_Rev;
+     this.departuretown = item.announcementDto.departuretown;
+     this.destinationtown = item.announcementDto.destinationtown;
+     this.departuredate = item.announcementDto.departuredate;
+     this.arrivaldate = item.announcementDto.arrivaldate;
+     this.names = item.announcementDto.userDto.firstName+" "+item.announcementDto.userDto.lastName;
+     this.profileImage = item.announcementDto.userDto.profileimgage;
+     this.quantityDocument = item.quantityDocument;
+     this.quantityComputer = item.quantityComputer;
+     this.quantitykilo = item.quantitykilo;
+
+    this.description = item.description;
+
+     console.log("departuretown",this.departuretown);
+     localStorage.setItem("Payment_departuretown", this.departuretown);
+
+     console.log("destinationtown",this.destinationtown);
+     localStorage.setItem("Payment_destinationtown", this.destinationtown);
+
+     console.log("departuredate",this.departuredate);
+     localStorage.setItem("Payment_departuredate", this.departuredate);
+
+     
+     console.log("arrivaldate",this.arrivaldate);
+     localStorage.setItem("Payment_arrivaldate", this.arrivaldate);
+
+     console.log("names",this.names);
+     localStorage.setItem("Payment_name", this.names);
+
+     console.log("quantityDocument",this.quantityDocument);
+     localStorage.setItem("Payment_quantityDocument", this.quantityDocument);
+
+     console.log("quantityComputer",this.quantityComputer);
+     localStorage.setItem("Payment_quantityComputer", this.quantityComputer);
+
+     console.log("quantitykilo",this.quantitykilo);
+     localStorage.setItem("Payment_quantitykilo", this.quantitykilo);
+
+
+     console.log("description",this.description);
+     localStorage.setItem("Payment_description", this.description);
+
+     console.log("profileImage",this.profileImage);
+     localStorage.setItem("Payment_profileImage", this.profileImage);
+    },
+    momo() {
+
+          var requestOptions1 = { method: "GET", redirect: "follow" };
+
+fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+  .then((response) => response.text())
+  .then((result) => {
+    this.subInfo = JSON.parse(result)[0];
+    this.subInfo.computerPrice;
+  this.subInfo.documentPrice;
+      
+  console.log("sub",this.subInfo.currency,   this.subInfo.documentPrice, this.subInfo.computerPrice)
+
+if( this.subInfo.currency ==="XAF"){
+ 
+    var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + item.id,
+        url: "http://46.105.36.240:3000/reservations/" + this.payRvId,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1395,61 +1362,49 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
 
       axios(config)
         .then((res) => { 
-          
-          var requestOptions1 = { method: "GET", redirect: "follow" };
-
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
-  .then((response) => response.text())
-  .then((result) => {
-      this.subInfo = JSON.parse(result)[0];
-      this.subInfo.computerPrice;
-  this.subInfo.documentPrice;
-  console.log("sub",   this.subInfo.documentPrice, this.subInfo.computerPrice)
-
-
-  this.revId = res.data.id;
-          this.confirm = res.data.confirm;
-          this.track = res.data.track;
-          this.owner = res.data.userDto.firstName + "  " + res.data.userDto.lastName;
-          this.annDtoStatus = res.data.announcementDto.status;
-          this.date = res.data.date;
-          this.description = res.data.description;
-          this.annDtoid = res.data.announcementDto.id;
-          this.annDtoDeparturedate = res.data.announcementDto.departuredate;
-          this.annDtoArrivaldate = res.data.announcementDto.arrivaldate;
-          this.annDtoFirstName = res.data.announcementDto.userDto.firstName + "  " + res.data.announcementDto.userDto.lastName;
-
-          this.stars = res.data.announcementDto.userDto.stars;
-          this.departuretown = res.data.announcementDto.departuretown;
-          this.destinationtown = res.data.announcementDto.destinationtown;
           this.annDtoQty = res.data.announcementDto.quantity;
-          this.restriction = res.data.announcementDto.restriction;
           this.annDtoPrice = res.data.announcementDto.price;
-          this.annDtouserDtoId = res.data.announcementDto.userDto.id;
-          this.profileimgage = res.data.announcementDto.userDto.profileimgage;
           this.totalprice = res.data.totalprice;
-          this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
-          this.receiver = res.data.receiver;
-          this.cardNumber =  res.data.receivernumbercni;
-          this.tel =  res.data.tel;
 
 
-
-          this.total_Rev = (res.data.quantityDocument * this.subInfo.documentPrice) + (res.data.quantityComputer * this.subInfo.computerPrice) + 3280;
+          this.total_Rev = (res.data.quantityDocument * this.subInfo.documentPrice) + (res.data.quantityComputer * this.subInfo.computerPrice) + this.totalprice +3280;
   })
   .catch((error) => console.log("error", error));
     //localStorage.setItem('refresh-token', refreshtoken);
           //localStorage.setItem('access-token', accesstoken);
+       
+
+}else if(this.subInfo.currency ==="€"){
+  var axios1 = require("axios");
+      var config1 = {
+        method: "get",
+        url: "http://46.105.36.240:3000/reservations/" + this.payRvId,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("access-token"),
+        },
+      };
+
+      axios1(config1)
+        .then((res) => { 
+          this.annDtoQty = res.data.announcementDto.quantity;
+          this.annDtoPrice = res.data.announcementDto.price;
+          this.totalprice = res.data.totalprice;
+          this.total_Rev =          ((res.data.quantityDocument * this.subInfo.documentPrice) + (res.data.quantityComputer * this.subInfo.computerPrice) + this.totalprice +5)*660;
+
+        })
+  .catch((error) => console.log("error", error));
+    //localStorage.setItem('refresh-token', refreshtoken);
+          //localStorage.setItem('access-token', accesstoken);
+       
+
+}    
         })
         .catch(function (error) {
           console.log(error);
         });
 
-
-
-
-
-       
+        
       let t = Math.floor(Math.random() * 100000000).toString()
       this.to =100;
       console.log(t);
@@ -1460,10 +1415,10 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
         "site_id": "798029",
         "transaction_id": t,
         "mode": "PRODUCTION",
-        "amount":  this.to,
+        "amount":  this.total_Rev,
         "currency": "XAF",
         "alternative_currency": "USD",
-        "description": "Pour la reservation du "+item.announcementDto.departuredate,
+        "description": "Pour la reservation du "+ this.departuredate,
         "customer_id": this.infoUser.id,
         "customer_name": `${this.infoUser.firstName} ${this.infoUser.lastName}`,
         "customer_surname": this.infoUser.pseudo,
@@ -1480,9 +1435,9 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
         "metadata": "user1",
         "lang": "FR",
         "invoice_data": {
-          "voyageur":item.announcementDto.userDto.firstName+" "+item.announcementDto.userDto.lastName,
-          "traget": "De "+item.announcementDto.departuretown+" à "+item.announcementDto.destinationtown,
-          "receveur": item.receiver+"; CNI: "+ item.receivernumbercni
+          "voyageur":this.travelPlaces,
+          "traget": "De "+this.departuretown+" à "+this.destinationtown,
+          "receveur": this.receiver+"; CNI: "+ this.receivernumbercni
         }
       }
       
@@ -1503,13 +1458,16 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
           let res = JSON.parse(result)
           console.log(res)
           window.open(res.data.payment_url, '_blank');
+          window.location.reload();
         })
         .catch(error => console.log('error', error));
 
-        }
-      })
+
      
     },
+
+
+
     async deleteUser(id) {
       var axios = require("axios");
 
@@ -1536,7 +1494,72 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+$popover-container-color: #fff;
+$back-button-background: #999;
+$back-button-color: #fff;
+$hover-color: #5d9cec;
+$method-button-color: #999;
+
+
+.popover-container {
+
+  .popover-header {
+    flex: 1;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    
+    .payment-button {
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-width: 40%;
+      margin: 3px;
+      padding: 15px 0 15px 0;
+      border: 1px solid $method-button-color;
+      border-radius: 5px;
+      color: $method-button-color;
+      font-weight: 300;
+      
+      &:last-child {
+        margin: 10px 0;
+      }
+      
+      &:hover {
+        background-color: $hover-color;
+        color: $popover-container-color;
+        cursor: pointer;
+      }
+      
+      &:hover i {
+        color: $popover-container-color;
+      }
+      
+      i {
+        font-size: 30px;
+        position: absolute;
+        top: 60%;
+        transform: translateY(-50%);
+        color: $hover-color;
+      }
+      
+      .payment-button-text {
+        margin: 0 auto;
+        font-size: 20px;
+      }
+    }
+  }
+}
 .h6 {
   font-size: 18px;
   font-weight: 600;
@@ -1750,14 +1773,67 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
 .mye {
   position: relative;
   display: flex;
+  height: 42px;
   align-items: center;
   justify-content: center;
   background: #D1D1D1;
-
-  border-radius: 50%;
 }
 
 .cop {
   color: #0f0;
 }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+     opacity: 2;
+  }
+
+  pan
+  {
+    display:block;
+    position:absolute;
+    top:calc(50% - 2px);
+    left:50%;
+    width:50%;
+    height:4px;
+    background:transparent;
+    transform-origin:left;
+    animation:animate 2s linear infinite;
+  }
+  pan:before
+  {
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff000;
+    top:-6px;
+    right:-8px;
+    box-shadow:0 0 20px #fff000;
+  }
+  @keyframes animateC
+  {
+    0%
+    {
+      transform:rotate(0deg);
+    }
+    100%
+    {
+      transform:rotate(360deg);
+    }
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      transform:rotate(45deg);
+    }
+    100%
+    {
+      transform:rotate(405deg);
+    }
+  }
 </style>

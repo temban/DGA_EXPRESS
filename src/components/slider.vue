@@ -6,7 +6,6 @@
       :interval="10000"
       controls
       indicators
-      background="#ababab"
       img-width="1024"
       img-height="480"
       style="text-shadow: 1px 1px 2px #333;"
@@ -21,7 +20,7 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="80"
-            src="@/assets/img/img31.png"
+            src="@/assets/img/pub-1.jpg"
             alt="image slot"
             style="
                     background-position: center;
@@ -38,7 +37,7 @@
       </b-carousel-slide>
 
 
-  <b-carousel-slide>
+  <!-- <b-carousel-slide>
         <template #img>
           <img
           style="
@@ -52,11 +51,10 @@
             width="1024"
             height="480"
             src="@/assets/img/img1.png"
-            alt="image slot" 
-             caption="First slide"
-          >
+            alt="image slot"
+             caption="First slide">
         </template>
-      </b-carousel-slide>
+      </b-carousel-slide> -->
       <!-- Slide with blank fluid image to maintain slide aspect ratio -->
             <b-carousel-slide>
         <template #img>
@@ -71,7 +69,7 @@
                       height:350px; width: 190px;" 
             width="1024"
             height="480"
-            src="@/assets/img/pc4.jpg"
+            src="@/assets/img/pub-2.jpg"
             alt="image slot"
           >
         </template>

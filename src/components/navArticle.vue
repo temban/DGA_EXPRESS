@@ -3,12 +3,12 @@
         <div>
             <b-navbar toggleable="lg" type="dark" variant="white">
                 <b-container>
-                    <div class="header__logo">
+                    <div class="header__logo" style="position:absolute; left:30px;">
                        <a class="header__logo-img" href="/"> </a>
                     </div>
 
 
-<div style="width:50%; margin-left:80px"><searchArticleBarVue/> </div>
+<div style="width:50%; margin-left:200px"><searchArticleBarVue/> </div>
 
 
 
@@ -25,16 +25,101 @@
                                 </div>
                             </div>
                         </b-navbar-nav>
-                        <button type="button" class="icon-button">
-                            <span class="material-icons">notifications</span>
-                            <span class="icon-button__badge">2</span>
-                            
-                        </button>
-                        <a href="/Register"> <div v-if="isLogged === false" style="margin: 0 20px 0 20px">
+                        
+                        
+
+                        <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+    <template #button-content >
+      <i class="fa fa-caret-down" style="font-size:25px; position:absolute;z-index: 2; top: 34px;
+            bottom: 0;
+            left: 42px;
+            right: 0;"></i>
+     
+    <button type="button" class="icon-button">
+    <span class="material-icons">notifications</span>
+    <div id="span" ><span class="icon-button__badge1" ></span> </div>
+  </button>
+ 
+       
+    </template>
+
+
+<div style="position:relative;width:230px; margin: 0px">
+  <b-dropdown-item  
+    href="#"  @click="removeemployeenewValidated" 
+    > <h6 style="margin-left:-16px">Voyage Validé </h6>
+    <span
+    style="position: absolute;
+  top: -8px;
+  right: 0;
+  min-width: 40px;
+  min-height: 40px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;" 
+    id="newValidated">{{newValidated}}</span>
+    </b-dropdown-item>
+    <hr style="position:relative; margin:0 0 0 0; border: none;
+        height: 2px;
+        background: grey;" />
+    <b-dropdown-item 
+    href="#"  @click="removeaddReservation" ><h6 style="margin-left:-16px">Nouvelle Réservation</h6>
+    <span  style="position: absolute;
+  top:39px;
+  right: 0;
+  min-width: 40px; 
+  min-height: 39px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;" 
+ id="addreservation">{{addReservation}}</span>
+  </b-dropdown-item>
+  <hr style="position:relative; margin:0 0 0 0; border: none;
+        height: 2px;
+        background: grey;" />
+      <b-dropdown-item  href="#"  
+      @click="removeconfirmReservation"> 
+      <h6 style="margin-left:-16px">Réservation confirmée</h6><span style="position: absolute;
+  bottom: -8px;
+  right: 0;
+  min-width: 40px;
+  min-height: 40px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;"  id="confirmReservation">{{confirmReservation}}</span></b-dropdown-item> </div>
+   
+  
+  </b-dropdown>
+ 
+
+
+
+
+
+<!-- 
+     
+    <button type="button" class="icon-button" style="position:relative; margin-right:80px">
+    <span class="material-icons">mail</span>
+    <span class="icon-button__badge" id="money">0</span>
+  </button> -->
+
+
+
+
+
+
+
+                        <a href="/Register"> <div v-if="isLogged === false" style="position:absolute; right:20px; top:25px;">
 <button type="button" class="btn btn-outline-primary">
 S'identifier</button>
 </div></a>
-          <a href="/Register"><div v-if="isLogged === false">
+          <a href="/Register"><div v-if="isLogged === false" style="position:absolute; right:145px; top:25px;">
 <button type="button" class="btn btn-outline-primary">Inscription</button>
 
 </div></a>
@@ -73,9 +158,8 @@ S'identifier</button>
                       height:50px; width: 50px;"   />
 </div>
                                 </template>
-                                <b-dropdown-item href="/userDashboard">Manage Account</b-dropdown-item>
-                                <b-dropdown-item @click="singout">Logout</b-dropdown-item>
-                            </b-dropdown>
+                                <b-dropdown-item  href="/userDashboard">Gestion de compte</b-dropdown-item>
+    <b-dropdown-item @click="singout" >Se déconnecter</b-dropdown-item></b-dropdown>
                         </div>
                     </b-collapse>
                 </b-container>
@@ -101,12 +185,16 @@ S'identifier</button>
 </template>
 
 <script>
+import $ from "jquery";
 import searchArticleBarVue from "./searchArticleBar.vue";
 import NavbarVue from "./Navbar.vue";
 export default {
     name: "lognav",
     data() {
         return {
+            newValidated:"",
+      addReservation:"",
+      confirmReservation:"",
             subInfo:{},
             source: "",
             destination: "",
@@ -142,6 +230,248 @@ export default {
            searchArticleBarVue
     },
 
+    mounted(){
+    document.getElementById('span').style.display = 'none';
+    document.getElementById('money').style.display = 'none';
+    
+    function notifications() {
+         
+      document.getElementById("money").innerHTML = localStorage.getItem("notificationSizeValidated")
+      if(localStorage.getItem("notificationSizeValidated") !== null){
+    document.getElementById('money').style.display = 'block';
+  } else{
+    document.getElementById('money').style.display = 'none';
+  }
+
+      if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
+    document.getElementById('span').style.display = 'block';
+  } else{
+    document.getElementById('span').style.display = 'none';
+  }
+   
+}setInterval(notifications, 1000)
+
+
+
+    if(localStorage.getItem("notificationSizeValidated") !== null){
+    
+    this.newValidated = localStorage.getItem("notificationSizeValidated");
+    
+  } 
+  else{
+    this.newValidated = 0;
+  } 
+
+  if(localStorage.getItem("addreservation") !== null){
+    
+    this.addReservation = localStorage.getItem("addreservation");
+    this.notif = true;
+  } 
+  else{
+    this.addReservation = 0;
+  } 
+  if(localStorage.getItem("confirmReservation") !== null){
+    
+    this.confirmReservation = localStorage.getItem("confirmReservation");
+    this.notif = true;
+  } 
+  else{
+    this.confirmReservation = 0;
+    
+  } 
+
+
+
+console.log(localStorage.getItem("notificationSizeValidated"))
+  var x = 0;
+  var y = 0;
+  
+let notif = (title, body) => {
+     const options = {
+       body: body,
+       icon: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`,
+       badge: `https://upload.wikimedia.org/wikipedia/fr/thumb/b/b6/Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg/langfr-280px-Logo_de_la_Direction_g%C3%A9n%C3%A9rale_de_l%27Armement.svg.png`
+     };
+     const n = new Notification(title, options)
+     console.log(n);
+   }
+
+function myFunction() {
+
+  x++;
+  y++;
+ 
+ 
+}setInterval(myFunction, 1000)
+
+// setTimeout(function(){
+//     window.location.reload();
+// }, 10000);
+
+
+  function validated(size, content){
+    
+            var btn = document.getElementById("newValidated");
+            btn.innerHTML = size; 
+            x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =size;
+            localStorage.setItem("notificationSizeValidated", para.innerHTML =size);
+            x.appendChild(para); 
+
+            var btn1 = document.getElementById("pack");
+            btn1.innerHTML = content; 
+             y = document.createElement("article1");
+            var para1 = document.createElement("p1");
+            var css = para1.innerHTML =content;
+            localStorage.setItem("item", {css});
+            console.log(css)
+            y.appendChild(para1); 
+            
+        }
+
+        function addreservation( content){
+    
+    var btn = document.getElementById("addreservation");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("addreservation", para.innerHTML =content);
+            
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+        function confirm( content){
+    
+    var btn = document.getElementById("confirmReservation");
+    btn.innerHTML = 0;
+        btn.innerHTML = content; 
+       
+
+             x = document.createElement("article");
+            var para = document.createElement("p");
+            para.innerHTML =content;
+            localStorage.setItem("confirmReservation", para.innerHTML =content);
+            this.notif = true;
+            x.appendChild(para); 
+            document.getElementById("pack").appendChild(x)
+            
+        }
+
+        var axios = require('axios');
+var config = {
+  method: 'get',
+  url: 'http://46.105.36.240:3000/profile',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  },
+};
+
+ axios(config)
+.then(res => {
+    this.userID  = res.data.id;
+    console.log('profile: ',res.data.id);
+
+    $(document).ready(function(){
+ 
+
+ var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=' + res.data.id;
+ var accessPoint = new EventSource(urlEndpoint);
+
+
+ accessPoint.addEventListener("validationSuggest", function (event){
+  var newValidated = JSON.parse( event.data);
+   if (Notification.permission === "granted") {
+    
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<newValidated.notificationSize; i++){
+  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
+  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
+  }
+  
+  })
+
+  accessPoint.addEventListener("addReservation", function (event){
+  var addReservation = JSON.parse( event.data);
+  console.log("travels",addReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<addReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  addreservation(addReservation.notificationSize)
+  }
+  
+  })
+
+
+
+  accessPoint.addEventListener("confirmReservation", function (event){
+  var confirmReservation = JSON.parse( event.data);
+  console.log("confirmReservation",confirmReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<confirmReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  confirm(confirmReservation.notificationSize)
+  }
+  
+  })
+})
+
+  
+      })
+.catch(function (error) {
+  console.log(error);
+});
+
+
+
+
+},
 
    async created() {
               var axios = require('axios');
@@ -157,7 +487,7 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='http://46.105.36.240:3000/'+ this.profileimgage,
+      this.pic='http://46.105.36.240:3000/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
@@ -224,6 +554,22 @@ var requestOptions1 = { method: 'GET', redirect: 'follow' };
     },
 
     methods: {
+
+
+        removeemployeenewValidated(){
+      window.localStorage.removeItem('notificationSizeValidated');
+      window.location.href = "/MyAnnouncements";
+    },
+
+    removeaddReservation(){
+      window.localStorage.removeItem('addreservation');
+      window.location.href = "/MyReservations";
+    },
+    removeconfirmReservation(){
+      window.localStorage.removeItem('confirmReservation');
+      window.location.href = "/MyReservations";
+    },
+    
         search() {
             var val = this.source;
             var val1 = this.destination;
@@ -424,20 +770,31 @@ ul li ul li a {
 }
 
 .icon-button__badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 20px;
-    height: 20px;
-    background: red;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+  position: absolute;
+  top: -16px;
+  right: -15px;
+  min-width: 25px;
+  min-height: 25px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
-
-
+.icon-button__badge1 {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  min-width: 15px;
+  min-height: 15px;
+  background: green;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
 
 
 
