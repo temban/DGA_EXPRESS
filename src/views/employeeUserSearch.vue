@@ -3,7 +3,7 @@
     <div id="dashboardPage">
         <employeeNavbarVue/>
 
-        <main style="margin-left:-200px;margin-right:10px">
+        <mainmethod>
             <div  class="page-breadcrumb">
     <div class="row">
         <div class="col-6">
@@ -90,7 +90,7 @@
     <p>&copy; Bootadmin. All Rights Reserved. <br />Designed and Developed by <a href="https://sazzad.me">Sazzad Hossain</a>.</p>
 </footer>
 
-        </main>
+        </mainmethod>
     </div>
     </body>
 </template>
@@ -135,6 +135,8 @@ axios(config).then(res => {
 })
   this.loading = false
   console.log(error);
+  localStorage.clear()
+        window.location.href = "/"
 });
  },
 methods:{

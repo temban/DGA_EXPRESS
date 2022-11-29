@@ -115,6 +115,8 @@ export default {
                     text: 'Something went wrong!',
                 })
                 console.log('error', error)
+                localStorage.clear()
+        window.location.href = "/"
             });
         var myHeaders0 = new Headers();
         myHeaders0.append("Content-Type", "application/json");

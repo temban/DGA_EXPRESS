@@ -383,7 +383,10 @@ created(){
           this.subInfo = JSON.parse(result)[0]
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => { 
+        localStorage.clear()
+        window.location.href = "/"
+        console.log('error', error)});
 },
 
     methods: {

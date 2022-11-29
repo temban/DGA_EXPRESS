@@ -329,6 +329,9 @@ export default {
           title: "Oops... Session Expired!",
           text: "You need to login Again!",
         });
+                
+        localStorage.clear()
+        window.location.href = "/"
       });
   },
 

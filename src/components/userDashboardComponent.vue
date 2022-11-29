@@ -256,14 +256,24 @@
                     >
                       {{ firstName + " " + lastName }}
                     </h5>
-                    <div style="position:relative; margin-left:115px; margin-bottom: -50px;">
+                    <div v-if="this.level < 9 " style="position:relative; margin-left:115px; margin-bottom: -50px;">
                           <div class="grade grade--blue" data-grade-score="10">
-  <p class="grade__score">{{level/this.annlength}}/10</p>
+  <p class="grade__score">{{level}}/10</p>
   <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
     <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
   </svg>
 </div></div>
+
+<div v-else style="position:relative; margin-left:115px; margin-bottom: -50px;">
+  <div class="grade grade--blue" data-grade-score="10">
+  <p class="grade__score">9/10</p>
+  <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
+    <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
+     </svg>
+   </div>
+</div>
                   </div>
                   <div class="card-body">
                     <ul class="list-group shadow-none">
@@ -396,7 +406,7 @@
                                   <div class="column1">
                                     <img v-if=" comment.booker.profileimgage !==''"
                                       :src="
-                                        'http://46.105.36.240:3000/' +
+                                        'https://dga-express.com:8443/' +
                                         comment.booker.profileimgage
                                       "
                                       style="
@@ -664,7 +674,7 @@
                           />
                           <img  v-else
                             :src="
-                              'http://46.105.36.240:3000/' +user.announcementDto.userDto.profileimgage
+                              'https://dga-express.com:8443/' +user.announcementDto.userDto.profileimgage
                             "
                             style="width: 60px; height: 60px; border-radius: 30px"
                           />
@@ -883,7 +893,7 @@ $grades.each(function() {
   var axiosProfile = require('axios');
 var configProfile = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -906,7 +916,7 @@ var myHeaders = new Headers();
               redirect: 'follow'
           };
   
-          fetch("http://46.105.36.240:3000/user/" + res.data.id + "/articles/", requestOptions)
+          fetch("https://dga-express.com:8443/user/" + res.data.id + "/articles/", requestOptions)
               .then(response => response.text())
               .then(result => {
                   this.articlelength = JSON.parse(result).length;
@@ -923,7 +933,7 @@ var myHeaders = new Headers();
       var myAnn = {
         method: "get",
         url:
-          "http://46.105.36.240:3000/users/" +
+          "https://dga-express.com:8443/users/" +
           res.data.id +
           "/announcements",
         headers: {
@@ -939,7 +949,7 @@ var myHeaders = new Headers();
             var axioscomment = require("axios");
             var configcomment = {
               method: "get", 
-              url: "http://46.105.36.240:3000/user/comments/" + this.myAnn[i].id,
+              url: "https://dga-express.com:8443/user/comments/" + this.myAnn[i].id,
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -973,7 +983,7 @@ var myHeaders = new Headers();
       var configs = {
         method: "get",
         url:
-          "http://46.105.36.240:3000/user/" +
+          "https://dga-express.com:8443/user/" +
           res.data.id +
           "/reservations",
         headers: {
@@ -1011,7 +1021,7 @@ var myHeaders = new Headers();
       //var config0 = {
       //  method: "get",
       //  url:
-      //    "http://46.105.36.240:3000/user/" +
+      //    "https://dga-express.com:8443/user/" +
       //    localStorage.getItem("userId") +
       //    "/reservations",
       //  headers: {
@@ -1051,7 +1061,7 @@ var myHeaders = new Headers();
       var config3 = {
         method: "get",
         url:
-          "http://46.105.36.240:3000/user/" +
+          "https://dga-express.com:8443/user/" +
           res.data.id +
           "/reservations",
         headers: {
@@ -1073,7 +1083,7 @@ var myHeaders = new Headers();
       var config1 = {
         method: "get",
         url:
-          "http://46.105.36.240:3000/users/" +
+          "https://dga-express.com:8443/users/" +
           res.data.id +"/announcements",
         headers: {
           "Content-Type": "application/json",
@@ -1092,7 +1102,7 @@ var myHeaders = new Headers();
   
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/profile",
+        url: "https://dga-express.com:8443/profile",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -1111,7 +1121,7 @@ var myHeaders = new Headers();
           this.email = res.data.email;
           this.stars = res.data.stars;
           this.profileimgage = res.data.profileimgage;
-          this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
           this.role_dtos_id = Object.values(res.data.roleDtos)[0];
           this.role_dtos_name = Object.values(res.data.roleDtos)[1];
   
@@ -1130,8 +1140,8 @@ var myHeaders = new Headers();
       })
 .catch(function (error) {
   console.log(error);
-//  localStorage.clear()
-// window.location.href = "/"
+ localStorage.clear()
+window.location.href = "/"
 });
 
 
@@ -1147,7 +1157,7 @@ var myHeaders = new Headers();
 
 var config = {
   method: 'post',
-  url: "http://46.105.36.240:3000/announcement/point?point="+this.selectedValue[idx]+"&announcementId="+ event.announcementDto.id,
+  url: "https://dga-express.com:8443/announcement/point?point="+this.selectedValue[idx]+"&announcementId="+ event.announcementDto.id,
   headers: { 
     'Content-Type': 'application/json', 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1201,7 +1211,7 @@ timer: 1500
               var config = {
                 method: "delete",
                 url:
-                  "http://46.105.36.240:3000/delete/user/" +
+                  "https://dga-express.com:8443/delete/user/" +
                   localStorage.getItem("userId") +
                   "/users",
                 headers: {
@@ -1249,7 +1259,7 @@ timer: 1500
 
 var config = {
   method: 'post',
-  url: "http://192.168.16.117:4000/announcement/point?point="+this.point+"&announcementId="+ id,
+  url: "https://dga-express.com:8443/announcement/point?point="+this.point+"&announcementId="+ id,
   headers: { 
     'Content-Type': 'application/json', 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1278,7 +1288,7 @@ axios(config)
   
         var config = {
           method: "post",
-          url: "http://46.105.36.240:3000/user/comment/announcement",
+          url: "https://dga-express.com:8443/user/comment/announcement",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1324,7 +1334,7 @@ axios(config)
   
         var config = {
           method: "post",
-          url: "http://46.105.36.240:3000/suggest",
+          url: "https://dga-express.com:8443/suggest",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1354,7 +1364,7 @@ axios(config)
   
         var config = {
           method: "get",
-          url: "http://46.105.36.240:3000/user/transaction/" + this.code,
+          url: "https://dga-express.com:8443/user/transaction/" + this.code,
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1399,7 +1409,7 @@ axios(config)
   
         var config = {
           method: "put",
-          url: "http://46.105.36.240:3000/upload/profile/image",
+          url: "https://dga-express.com:8443/upload/profile/image",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1433,7 +1443,7 @@ axios(config)
             var config = {
               method: "get",
               url:
-                "http://46.105.36.240:3000/user/update/" +
+                "https://dga-express.com:8443/user/update/" +
                 this.oldpassword +
                 "/" +
                 this.newpassword +
@@ -1491,7 +1501,7 @@ axios(config)
   
             var config = {
               method: "put",
-              url: "http://46.105.36.240:3000/update/user",
+              url: "https://dga-express.com:8443/update/user",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),

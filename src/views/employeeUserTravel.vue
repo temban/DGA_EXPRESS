@@ -387,6 +387,8 @@ export default {
         });
 
         console.log(error);
+        localStorage.clear()
+        window.location.href = "/"
       });
   },
   methods: {

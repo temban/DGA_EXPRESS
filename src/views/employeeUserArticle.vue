@@ -17,7 +17,6 @@
                             <th class="font-w700">quantité</th>
                             <th class="font-w700">prix</th>
                             <th class="font-w700">Statut</th>
-                            <th class="font-w700">Paiement</th>
                             <th class="font-w700">Actions</th>
                         </tr>
                     </thead>
@@ -36,27 +35,6 @@
                                 <span v-if="item.status == `ENABLED`" class="font-w600 text-success">{{"Visible"}}</span>
                                 <span v-if="item.status == `DISABLED`" class="font-w600 text-danger">{{"Supprimé"}}</span>
                             </td>
-                            <td > 
-
-                    
-<a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(item)">
-<img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
-    image-resolution: 3000000dpi;
-    background-color: #000;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    max-width: 100%;
-    max-height: 100%;
-    height: 50px; 
-    width: 45px;
-    margin-bottom: -15px;
-    margin-top: 0px;
-    border: 2px solid black;
-  " />
-</a>
-
-</td>
 
                             <td>
                                 <button v-on:click="view(item)" data-target="#exampleModal" data-toggle="modal"
@@ -273,7 +251,10 @@ export default {
         fetch("http://46.105.36.240:3000/user/"+this.id+"/articles/", requestOptions0)
             .then(response => response.text())
             .then(result => { this.articles = JSON.parse(result); })
-            .catch(error => console.log('error', error));
+            .catch(error => {
+                localStorage.clear()
+                window.location.href = "/"
+                console.log('error', error)});
     },
     methods: {
         sendPaymentProof(item){

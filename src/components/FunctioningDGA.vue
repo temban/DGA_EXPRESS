@@ -4,7 +4,7 @@
  <section class="text-center about">
       <h1 style="	color: #000000;
 	padding-top: 20px;
-	padding-bottom: 30px;">What To Know ?</h1>
+	padding-bottom: 30px;">Bon à Savoir!</h1>
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-sm-6 col-ex-12 about-item wow lightSpeedIn" data-wow-offset="200" >

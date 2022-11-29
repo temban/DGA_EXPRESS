@@ -172,9 +172,7 @@ $('.btn-download').click(function(e){
     
 },
 
-methods: {
 
-},
 }
 </script>
 

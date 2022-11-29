@@ -19,6 +19,7 @@ import VuePlaceAutocomplete from 'vue-place-autocomplete';
 import VueMeta from 'vue-meta'
 import VueSSE from 'vue-sse';
 import Notifications from 'vue-notification'
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 // using defaults
 
 
@@ -29,7 +30,7 @@ const options = {
 };
 
 Vue.use(StripePlugin, options);
-
+Vue.use(EnlargeableImage)
 Vue.use(VueSSE);
 Vue.use(Notifications);
 // OR specify custom defaults (described below)

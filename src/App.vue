@@ -178,7 +178,7 @@ let notif = (title, body) => {
      console.log(n);
    }
   
-let url = 'http://46.105.36.240:3000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f332';
+let url = 'https://dga-express.com:8443/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f332';
    let ev = new EventSource(url);
    
 

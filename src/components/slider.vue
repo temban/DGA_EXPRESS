@@ -78,7 +78,7 @@
 
     
 <div class="wrap1s" style="margin-bottom:-15px">
-    <a class="button1" href="/MarketPlace"> <button1 ><i class="fa fa-shopping-cart"></i>   Notre MarketPlace.</button1></a>
+    <a class="button1" href="/MarketPlace"> <button1 ><i class="fa fa-shopping-cart"></i>Espace E-commerce</button1></a>
  
 </div>
 </div>

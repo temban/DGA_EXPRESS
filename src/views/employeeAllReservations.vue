@@ -44,7 +44,7 @@
                                 <span class="font-w600">
                                     <span v-if="item.confirm"
                                         class="badge badge-success font-weight-100">Confirmé</span>
-                                    <span v-else class="badge badge-warning font-weight-100">En attendant...</span>
+                                    <span v-else class="badge badge-warning font-weight-100">En attend...</span>
                                 </span>
                             </td>
                             
@@ -74,7 +74,7 @@
                   <span class="badge badge-primary font-weight-100">Payé</span>
                 </td>
                 <td v-else>
-                  <span class="badge badge-warning font-weight-100">En Cour...</span>
+                  <span class="badge badge-warning font-weight-100">En Cours...</span>
                 </td>
 
                             <td>
@@ -377,7 +377,11 @@ export default {
         fetch("http://46.105.36.240:3000/reservations", requestOptions)
             .then(response => response.text())
             .then(result => { this.reservations = JSON.parse(result);})
-            .catch(error => console.log('error', error));
+            .catch(error => {console.log('error', error)
+                
+            localStorage.clear()
+        window.location.href = "/"
+    });
     },
     methods: {
         copyText() {

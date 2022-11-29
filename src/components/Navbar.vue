@@ -27,7 +27,7 @@
               <a  href="/MyAnnouncements">Ajouter un Voyage</a>
             </li>
             <li>
-              <a  href="/MarketPlace">Tous les Articles</a>
+              <a  href="/MarketPlace">Espace E-commerce</a>
             </li>
         <li v-if="isLogged === true">
               <a href="/MyArticles">Ajouter un Article</a>

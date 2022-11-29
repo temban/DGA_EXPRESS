@@ -50,7 +50,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <p class="footer-alt mb-0 f-14">2022 © Developed By <a href="">SHINTHEO OÜ</a></p>
+            <p class="footer-alt mb-0 f-14">2022 © Developed By <a href="https://shintheo.com" target="_blank">SHINTHEO OÜ</a></p>
         </div>
     </footer>
 </template>

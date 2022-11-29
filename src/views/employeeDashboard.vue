@@ -612,11 +612,16 @@ localStorage.setItem('pseudo', res.data.pseudo);
                 if (JSON.parse(result).length !== 0) {
                     this.subInfo = JSON.parse(result)[0]
                     console.log(result);
+                    this.use = this.use - this.employee.length
                 }
-            })
-            .catch(error => console.log('error', error));
-        this.use = this.use - this.employee.length
 
+            })
+            .catch(error => {console.log('error', error)
+            localStorage.clear()
+        window.location.href = "/"
+    });
+        
+     
     },
     methods: {
         updadeSubInformation(event) {

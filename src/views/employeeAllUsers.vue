@@ -217,6 +217,9 @@
           })
           this.loading = false
           console.log(error);
+                  
+        localStorage.clear()
+        window.location.href = "/"
         });
     },
   

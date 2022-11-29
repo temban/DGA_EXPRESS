@@ -73,7 +73,7 @@ Inscrivez-vous ici</u></a></p>
             <div class="card ma-cart" style="border-radius: 15px; padding:-90px">
               <div class="card-body text-left">
                 <img class="d-block img-fluid w-100 imgSlide"
-                  :src="`http://46.105.36.240:3000/article/image?file=${item.mainImage}`" alt="image slot">
+                  :src="`https://dga-express.com:8443/article/image?file=${item.mainImage}`" alt="image slot">
 
                 <span class="mb-1 art-title">{{  item.name  }}</span><br />
                 <span class="mb-1 art-0 text-muted"><i class="fa fa-chevron-down text-warning"></i> {{
@@ -111,9 +111,9 @@ Inscrivez-vous ici</u></a></p>
 
 
                   <button v-if="isLogged === true && infoUser.id !== item.user.id" @click="addToCard(item)"
-                   type="button" style="height:38px; float:right ;"
-                    class="btn btn-warning btn-rounded btn-sm btn-floating">
-                    + À la carte
+                   type="button" style="height:38px; float:right; background-color:orange"
+                    class="btn btn-rounded btn-sm btn-floating">
+                    + <i class="fa fa-shopping-cart" style="font-size:20px;color:blue"></i>
                   </button>
                   <button v-if="isLogged === false" v-b-modal.modal-multi-4 type="button"
                     style="height:38px; width:50%;  float:right ;"
@@ -156,7 +156,7 @@ Inscrivez-vous ici</u></a></p>
                               <b-carousel-slide v-for="(top, id) in path" class="my-img" v-bind:key="id">
                                 <template #img class="img">
                                   <img class="d-block img-fluid w-100 my-img0"
-                                    :src="`http://46.105.36.240:3000/article/image?file=${top}`" alt="image slot">
+                                    :src="`https://dga-express.com:8443/article/image?file=${top}`" alt="image slot">
                                 </template>
                               </b-carousel-slide>
                             </b-carousel>
@@ -336,7 +336,7 @@ export default {
   async mounted() {
     var requestoptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestoptions1)
+    fetch("https://dga-express.com:8443/sub/informations/view", requestoptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -360,7 +360,7 @@ export default {
       this.isLogged = this.checkIfIsLogged()
     }),
 
-      await fetch("http://46.105.36.240:3000/articles/available")
+      await fetch("https://dga-express.com:8443/articles/available")
         .then(response => response.json())
         .then((data) => {
           console.log("wasasdasdsdasd",data);
@@ -484,7 +484,7 @@ if( this.subInfo.currency === "XAF"){
         redirect: 'follow'
       };
 
-      fetch("http://46.105.36.240:3000/article/paths/" + item.id, requestoptions5)
+      fetch("https://dga-express.com:8443/article/paths/" + item.id, requestoptions5)
         .then(response => response.text())
         .then(result => {
           this.path = JSON.parse(result)
@@ -508,7 +508,7 @@ if( this.subInfo.currency === "XAF"){
         email: this.email,
         password: this.password
       }
-      axios.post('http://46.105.36.240:3000/signup', newUser)
+      axios.post('https://dga-express.com:8443/signup', newUser)
       {
         this.$router.push('/');
       }
@@ -526,7 +526,7 @@ if( this.subInfo.currency === "XAF"){
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/login",
+        url: "https://dga-express.com:8443/login",
         data: data,
       };
 
@@ -540,7 +540,7 @@ if( this.subInfo.currency === "XAF"){
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "https://dga-express.com:8443/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -592,7 +592,7 @@ if( this.subInfo.currency === "XAF"){
     //   });
     //   var config = {
     //     method: 'post',
-    //     url: 'http://46.105.36.240:3000/login',
+    //     url: 'https://dga-express.com:8443/login',
     //     headers: {
     //       'Content-Type': 'application/x-www-form-urlencoded'
     //     },

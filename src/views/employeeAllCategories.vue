@@ -297,7 +297,11 @@ export default {
                 }
                 console.log(this.employee);
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {console.log('error', error)
+                
+            localStorage.clear()
+        window.location.href = "/"
+        });
     },
     methods: {
         getCategoryEmployee(id) {

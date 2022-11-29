@@ -342,17 +342,19 @@
                
                <td  v-else><i class="fa fa-remove" style="font-size:25px;color:red"></i></td> 
                  <td v-if="user.confirm">
-                              <span class="badge badge-success font-weight-100">Confirmed</span>
+                              <span class="badge badge-success font-weight-100">Confirmé</span>
                             </td>
                               <td v-else>
-                              <span class="badge badge-warning font-weight-100">Pending...</span>
+                              <span class="badge badge-warning font-weight-100">En cours...</span>
                             </td>
 
-                            <td v-if="user.track === 'complete' "> 
+                            <td v-if="user.track === 'complete' && !user.paid"> 
+
+                    
 <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(user)">
 <img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
-    image-resolution: 3000000dpi;
-    background-color: #000;
+    image-resolution: 3000000dpi; 
+    background-color: #000; 
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -361,14 +363,17 @@
     height: 50px; 
     width: 45px;
     margin-bottom: -15px;
-    margin-top: 0px; 
+    margin-top: 0px;
     border: 2px solid black;
   " />
 </a>
- 
+
+</td>
+<td v-else-if="user.track === 'complete' && user.paid">
+<span class="badge badge-primary font-weight-100">Payé</span>
 </td>
 <td v-else>
-<span class="badge badge-warning font-weight-100">En Cour...</span>
+<span class="badge badge-warning font-weight-100">En Cours...</span>
 </td>
                         <td>
             <form>
@@ -475,6 +480,8 @@ axios(config)
   title: 'Oops...No Reservation found!',
 })
   console.log(error);
+  localStorage.clear()
+        window.location.href = "/"
 });
 
   },

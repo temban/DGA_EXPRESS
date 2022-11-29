@@ -464,7 +464,11 @@ if( this.subInfo.currency === "XAF"){
           console.log(res)
           window.open(res.data.payment_url,'_blank');
         })
-        .catch(error => console.log('error', error));   
+        .catch(error => {console.log('error', error)
+              
+        localStorage.clear()
+        window.location.href = "/"
+      });   
 
    
     },

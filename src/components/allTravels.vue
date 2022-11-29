@@ -193,7 +193,7 @@ Inscrivez-vous ici</u></a></p>
                                 <div class="column1">
                                   <img v-if=" comment.booker.profileimgage !==''"
                                     :src="
-                                      'http://46.105.36.240:3000/' +
+                                      'https://dga-express.com:8443/' +
                                       comment.booker.profileimgage
                                     "
                                     style="
@@ -479,7 +479,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 300000000dpi;  background-color: #000;
                     background-position: center;
@@ -504,7 +504,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 300000000dpi;  background-color: #000;
                     background-position: center;
@@ -872,7 +872,7 @@ $grades.each(function() {
 
     var requestOptions1 = { method: "GET", redirect: "follow" };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
       .then((response) => response.text())
       .then((result) => {
         if (JSON.parse(result).length !== 0) {
@@ -884,7 +884,7 @@ $grades.each(function() {
     this.$bus.$on("logged", () => {
       this.isLogged = this.checkIfIsLogged();
     }),
-      await fetch("http://46.105.36.240:3000/announcements")
+      await fetch("https://dga-express.com:8443/announcements")
         .then((response) => response.json())
         .then((data) => {
               if (data=="") {
@@ -968,7 +968,7 @@ $grades.each(function() {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/user/" +id2 + "/articles/", requestOptions)
+        fetch("https://dga-express.com:8443/user/" +id2 + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articlelength = JSON.parse(result).length;
@@ -983,7 +983,7 @@ $grades.each(function() {
       var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "http://46.105.36.240:3000/users/" + id2 + "/announcements",
+        url: "https://dga-express.com:8443/users/" + id2 + "/announcements",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1001,7 +1001,7 @@ $grades.each(function() {
       var axios3 = require("axios");
       var config3 = {
         method: "get",
-        url: "http://46.105.36.240:3000/user/" + id2 + "/reservations",
+        url: "https://dga-express.com:8443/user/" + id2 + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1020,7 +1020,7 @@ $grades.each(function() {
       var axioscomment = require("axios");
       var configcomment = {
         method: "get",
-        url: "http://46.105.36.240:3000/user/comments/" + id,
+        url: "https://dga-express.com:8443/user/comments/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1043,7 +1043,7 @@ $grades.each(function() {
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/announcement/" + id + "/users",
+        url: "https://dga-express.com:8443/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1054,7 +1054,7 @@ $grades.each(function() {
         .then((res) => {
           this.profileimgage = res.data.userDto.profileimgage;
           this.stars = res.data.userDto.stars;
-          this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
           this.firstName = res.data.userDto.firstName;
           this.lastName = res.data.userDto.lastName;
           this.pseudo = res.data.userDto.pseudo;
@@ -1093,7 +1093,7 @@ $grades.each(function() {
         email: this.email,
         password: this.password,
       };
-      axios.post("http://46.105.36.240:3000/signup", newUser);
+      axios.post("https://dga-express.com:8443/signup", newUser);
       {
         this.$router.push("/");
       }
@@ -1112,7 +1112,7 @@ $grades.each(function() {
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/login",
+        url: "https://dga-express.com:8443/login",
         data: data,
       };
 

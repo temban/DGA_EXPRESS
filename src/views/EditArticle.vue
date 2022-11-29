@@ -469,7 +469,11 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
                 this.cate = this.art.cathegory
                 console.log(result);
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {console.log('error', error)
+                  
+        localStorage.clear()
+        window.location.href = "/"
+          });
 
     },
     methods: {

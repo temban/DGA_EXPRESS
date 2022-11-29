@@ -258,7 +258,11 @@ export default {
                 this.articles = JSON.parse(result); 
             console.log("tesssss", this.articles)
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {console.log('error', error)
+                
+            localStorage.clear()
+        window.location.href = "/"
+        });
     },
     methods: {
         copyText() {

@@ -10,6 +10,12 @@ export default [
       component: () => import('@/views/Announcements.vue'),
       props: true,
     },
+    {
+      path: '/forgot-password',
+      name: 'Forgot Password',
+      component: () => import('@/views/ForgotPassword.vue'),
+      props: true,
+    },
       {
         path: '/reservation/:id',
         name: 'Reservation',

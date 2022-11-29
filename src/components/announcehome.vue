@@ -67,7 +67,7 @@ Inscrivez-vous ici</u></a></p>
                   <div v-if="profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -173,7 +173,7 @@ Inscrivez-vous ici</u></a></p>
                                 <div class="column1">
                                  <img v-if=" comment.booker.profileimgage !==''"
                                     :src="
-                                      'http://46.105.36.240:3000/' +
+                                      'http://46.105.36.240:8443/' +
                                       comment.booker.profileimgage
                                     "
                                     style="
@@ -263,7 +263,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -272,9 +272,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -288,7 +288,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -297,9 +297,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -410,7 +410,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -419,9 +419,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -435,7 +435,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -444,9 +444,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -559,7 +559,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -568,9 +568,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -584,7 +584,7 @@ Inscrivez-vous ici</u></a></p>
   <div v-if="user.userDto.profileimgage===''" class="mt-1 mb-1" >
               <img src="@/assets/img/hotels/59710428.png" 
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 3000000dpi;  background-color: #000;
+                    image-resolution: 8443000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -593,9 +593,9 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:3000/'+user.userDto.profileimgage"
+              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
-                    image-resolution: 300000000dpi;  background-color: #000;
+                    image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -907,7 +907,7 @@ $grades.each(function() {
         
           var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+        fetch("http://46.105.36.240:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -919,7 +919,7 @@ $grades.each(function() {
 
    
 
-    await fetch("http://46.105.36.240:3000/announcements")
+    await fetch("http://46.105.36.240:8443/announcements")
     .then(response => response.json())
     .then(data => {
         this.loading = false
@@ -928,7 +928,7 @@ $grades.each(function() {
           this.homAnnLength = data.length;
       
       console.log('success');
-    })
+    }) 
     .catch(err => {
       console.error(err);
     });
@@ -952,7 +952,7 @@ $grades.each(function() {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/user/" + id2 + "/articles/", requestOptions)
+        fetch("http://46.105.36.240:8443/user/" + id2 + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articlelength = JSON.parse(result).length;
@@ -967,7 +967,7 @@ $grades.each(function() {
 
     var configcomment = {
       method: "get",
-      url: "http://46.105.36.240:3000/user/comments/" + id,
+      url: "http://46.105.36.240:8443/user/comments/" + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -991,7 +991,7 @@ var axios3 = require("axios");
     var config3 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/user/" +
+        "http://46.105.36.240:8443/user/" +
        id2 +
         "/reservations",
       headers: {
@@ -1013,7 +1013,7 @@ var axios3 = require("axios");
     var config1 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/users/" +
+        "http://46.105.36.240:8443/users/" +
         id2+"/announcements",
       headers: {
         "Content-Type": "application/json",
@@ -1031,7 +1031,7 @@ var axios3 = require("axios");
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/announcement/'+id+'/users',
+  url: 'http://46.105.36.240:8443/announcement/'+id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -1042,7 +1042,7 @@ axios(config)
 .then(res => {
   this.level= res.data.userDto.level;
        this.profileimgage= res.data.userDto.profileimgage;
-          this.pic = 'http://46.105.36.240:3000/'+  this.profileimgage,
+          this.pic = 'http://46.105.36.240:8443/'+  this.profileimgage,
         this.AnnUserId = res.data.userDto.id;
         this.firstName = res.data.userDto.firstName;
         this.lastName = res.data.userDto.lastName;
@@ -1083,7 +1083,7 @@ axios(config)
         email: this.email,
         password: this.password
       }
-      axios.post('http://46.105.36.240:3000/signup', newUser)
+      axios.post('http://46.105.36.240:8443/signup', newUser)
         {
           this.$router.push('/login');
         }
@@ -1101,7 +1101,7 @@ axios(config)
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/login",
+        url: "http://46.105.36.240:8443/login",
         data: data,
       };
 
@@ -1115,7 +1115,7 @@ axios(config)
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "http://46.105.36.240:8443/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1167,7 +1167,7 @@ axios(config)
 // });
 // var config = {
 //   method: 'post',
-//   url: 'http://46.105.36.240:3000/login',
+//   url: 'http://46.105.36.240:8443/login',
 //   headers: { 
 //     'Content-Type': 'application/x-www-form-urlencoded'
 //   },

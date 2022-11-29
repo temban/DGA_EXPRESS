@@ -667,6 +667,8 @@ mounted(){
         this.error = true
 
         console.log(error);
+        localStorage.clear()
+        window.location.href = "/"
       });
       this.infoUser = JSON.parse(localStorage.getItem("infoUser"))
   },

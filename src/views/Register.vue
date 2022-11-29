@@ -47,26 +47,28 @@ position: relative;
           <label for="chk" aria-hidden="true" >S'identifier</label>
           <input v-model="useremail" type="email" name="email" placeholder="E-mail" required=" Please Insert Your E-mail!" />
           <input
-          v-model="password"
-          id="loginpass"
+          v-model="passwordLogin"
+          id="pass2"
             type="password"
             name="pswd"
             placeholder="Mot de passe"
             required=""
           />
        
-                            <i class="far fa-eye" v-on:click="toggleLogin()"  v-if="!login1"  style=" float: right;
+          <span class="show-pass" v-on:click="toggle2()"  v-if="!state2">    <i class="far fa-eye"  style=" float: right;
         margin-right: 50px;
-        margin-top: -50px;
+        margin-top: -50px; 
         position: relative;
-        font-size:25px"></i>
+        font-size:25px"></i> </span>    
                        
-                        <span v-else class="show-pass" v-on:click="toggleLogin()" style=" float: right;
-        margin-right: 50px;
+                        <span v-else class="show-pass" v-on:click="toggle2()" style=" float: right;
+        margin-right: 50px; 
         margin-top: -50px;
         position: relative;">
                             <i class="fa fa-eye-slash" style="font-size:25px;"></i>
                         </span>
+
+               <div class="login-choice"><a href="/forgot-password"><span>or SignIn with</span>  </a></div>          
         
           <button class="button1" type="submit" style="margin-top:30px">S'identifier   
           <div class="spinner-border text-light spinner-border-sm" role="status" v-if="login">
@@ -186,7 +188,7 @@ position: relative;
               <div style="margin-left:13px; margin-top:-12px;">
                 <input 
                style=" width:95%"
-               v-model="tel"
+               v-model="tel" 
               id="phone" 
               type="tel"
                 name="tel"
@@ -248,7 +250,9 @@ position: relative;
              <div style="position: relative; margin-top:68px;"> <button @click="signup" type="button" class="button">S'inscrire
              <div class="spinner-border text-light spinner-border-sm" role="status" v-if="loginOn">
           <span class="sr-only">Loading...</span></div>
-          </button></div>
+          </button>
+         
+        </div>
           
           
         </form>
@@ -264,13 +268,14 @@ export default {
   name: "loginmodelVue",
   data() {
     return {
-      login1: false,
+      state2: false,
       loginOn:false,
         login:false,
       loading: false,
       modalShow: false,
       useremail: "",
       password: "",
+      passwordLogin:"",
        firstName: "",
       lastName: "",
       pseudo: "",
@@ -396,13 +401,13 @@ function checkStrength(password) {
         this.state1 = true;
     }
   },
-  togglelogin(){
-    if(this.login1){
-        document.getElementById("loginpass").setAttribute("type","password");
-        this.login1 = false;
+  toggle2(){
+    if(this.state2){
+        document.getElementById("pass2").setAttribute("type","password");
+        this.state2 = false;
     }else{
-        document.getElementById("loginpass").setAttribute("type","text")
-        this.login1 = true;
+        document.getElementById("pass2").setAttribute("type","text")
+        this.state2 = true;
     }
   },
      signup(event) {
@@ -664,7 +669,7 @@ function checkStrength(password) {
       var qs = require("qs");
       var data = qs.stringify({
         useremail: this.useremail,
-        password: this.password,
+        password: this.passwordLogin,
       });
       var config = {
         method: "post",

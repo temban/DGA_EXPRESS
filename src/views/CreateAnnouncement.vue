@@ -664,7 +664,9 @@ this.loading=true;
         })
         .catch(function (error) {
           Swal.fire("échec!", "Réessayer.", "warning");
-          window.location.reload();
+                  
+        localStorage.clear()
+        window.location.href = "/"
           console.log(error);
         });
             }
@@ -873,6 +875,7 @@ this.loading=true;
               Swal.fire("échec!", "Réessayer.", "warning");
                window.location.reload();
               console.log(error);
+              
             });
         }
       });   

@@ -1,140 +1,217 @@
-<template>
-  <div style="position:relative; margin: auto;
-  width: 14%;
-  height: 230px;
-  border: 3px solid green;
-  padding: 15px;">
-    <label>Card Number</label>
-    <div id="card-number"></div>
-    <label>Card Expiry</label>
-    <div id="card-expiry"></div>
-    <label>Card CVC</label>
-    <div id="card-cvc"></div>
-    <div id="card-error"></div>
-    <button style="margin-top: 20px;" id="custom-button" @click="call()">Generate Token</button>
-  </div>
-</template>
 
+
+<!--
+  Author: Dane Iracleous <daneiracleous@gmail.com>
+  Repository: https://github.com/diracleo/vue-enlargeable-image
+-->
 <script>
-import Swal from "sweetalert2";
 export default {
-  data () {
-    return {
-      
-      token: null,
-      cardNumber: null,
-      cardExpiry: null,
-      cardCvc: null,
-      url: './assets/img/air-transport-1.jpg'
-    };
-  },
-  computed: {
-    stripeElements () {
-      return this.$stripe.elements();
+  name: 'EnlargeableImage',
+  props: {
+    src: {
+      type: String
     },
+    src_large: {
+      type: String
+    },
+    animation_duration: {
+      type: String,
+      default: "700"
+    },
+    trigger: {
+      type: String,
+      default: "click"
+    }
   },
-  mounted () {
-    // Style Object documentation here: https://stripe.com/docs/js/appendix/style
-    const style = {
-      base: {
-        color: 'black',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '14px',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a',
-      },
+  data() {
+    return {
+      state: this.state,
+      styles: this.styles
     };
-    this.cardNumber = this.stripeElements.create('cardNumber', { style });
-    this.cardNumber.mount('#card-number');
-    this.cardExpiry = this.stripeElements.create('cardExpiry', { style });
-    this.cardExpiry.mount('#card-expiry');
-    this.cardCvc = this.stripeElements.create('cardCvc', { style });
-    this.cardCvc.mount('#card-cvc');
-  },
-  beforeDestroy () {
-
-
-
-    this.cardNumber.destroy();
-    this.cardExpiry.destroy();
-    this.cardCvc.destroy();
   },
   methods: {
-    async createToken () {
-      const { token, error } = await this.$stripe.createToken(this.cardNumber);
-      if (error) {
-        // handle error here
-        document.getElementById('card-error').innerHTML = error.message;
-        return;
+    init() {
+      var self = this;
+      self.state = "delarged";
+      self.delay = 50;
+      self.adjust_top = 0;
+      self.wait = false;
+      var transition_seconds = parseInt(self.$props.animation_duration) / 1000;
+      if(transition_seconds == 0) {
+        self.delay = 0;
       }
-      console.log(token);
-      var axios = require('axios');
-
-var config = {
-  method: 'post',
-  url: 'http://192.168.43.44:4000/payment?amount=120&description=one&token='+ token.id+'&currency=EUR',
-  headers: { 
-    'Content-Type': 'application/json'
-  }
-};
-
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-
+      transition_seconds = transition_seconds.toFixed(2);
+      self.transition_value = "width "+transition_seconds+"s, height "+transition_seconds+"s, top "+transition_seconds+"s, left "+transition_seconds+"s, background-color "+transition_seconds+"s";
+      self.styles = {
+        transition: self.transition_value
+      };
+      if(self.$props.trigger == "hover") {
+        self.styles.pointerEvents = "none";
+      }
     },
-
-    call(){
-      const imagePath = require("../assets/img/loading1.gif");
-
-Swal.fire({
-showConfirmButton: false,
-backdrop: true,
-imageUrl: imagePath,
-imageWidth: 360,
-imageHeight: 310,
-background : '#e6e6e600',
-width: '280px',
-// padding: 150,
-// background: '#fff url(https://image.shutterstock.com/z/stock-vector--exclamation-mark-exclamation-mark-hazard-warning-symbol-flat-design-style-vector-eps-444778462.jpg)'
-// timer: 1500
-});
+    enlarge() {
+      var self = this;
+      var rect = self.$refs.slot.getBoundingClientRect();
+      self.styles = {
+        position: "fixed",
+        left: Math.round(rect.left)+"px",
+        top: Math.round(rect.top + self.adjust_top)+"px",
+        width: Math.round(rect.right - rect.left)+"px",
+        height: Math.round(rect.bottom - rect.top)+"px",
+        backgroundImage: "url("+self.$props.src+")",
+        transition: self.transition_value
+      };
+      if(self.$props.trigger == "hover") {
+        self.styles.pointerEvents = "none";
+      }
+      self.state = "enlarging";
+      if(typeof(self.timer) != 'undefined') {
+        clearTimeout(self.timer);
+      }
+      self.timer = setTimeout(function() {
+        self.$emit('enlarging');
+        self.styles = {
+          backgroundImage: "url("+self.$props.src+")",
+          transition: self.transition_value
+        };
+        if(self.$props.trigger == "hover") {
+          self.styles.pointerEvents = "none";
+        }
+        if(typeof(self.timer) != 'undefined') {
+          clearTimeout(self.timer);
+        }
+        self.timer = setTimeout(function() {
+          self.state = "enlarged";
+          self.$emit('enlarged');
+        }, self.$props.animation_duration);
+      }, self.delay);
+    },
+    reset() {
+      var self = this;
+      if(self.state != "delarging") {
+        var rect = self.$refs.slot.getBoundingClientRect();
+        if(typeof(self.timer) != 'undefined') {
+          clearTimeout(self.timer);
+        }
+        self.timer = setTimeout(function() {
+          self.state = "delarging";
+          self.$emit('delarging');
+          self.styles = {
+            backgroundImage: "url("+self.$props.src+")",
+            position: "fixed",
+            left: Math.round(rect.left)+"px",
+            top: Math.round(rect.top + self.adjust_top)+"px",
+            width: Math.round(rect.right - rect.left)+"px",
+            height: Math.round(rect.bottom - rect.top)+"px",
+            transition: self.transition_value
+          };
+          if(self.$props.trigger == "hover") {
+            self.styles.pointerEvents = "none";
+          }
+          if(typeof(self.timer) != 'undefined') {
+            clearTimeout(self.timer);
+          }
+          self.timer = setTimeout(function() {
+            self.state = "delarged";
+            self.$emit('delarged');
+          }, self.$props.animation_duration);
+        }, 0);
+      } else {
+        self.enlarge();
+      }
     }
+  },
+  mounted: function() {
+    var self = this;
+    self.init();
   }
 };
 </script>
 
-<style scoped>
-body {
-	background: url(../assets/img/e-commerce.jpg);
-  background-attachment: fixed;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	display: grid;
-	height: 100vh;
-    font-family:  "Times New Roman", Times, serif;
-    font-size: 16px;
-}
-#custom-button {
-  height: 30px;
-  outline: 1px solid grey;
-  background-color: green;
-  padding: 5px;
-  color: white;
-}
+<template>
+  <div v-bind:class="{ 'enlargeable-image': true, active: state != 'delarged' }">
+    <div class="slot" ref="slot" v-on="this.$props.trigger == 'click' ? { click: enlarge } : { mouseenter: enlarge, mouseleave: reset }">
+      <slot>
+        <img :src="this.$props.src" class="default" />
+      </slot>
+    </div>
+    <div class="full" v-bind:style="styles" v-bind:class="state" v-on="this.$props.trigger == 'click' ? { click: reset } : {}">
+      <img v-if="state != 'enlarged'" src="https://images.unsplash.com/photo-1550948537-130a1ce83314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80" />
+      <enlargeable-image 
+/>
+      <img v-if="state == 'enlarged'"  src_large="https://www.w3schools.com/howto/img_fjords.jpg"  />
+    </div>
+  </div>
+</template>
 
-#card-error {
-  color: red;
+<style scoped>
+/* your passed-in element */
+.enlargeable-image > .slot {
+  display:inline-block;
+  max-width:100%;
+  max-height:100%;
+  cursor:zoom-in;
+}
+/* default img if no element passed in */
+.enlargeable-image > .slot > img.default {
+  max-width:100%;
+  vertical-align:middle;
+}
+/* passed-in element when growth is happening */
+.enlargeable-image.active > .slot {
+  opacity:0.3;
+  filter:grayscale(100%);
+}
+/* full version that grows (background image allows seamless transition from thumbnail to full) */
+.enlargeable-image .full {
+  cursor:zoom-out;
+  background-color:transparent;
+  align-items:center;
+  justify-content:center;
+  background-position: center center;
+  background-repeat:no-repeat;
+  background-size:contain;
+  display:none;
+}
+.enlargeable-image .full > img {
+  object-fit:contain;
+  width:100%;
+  height:100%;
+}
+/* full version while getting bigger */
+.enlargeable-image .full.enlarging {
+  display:flex;
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  background-color:transparent;
+  cursor:zoom-out;
+  z-index:3;
+}
+/* full version while at its peak size */
+.enlargeable-image .full.enlarged {
+  display:flex;
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  background-color:transparent;
+  cursor:zoom-out;
+  z-index:2;
+}
+/* full version while getting smaller */
+.enlargeable-image .full.delarging {
+  display:flex;
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  background-color:transparent;
+  cursor:zoom-in;
+  z-index:1;
 }
 </style>

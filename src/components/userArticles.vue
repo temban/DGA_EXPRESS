@@ -421,7 +421,11 @@ axios(config)
             this.subInfo = JSON.parse(result)[0]
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => { 
+        console.log('error', error)
+        localStorage.clear();
+window.location.reload();
+});
   
   
       let bask = JSON.parse(localStorage.getItem("basket"))

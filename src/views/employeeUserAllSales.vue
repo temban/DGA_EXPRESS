@@ -218,6 +218,8 @@ axios(config)
         });
         console.log("error", error);
         this.error=true
+        localStorage.clear()
+        window.location.href = "/"
       });
 },
 methods:{

@@ -297,7 +297,11 @@ export default {
       .then((result) => {
         this.announces = JSON.parse(result);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) =>{  console.log("error", error)
+            
+      localStorage.clear()
+        window.location.href = "/"
+    });
 
   },
   methods: {

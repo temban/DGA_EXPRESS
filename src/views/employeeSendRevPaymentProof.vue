@@ -178,7 +178,7 @@ export default{
 
       var date= currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds()  + " "  + " " + " " + currentdate.getDate() + "-"+(currentdate.getMonth()+1) + "-" + currentdate.getFullYear();
  var name = JSON.parse(localStorage.getItem("sendPaymentProof")).announcementDto.userDto.lastName +" " +JSON.parse(localStorage.getItem("sendPaymentProof")).announcementDto.userDto.firstName;
-       var opration= "Une Reservation";
+       var opration= "Paiement de Voyage";
            const input = evt.currentTarget;
            const previousFile = input.files[0];
         //   const oldfilename = input.files[0].name;

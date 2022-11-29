@@ -188,7 +188,7 @@ console.log("Eur%", this.euroPercentagetotalPrice," ",this.euroPrice, " ", this.
 
 var date= currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds()  + " " +  " "  + " " + currentdate.getDate() + "-"+(currentdate.getMonth()+1) + "-" + currentdate.getFullYear();
  var name = JSON.parse(localStorage.getItem("sendPaymentProof")).article.user.lastName +"  " +JSON.parse(localStorage.getItem("sendPaymentProof")).article.user.firstName;
-       var opration= "Achats d'articles";
+       var opration= "Paiement d'articles";
            const input = evt.currentTarget;
            const previousFile = input.files[0];
         //   const oldfilename = input.files[0].name;

@@ -426,7 +426,9 @@ export default {
           text: "Something went wrong!",
         });
         console.log("error", error);
-        this.error=true
+        this.error=true;
+        localStorage.clear()
+        window.location.href = "/"
       });
   },
   methods: {

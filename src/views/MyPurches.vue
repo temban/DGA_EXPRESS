@@ -118,6 +118,8 @@ axios(config)
             title: 'Oops...',
             text: "Quelque chose s'est mal passé!",
           })
+          localStorage.clear()
+        window.location.href = "/"
 });
 
 

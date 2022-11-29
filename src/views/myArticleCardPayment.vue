@@ -5,12 +5,12 @@
     </div>
 
    
-        <b-container style="margin-bottom:10px; margin-top: 40px;">
+        <div style="margin-bottom:50px; margin-top: 40px; margin-right: 60px; margin-left: 60px;">
             <!-- <button @click="but()" id="demo">but</button> -->
 
       <b-row align-v="start">
         <!-- About Hotel -->
-        <b-col lg="6" class="mb-2 mb-lg-0">
+        <b-col lg="7" class="mb-2 mb-lg-0">
 
           <div class="shadow" style="border-radius:15px;height:60% ">
 
@@ -79,31 +79,37 @@
               <div style="margin-left:-14px">
                 
               </div> -->
-
-              <div >
+ <div >
+  <div style="position:relative; margin-bottom:-20px; margin-left:-200px;">
+    <h4>Mon Panier</h4>
+  </div>
+ 
                 <table class="content-table">
+                 
   <thead>
     <tr>
       <th>Nom</th>
-      <th>Ville</th>
+      <th><div style="position:relative; margin-left:40px">Emplacement du vendeur</div></th>
       <th>Quantite</th>
-      <th>Prix</th>
+      <th><div style="width:100px">Prix d'article</div></th>
+      <th><div style="width:100px">Prix Total</div></th>
     </tr>
   </thead>
   <tbody>
-    <tr v-for="item in items" :key="item.id">
-      <td style="position: relative; margin-left:35px">{{item.name}}</td>
-      <td>{{item.location}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.price}}</td>
+    <tr v-for="pair in pairs" :key="pair.id">
+      <td style="position: relative; margin-left:35px">{{pair.item.name}}</td>
+      <td>{{pair.item.location}}</td>
+      <td>{{pair.quantity}}</td>
+      <td>{{pair.item.price}}</td>
+      <td>{{pair.item.price*pair.quantity}}</td>
       
     </tr>
   
   </tbody>
 </table>
-              </div>
+</div>
 
-              <div style="position:relative; margin-right:-280px">
+              <div style="position:relative; margin-right:380px">
                 <!-- pc -->
                 <span class="mx-1"></span>
                 <span >
@@ -119,7 +125,7 @@
 
 
 
-        <b-col lg="6" class="sticky p-lg-0">
+        <b-col lg="5" class="sticky p-lg-0">
           <div class="shadow" style="border-radius:15px;height:80%">
             <div style="position:relative; margin:30px">
 
@@ -230,7 +236,7 @@
         </b-col>
       </b-row>
 
-    </b-container>
+    </div>
     <!--  -->
     <div style="position:relative; margin-bottom:-60px; left:0; right:0"> <footerVue /></div>
     </div>
@@ -278,6 +284,15 @@ import lognavVue from "../components/lognav.vue";
       stripeElements () {
         return this.$stripe.elements();
       },
+
+      pairs () {
+      return this.items.map((item, i) => {
+        return {
+          item: item,
+          quantity: this.quantity[i]
+        }
+      })
+    }
     },
     mounted () {
 
@@ -480,7 +495,11 @@ created(){
           this.subInfo = JSON.parse(result)[0]
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => { 
+        localStorage.clear()
+        window.location.href = "/"
+        console.log('error', error)
+      });
 },
 
     methods: {

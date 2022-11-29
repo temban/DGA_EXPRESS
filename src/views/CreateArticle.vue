@@ -447,7 +447,11 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
     fetch("http://46.105.36.240:3000/cathegories", requestOptions)
       .then(response => response.text())
       .then(result => this.cates = JSON.parse(result))
-      .catch(error => console.log('error', error));
+      .catch(error => {console.log('error', error)
+            
+      localStorage.clear()
+        window.location.href = "/"
+    });
   },
   methods: {
   async uploadItem2(){

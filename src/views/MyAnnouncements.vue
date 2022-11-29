@@ -433,6 +433,8 @@ export default {
         });
 this.error=true
         console.log(error);
+        localStorage.clear()
+        window.location.href = "/"
       });
   },
   methods: {

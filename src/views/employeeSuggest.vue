@@ -78,7 +78,10 @@ export default {
             this.suggest = JSON.parse(result); 
        
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {console.log('error', error)
+            localStorage.clear()
+        window.location.href = "/"
+    });
     },
     methods: {
         like(id) {

@@ -134,6 +134,8 @@ console.log('pathsss', res.data)
 
 .catch(function (error) {
   console.log(error);
+  localStorage.clear()
+        window.location.href = "/"
 });
 
 
