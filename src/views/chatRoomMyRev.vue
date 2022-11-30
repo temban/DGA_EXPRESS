@@ -24,12 +24,12 @@
             </div>
             <div v-else>
               <a
-                :src="'http://46.105.36.240:3000/' + profileimgage"
+                :src="'https://dga-express.com:8443/' + profileimgage"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  :src="'http://46.105.36.240:3000/' + profileimgage"
+                  :src="'https://dga-express.com:8443/' + profileimgage"
                   style="
                     image-resolution: 3000000000dpi;
                     background-color: #000;
@@ -118,7 +118,7 @@
                   <div v-else>
                     <a
                       :src="
-                        'http://46.105.36.240:3000/' +
+                        'https://dga-express.com:8443/' +
                         user.sendermessage.profileimgage
                       "
                       target="_blank"
@@ -126,7 +126,7 @@
                     >
                       <img
                         :src="
-                          'http://46.105.36.240:3000/' +
+                          'https://dga-express.com:8443/' +
                           user.sendermessage.profileimgage
                         "
                         style="
@@ -216,7 +216,7 @@
                   <div v-else>
                     <a :href="pic" target="_blank" rel="noopener noreferrer">
                       <img
-                        :src="'http://46.105.36.240:3000/' + profileimgage"
+                        :src="'https://dga-express.com:8443/' + profileimgage"
                         style="
                           margin-left: 10px;
                           image-resolution: 3000000000dpi;
@@ -314,7 +314,7 @@ export default {
     var config1 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/chat/messages/" +
+        "https://dga-express.com:8443/chat/messages/" +
         localStorage.getItem("receiver-id"),
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +347,7 @@ export default {
             var config = {
               method: "delete",
               url:
-                "http://46.105.36.240:3000/delete/message/" + id + "/messages",
+                "https://dga-express.com:8443/delete/message/" + id + "/messages",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -518,7 +518,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/add/message",
+        url: "https://dga-express.com:8443/add/message",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

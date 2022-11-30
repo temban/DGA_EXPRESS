@@ -404,7 +404,7 @@
               <a v-on:click="view1(user.announcementDto.id, user.announcementDto.userDto.id)"
                 data-target="#exampleModal12" data-toggle="modal">
                 <img v-if="user.announcementDto.userDto.profileimgage !== ''" :src="
-                  'http://46.105.36.240:3000/' +
+                  'https://dga-express.com:8443/' +
                   user.announcementDto.userDto.profileimgage
                 " style="width: 60px; height: 60px; border-radius: 30px" />
                 <img v-else src="@/assets/img/hotels/59710428.png"
@@ -644,7 +644,7 @@ mounted(){
     var config = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/user/" +
+        "https://dga-express.com:8443/user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -693,7 +693,7 @@ mounted(){
           var axios = require("axios");
           var config = {
             method: "get",
-            url: "http://46.105.36.240:3000/reservations/" + id,
+            url: "https://dga-express.com:8443/reservations/" + id,
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -706,7 +706,7 @@ mounted(){
               var data0 = JSON.stringify(res.data);
               var config0 = {
                 method: "put",
-                url: "http://46.105.36.240:3000/update/reseravtion",
+                url: "https://dga-express.com:8443/update/reseravtion",
                 headers: {
                   "Content-Type": "application/json",
                   Authorization:
@@ -766,7 +766,7 @@ var data = JSON.stringify(
 
 var config = {
   method: 'put',
-  url: 'http://46.105.36.240:3000/update/announcement',
+  url: 'https://dga-express.com:8443/update/announcement',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },
@@ -818,7 +818,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + id,
+        url: "https://dga-express.com:8443/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -916,7 +916,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + id,
+        url: "https://dga-express.com:8443/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1028,7 +1028,7 @@ axios(config)
         redirect: 'follow'
       };
 
-      fetch("http://46.105.36.240:3000/user/" + id2 + "/articles/", requestOptions)
+      fetch("https://dga-express.com:8443/user/" + id2 + "/articles/", requestOptions)
         .then(response => response.text())
         .then(result => {
           this.articlelength = JSON.parse(result).length;
@@ -1043,7 +1043,7 @@ axios(config)
       var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "http://46.105.36.240:3000/users/" + id2 + "/announcements",
+        url: "https://dga-express.com:8443/users/" + id2 + "/announcements",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1061,7 +1061,7 @@ axios(config)
       var axios3 = require("axios");
       var config3 = {
         method: "get",
-        url: "http://46.105.36.240:3000/user/" + id2 + "/reservations",
+        url: "https://dga-express.com:8443/user/" + id2 + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1080,7 +1080,7 @@ axios(config)
       var axioscomment = require("axios");
       var configcomment = {
         method: "get",
-        url: "http://46.105.36.240:3000/user/comments/" + id,
+        url: "https://dga-express.com:8443/user/comments/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1103,7 +1103,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/announcement/" + id + "/users",
+        url: "https://dga-express.com:8443/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1114,7 +1114,7 @@ axios(config)
         .then((res) => {
           this.profileimgage = res.data.userDto.profileimgage;
           this.stars = res.data.userDto.stars;
-          this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
           this.firstName = res.data.userDto.firstName;
           this.lastName = res.data.userDto.lastName;
           this.pseudo = res.data.userDto.pseudo;
@@ -1137,7 +1137,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + id,
+        url: "https://dga-express.com:8443/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1149,7 +1149,7 @@ axios(config)
           
           var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
   .then((response) => response.text())
   .then((result) => {
       this.subInfo = JSON.parse(result)[0];
@@ -1181,7 +1181,7 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
           this.annDtouserDtoId = res.data.announcementDto.userDto.id;
           this.profileimgage = res.data.announcementDto.userDto.profileimgage;
           this.totalprice = res.data.totalprice;
-          this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
           this.receiver = res.data.receiver;
           this.cardNumber =  res.data.receivernumbercni;
           this.tel =  res.data.tel;
@@ -1218,7 +1218,7 @@ this.beforPay();
 
       var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
 .then((response) => response.text())
 .then((result) => {
 this.subInfo = JSON.parse(result)[0];
@@ -1232,7 +1232,7 @@ if( this.subInfo.currency ==="XAF"){
 var axios = require("axios");
 var config = {
   method: "get",
-  url: "http://46.105.36.240:3000/reservations/" + item.id,
+  url: "https://dga-express.com:8443/reservations/" + item.id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1260,7 +1260,7 @@ axios(config)
 var axios1 = require("axios");
 var config1 = {
   method: "get",
-  url: "http://46.105.36.240:3000/reservations/" + item.id,
+  url: "https://dga-express.com:8443/reservations/" + item.id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1341,7 +1341,7 @@ axios1(config1)
 
           var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
   .then((response) => response.text())
   .then((result) => {
     this.subInfo = JSON.parse(result)[0];
@@ -1355,7 +1355,7 @@ if( this.subInfo.currency ==="XAF"){
     var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + this.payRvId,
+        url: "https://dga-express.com:8443/reservations/" + this.payRvId,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1380,7 +1380,7 @@ if( this.subInfo.currency ==="XAF"){
   var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "http://46.105.36.240:3000/reservations/" + this.payRvId,
+        url: "https://dga-express.com:8443/reservations/" + this.payRvId,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1475,7 +1475,7 @@ if( this.subInfo.currency ==="XAF"){
 
       var config = {
         method: "delete",
-        url: "http://46.105.36.240:3000/user/" + id + "/reservations",
+        url: "https://dga-express.com:8443/user/" + id + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

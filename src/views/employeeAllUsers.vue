@@ -30,7 +30,7 @@
                     <!-- title -->
                     <div class="d-md-flex align-items-center">
                       <div>
-                        <h4 class="card-title">Tous les clients de DGA</h4>
+                        <h4 class="card-title">Tous les clients DGA</h4>
                       </div>
                       <div class="ml-auto">
                         <div class="dl">
@@ -188,7 +188,7 @@
   
       var config = {
         method: 'get',
-        url: 'http://46.105.36.240:3000/admin/users',
+        url: 'https://dga-express.com:8443/admin/users',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -260,7 +260,7 @@ window.location.href="/employeeUserPurchase"
         var axios = require('axios');
         var config = {
           method: 'get',
-          url: 'http://46.105.36.240:3000/users/' + id,
+          url: 'https://dga-express.com:8443/users/' + id,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -274,7 +274,7 @@ window.location.href="/employeeUserPurchase"
             this.name = this.name1 + " " + this.name2;
             this.profileimgage = res.data.profileimgage;
             this.totalprice = res.data.totalprice;
-            this.pic = 'http://46.105.36.240:3000/' + this.profileimgage
+            this.pic = 'https://dga-express.com:8443/' + this.profileimgage
             //localStorage.setItem('refresh-token', refreshtoken);
             //localStorage.setItem('access-token', accesstoken);
           })
@@ -316,7 +316,7 @@ window.location.href="/employeeUserPurchase"
               redirect: 'follow'
             };
   
-            fetch("http://46.105.36.240:3000/delete/user/" + id + "/users", requestOptions)
+            fetch("https://dga-express.com:8443/delete/user/" + id + "/users", requestOptions)
               .then(response => response.text())
               .then(result => {
                 console.log(result)

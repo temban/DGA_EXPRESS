@@ -32,8 +32,7 @@
     <template #button-content >
       <i class="fa fa-caret-down" style="font-size:25px; position:absolute;z-index: 2; top: 34px;
             bottom: 0;
-            left: 42px;
-            right: 0;"></i>
+            right: 95px;"></i>
      
     <button type="button" class="icon-button">
     <span class="material-icons">notifications</span>
@@ -367,7 +366,7 @@ function myFunction() {
         var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -382,7 +381,7 @@ var config = {
     $(document).ready(function(){
  
 
- var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=' + res.data.id;
+ var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=' + res.data.id;
  var accessPoint = new EventSource(urlEndpoint);
 
 
@@ -477,7 +476,7 @@ var config = {
               var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -487,7 +486,7 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='http://46.105.36.240:3000/'+ res.data.profileimgage;
+      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
@@ -499,7 +498,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
       this.isLogged = this.checkIfIsLogged();
     });
     this.tabFin = this.tabInit
-    await fetch("http://46.105.36.240:3000/announcements")
+    await fetch("https://dga-express.com:8443/announcements")
     .then(response => response.json())
     .then(data => {
         for (let  i= 0;  i< data.length; i++) {
@@ -517,7 +516,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
     
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -747,18 +746,21 @@ ul li ul li a {
 }
 
 .icon-button {
-    margin: 8px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    color: #333333;
-    background: #dddddd;
-    border: none;
-    outline: none;
-    border-radius: 50%;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 90px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
 }
 
 .icon-button:hover {

@@ -177,7 +177,7 @@ export default {
 
     var config = {
       method: 'get',
-      url: 'http://46.105.36.240:3000/admin/users',
+      url: 'https://dga-express.com:8443/admin/users',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -237,7 +237,7 @@ export default {
       var axios = require('axios');
       var config = {
         method: 'get',
-        url: 'http://46.105.36.240:3000/users/' + id,
+        url: 'https://dga-express.com:8443/users/' + id,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -251,7 +251,7 @@ export default {
           this.name = this.name1 + " " + this.name2;
           this.profileimgage = res.data.profileimgage;
           this.totalprice = res.data.totalprice;
-          this.pic = 'http://46.105.36.240:3000/' + this.profileimgage
+          this.pic = 'https://dga-express.com:8443/' + this.profileimgage
           //localStorage.setItem('refresh-token', refreshtoken);
           //localStorage.setItem('access-token', accesstoken);
         })
@@ -294,7 +294,7 @@ export default {
             redirect: 'follow'
           };
 
-          fetch("http://46.105.36.240:3000/delete/user/" + id + "/users", requestOptions)
+          fetch("https://dga-express.com:8443/delete/user/" + id + "/users", requestOptions)
             .then(response => response.text())
             .then(result => {
               console.log(result)

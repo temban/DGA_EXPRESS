@@ -393,7 +393,7 @@ import usersidebarVue from "../components/usersidebar.vue";
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/announcement/'+this.id+'/users',
+  url: 'https://dga-express.com:8443/announcement/'+this.id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -600,7 +600,7 @@ console.log('CNI file: ' + input.files.item(0).name);
 
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-     fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+     fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
          .then(response => response.text())
          .then(result => {
              if (JSON.parse(result).length!==0) {
@@ -643,7 +643,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/covid/test/image/" +this.id,
+          "https://dga-express.com:8443/upload/covid/test/image/" +this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -677,7 +677,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/passport/image/" +this.id,
+          "https://dga-express.com:8443/upload/passport/image/" +this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -709,7 +709,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/tiket/image/" + this.id,
+          "https://dga-express.com:8443/upload/tiket/image/" + this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -831,7 +831,7 @@ var data = JSON.stringify(
 
 var config = {
   method: 'put',
-  url: 'http://46.105.36.240:3000/update/announcement',
+  url: 'https://dga-express.com:8443/update/announcement',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },

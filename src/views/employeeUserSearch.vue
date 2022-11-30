@@ -115,7 +115,7 @@ var data = '';
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/user/friedrich@gmail.com/users',
+  url: 'https://dga-express.com:8443/user/friedrich@gmail.com/users',
   headers: { 
     'Content-Type': 'application/json', 
   'Authorization': 'Bearer ' + localStorage.getItem('access-token')  },
@@ -166,7 +166,7 @@ swalWithBootstrapButtons.fire({
 var axios = require('axios');
 var config = {
   method: 'delete',
-  url: 'http://46.105.36.240:3000/delete/user/'+id+'/users',
+  url: 'https://dga-express.com:8443/delete/user/'+id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token')}

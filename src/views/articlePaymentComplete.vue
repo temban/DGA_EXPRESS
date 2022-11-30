@@ -30,7 +30,7 @@
     <div class="top-container">
         
         <img v-if="profile ===''" src="@/assets/img/hotels/59710428.png" class="img-fluid profile-image" width="70">
-        <img v-else :src="'http://46.105.36.240:3000/' + profile" class="img-fluid profile-image" width="70">
+        <img v-else :src="'https://dga-express.com:8443/' + profile" class="img-fluid profile-image" width="70">
         <div class="ml-3">
             <h2 class="name">{{firstname+ " " +lastname}}</h2>
             <p class="mail">{{email}}</p>

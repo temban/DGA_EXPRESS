@@ -10,7 +10,7 @@
                         <ul class="list-unstyled footer-link mt-4">
                             <li><a href="/">Accueil</a></li>
                             <li><a href="/Announcements">Voyages</a></li>
-                            <li><a href="/MarketPlace">MarketPlace</a></li>
+                            <li><a href="/MarketPlace">Espace e-commerce</a></li>
                             <li><a href="/About">À propos de nous</a></li>
                         </ul>
                     </div>
@@ -18,23 +18,23 @@
 
                 <div class="col-lg-4">
                     <div class="">
-                        <h6 class="footer-heading text-uppercase text-white">Help</h6>
+                        <h6 class="footer-heading text-uppercase text-white">Aide</h6>
                         <ul class="list-unstyled footer-link mt-4">
                             <li><a href="/Register">S'inscrire</a></li>
                             <li><a href="/Register">S'identifier</a></li>
-                            <li><a href="/Conditions">Termes et Conditions.</a></li>
-                            <li><a href="/policy">Privacy Policy</a></li>
+                            <li><a href="/Conditions">Termes et Conditions</a></li>
+                            <li><a href="/policy">Politique de confidentialité</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="">
-                        <h6 class="footer-heading text-uppercase text-white">Contactez Nous</h6>
-                        <p class="contact-info mt-4">Yaoundé: +237 67 58 51 49</p>
+                        <h6 class="footer-heading text-uppercase text-white">Contactez-Nous</h6>
+                        <p class="contact-info mt-4">Yaoundé : +237 67 58 51 49</p>
                         <p class="contact-info"> Douala : +237 67 87 86 731</p>
                         <p class="contact-info">Namur : +32 465 853 983</p>
-                        <p class="contact-info">Bruxelle: +32 465 860 367</p>
+                        <p class="contact-info">Bruxelle : +32 465 860 367</p>
                         <p class="contact-info">E-mail : contact@dga-express.com</p>
                         <div class="mt-5">
                             <ul class="list-inline">

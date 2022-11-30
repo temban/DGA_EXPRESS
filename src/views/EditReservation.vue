@@ -277,7 +277,7 @@ tel:'',
    mounted(){
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
     .then(response => response.text())
     .then(result => {
         if (JSON.parse(result).length!==0) {
@@ -303,7 +303,7 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/reservations/'+this.id1,
+  url: 'https://dga-express.com:8443/reservations/'+this.id1,
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -462,7 +462,7 @@ var data = JSON.stringify({
 
 var config = {
   method: 'put',
-  url: 'http://46.105.36.240:3000/update/reseravtion',
+  url: 'https://dga-express.com:8443/update/reseravtion',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },

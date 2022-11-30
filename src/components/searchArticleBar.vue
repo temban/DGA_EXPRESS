@@ -89,7 +89,7 @@ export default {
       redirect: 'follow'
     };
 
-    fetch("http://46.105.36.240:3000/cathegories", requestOptions)
+    fetch("https://dga-express.com:8443/cathegories", requestOptions)
       .then(response => response.text())
       .then(result => this.cates = JSON.parse(result))
       .catch(error => console.log('error', error));

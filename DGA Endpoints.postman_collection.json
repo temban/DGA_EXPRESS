@@ -1,0 +1,1456 @@
+{
+	"info": {
+		"_postman_id": "3dbe1d6a-e57e-4f58-af9a-3471c03b4434",
+		"name": "DGA Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://dga-express.com:8443/user/update/Azerty@123/Fikish@123/password",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTc3MDM2Nzh9.O06718jXJkJMcFUXsecw1CyCUzx35IYnJz1W1LPalE0",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/user/update/Azerty@123/Fikish@123/password",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"update",
+						"Azerty@123",
+						"Fikish@123",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/delete/{id}/reservations",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/delete/{id}/reservations",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"delete",
+						"{id}",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/update/announcement",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTgwNTUzMzV9.OtD6tItYj9fa80yAAped_TNHCnNtoW0qz47J38HvssU",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"22e6fd4b-9a45-46fd-bac9-bb07ba6cfe0d\",\n  \"departuredate\": \"2022-07-13T07:58:14.451Z\",\n  \"arrivaldate\": \"2022-07-14T07:58:14.451Z\",\n  \"departuretown\": \"Dusseldorf\",\n  \"destinationtown\": \"Bruxelle\",\n  \"quantity\": 23,\n  \"computer\": true,\n  \"restriction\": \"no machines\",\n  \"document\": true,\n  \"status\": \"ENABLED\",\n  \"cni\": \"string\",\n  \"ticket\": \"string\",\n  \"covidtest\": \"string\",\n  \"price\": 400,\n  \"validation\": true,\n  \"userDto\": {\n    \"id\": \"82476c67-d865-4c0e-836d-3c60c641815f\",\n    \"firstName\": \"Ngouanet\",\n    \"lastName\": \"Fredy\",\n    \"pseudo\": \"fikish\",\n    \"email\": \"mikefikish@gmail.com\",\n    \"roleDtos\": [\n      {\n        \"id\": 2,\n        \"name\": \"ROLE_CLIENT\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\"\n  }\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/update/announcement",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"update",
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/users/{id}/announcements",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"departuredate\": \"2022-07-06T15:59:11.040Z\",\n    \"arrivaldate\": \"2022-07-06T15:59:11.040Z\",\n    \"departuretown\": \"string\",\n    \"destinationtown\": \"string\",\n    \"quantity\": 0,\n    \"computer\": true,\n    \"restriction\": \"string\",\n    \"document\": true,\n    \"status\": \"ENABLED\",\n    \"cni\": \"string\",\n    \"ticket\": \"string\",\n    \"covidtest\": \"string\",\n    \"price\": 0,\n    \"validation\": true,\n    \"userDto\": {\n      \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"pseudo\": \"string\",\n      \"email\": \"string\",\n      \"roleDtos\": [\n        {\n          \"id\": 0,\n          \"name\": \"string\"\n        }\n      ],\n      \"status\": \"ENABLED\"\n    }\n  }"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/users/{id}/announcements",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{id}",
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/update/user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBlcm9yQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTcxMDI4OTB9.NmRMt5xdyV73JH8n8-eherxgsE3UbPCoskd36hzQZvs",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"e1252068-c54b-4417-9a7e-3da13a3d0b7a\",\n  \"firstName\": \"Emperor\",\n  \"lastName\": \"Jud\",\n  \"pseudo\": \"Jud\",\n  \"email\": \"emperorjud@gmail.com\",\n  \"roleDtos\": [\n    {\n      \"id\": 2,\n      \"name\": \"ROLE_CLIENT\"\n    }\n  ],\n  \"password\": \"Emperor@123\",\n  \"status\": \"ENABLED\"\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/update/user",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"update",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/search/ffff/tttt/announcements",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/search/ffff/tttt/announcements",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"search",
+						"ffff",
+						"tttt",
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/announcement/44e99c26-86ae-44fe-bf1a-4268ea983006/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmaWtpc2hAZ21haWwuY29tIiwicm9sZXMiOlsiUk9MRV9DTElFTlQiXSwiaXNzIjoiaHR0cDovLzQ2LjEwNS4zNi4yNDA6MzAwMC9sb2dpbiIsImV4cCI6MTY1NjU4OTkxM30.F5ndKwdulSexMBgoSWHAHbf3-oE5m5ugyjVMkov6YiM",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/announcement/44e99c26-86ae-44fe-bf1a-4268ea983006/users",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"announcement",
+						"44e99c26-86ae-44fe-bf1a-4268ea983006",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/addReservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmaWtpc2hAZ21haWwuY29tIiwicm9sZXMiOlsiUk9MRV9DTElFTlQiXSwiaXNzIjoiaHR0cDovLzQ2LjEwNS4zNi4yNDA6MzAwMC9sb2dpbiIsImV4cCI6MTY1NjY2MjI3N30.h99QJX6yqjq_s7_KBg1vSijBtl-hiTOsHtsRC5x43Do",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"description\": \"string\",\n  \"documents\": true,\n  \"computer\": true,\n  \"status\": \"ENABLED\",\n  \"quantitykilo\": 0,\n  \"date\": \"2022-06-30T16:04:00.666Z\",\n  \"userDto\": {\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"pseudo\": \"string\",\n    \"email\": \"string\",\n    \"roleDtos\": [\n      {\n        \"id\": 2,\n        \"name\": \"ROLE_CLIENT\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\"\n  },\n  \"announcementDto\": {\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"departuredate\": \"2022-06-30T16:04:00.666Z\",\n    \"arrivaldate\": \"2022-06-30T16:04:00.666Z\",\n    \"departuretown\": \"string\",\n    \"destinationtown\": \"string\",\n    \"quantity\": 0,\n    \"computer\": true,\n    \"restriction\": \"string\",\n    \"document\": true,\n    \"status\": \"ENABLED\",\n    \"cni\": \"string\",\n    \"ticket\": \"string\",\n    \"covidtest\": \"string\",\n    \"price\": 0,\n    \"validation\": true,\n    \"userDto\": {\n      \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"pseudo\": \"string\",\n      \"email\": \"string\",\n      \"roleDtos\": [\n        {\n          \"id\": 2,\n          \"name\": \"ROLE_CLIENT\"\n        }\n      ],\n      \"password\": \"string\",\n      \"status\": \"ENABLED\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/addReservation",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"addReservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/announcements",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbkBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjQzLjQ0OjQwMDAvbG9naW4iLCJleHAiOjE2NjQ4ODg2MTh9.a1Tx__Xqq2SfTPSApL9ebo3nceDfiQwR8AjF38UZhHY",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.43.44:4000/admin/dashboard/announcements",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"44"
+					],
+					"port": "4000",
+					"path": [
+						"admin",
+						"dashboard",
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.16.117:4000/profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW1iYW5ibGFpc2UyMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vMTkyLjE2OC40My40NDo0MDAwL2xvZ2luIiwiZXhwIjoxNjY2ODk1ODk5fQ.i3U2mGZc1mu1xieZOK33F_Oswz9kZ9vtic5SaQife20",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/articles/available",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/createAnnouncement",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5kYWFsbHBoYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vMTkyLjE2OC44LjEwNDo0MDAwL2xvZ2luIiwiZXhwIjoxNjY0NjMyNTI2fQ.vXtiCdYSLeAalaQJy7Ld07hdRidk3sNFBDHSWnrAlNc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"departuredate\": \"2022-12-13T10:46:30.864Z\",\n  \"arrivaldate\": \"2022-12-18T10:46:30.864Z\",\n  \"departuretown\": \"apha\",\n  \"destinationtown\": \"weeeee\",\n  \"quantity\": 200,\n  \"computer\": true,\n  \"reserved\": false,\n  \"restriction\": \"string\",\n  \"document\": true,\n  \"status\": \"ENABLED\",\n  \"cni\": \"string\",\n  \"ticket\": \"string\",\n  \"covidtest\": \"string\",\n  \"price\": 2000,\n  \"validation\": false,\n   \"userDto\": {\n    \"id\": \"03deabeb-84ab-45c4-b1d3-f3cfa2bb07cd\",\n    \"notificationId\": \"izCNKybR\",\n    \"firstName\": \"Temban\",\n    \"lastName\": \"Locale\",\n    \"profileimgage\": null,\n    \"pseudo\": \"eity\",\n    \"email\": \"Temban@gmail.com\",\n    \"phone\": null,\n    \"roleDtos\": [\n        {\n            \"id\": 2,\n            \"name\": \"ROLE_CLIENT\"\n        }\n    ],\n    \"status\": \"ENABLED\",\n    \"stars\": 0\n}\n}\n"
+				},
+				"url": {
+					"raw": "http://192.168.8.104:4000/createAnnouncement",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"8",
+						"104"
+					],
+					"port": "4000",
+					"path": [
+						"createAnnouncement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "useremail",
+							"value": "Temban@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "Qwerty@123",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.16.117:4000/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"16",
+						"117"
+					],
+					"port": "4000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Blaise\",\n  \"lastName\": \"Ayim\",\n  \"pseudo\": \"user\",\n  \"email\": \"Ayim@gmail.com\",\n  \"password\": \"Qwerty.123#\"\n}"
+				},
+				"url": {
+					"raw": "http://1192.168.16.117:3000/signup",
+					"protocol": "http",
+					"host": [
+						"1192",
+						"168",
+						"16",
+						"117"
+					],
+					"port": "3000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/update/reseravtion",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTc3MjI5NzR9.5kuA1T1ivP-vK_Bq7nzOu6PiF378GLFg2MQ1-WPSqUE",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"f4eddce4-f1d5-47eb-a99d-7b7cd12ee5c9\",\n  \"description\": \"white wine\",\n  \"documents\": true,\n  \"computer\": false,\n  \"status\": \"ENABLED\",\n  \"quantitykilo\": 30,\n  \"date\": \"string\",\n  \"totalprice\": 500,\n  \"userDto\": {\n    \"id\": \"c4c24f01-47b4-4a85-a109-f5ad59569a01\",\n    \"firstName\": \"Friedrich\",\n    \"lastName\": \"Ngouanet\",\n    \"profileimgage\": \"string\",\n    \"pseudo\": \"Fikish\",\n    \"email\": \"mikefikish@gmail.com\",\n    \"roleDtos\": [\n      {\n        \"id\": 2,\n        \"name\": \"ROLE_CLIENT\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\"\n  },\n  \"announcementDto\": {\n    \"id\": \"fd36f7ad-d641-4021-967a-81e62e4fdb08\",\n    \"departuredate\": \"2022-07-13T13:50:18.007Z\",\n    \"arrivaldate\": \"2022-07-13T13:50:18.007Z\",\n    \"departuretown\": \"Frankfort\",\n    \"destinationtown\": \"Douala\",\n    \"quantity\": 23,\n    \"computer\": true,\n    \"restriction\": \"no bottles\",\n    \"document\": true,\n    \"status\": \"ENABLED\",\n    \"cni\": \"string\",\n    \"ticket\": \"string\",\n    \"covidtest\": \"string\",\n    \"price\": 600,\n    \"validation\": true,\n    \"userDto\": {\n      \"id\": \"c4c24f01-47b4-4a85-a109-f5ad59569a01\",\n      \"firstName\": \"Friedrich\",\n      \"lastName\": \"Ngouanet\",\n      \"profileimgage\": \"string\",\n      \"pseudo\": \"Fikish\",\n      \"email\": \"mikefikish@gmail.com\",\n      \"roleDtos\": [\n        {\n          \"id\": 2,\n          \"name\": \"ROLE_CLIENT\"\n        }\n      ],\n      \"password\": \"string\",\n      \"status\": \"ENABLED\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/update/reseravtion",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"update",
+						"reseravtion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/chat/messages/4a0ace82-2961-4272-9688-82b91cdb8b08",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTc4MTIzNDl9.S7bx3GEuxD3NzpB3xP6yJrH-H1Ayok3X4OZZyhbUUa8",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/chat/messages/4a0ace82-2961-4272-9688-82b91cdb8b08",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"chat",
+						"messages",
+						"4a0ace82-2961-4272-9688-82b91cdb8b08"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTgxNDk5NTR9.7TTWAoAH_ACywb6wji92W1zmbINrIysh7q8g1XrDWbM",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/users/{id}",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/add/message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5kYWFsbHBoYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vMTkyLjE2OC40My40NDo0MDAwL2xvZ2luIiwiZXhwIjoxNjY2NjI1NzY0fQ.gzyvkD9Cf6d1TlP_HtU3sFICv65zy5JCvCyAH9S2Kfs",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.43.44:4000/payment?amount=120&description=one&token=tok_1LwOlMCZjIzC8XowPGox9IDC&currency=EUR&email=tembanblaise12@gmail.com&address=messassi&articlesIds=88a745c3-ee23-4f15-a879-ad58eeabd200,250946c9-004d-4951-add7-572b9597f2b5,0fab7f05-d384-4e57-a849-8add1ae6b50e",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"44"
+					],
+					"port": "4000",
+					"path": [
+						"payment"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "120"
+						},
+						{
+							"key": "description",
+							"value": "one"
+						},
+						{
+							"key": "token",
+							"value": "tok_1LwOlMCZjIzC8XowPGox9IDC"
+						},
+						{
+							"key": "currency",
+							"value": "EUR"
+						},
+						{
+							"key": "email",
+							"value": "tembanblaise12@gmail.com"
+						},
+						{
+							"key": "address",
+							"value": "messassi"
+						},
+						{
+							"key": "articlesIds",
+							"value": "88a745c3-ee23-4f15-a879-ad58eeabd200,250946c9-004d-4951-add7-572b9597f2b5,0fab7f05-d384-4e57-a849-8add1ae6b50e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/delete/message/662436d9-f14e-49e3-a674-3b0c0b49a09a/messages",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTc5Njg1NTB9.x5v8BJJd2FFPN6_SclGLZXYBu68WUHlYpVFEfLzw2tc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/delete/message/662436d9-f14e-49e3-a674-3b0c0b49a09a/messages",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"delete",
+						"message",
+						"662436d9-f14e-49e3-a674-3b0c0b49a09a",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/upload/profile/image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTc4MjI1Mzd9.tkB_-zFcOD0abtg_83pYP1DlgglUJBJXebh4eeqtp2I",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/gast/Downloads/f8dee248-e7b4-4469-bff7-f07f37984130.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/upload/profile/image",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"profile",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/users/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/users/{id}",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/users/4a0ace82-2961-4272-9688-82b91cdb8b08/announcements",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZmlraXNoQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQ0xJRU5UIl0sImlzcyI6Imh0dHA6Ly80Ni4xMDUuMzYuMjQwOjMwMDAvbG9naW4iLCJleHAiOjE2NTgxNDk5NTR9.7TTWAoAH_ACywb6wji92W1zmbINrIysh7q8g1XrDWbM",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/users/4a0ace82-2961-4272-9688-82b91cdb8b08/announcements",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"4a0ace82-2961-4272-9688-82b91cdb8b08",
+						"announcements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/upload/profile/image",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWtlZ2hvc3RAZ21haWwuY29tIiwicm9sZXMiOlsiUk9MRV9DTElFTlQiXSwiaXNzIjoiaHR0cDovLzQ2LjEwNS4zNi4yNDA6MzAwMC9sb2dpbiIsImV4cCI6MTY1ODc0MDIzNH0.EixwrIKfVQOu4Q12eWQLC1XgFmfu_GkrvJRY9kTvM4c",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/gast/Downloads/f8dee248-e7b4-4469-bff7-f07f37984130.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/upload/profile/image",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"profile",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/add/article",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU4OTU4NDY0fQ.ASTEG-N5LAkHwOQvPStYURxzh3GMFriRnLGwrdRGBPc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"IphoneXR\",\n  \"description\": \"batterie en beton\",\n  \"price\": 180000,\n  \"quantity\": 21,\n  \"status\": \"ENABLED\",\n  \"user\": {\n    \"id\": \"5096e3ba-5d6d-4eb7-b2ff-75a2778b2604\",\n    \"firstName\": \"Friedrich\",\n    \"lastName\": \"Ngouanet\",\n    \"profileimgage\": null,\n    \"pseudo\": \"Ghost\",\n    \"email\": \"ghost@gmail.com\",\n    \"phone\": \"697658351\",\n    \"roleDtos\": [\n      {\n        \"id\": 2,\n        \"name\": \"ROLE_CLIENT\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\"\n  }\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/add/article",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"add",
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/articles/available",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MzQ4MjY4fQ.vFDyD8s4ZlXmb_z61FuZ_ROTo_jPpNFGSm3vuFiWvyk",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/articles/available",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/user/cathegories/e61a5f5e-52e1-42e9-901c-0e3d2a15b46f",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MTkxMDYwfQ.CSYUw9xOAStw5XfD_MMCnG8m4khQGQMSGQk3eqCcF_c",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/user/cathegories/e61a5f5e-52e1-42e9-901c-0e3d2a15b46f",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"cathegories",
+						"e61a5f5e-52e1-42e9-901c-0e3d2a15b46f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/article/cathegory/2219af47-6ec5-4500-a93e-f3fe40917272",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MTkzOTI1fQ.-hv77ZDTEQi8gZGBzjCIHSMrP0luFlPzuLxpeuWRk5Y",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/article/cathegory/2219af47-6ec5-4500-a93e-f3fe40917272",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"article",
+						"cathegory",
+						"2219af47-6ec5-4500-a93e-f3fe40917272"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/delete/article/ccc218b2-e920-4511-a7f4-417c849e4333",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MjYzODgzfQ.fHySYGjj06KXKrJUxsT4IOFDXQBOp_Ido7-PqEv1kzQ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/delete/article/ccc218b2-e920-4511-a7f4-417c849e4333",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"delete",
+						"article",
+						"ccc218b2-e920-4511-a7f4-417c849e4333"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/confirm/reseravtion/1a099197-8973-4350-88ce-33fca9ad1ed",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MzYzNzM3fQ.3irpTtnE-ZLQvvkydzMFw3Mb-K1xAaeLs2oGTQCkH5U",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/confirm/reseravtion/1a099197-8973-4350-88ce-33fca9ad1ed",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"confirm",
+						"reseravtion",
+						"1a099197-8973-4350-88ce-33fca9ad1ed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/cathegories",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjU5MjYzODgzfQ.fHySYGjj06KXKrJUxsT4IOFDXQBOp_Ido7-PqEv1kzQ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/cathegories",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"cathegories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/suggest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZW1iYW5AZ21haWwuY29tIiwicm9sZXMiOlsiUk9MRV9DTElFTlQiXSwiaXNzIjoiaHR0cDovLzE5Mi4xNjguOC4xMDQ6NDAwMC9sb2dpbiIsImV4cCI6MTY2NDcyNTY3Mn0.zlsuAMGLG67Da60guyTq1XeUiKk7_ZRXsVPk_npUllc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"content\": \"post man 1\",\r\n  \"validated\": true,\r\n  \"user\": {\r\n    \"id\": \"03deabeb-84ab-45c4-b1d3-f3cfa2bb07cd\",\r\n    \"notificationId\": \"izCNKybR\",\r\n    \"firstName\": \"Temban\",\r\n    \"lastName\": \"Locale\",\r\n    \"profileimgage\": null,\r\n    \"pseudo\": \"eity\",\r\n    \"email\": \"Temban@gmail.com\",\r\n    \"phone\": null,\r\n    \"roleDtos\": [\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"ROLE_CLIENT\"\r\n        }\r\n    ],\r\n    \"status\": \"ENABLED\",\r\n    \"stars\": 0\r\n}\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.8.104:4000/suggest",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"8",
+						"104"
+					],
+					"port": "4000",
+					"path": [
+						"suggest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/user/comment/announcement",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 0,\n  \"content\": \"string\",\n  \"booker\": {\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"profileimgage\": \"string\",\n    \"pseudo\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"roleDtos\": [\n      {\n        \"id\": 0,\n        \"name\": \"string\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\",\n    \"stars\": 0\n  },\n  \"announcement\": {\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"departuredate\": \"2022-08-09T09:37:43.479Z\",\n    \"arrivaldate\": \"2022-08-09T09:37:43.479Z\",\n    \"departuretown\": \"string\",\n    \"destinationtown\": \"string\",\n    \"quantity\": 0,\n    \"computer\": true,\n    \"reserved\": true,\n    \"restriction\": \"string\",\n    \"document\": true,\n    \"status\": \"ENABLED\",\n    \"cni\": \"string\",\n    \"ticket\": \"string\",\n    \"covidtest\": \"string\",\n    \"price\": 0,\n    \"validation\": true,\n    \"userDto\": {\n      \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profileimgage\": \"string\",\n      \"pseudo\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"roleDtos\": [\n        {\n          \"id\": 0,\n          \"name\": \"string\"\n        }\n      ],\n      \"password\": \"string\",\n      \"status\": \"ENABLED\",\n      \"stars\": 0\n    }\n  },\n  \"status\": \"ENABLED\"\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/user/comment/announcement",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"comment",
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/like/{announcementId}",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/like/{announcementId}",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"like",
+						"{announcementId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/update/article/",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjYwNjY0NDM3fQ.RelgddDXviS6O_xLrZ8406GBLzEkdyWXiHpcIgcMabM",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"f72b0fb0-a9e8-4def-a426-1ef89e8e5211\",\n  \"name\": \"Electronic Mixer\",\n  \"description\": \"5000W color: SilverGrey, deep red Marque Kal\",\n  \"price\": 550,\n  \"quantity\": 20,\n  \"mainImage\": \"string\",\n  \"status\": \"ENABLED\",\n  \"date\": \"16/08/2022\",\n  \"location\": \"Yaoundde, Omnisport\",\n  \"user\": {\n    \"id\": \"49defa7a-0b56-4edb-b881-a8f181142930\",\n    \"firstName\": \"Ngouanet\",\n    \"lastName\": \"Friedy\",\n    \"profileimgage\": \"image_picker_67F19341-D24C-4329-903E-6B3AE4A9AB0C-19943-000038F2BD6EDDB0.jpg\",\n    \"pseudo\": \"Ghost\",\n    \"email\": \"ghost@gmail.com\",\n    \"phone\": \"+237699873523\",\n    \"roleDtos\": [\n      {\n        \"id\": 2,\n        \"name\": \"ROLE_CLIENT\"\n      }\n    ],\n    \"password\": \"string\",\n    \"status\": \"ENABLED\",\n    \"stars\": 0\n  },\n  \"cathegory\": {\n    \"id\": \"32db5c99-f682-4013-9155-071ec33897af\",\n    \"name\": \"houe appliances\",\n    \"description\": \"for help with hous core\",\n    \"status\": \"ENABLED\",\n    \"user\": {\n      \"id\": \"ba6bb183-ba3d-441e-9023-708d7fbfde02\",\n      \"firstName\": \"Temban\",\n      \"lastName\": \"Ayim\",\n      \"profileimgage\": \"string\",\n      \"pseudo\": \"Admin\",\n      \"email\": \"DGA-ADMIN@gmail.com\",\n      \"phone\": \"6 70 10 59 92\",\n      \"roleDtos\": [\n        {\n          \"id\": 3,\n          \"name\": \"ROLE_ADMIN\"\n        }\n      ],\n      \"password\": \"string\",\n      \"status\": \"ENABLED\",\n      \"stars\": 0\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "https://dga-express.com:8443/update/article/",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"update",
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/current/user/messages/filter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaG9zdEBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL2xvZ2luIiwiZXhwIjoxNjYyNjQ2NzM1fQ.g6Suj0Lq-mtpjc7L0OXX4u3XzeigvKzY0c-kc0uGkbk",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/current/user/messages/filter",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"current",
+						"user",
+						"messages",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.44:4000/admin/dashboard/validation/d78dfb05-f8ba-4c1b-819f-58c42dc98310",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbkBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sImlzcyI6Imh0dHA6Ly8xOTIuMTY4LjQzLjQ0OjQwMDAvbG9naW4iLCJleHAiOjE2NjQ4ODg0MDV9.Y_dQ8RK7xMX3Wr_ZJlsSUbyltilnbjO2_t1oiuXnUXo",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"content\": \"test1 Postman\",\r\n  \"validated\": true,\r\n  \"user\": {\r\n     \"id\": \"03deabeb-84ab-45c4-b1d3-f3cfa2bb07cd\",\r\n    \"notificationId\": \"izCNKybR\",\r\n    \"firstName\": \"Temban\",\r\n    \"lastName\": \"Locale\",\r\n    \"profileimgage\": null,\r\n    \"pseudo\": \"eity\",\r\n    \"email\": \"Temban@gmail.com\",\r\n    \"phone\": null,\r\n    \"roleDtos\": [\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"ROLE_CLIENT\"\r\n        }\r\n    ],\r\n    \"status\": \"ENABLED\",\r\n    \"stars\": 0\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.43.44:4000/admin/dashboard/validation/5c4c917b-cc48-4fec-8f54-b9aff696d2d2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"44"
+					],
+					"port": "4000",
+					"path": [
+						"admin",
+						"dashboard",
+						"validation",
+						"5c4c917b-cc48-4fec-8f54-b9aff696d2d2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.8.104:4000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.8.104:4000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"8",
+						"104"
+					],
+					"port": "4000",
+					"path": [
+						"subcribe"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "ae6043af-4db2-45a5-ab43-e2b6927f3325"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://dga-express.com:8443/payment/articles?amount=93200&description=Articles&token=tok_1M4iiRCZjIzC8XowoEZTgvP6&currency=EUR&email=tendaallpha@gmail.com&address=Namur : Rue d'Arquet 64,5000 namur&articlesIds=01a34dd1-9da2-46fc-a700-e753bf54d3ed,76ffcbd2-a6a9-4272-b6b6-af3c42198bd6,2655d399-0971-44eb-b6bb-4bf2f821d1ee,d1e73e9c-9641-4298-9143-3b9cb7bd102b,0160dfa6-dcd7-4706-ae47-b3dff03d6882,a5a22415-32c0-46d8-8e8d-0f9622396d97&quantities=1,1,1,1,1,1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW5kYWFsbHBoYUBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL3JlZnJlc2hUb2tlbiIsImV4cCI6MTY2ODU5NzM3MX0.xc7yHbFjjQ_KQbPSlpcTc_3tjZpkMiNhlyBVOYbStuk",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dga-express.com:8443/payment/articles?amount=93200&description=Articles&token=tok_1M4iiRCZjIzC8XowoEZTgvP6&currency=EUR&email=tendaallpha@gmail.com&address=Namur : Rue d'Arquet 64,5000 namur&articlesIds=01a34dd1-9da2-46fc-a700-e753bf54d3ed,76ffcbd2-a6a9-4272-b6b6-af3c42198bd6,2655d399-0971-44eb-b6bb-4bf2f821d1ee,d1e73e9c-9641-4298-9143-3b9cb7bd102b,0160dfa6-dcd7-4706-ae47-b3dff03d6882,a5a22415-32c0-46d8-8e8d-0f9622396d97&quantities=1,1,1,1,1,1",
+					"protocol": "http",
+					"host": [
+						"46",
+						"105",
+						"36",
+						"240"
+					],
+					"port": "3000",
+					"path": [
+						"payment",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "93200"
+						},
+						{
+							"key": "description",
+							"value": "Articles"
+						},
+						{
+							"key": "token",
+							"value": "tok_1M4iiRCZjIzC8XowoEZTgvP6"
+						},
+						{
+							"key": "currency",
+							"value": "EUR"
+						},
+						{
+							"key": "email",
+							"value": "tendaallpha@gmail.com"
+						},
+						{
+							"key": "address",
+							"value": "Namur : Rue d'Arquet 64,5000 namur"
+						},
+						{
+							"key": "articlesIds",
+							"value": "01a34dd1-9da2-46fc-a700-e753bf54d3ed,76ffcbd2-a6a9-4272-b6b6-af3c42198bd6,2655d399-0971-44eb-b6bb-4bf2f821d1ee,d1e73e9c-9641-4298-9143-3b9cb7bd102b,0160dfa6-dcd7-4706-ae47-b3dff03d6882,a5a22415-32c0-46d8-8e8d-0f9622396d97"
+						},
+						{
+							"key": "quantities",
+							"value": "1,1,1,1,1,1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

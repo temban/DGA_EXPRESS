@@ -23,7 +23,7 @@
                       height:300px; width: 300px;" />
                 </div>
 
-                <img v-else :src="'http://46.105.36.240:3000/' + profileimgage" style="border-radius:55px;
+                <img v-else :src="'https://dga-express.com:8443/' + profileimgage" style="border-radius:55px;
                 image-resolution: -300000000dpi;  
                     background-position: center;
                     background-size: cover;
@@ -97,7 +97,7 @@
 
               <div>
                 <textarea v-model="restriction" name="name"
-                  style="font-family:sans-serif;margin-top:30px;font-size:1.2em;width:100%; height:60px;"
+                  style="font-family:sans-serif;margin-top:30px;font-size:1.2em;width:100%; height:60px; color: #000;"
                   readonly></textarea>
               </div>
 
@@ -282,7 +282,7 @@ export default {
   async created() {
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -293,7 +293,7 @@ export default {
     var axios = require('axios');
     var config = {
       method: 'get',
-      url: 'http://46.105.36.240:3000/announcement/' + this.id + '/users',
+      url: 'https://dga-express.com:8443/announcement/' + this.id + '/users',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -430,7 +430,7 @@ export default {
 
           var config = {
             method: 'post',
-            url: 'http://46.105.36.240:3000/addReservation',
+            url: 'https://dga-express.com:8443/addReservation',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + localStorage.getItem('access-token')

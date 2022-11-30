@@ -271,7 +271,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/cathegories", requestOptions)
+        fetch("https://dga-express.com:8443/cathegories", requestOptions)
             .then(response => response.text())
             .then(result => { this.allCategoties = JSON.parse(result)})
             .catch(error => console.log('error', error));
@@ -287,7 +287,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/users", requestOptions0)
+        fetch("https://dga-express.com:8443/users", requestOptions0)
             .then(response => response.text())
             .then(result => {
                 for (let i = 0; i < JSON.parse(result).length; i++) {
@@ -315,7 +315,7 @@ export default {
                 redirect: 'follow'
             };
 
-            fetch("http://46.105.36.240:3000/user/"+id+"/cathegories", requestOptions)
+            fetch("https://dga-express.com:8443/user/"+id+"/cathegories", requestOptions)
                 .then(response => response.text())
                 .then(result => this.catByEmployee = JSON.parse(result))
                 .catch(error => console.log('error', error));
@@ -334,7 +334,7 @@ export default {
                 redirect: 'follow'
             };
 
-            fetch("http://46.105.36.240:3000/update/cathegory", requestOptions)
+            fetch("https://dga-express.com:8443/update/cathegory", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     console.log(result)
@@ -353,7 +353,7 @@ export default {
                 redirect: 'follow'
             };
 
-            fetch("http://46.105.36.240:3000/user/cathegories/" + id, requestOptions)
+            fetch("https://dga-express.com:8443/user/cathegories/" + id, requestOptions)
                 .then(response => response.text())
                 .then(result => { this.dataCat = JSON.parse(result); console.log(result); })
                 .catch(error => console.log('error', error));
@@ -388,7 +388,7 @@ export default {
                         redirect: 'follow'
                     };
 
-                    fetch("http://46.105.36.240:3000/user/cathegories/" + id, requestOptions)
+                    fetch("https://dga-express.com:8443/user/cathegories/" + id, requestOptions)
                         .then(response => response.text())
                         .then(result => {
                             console.log(result);
@@ -452,7 +452,7 @@ export default {
                         redirect: 'follow'
                     };
 
-                    fetch("http://46.105.36.240:3000/add/cathegory", requestOptions)
+                    fetch("https://dga-express.com:8443/add/cathegory", requestOptions)
                         .then(response => response.text())
                         .then(result => {
                             swalWithBootstrapButtons.fire(

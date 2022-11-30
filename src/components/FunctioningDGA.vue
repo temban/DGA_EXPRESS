@@ -4,28 +4,27 @@
  <section class="text-center about">
       <h1 style="	color: #000000;
 	padding-top: 20px;
-	padding-bottom: 30px;">Bon à Savoir!</h1>
+	padding-bottom: 30px;">Bon à Savoir !</h1>
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-sm-6 col-ex-12 about-item wow lightSpeedIn" data-wow-offset="200" >
             <span class="fa fa-group"></span>
             <h2>Section 1</h2>
             <p class="lead">
-				Avec DGA-Express, tout vos colis seront en securite, les transactions seront rapide
-				et tout  
+				DGA-Express garantit la sécurité de vos colis et la rapidité de vos transactions.
 				
 			</p>
           </div>
           <div class="col-lg-4 col-sm-6 col-ex-12 about-item wow lightSpeedIn" data-wow-offset="200">
             <span class="fa fa-info"></span>
             <h2>Section 2 </h2>
-            <p class="lead">Pour tout vos probleme sur l'utilisation de la plateforme, par rapport à vos transactions, veuillez entrer dans la page contact et suivre les instructions</p>
+            <p class="lead">Pour tous vos problèmes sur l'utilisation de la plateforme, par rapport à vos transactions, veuillez entrer dans la page contact et suivre les instructions</p>
           </div>
           <div class="clearfix visible-md-block visible-sm-block"></div>
           <div class="col-lg-4 col-sm-6 col-ex-12 about-item wow lightSpeedIn" data-wow-offset="200">
             <span class="fa fa-file"></span>
             <h2>Section 3</h2>
-            <p class="lead">Les prix de transport de document et d'ordinateur, la devise utilisée  pour vos transactions sont défini au préalable par DGA</p>
+            <p class="lead">Les prix relatifs au transport de documents et d'ordinateurs sont à la portée de tous</p>
           </div>
           
         </div>

@@ -20,24 +20,24 @@
           <a href="#!">About</a>
         </li> -->
         <li >
-              <a  href="/Announcements">Tous les Voyages</a>
+              <a  href="/Announcements">Tous les voyages</a>
             </li>
         
         <li v-if="isLogged === true">
-              <a  href="/MyAnnouncements">Ajouter un Voyage</a>
+              <a  href="/MyAnnouncements">Ajouter un voyage</a>
             </li>
             <li>
               <a  href="/MarketPlace">Espace E-commerce</a>
             </li>
         <li v-if="isLogged === true">
-              <a href="/MyArticles">Ajouter un Article</a>
+              <a href="/MyArticles">Ajouter un article</a>
             </li>
            
         <li>
           <a href="/About">À propos de nous</a>
         </li>
         <li>
-          <a href="/contact_us">Nous contacter</a>
+          <a href="/contact_us">Contactez-nous</a>
         </li>
       </ul>
     </nav>

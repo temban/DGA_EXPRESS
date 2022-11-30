@@ -28,7 +28,7 @@ export default {
 
 //var config = {
 //  method: 'put',
-//  url: 'http://46.105.36.240:3000/upload/profile/image',
+//  url: '/upload/profile/image',
 //  headers: { 
 //    'Content-Type': 'application/json', 
 //    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW1iYW5ibGFpc2UxMkBnbWFpbC5jb20iLCJyb2xlcyI6WyJST0xFX0NMSUVOVCJdLCJpc3MiOiJodHRwOi8vNDYuMTA1LjM2LjI0MDozMDAwL3JlZnJlc2hUb2tlbiIsImV4cCI6MTY1OTU0OTc4OH0.T_c1PteRj2BUOiqHxrbMeAWFaL5ADCASeDoXnlrQE48', 
@@ -54,7 +54,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/refreshToken',
+  url: 'https://dga-express.com:8443/refreshToken',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -86,7 +86,7 @@ localStorage.setItem('access-token', accesstoken);
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

@@ -751,12 +751,12 @@
                                     "
                                   ></label>
                                   <div class="col-lg-9">
-                                    <input
+                                    <button
                                       id="user"
                                       @click="commentBox(user, idx)"
-                                      type="Envoyer"
+                                      type="button"
                                       class="btn btn"
-                                      style="background-color: orangered"/>
+                                      style="background-color: orangered">Envoyer</button>
                                   </div>
                                 </div>
                             </div>
@@ -1310,7 +1310,6 @@ axios(config)
       },
   
       suggestionBox() {
-        this.loading = true;
         var axios = require("axios");
         var data = JSON.stringify({
           content: this.suggestion,
@@ -1347,10 +1346,16 @@ axios(config)
             
             window.location.reload();
             console.log(JSON.stringify(response.data));
+            Swal.fire({
+                        icon: 'success',
+                        title: ' Enregistré avec succès !',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
           })
           .catch(function (error) {
             Swal.fire("Échec !", "Quelque chose s'est mal passé!", "error");
-         window.location.reload();
+        //  window.location.reload();
             console.log(error);
           });
       },

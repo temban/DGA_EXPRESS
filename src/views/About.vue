@@ -3,7 +3,7 @@
         <lognav />
         <div class="about">
             <div class="head">
-                <span>About Us</span>
+                <span>À propos de nous</span>
             </div>
             <div class="body">
                 <p>
@@ -79,11 +79,11 @@
                 <h2>
                     Contact
                 </h2>
-                &nbsp;&nbsp;&nbsp;&nbsp;- Douala : +237 678 786 731
-                &nbsp;&nbsp;&nbsp;&nbsp;- Yaoundé: +237 675 851 499
-                &nbsp;&nbsp;&nbsp;&nbsp;- Bruxelle: +324 658 60367
-                &nbsp;&nbsp;&nbsp;&nbsp;- Namur : +32 465 853983    
-                &nbsp;&nbsp;&nbsp;&nbsp;- WhatsApp : Ces contacts sont tous des numéros Whatsapp
+                &nbsp;&nbsp;&nbsp;- Douala : +237 678 786 731
+                &nbsp;&nbsp;&nbsp;- Yaoundé : +237 675 851 499
+                &nbsp;&nbsp;&nbsp;- Bruxelle: +324 658 60367
+                &nbsp;&nbsp;&nbsp;- Namur : +32 465 853983    
+                &nbsp;&nbsp;&nbsp;- WhatsApp : Ces contacts sont tous des numéros Whatsapp
 
             </div>
         </div>

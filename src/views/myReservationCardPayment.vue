@@ -24,7 +24,7 @@
                       height:300px; width: 300px;" />
                 </div>
 
-                <img v-else :src="'http://46.105.36.240:3000/' + this.profileImage" style="border-radius:55px;
+                <img v-else :src="'https://dga-express.com:8443/' + this.profileImage" style="border-radius:55px;
                 image-resolution: -300000000dpi;  
                     background-position: center;
                     background-size: cover;
@@ -376,7 +376,7 @@ $("button.submit").on('click', function(e){
 created(){
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -403,7 +403,7 @@ created(){
         this.pay = true;
   var config = {
     method: 'post',
-    url: `http://46.105.36.240:3000/payment/reservations?amount=${this.totalPrice *100}&description=Reservation&token=${token.id}&currency=EUR&email=${localStorage.getItem("email")}`,
+    url: `https://dga-express.com:8443/payment/reservations?amount=${this.totalPrice *100}&description=Reservation&token=${token.id}&currency=EUR&email=${localStorage.getItem("email")}`,
     headers: { 
       'Content-Type': 'application/json',
       Authorization: "Bearer " + localStorage.getItem("access-token"),

@@ -367,7 +367,7 @@ export default {
 
     var config = {
       method: "get",
-      url: "http://46.105.36.240:3000/users/" + this.id + "/announcements",
+      url: "https://dga-express.com:8443/users/" + this.id + "/announcements",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -406,7 +406,7 @@ export default {
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/admin/dashboard/validation/'+ id,
+  url: 'https://dga-express.com:8443/admin/dashboard/validation/'+ id,
   headers: { 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
      'Content-Type': 'application/json',
@@ -437,7 +437,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/announcement/"+id+"/users",
+        url: "https://dga-express.com:8443/announcement/"+id+"/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -458,11 +458,11 @@ axios(config)
           this.restriction = res.data.restriction;
           this.document = res.data.document;
           this.cni = res.data.cni;
-          this.passport = "http://46.105.36.240:3000/passport/" + this.cni;
+          this.passport = "https://dga-express.com:8443/passport/" + this.cni;
           this.ticket = res.data.ticket;
-          this.tiket = "http://46.105.36.240:3000/tiket/" + this.ticket;
+          this.tiket = "https://dga-express.com:8443/tiket/" + this.ticket;
           this.covidtest = res.data.covidtest;
-          this.covid = "http://46.105.36.240:3000/covidTest/" + this.covidtest;
+          this.covid = "https://dga-express.com:8443/covidTest/" + this.covidtest;
           this.price = res.data.price;
           this.id = res.data.id;
           this.userDtoId = res.data.userDto.id;
@@ -519,7 +519,7 @@ axios(config)
             var axios = require("axios");
             var config = {
               method: "delete",
-              url: "http://46.105.36.240:3000/delete/" + id + "/announcements",
+              url: "https://dga-express.com:8443/delete/" + id + "/announcements",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),

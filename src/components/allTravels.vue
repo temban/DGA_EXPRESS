@@ -641,7 +641,7 @@ Inscrivez-vous ici</u></a></p>
                     style="height: 38px; float: right"
                     class="btn btn-primary btn-rounded btn-sm btn-floating"
                   >
-                  Reserver
+                  S'indintifier
                   </button>
 
                   <router-link
@@ -653,7 +653,7 @@ Inscrivez-vous ici</u></a></p>
                     type="submit"
                     :to="{ name: 'Reservation', params: { id: user.id } }"
                     class="btn btn-primary btn-rounded btn-sm btn-floating"
-                    >Reserver</router-link
+                    >Réserver</router-link
                   >
                 </div>
               </div>

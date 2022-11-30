@@ -12,7 +12,7 @@
          
                     <img class="my-pp" v-if="item.user.profileimgage == ``" src="@/assets/img/hotels/59710428.jpg"
                         alt="profile" />
-                    <img class="my-pp" v-else :src="`http://46.105.36.240:3000/${item.user.profileimgage}`"
+                    <img class="my-pp" v-else :src="`https://dga-express.com:8443/${item.user.profileimgage}`"
                         alt="profile" />
                     <div class="user-info">
                         <div class="name">{{ item.user.firstName + " " + item.user.lastName }}</div>
@@ -71,7 +71,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/view/suggest", requestOptions)
+        fetch("https://dga-express.com:8443/view/suggest", requestOptions)
             .then(response => response.text())
             .then(result => { 
                 
@@ -95,7 +95,7 @@ export default {
                 redirect: 'follow'
             };
 
-            fetch("http://46.105.36.240:3000/check/suggestion/" + id, requestOptions)
+            fetch("https://dga-express.com:8443/check/suggestion/" + id, requestOptions)
                 .then(response => response.text())
                 .then(result => {console.log(result);window.location.reload()})
                 .catch(error => console.log('error', error));

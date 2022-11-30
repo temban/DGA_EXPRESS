@@ -99,7 +99,7 @@ destinationtown: '',
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/announcement/'+this.id+'/users',
+  url: 'https://dga-express.com:8443/announcement/'+this.id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

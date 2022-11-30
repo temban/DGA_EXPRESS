@@ -103,7 +103,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/user/" + JSON.parse(localStorage.getItem('infoUser')).id + "/articles/", requestOptions)
+        fetch("https://dga-express.com:8443/user/" + JSON.parse(localStorage.getItem('infoUser')).id + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articles = JSON.parse(result);
@@ -128,7 +128,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/current/user/messages", requestOptions0)
+        fetch("https://dga-express.com:8443/current/user/messages", requestOptions0)
             .then(response => response.text())
             .then(result => {
                 this.messages = JSON.parse(result)

@@ -425,7 +425,7 @@ ccInputElement.addEventListener('keydown', event => {
 
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
     .then(response => response.text())
     .then(result => {
         if (JSON.parse(result).length!==0) {
@@ -444,7 +444,7 @@ fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
       redirect: 'follow'
     };
 
-    fetch("http://46.105.36.240:3000/cathegories", requestOptions)
+    fetch("https://dga-express.com:8443/cathegories", requestOptions)
       .then(response => response.text())
       .then(result => this.cates = JSON.parse(result))
       .catch(error => {console.log('error', error)
@@ -468,7 +468,7 @@ data.append('articleId', localStorage.getItem('PostIdPic'));
 
 var config = {
   method: 'put',
-  url: 'http://46.105.36.240:3000/upload/main/article/image',
+  url: 'https://dga-express.com:8443/upload/main/article/image',
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -497,7 +497,7 @@ data.append('file', this.pic3);
 
 var config = {
   method: 'put',
-   url: 'http://46.105.36.240:3000/upload/article/images/'+localStorage.getItem('PostIdPic'),
+   url: 'https://dga-express.com:8443/upload/article/images/'+localStorage.getItem('PostIdPic'),
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -528,7 +528,7 @@ data.append('file', this.pic2);
 
 var config = {
   method: 'put',
-  url: 'http://46.105.36.240:3000/upload/article/images/'+localStorage.getItem('PostIdPic'),
+  url: 'https://dga-express.com:8443/upload/article/images/'+localStorage.getItem('PostIdPic'),
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -640,7 +640,7 @@ await axios(config)
             redirect: 'follow'
           };
 
-          fetch("http://46.105.36.240:3000/add/article", requestOptions)
+          fetch("https://dga-express.com:8443/add/article", requestOptions)
             .then(response => response.text())
             .then(result => {
                 let a=JSON.parse(result);

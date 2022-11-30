@@ -586,7 +586,7 @@ $('body').on('change', '#covid', function(evt) {
 
    var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -643,7 +643,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/covid/test/image/" +
+          "https://dga-express.com:8443/upload/covid/test/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -680,7 +680,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/passport/image/" +
+          "https://dga-express.com:8443/upload/passport/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -713,7 +713,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "http://46.105.36.240:3000/upload/tiket/image/" +
+          "https://dga-express.com:8443/upload/tiket/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -849,7 +849,7 @@ this.loading=true;
 
           var config = {
             method: "post",
-            url: "http://46.105.36.240:3000/createAnnouncement",
+            url: "https://dga-express.com:8443/createAnnouncement",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -873,7 +873,7 @@ this.loading=true;
             })
             .catch(function (error) {
               Swal.fire("échec!", "Réessayer.", "warning");
-               window.location.reload();
+              //  window.location.reload();
               console.log(error);
               
             });

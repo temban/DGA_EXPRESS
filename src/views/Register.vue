@@ -68,7 +68,7 @@ position: relative;
                             <i class="fa fa-eye-slash" style="font-size:25px;"></i>
                         </span>
 
-               <div class="login-choice"><a href="/forgot-password"><span>or SignIn with</span>  </a></div>          
+                        
         
           <button class="button1" type="submit" style="margin-top:30px">S'identifier   
           <div class="spinner-border text-light spinner-border-sm" role="status" v-if="login">
@@ -250,9 +250,7 @@ position: relative;
              <div style="position: relative; margin-top:68px;"> <button @click="signup" type="button" class="button">S'inscrire
              <div class="spinner-border text-light spinner-border-sm" role="status" v-if="loginOn">
           <span class="sr-only">Loading...</span></div>
-          </button>
-         
-        </div>
+          </button></div>
           
           
         </form>
@@ -445,7 +443,7 @@ function checkStrength(password) {
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/login",
+        url: "https://dga-express.com:8443/login",
         data: data,
       };
 
@@ -459,7 +457,7 @@ function checkStrength(password) {
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "https://dga-express.com:8443/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -513,7 +511,7 @@ function checkStrength(password) {
 
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/signup",
+        url: "https://dga-express.com:8443/signup",
         headers: {
           "Content-Type": "application/json",
         },
@@ -673,7 +671,7 @@ function checkStrength(password) {
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/login",
+        url: "https://dga-express.com:8443/login",
         data: data,
       };
 
@@ -687,7 +685,7 @@ function checkStrength(password) {
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "https://dga-express.com:8443/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),

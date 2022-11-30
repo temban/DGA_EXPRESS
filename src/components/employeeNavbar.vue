@@ -80,7 +80,7 @@ export default {
         var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -93,7 +93,7 @@ var config = {
     this.pseudo = res.data.pseudo
     this.firstName = res.data.firstName;
     this.lastName = res.data.lastName;
-      this.pic='http://46.105.36.240:3000/'+ res.data.profileimgage;
+      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })

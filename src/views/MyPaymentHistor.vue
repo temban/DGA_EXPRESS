@@ -15,9 +15,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;">
-                  <a :href="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" target="_blank">
+                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" style="
+                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
                       background-position: center;
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -115,16 +115,11 @@ export default{
         var axios = require('axios');
         var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/bills/paths/' + localStorage.getItem("userId"),
+  url: 'https://dga-express.com:8443/bills/paths/' + localStorage.getItem("userId"),
   headers: { 
     'Content-Type': 'application/json'
   }
 };
-
-
-
-
-
 axios(config)
 .then((res) => {
 
@@ -134,8 +129,8 @@ console.log('pathsss', res.data)
 
 .catch(function (error) {
   console.log(error);
-  localStorage.clear()
-        window.location.href = "/"
+  // localStorage.clear()
+  //       window.location.href = "/"
 });
 
 

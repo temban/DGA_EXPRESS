@@ -342,7 +342,7 @@
                                     <img class="mon-profile" v-if="item.profileimgage == ``" src="@/assets/img/pp.png"
                                         alt="profile" />
                                     <img class="mon-profile" v-else
-                                        :src="`http://46.105.36.240:3000/${item.profileimgage}`" alt="profile" />
+                                        :src="`https://dga-express.com:8443/${item.profileimgage}`" alt="profile" />
                                 </div>
                                 <div class="col2 text-uppercase">{{ item.firstName + " " + item.lastName }}</div>
                                 <div class="col3">{{ item.phone }}</div>
@@ -510,7 +510,7 @@ export default {
         var axiosprofile = require('axios');
 var configprofile = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -530,7 +530,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var config = {
             method: 'get',
-            url: 'http://46.105.36.240:3000/statistics',
+            url: 'https://dga-express.com:8443/statistics',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -589,7 +589,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var requestOptions0 = { method: 'GET', headers: myHeaders0, redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/users", requestOptions0)
+        fetch("https://dga-express.com:8443/users", requestOptions0)
             .then(response => response.text())
             .then(result => {
                 for (let i = 0; i < JSON.parse(result).length; i++) {
@@ -606,7 +606,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-         fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+         fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length !== 0) {
@@ -639,14 +639,14 @@ localStorage.setItem('pseudo', res.data.pseudo);
                 redirect: 'follow'
             };
 
-            fetch("http://46.105.36.240:3000/sub/informations", requestOptions)
+            fetch("https://dga-express.com:8443/sub/informations", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     console.log(result);
                     Swal.fire({
                         icon: 'success',
-                        title: ' Mise à jour réussie !',
-                        showConfirmButton: true,
+                        title: 'Mise à jour réussie !',
+                        showConfirmButton: false,
                         timer: 1500
                     })
                 })
@@ -669,7 +669,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
             var config = {
                 method: 'post',
-                url: 'http://46.105.36.240:3000/signup',
+                url: 'https://dga-express.com:8443/signup',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -686,7 +686,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    //window.location.href = "/"
+                    window.location.href = "/employeeDashboard"
                 })
                 .catch(function (error) {
                     console.log(error);

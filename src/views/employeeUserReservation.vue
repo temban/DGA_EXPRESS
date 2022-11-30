@@ -462,7 +462,7 @@ cop: false,
 
 var config = {
   method: 'get', 
-  url: 'http://46.105.36.240:3000/user/'+this.id+'/reservations',
+  url: 'https://dga-express.com:8443/user/'+this.id+'/reservations',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') }
@@ -527,7 +527,7 @@ lockedRev(){
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/reservations/'+id,
+  url: 'https://dga-express.com:8443/reservations/'+id,
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -591,7 +591,7 @@ swalWithBootstrapButtons.fire({
 var axios = require('axios');
 var config = {
   method: 'delete',
-  url: 'http://46.105.36.240:3000/delete/'+id+'/reservations',
+  url: 'https://dga-express.com:8443/delete/'+id+'/reservations',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token')}

@@ -374,7 +374,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:3000/reservations", requestOptions)
+        fetch("https://dga-express.com:8443/reservations", requestOptions)
             .then(response => response.text())
             .then(result => { this.reservations = JSON.parse(result);})
             .catch(error => {console.log('error', error)
@@ -460,7 +460,7 @@ window.location.href="/employeeSendRevPaymentProof"
             var axios = require('axios');
             var config = {
                 method: 'get',
-                url: 'http://46.105.36.240:3000/reservations/' + id,
+                url: 'https://dga-express.com:8443/reservations/' + id,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -523,7 +523,7 @@ window.location.href="/employeeSendRevPaymentProof"
                     var axios = require('axios');
                     var config = {
                         method: 'delete',
-                        url: 'http://46.105.36.240:3000/delete/' + id + '/reservations',
+                        url: 'https://dga-express.com:8443/delete/' + id + '/reservations',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem('access-token')

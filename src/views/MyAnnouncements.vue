@@ -251,11 +251,11 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">La Source</th>
+              <th scope="col">Départ</th>
               <th scope="col">Destination</th>
               <th scope="col" style="margin-left: -600px">Documents</th>
               <th scope="col">Qté</th>
-              <th scope="col">ordinateur</th>
+              <th scope="col">Ordinateur</th>
               <th scope="col">Prix</th>
               <th style="margin-left: 40px" scope="col">Action</th>
             </tr>
@@ -392,7 +392,7 @@ export default {
 
     //var requestOptions = { method: "GET", headers: myHeaders, redirect: "follow", };
 
-    //fetch( "http://46.105.36.240:3000/passport/Screenshot_20220531-020256.png", requestOptions )
+    //fetch( "https://dga-express.com:8443/passport/Screenshot_20220531-020256.png", requestOptions )
     //  .then((response) => response.text())
     //  .then((result) => {
     //    console.log(result);
@@ -405,7 +405,7 @@ export default {
     var config = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/users/" +
+        "https://dga-express.com:8443/users/" +
         localStorage.getItem("userId") +
         "/announcements",
       headers: {
@@ -454,7 +454,7 @@ this.error=true
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/announcement/" + id + "/users",
+        url: "https://dga-express.com:8443/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -475,11 +475,11 @@ this.error=true
           this.document = res.data.document;
           this.paymentMethod = res.data.paymentMethod;
           this.cni = res.data.cni;
-          this.passport = "http://46.105.36.240:3000/passport/" + this.cni;
+          this.passport = "https://dga-express.com:8443/passport/" + this.cni;
           this.ticket = res.data.ticket;
-          this.tiket = "http://46.105.36.240:3000/tiket/" + this.ticket;
+          this.tiket = "https://dga-express.com:8443/tiket/" + this.ticket;
           this.covidtest = res.data.covidtest;
-          this.covid = "http://46.105.36.240:3000/covidTest/" + this.covidtest;
+          this.covid = "https://dga-express.com:8443/covidTest/" + this.covidtest;
           this.price = res.data.price;
           this.id = res.data.id;
           this.annlength = res.data.length;
@@ -532,7 +532,7 @@ this.error=true
             var axios = require("axios");
             var config = {
               method: "delete",
-              url: "http://46.105.36.240:3000/delete/" + id + "/announcements",
+              url: "https://dga-express.com:8443/delete/" + id + "/announcements",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),

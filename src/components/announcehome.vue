@@ -17,7 +17,7 @@
           <span class="sr-only" >Loading...</span></div>
           </button>
         </div>
-        <div class="login-choice"><span>ou S'identifier avec</span></div>
+        <!-- <div class="login-choice"><span>ou S'identifier avec</span></div> -->
        
     </form>
     <div class="footer">
@@ -173,7 +173,7 @@ Inscrivez-vous ici</u></a></p>
                                 <div class="column1">
                                  <img v-if=" comment.booker.profileimgage !==''"
                                     :src="
-                                      'http://46.105.36.240:8443/' +
+                                      'https://dga-express.com:8443/' +
                                       comment.booker.profileimgage
                                     "
                                     style="
@@ -272,7 +272,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -297,7 +297,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -379,11 +379,11 @@ Inscrivez-vous ici</u></a></p>
 
 
                  <button v-if="isLogged === false"  v-b-modal.modal-multi-4  type="button"  style="height:38px; float:right ;"  class="btn btn-primary btn-rounded btn-sm btn-floating">
-              Reserver
+              S'identifier
             </button>
           
           
-          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Reserver</router-link>
+          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Réserver</router-link>
 
          
            </div>
@@ -419,7 +419,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -444,7 +444,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -525,11 +525,11 @@ Inscrivez-vous ici</u></a></p>
 
 
                  <button v-if="isLogged === false"  v-b-modal.modal-multi-4  type="button"  style="height:38px; float:right ;"  class="btn btn-primary btn-rounded btn-sm btn-floating">
-              Reserver
+              S'identifier
             </button>
           
           
-          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Reserver</router-link>
+          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Réserver</router-link>
 
          
            </div>
@@ -568,7 +568,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -593,7 +593,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'http://46.105.36.240:8443/'+user.userDto.profileimgage"
+              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -675,10 +675,10 @@ Inscrivez-vous ici</u></a></p>
 
 
                  <button v-if="isLogged === false"  v-b-modal.modal-multi-4  type="button"  style="height:38px; float:right ;"  class="btn btn-primary btn-rounded btn-sm btn-floating">
-              Reserver
+              S'identifier
             </button>
           
-          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Reserver</router-link>
+          <router-link v-if="isLogged === true && user.userDto.id!==userIdAnnouncement" style="height:38px; float:right ; " type="submit"  :to="{ name: 'Reservation', params: { id: user.id} }" class="btn btn-primary btn-rounded btn-sm btn-floating">Réserver</router-link>
 
          
            </div>
@@ -699,7 +699,7 @@ Inscrivez-vous ici</u></a></p>
     </div>
 </div>
 <div class="wrap1s" style="margin-bottom:-15px">
-    <a class="button1" href="/Announcements"> <button1 ><i class="fa fa-plane"></i> Tous les Voyages..</button1></a>
+    <a class="button1" href="/Announcements"> <button1 ><i class="fa fa-plane"></i> Tous les voyages..</button1></a>
  
 </div>
 </section>
@@ -907,7 +907,7 @@ $grades.each(function() {
         
           var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:8443/sub/informations/view", requestOptions1)
+        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -919,7 +919,7 @@ $grades.each(function() {
 
    
 
-    await fetch("http://46.105.36.240:8443/announcements")
+    await fetch("https://dga-express.com:8443/announcements")
     .then(response => response.json())
     .then(data => {
         this.loading = false
@@ -952,7 +952,7 @@ $grades.each(function() {
             redirect: 'follow'
         };
 
-        fetch("http://46.105.36.240:8443/user/" + id2 + "/articles/", requestOptions)
+        fetch("https://dga-express.com:8443/user/" + id2 + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articlelength = JSON.parse(result).length;
@@ -967,7 +967,7 @@ $grades.each(function() {
 
     var configcomment = {
       method: "get",
-      url: "http://46.105.36.240:8443/user/comments/" + id,
+      url: "https://dga-express.com:8443/user/comments/" + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -991,7 +991,7 @@ var axios3 = require("axios");
     var config3 = {
       method: "get",
       url:
-        "http://46.105.36.240:8443/user/" +
+        "https://dga-express.com:8443/user/" +
        id2 +
         "/reservations",
       headers: {
@@ -1013,7 +1013,7 @@ var axios3 = require("axios");
     var config1 = {
       method: "get",
       url:
-        "http://46.105.36.240:8443/users/" +
+        "https://dga-express.com:8443/users/" +
         id2+"/announcements",
       headers: {
         "Content-Type": "application/json",
@@ -1031,7 +1031,7 @@ var axios3 = require("axios");
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:8443/announcement/'+id+'/users',
+  url: 'https://dga-express.com:8443/announcement/'+id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -1042,7 +1042,7 @@ axios(config)
 .then(res => {
   this.level= res.data.userDto.level;
        this.profileimgage= res.data.userDto.profileimgage;
-          this.pic = 'http://46.105.36.240:8443/'+  this.profileimgage,
+          this.pic = 'https://dga-express.com:8443/'+  this.profileimgage,
         this.AnnUserId = res.data.userDto.id;
         this.firstName = res.data.userDto.firstName;
         this.lastName = res.data.userDto.lastName;
@@ -1083,7 +1083,7 @@ axios(config)
         email: this.email,
         password: this.password
       }
-      axios.post('http://46.105.36.240:8443/signup', newUser)
+      axios.post('https://dga-express.com:8443/signup', newUser)
         {
           this.$router.push('/login');
         }
@@ -1101,7 +1101,7 @@ axios(config)
       });
       var config = {
         method: "post",
-        url: "http://46.105.36.240:8443/login",
+        url: "https://dga-express.com:8443/login",
         data: data,
       };
 
@@ -1115,7 +1115,7 @@ axios(config)
 
           var config0 = {
             method: "get",
-            url: "http://46.105.36.240:8443/profile",
+            url: "https://dga-express.com:8443/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1167,7 +1167,7 @@ axios(config)
 // });
 // var config = {
 //   method: 'post',
-//   url: 'http://46.105.36.240:8443/login',
+//   url: 'https://dga-express.com:8443/login',
 //   headers: { 
 //     'Content-Type': 'application/x-www-form-urlencoded'
 //   },

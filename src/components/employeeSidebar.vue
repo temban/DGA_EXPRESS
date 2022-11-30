@@ -192,7 +192,7 @@ $(document).ready(function(){
 
 var userID = "1b6bad9d-8e08-4c0c-9f32-7aa544996a64";
   $("#userspan").text(userID);
-   var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325';
+   var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325';
    var accessPoint = new EventSource(urlEndpoint);
 
 

@@ -255,7 +255,7 @@ export default {
         var config3 = {
             method: "get",
             url:
-                "http://46.105.36.240:3000/user/" +
+                "https://dga-express.com:8443/user/" +
                 localStorage.getItem("userId") +
                 "/reservations",
             headers: {
@@ -276,7 +276,7 @@ export default {
         var config1 = {
             method: "get",
             url:
-                "http://46.105.36.240:3000/users/" +
+                "https://dga-express.com:8443/users/" +
                 localStorage.getItem("userId") +
                 "/announcements",
             headers: {
@@ -295,7 +295,7 @@ export default {
 
         var config = {
             method: "get",
-            url: "http://46.105.36.240:3000/profile",
+            url: "https://dga-express.com:8443/profile",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
@@ -314,7 +314,7 @@ export default {
                 this.pseudo = res.data.pseudo;
                 this.profileimgage = res.data.profileimgage;
                 if (this.profileimgage !== "") {
-                    this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+                    this.pic = "https://dga-express.com:8443/" + this.profileimgage;
                 }
                 this.role_dtos_id = Object.values(res.data.roleDtos)[0];
                 this.role_dtos_name = Object.values(res.data.roleDtos)[1];
@@ -339,7 +339,7 @@ this.loading = true;
 
             var config = {
                 method: "put",
-                url: "http://46.105.36.240:3000/upload/profile/image",
+                url: "https://dga-express.com:8443/upload/profile/image",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -372,7 +372,7 @@ this.loading = true;
                     var config = {
                         method: "get",
                         url:
-                            "http://46.105.36.240:3000/user/update/" +
+                            "https://dga-express.com:8443/user/update/" +
                             this.oldpassword +
                             "/" +
                             this.newpassword +
@@ -428,7 +428,7 @@ this.loading = true;
 
                     var config = {
                         method: "put",
-                        url: "http://46.105.36.240:3000/update/user",
+                        url: "https://dga-express.com:8443/update/user",
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: "Bearer " + localStorage.getItem("access-token"),

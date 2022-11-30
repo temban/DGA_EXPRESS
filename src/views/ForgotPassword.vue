@@ -248,7 +248,7 @@
         });
         var config = {
           method: "post",
-          url: "http://46.105.36.240:3000/login",
+          url: "https://dga-express.com:8443/login",
           data: data,
         };
   
@@ -262,7 +262,7 @@
   
             var config0 = {
               method: "get",
-              url: "http://46.105.36.240:3000/profile",
+              url: "https://dga-express.com:8443/profile",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -316,7 +316,7 @@
   
         var config = {
           method: "post",
-          url: "http://46.105.36.240:3000/signup",
+          url: "https://dga-express.com:8443/signup",
           headers: {
             "Content-Type": "application/json",
           },
@@ -361,7 +361,7 @@
   //      });
   //      var config = {
   //        method: "post",
-  //        url: "http://46.105.36.240:3000/login",
+  //        url: "https://dga-express.com:8443/login",
   //        data: data,
   //      };
   
@@ -375,7 +375,7 @@
   
   //          var config0 = {
   //            method: "get",
-  //            url: "http://46.105.36.240:3000/profile",
+  //            url: "https://dga-express.com:8443/profile",
   //            headers: {
   //              "Content-Type": "application/json",
   //              Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -429,7 +429,7 @@
   
   //      var config = {
   //        method: "post",
-  //        url: "http://46.105.36.240:3000/signup",
+  //        url: "https://dga-express.com:8443/signup",
   //        headers: {
   //          "Content-Type": "application/json",
   //        },
@@ -476,7 +476,7 @@
         });
         var config = {
           method: "post",
-          url: "http://46.105.36.240:3000/login",
+          url: "https://dga-express.com:8443/login",
           data: data,
         };
   
@@ -490,7 +490,7 @@
   
             var config0 = {
               method: "get",
-              url: "http://46.105.36.240:3000/profile",
+              url: "https://dga-express.com:8443/profile",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),

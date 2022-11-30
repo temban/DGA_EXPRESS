@@ -21,12 +21,12 @@
          <span class="sr-only" >Loading...</span></div>
          </button>
        </div>
-       <div class="login-choice"><span>ou S'identifier avec</span></div>
+       <!-- <div class="login-choice"><span>ou S'identifier avec</span></div> -->
    </form>
-   <!-- <div class="footer">
-      <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
+   <div class="footer">
+       <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
 Inscrivez-vous ici</u></a></p>
-   </div> -->
+    </div>
   </b-modal>
 
  <b-modal id="modal-multi-payment" title="DGA Express" hide-footer>
@@ -204,7 +204,7 @@ Inscrivez-vous ici</u></a></p>
 
                               <div class="form-group">
                                 <div class="controls">
-                                  <h6>La Description</h6> <textarea v-model="article.description" id="contact-message"
+                                  <h6>Description</h6> <textarea v-model="article.description" id="contact-message"
                                     name="comments" placeholder="Your message"
                                     class="form-control requiredField Highlighted-label" rows="3" readonly></textarea>
                                   <!-- <i class="fa fa-comment"></i> -->
@@ -571,7 +571,7 @@ if( this.subInfo.currency === "XAF"){
             );
           }
           if (error.response.status === 401) {
-            Swal.fire("Login Failed!", "L'utilisateur n'existe pas!.", "error");
+            Swal.fire("Echec!", "L'utilisateur n'existe pas!.", "error");
           }
           if (error.response.status === 404) {
             Swal.fire("Échec!", "Échec de connexion!", "error");

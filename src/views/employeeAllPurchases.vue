@@ -14,9 +14,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;width:1000px">
-                  <a :href="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" target="_blank">
+                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" style="
+                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
                       background-position: center; 
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -55,7 +55,7 @@
      <tbody style="text-transform: capitalize">
        <tr v-for="pay in strip" :key="pay.id">
         <img v-if="pay.user.profileimgage !== ''" :src="
-                  'http://46.105.36.240:3000/' +
+                  'https://dga-express.com:8443/' +
                   pay.user.profileimgage
                 " style="width: 60px; height: 60px; border-radius: 30px" />
                 <img v-else src="@/assets/img/hotels/59710428.png"
@@ -104,7 +104,7 @@ export default{
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/payments',
+  url: 'https://dga-express.com:8443/payments',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

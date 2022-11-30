@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: 'http://46.105.36.240:3000/'
+  baseURL: 'https://dga-express.com:8443/'
 });
 
 let user = localStorage.getItem('user');

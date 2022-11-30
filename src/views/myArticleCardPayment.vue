@@ -488,7 +488,7 @@ created(){
  
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -530,7 +530,7 @@ if(this.adres ===''){
 
                 var config = {
     method: 'post',
-    url: `http://46.105.36.240:3000/payment/articles?amount=${this.totalPrice*100}&description=Articles&token=${token.id}&currency=EUR&email=${localStorage.getItem("email")}&address=${this.adres}&articlesIds=${this.ids}&quantities=${this.quantity}`,     
+    url: `https://dga-express.com:8443/payment/articles?amount=${this.totalPrice*100}&description=Articles&token=${token.id}&currency=EUR&email=${localStorage.getItem("email")}&address=${this.adres}&articlesIds=${this.ids}&quantities=${this.quantity}`,     
      headers: { 
     'Content-Type': 'application/json', 
           Authorization: "Bearer " + localStorage.getItem("access-token"),

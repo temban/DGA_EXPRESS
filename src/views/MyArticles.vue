@@ -97,7 +97,7 @@
                                   ></i>
                                 </button>
                                 <img
-                                  :src="`http://46.105.36.240:3000/article/image?file=${im}`"
+                                  :src="`https://dga-express.com:8443/article/image?file=${im}`"
                                   style="
                                     border-radius: 10px;
 
@@ -404,7 +404,7 @@ export default {
     };
 
     fetch(
-      "http://46.105.36.240:3000/user/" +
+      "https://dga-express.com:8443/user/" +
         JSON.parse(localStorage.getItem("infoUser")).id +
         "/articles/",
       requestOptions
@@ -449,7 +449,7 @@ export default {
       var config = {
         method: "GET",
         url:
-          "http://46.105.36.240:3000/delete/article/" +
+          "https://dga-express.com:8443/delete/article/" +
           Artid +
           "/image/" +
           name,
@@ -504,7 +504,7 @@ export default {
             };
 
             fetch(
-              "http://46.105.36.240:3000/delete/article/" + id,
+              "https://dga-express.com:8443/delete/article/" + id,
               requestOptions
             )
               .then((response) => response.text())
@@ -551,7 +551,7 @@ export default {
       };
 
       fetch(
-        "http://46.105.36.240:3000/article/paths/" + item.id,
+        "https://dga-express.com:8443/article/paths/" + item.id,
         requestOptions5
       )
         .then((response) => response.text())
@@ -607,7 +607,7 @@ export default {
             };
 
             fetch(
-              "http://46.105.36.240:3000/delete/article/" + id,
+              "https://dga-express.com:8443/delete/article/" + id,
               requestOptions
             )
               .then((response) => response.text())

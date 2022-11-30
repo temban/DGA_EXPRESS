@@ -98,7 +98,7 @@ export default {
   
       var config = {
         method: 'get',
-        url: "http://46.105.36.240:3000/articles",
+        url: "https://dga-express.com:8443/articles",
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -113,7 +113,7 @@ a.push(res.data[i].id)
 var axios = require('axios');
           var config = {
 method: 'get',
-url: 'http://46.105.36.240:3000/destination/article?articleId='+ res.data[i].id,
+url: 'https://dga-express.com:8443/destination/article?articleId='+ res.data[i].id,
 headers: { 
   'Content-Type': 'application/json',
   'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -170,7 +170,7 @@ console.log(error);
     };
 
     fetch(
-        "http://46.105.36.240:3000/articles",
+        "https://dga-express.com:8443/articles",
       requestOptions
     )
       .then((response) => response.text())
@@ -186,7 +186,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: 'http://46.105.36.240:3000/destination/article?articleId='+ this.articles[i].id,
+  url: 'https://dga-express.com:8443/destination/article?articleId='+ this.articles[i].id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),

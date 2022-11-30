@@ -34,8 +34,8 @@ var data = new FormData();
             data.append('file', this.files[i]);
           }
 var config = {
-  method: 'put',
-  url: 'http://46.105.36.240:3000/upload/article/images/942cd26a-559a-4108-80a5-2426912c68c8',
+  method: 'put',https://dga-express.com:8443
+  url: 'https://dga-express.com:8443/upload/article/images/942cd26a-559a-4108-80a5-2426912c68c8',
   headers: { 
   },
   data : data

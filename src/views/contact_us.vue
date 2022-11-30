@@ -10,9 +10,9 @@
                             <div class="col-md-10">
                                 <div class="contact_form_inner">
                                     <div class="contact_field">
-                                        <h3>Contatez Nous</h3>
-                                        <p>N'hésitez pas à nous contacter à tout moment. Nous vous répondrons dès que possible !.</p>
-                                        <textarea class="form-control form-group" placeholder="Laisez un Message"
+                                        <h3>Contactez-nous</h3>
+                                        <p>N'hésitez pas à nous contacter à tout moment. Nous vous répondrons dès que possible.</p>
+                                        <textarea class="form-control form-group" placeholder="Laissez un message"
                                         onkeyup="if(this.value.length > 0) 
                           document.getElementById('suggestion_button').disabled = false; 
                           else document.getElementById('suggestion_button').disabled = true;"
@@ -37,7 +37,7 @@
                             <h4>Contactez-nous</h4>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
-                                <span>Yaoundé: +23767585149</span>
+                                <span>Yaoundé : +23767585149</span>
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
-                                <span>Bruxelle: +32465860367</span>
+                                <span>Bruxelle : +32465860367</span>
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-envelope-open-text"></i>
@@ -111,7 +111,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/suggest",
+        url: "https://dga-express.com:8443/suggest",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

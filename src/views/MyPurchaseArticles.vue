@@ -86,7 +86,7 @@ export default {
     };
 
     fetch(
-      "http://46.105.36.240:3000/user/" +
+      "https://dga-express.com:8443/user/" +
         JSON.parse(localStorage.getItem("infoUser")).id +
         "/articles/",
       requestOptions
@@ -104,7 +104,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: 'http://46.105.36.240:3000/destination/article?articleId='+ this.articles[i].id,
+  url: 'https://dga-express.com:8443/destination/article?articleId='+ this.articles[i].id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),

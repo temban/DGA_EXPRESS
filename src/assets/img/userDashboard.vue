@@ -524,7 +524,7 @@
               >
               <img
                    :src="
-                  'http://46.105.36.240:3000/' +
+                  'https://dga-express.com:8443/' +
                   user.announcementDto.userDto.profileimgage
                 "
                   style="width: 60px; height: 60px; border-radius: 30px"
@@ -688,7 +688,7 @@ like(id){
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/like/announcement/'+id,
+  url: 'https://dga-express.com:8443/like/announcement/'+id,
   headers: { 
     'Content-Type': 'application/json', 
  Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -727,7 +727,7 @@ axios(config)
 
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/comment/"+user.id,
+        url: "https://dga-express.com:8443/comment/"+user.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -778,7 +778,7 @@ axios(config)
 
       var config = {
         method: "post",
-        url: "http://46.105.36.240:3000/suggest",
+        url: "https://dga-express.com:8443/suggest",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -808,7 +808,7 @@ axios(config)
 
       var config = {
         method: "get",
-        url: "http://46.105.36.240:3000/user/transaction/" + this.code,
+        url: "https://dga-express.com:8443/user/transaction/" + this.code,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -846,7 +846,7 @@ axios(config)
 
       var config = {
         method: "put",
-        url: "http://46.105.36.240:3000/upload/profile/image",
+        url: "https://dga-express.com:8443/upload/profile/image",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -878,7 +878,7 @@ axios(config)
           var config = {
             method: "get",
             url:
-              "http://46.105.36.240:3000/user/update/" +
+              "https://dga-express.com:8443/user/update/" +
               this.oldpassword +
               "/" +
               this.newpassword +
@@ -933,7 +933,7 @@ axios(config)
 
           var config = {
             method: "put",
-            url: "http://46.105.36.240:3000/update/user",
+            url: "https://dga-express.com:8443/update/user",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -963,7 +963,7 @@ axios(config)
   var configs = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/user/" +
+        "https://dga-express.com:8443/user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1003,7 +1003,7 @@ axios(config)
     var config0 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/user/" +
+        "https://dga-express.com:8443/user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1049,7 +1049,7 @@ axios(config)
     var config3 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/user/" +
+        "https://dga-express.com:8443/user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1071,7 +1071,7 @@ axios(config)
     var config1 = {
       method: "get",
       url:
-        "http://46.105.36.240:3000/users/" +
+        "https://dga-express.com:8443/users/" +
         localStorage.getItem("userId") +
         "/announcements",
       headers: {
@@ -1091,7 +1091,7 @@ axios(config)
 
     var config = {
       method: "get",
-      url: "http://46.105.36.240:3000/profile",
+      url: "https://dga-express.com:8443/profile",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
@@ -1108,7 +1108,7 @@ axios(config)
         this.pseudo = res.data.pseudo;
         this.email = res.data.email;
         this.profileimgage = res.data.profileimgage;
-        this.pic = "http://46.105.36.240:3000/" + this.profileimgage;
+        this.pic = "https://dga-express.com:8443/" + this.profileimgage;
         this.role_dtos_id = Object.values(res.data.roleDtos)[0];
         this.role_dtos_name = Object.values(res.data.roleDtos)[1];
 

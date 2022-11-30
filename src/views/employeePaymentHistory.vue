@@ -14,9 +14,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;width:1000px">
-                  <a :href="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" target="_blank">
+                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'http://46.105.36.240:3000/bill/image?file=' + this.receipt" style="
+                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
                       background-position: center;
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -109,7 +109,7 @@ export default{
   
       var config = {
         method: 'get',
-        url: 'http://46.105.36.240:3000/admin/users',
+        url: 'https://dga-express.com:8443/admin/users',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -127,7 +127,7 @@ console.log("uders",res.data[i].id )
         var axios = require('axios');
             var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/bills/paths/'+res.data[i].id,
+  url: 'https://dga-express.com:8443/bills/paths/'+res.data[i].id,
   headers: { 
     'Content-Type': 'application/json'
   }
@@ -180,7 +180,7 @@ axios(config)
 
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/payments',
+  url: 'https://dga-express.com:8443/payments',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

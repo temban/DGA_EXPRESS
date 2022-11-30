@@ -123,17 +123,17 @@ export default {
            var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
   },
 };
 
-await axios(config)
+ axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='http://46.105.36.240:3000/'+ this.profileimgage,
+      this.pic='https://dga-express.com:8443/'+ this.profileimgage,
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })

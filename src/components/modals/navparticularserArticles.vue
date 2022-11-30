@@ -365,7 +365,7 @@ function myFunction() {
         var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -380,7 +380,7 @@ var config = {
     $(document).ready(function(){
  
 
- var urlEndpoint ='http://46.105.36.240:3000/subcribe?userId=' + res.data.id;
+ var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=' + res.data.id;
  var accessPoint = new EventSource(urlEndpoint);
 
 
@@ -475,7 +475,7 @@ var config = {
               var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'http://46.105.36.240:3000/profile',
+  url: 'https://dga-express.com:8443/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -485,7 +485,7 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='http://46.105.36.240:3000/'+ res.data.profileimgage;
+      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
@@ -497,7 +497,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
       this.isLogged = this.checkIfIsLogged();
     });
     this.tabFin = this.tabInit
-    await fetch("http://46.105.36.240:3000/announcements")
+    await fetch("https://dga-express.com:8443/announcements")
     .then(response => response.json())
     .then(data => {
         for (let  i= 0;  i< data.length; i++) {
@@ -515,7 +515,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
     
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("http://46.105.36.240:3000/sub/informations/view", requestOptions1)
+        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
