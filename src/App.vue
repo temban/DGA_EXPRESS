@@ -79,7 +79,7 @@ localStorage.setItem('access-token', accesstoken);
 //   localStorage.clear();
 //window.location.reload();
 });
-}setInterval(refreshtoken, 114000);
+}setInterval(refreshtoken, 570000);
 
 
 

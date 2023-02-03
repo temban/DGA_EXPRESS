@@ -158,14 +158,7 @@ How to turn off Admit to meeting in Google Meet?<template>
              
 
               <div class="form-footer">
-            <div   class="form-check">
-                <div> 
-                <input v-if="document" v-model="doc" type="checkbox" id="cb1"> 
-            <label for="cb1"  v-if="document">Avez-vous des Documents</label>
-            <p v-else>.</p> 
-                </div>
-           
-            </div> 
+
 <div  >
                 <label class="form-label" for="name">La Description</label>
             <textarea class="input-text"  v-model="desc" name="name"  style="color:black;font-size:1.2em;width:210%" ></textarea>
@@ -177,7 +170,7 @@ How to turn off Admit to meeting in Google Meet?<template>
             <div>
               <div>
                 <label class="form-label" for="last-name">Numéro de téléphone du destinataire</label>
-                 <input v-model="tel" type="tel" name="tel" style="width:171%"  class="input-text" id="phone"/> 
+                 <input v-model="tel" type="tel" name="tel" style="width:150%"  class="input-text" id="phone"/> 
               </div>
              
  <div>
@@ -195,15 +188,6 @@ How to turn off Admit to meeting in Google Meet?<template>
                 /> 
               </div>
               <div class="form-footer">
-                <div  class="form-check">
-                    <div> 
-                   <input  v-if="computer" v-model="pc" type="checkbox" id="cb2">
-    	 <label for="cb2"  v-if="computer">Avez-vous des ordinateurs?</label>
-         <p v-else>.</p>
-                    </div>
-          
-            </div>
-
                 <label
                   @click="onSubmit"
                   class="create"
@@ -277,7 +261,7 @@ tel:'',
    mounted(){
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
     .then(response => response.text())
     .then(result => {
         if (JSON.parse(result).length!==0) {
@@ -303,7 +287,7 @@ fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/reservations/'+this.id1,
+  url: this.$url+'/reservations/'+this.id1,
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -382,6 +366,11 @@ localStorage.setItem('Annrev-id', res.data.announcementDto.userDto.id)
  methods: {
 
   onSubmit(event){
+    if(this.receivernumbercni==='' || this.receiver === '' || this.desc==='' || this.tel===''){
+  Swal.fire("échec!", "remplissez tous les champs de texte!", "warning"). then(function() {
+          window.location.reload();
+});
+}else{
   Swal.fire({
   title: '',
   text: "Voulez-vous enregistrer les modifications",
@@ -389,7 +378,7 @@ localStorage.setItem('Annrev-id', res.data.announcementDto.userDto.id)
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Update!'
+  confirmButtonText: 'Modifier!'
 }).then((result) => {
   if (result.isConfirmed) {
         event.preventDefault()
@@ -462,7 +451,7 @@ var data = JSON.stringify({
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/update/reseravtion',
+  url: this.$url+'/update/reseravtion',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },
@@ -486,6 +475,10 @@ axios(config)
   
   }
 })
+}
+  
+
+
 }}
     }
 </script>

@@ -256,7 +256,7 @@
                     >
                       {{ firstName + " " + lastName }}
                     </h5>
-                    <div v-if="this.level < 9 " style="position:relative; margin-left:115px; margin-bottom: -50px;">
+                    <div v-if="this.level < 9 " style="position:relative; margin-left:100px; margin-bottom: -50px;">
                           <div class="grade grade--blue" data-grade-score="10">
   <p class="grade__score">{{level}}/10</p>
   <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -265,9 +265,9 @@
   </svg>
 </div></div>
 
-<div v-else style="position:relative; margin-left:115px; margin-bottom: -50px;">
+<div v-else style="position:relative; margin-left:100px; margin-bottom: -50px;">
   <div class="grade grade--blue" data-grade-score="10">
-  <p class="grade__score">9/10</p>
+  <p class="grade__score">7/10</p>
   <svg class="grade__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <circle class="grade__icon__background" r="40" cx=50 cy="50"></circle>
     <circle class="grade__icon__foreground" r="40" cx=50 cy="50"></circle>
@@ -311,8 +311,12 @@
                         <h4 class="mb-1 line-height-5">0</h4>
                         <small class="mb-0 font-weight-bold">Articles</small>
                       </div>
-                      <div class="col p-2">
-                        <h4 class="mb-1 line-height-5">{{ 0 }}</h4>
+                       <div v-if="this.purchaseLength > 0" class="col p-2">
+                        <h4 class="mb-1 line-height-5">{{ this.purchaseLength }}</h4>
+                        <small class="mb-0 font-weight-bold">Achats</small>
+                      </div>
+                      <div v-else class="col p-2">
+                        <h4 class="mb-1 line-height-5">0</h4>
                         <small class="mb-0 font-weight-bold">Achats</small>
                       </div>
                     </div>
@@ -320,7 +324,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-8">
+            <div class="se col-lg-8">
               <div>
                 <div class="card z-depth-3" style="height: 360px">
                   <div class="card-body">
@@ -405,8 +409,8 @@
                                 <div class="row">
                                   <div class="column1">
                                     <img v-if=" comment.booker.profileimgage !==''"
-                                      :src="
-                                        'https://dga-express.com:8443/' +
+                                      v-bind:src="
+                                           urel+'/' +
                                         comment.booker.profileimgage
                                       "
                                       style="
@@ -490,7 +494,7 @@
                           <div class="form-group row">
                             <label
                               class="col-lg-3 col-form-label form-control-label"
-                              >Numéro portal</label
+                              >Numéro portable</label
                             >
                             <div class="col-lg-9">
                               <input
@@ -569,6 +573,7 @@
                             >
                             <div class="col-lg-9">
                               <input
+                              v-model="secondPass"
                                 class="form-control"
                                 type="text"
                                 required
@@ -655,7 +660,8 @@
                     <thead>
                       <tr>
                         <th scope="col">Voyageur</th>
-                        <th scope="col">La source</th>
+                        <th scope="col">Son nom</th>
+                        <th scope="col">Départ</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Noter le voyageur</th>
                         <th scope="col">Commentaire</th>
@@ -673,17 +679,17 @@
                             style="width: 60px; height: 60px; border-radius: 30px"
                           />
                           <img  v-else
-                            :src="
-                              'https://dga-express.com:8443/' +user.announcementDto.userDto.profileimgage
+                            v-bind:src=" urel+'/' +user.announcementDto.userDto.profileimgage
                             "
                             style="width: 60px; height: 60px; border-radius: 30px"
                           />
                      
                         </td>
                         
-                          
-                        <td style="font-size:20px">{{ user.announcementDto.departuretown.slice(0, 35) }}...</td>
-                        <td>{{ user.announcementDto.destinationtown.slice(0, 35) + "  " + user.announcementDto.point}}...</td>
+                        <td style="font-size:16px">{{ user.announcementDto.userDto.firstName + " "+   user.announcementDto.userDto.lastName }}</td>
+
+                        <td style="font-size:16px">{{ user.announcementDto.departuretown.slice(0, 40) }}...</td>
+                        <td style="font-size:16px">{{ user.announcementDto.destinationtown.slice(0, 40)}}...</td>
              
                         <td>
                             <!-- <div v-if="user.announcementDto.point < 1">
@@ -721,7 +727,7 @@
 
                         
                       </tr>
-                      <th colspan="7">
+                      <th colspan="6">
                         <div name="popup" :id="user.id" class="hide">
                           <div class="card z-depth-3" style="padding: 20px">
                             <div class="tab-pane" id="edit">
@@ -736,29 +742,33 @@
                                   >
                                   <div class="col-lg-12">
                                     <textarea
+                                    onkeyup="if(this.value.length > 0) 
+                            document.getElementById('comment_button').disabled = false; 
+                            else document.getElementById('comment_button').disabled = true;"
                                       class="form-control"
                                       type="text"
                                       required
                                       v-model="comment[idx]"
                                     ></textarea>
                                   </div>
-                                </div>
-                                <div class="form-group row">
                                   <label
                                     class="
                                       col-lg-3 col-form-label
                                       form-control-label
                                     "
                                   ></label>
-                                  <div class="col-lg-9">
+                                  
+                                  <div class="col-lg-12">
                                     <button
-                                      id="user"
+                                      id="comment_button"
                                       @click="commentBox(user, idx)"
-                                      type="button"
-                                      class="btn btn"
-                                      style="background-color: orangered">Envoyer</button>
-                                  </div>
+                                      type="comment_button"
+                                      disabled
+                                      style="background-color: orangered;position:relative;float: right;width: 10%; height: 43px; border-radius: 5px; border: none; margin-right: -80px;">Envoyer</button>
+                                                                     
+                                    </div>
                                 </div>
+                               
                             </div>
                           </div>
                         </div>
@@ -824,6 +834,7 @@
     }, 
     data() {
       return {
+        urel: this.$url,
         level:1,
         selectedValue:[],
           loding:false, 
@@ -839,6 +850,7 @@
         annlength: 1,
         firstName: "",
         artlength: "",
+        purchaseLength:"",
         email: "",
         id: "",
         lastName: "",
@@ -893,7 +905,7 @@ $grades.each(function() {
   var axiosProfile = require('axios');
 var configProfile = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url:this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -916,7 +928,7 @@ var myHeaders = new Headers();
               redirect: 'follow'
           };
   
-          fetch("https://dga-express.com:8443/user/" + res.data.id + "/articles/", requestOptions)
+          fetch(this.$url+"/user/" + res.data.id + "/articles/", requestOptions)
               .then(response => response.text())
               .then(result => {
                   this.articlelength = JSON.parse(result).length;
@@ -933,7 +945,7 @@ var myHeaders = new Headers();
       var myAnn = {
         method: "get",
         url:
-          "https://dga-express.com:8443/users/" +
+          this.$url+"/users/" +
           res.data.id +
           "/announcements",
         headers: {
@@ -949,7 +961,7 @@ var myHeaders = new Headers();
             var axioscomment = require("axios");
             var configcomment = {
               method: "get", 
-              url: "https://dga-express.com:8443/user/comments/" + this.myAnn[i].id,
+              url: this.$url+"/user/comments/" + this.myAnn[i].id,
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -968,10 +980,6 @@ var myHeaders = new Headers();
               })
               .catch(function (error) {
                 this.loading = false;
-                Swal.fire({
-                  icon: "warning",
-                  title: "Oops...No Reservation found!",
-                });
                 console.log(error);
               });
           }
@@ -982,8 +990,7 @@ var myHeaders = new Headers();
   
       var configs = {
         method: "get",
-        url:
-          "https://dga-express.com:8443/user/" +
+        url: this.$url+"/user/" +
           res.data.id +
           "/reservations",
         headers: {
@@ -1009,10 +1016,6 @@ var myHeaders = new Headers();
         })
         .catch(function (error) {
           this.loading = false;
-          Swal.fire({
-            icon: "warning",
-            title: "Oops...No Reservation found!",
-          });
           console.log(error);
         });
   
@@ -1021,7 +1024,7 @@ var myHeaders = new Headers();
       //var config0 = {
       //  method: "get",
       //  url:
-      //    "https://dga-express.com:8443/user/" +
+      //    this.$url+"/user/" +
       //    localStorage.getItem("userId") +
       //    "/reservations",
       //  headers: {
@@ -1061,7 +1064,7 @@ var myHeaders = new Headers();
       var config3 = {
         method: "get",
         url:
-          "https://dga-express.com:8443/user/" +
+          this.$url+"/user/" +
           res.data.id +
           "/reservations",
         headers: {
@@ -1083,7 +1086,7 @@ var myHeaders = new Headers();
       var config1 = {
         method: "get",
         url:
-          "https://dga-express.com:8443/users/" +
+          this.$url+"/users/" +
           res.data.id +"/announcements",
         headers: {
           "Content-Type": "application/json",
@@ -1102,7 +1105,7 @@ var myHeaders = new Headers();
   
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/profile",
+        url: this.$url+"/profile",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -1117,16 +1120,16 @@ var myHeaders = new Headers();
           this.id = res.data.id;
           this.firstName = res.data.firstName;
           this.lastName = res.data.lastName;
-          this.pseudo = res.data.phone;
+          this.phone = res.data.phone;
           this.email = res.data.email;
           this.stars = res.data.stars;
           this.profileimgage = res.data.profileimgage;
-          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+          this.pic = this.$url+"/" + this.profileimgage;
           this.role_dtos_id = Object.values(res.data.roleDtos)[0];
           this.role_dtos_name = Object.values(res.data.roleDtos)[1];
   
           console.log(JSON.stringify(res.data.id));
-          console.log(res.data.stars);
+          console.log("phoneeeeeeeee",res.data);
           console.log(JSON.stringify(res.data.lastName));
           console.log(JSON.stringify(res.data.pseudo));
           console.log(JSON.stringify(res.data.email));
@@ -1144,7 +1147,25 @@ var myHeaders = new Headers();
 window.location.href = "/"
 });
 
+var axios = require('axios');
 
+var config = {
+  method: 'get',
+  url: this.$url+'/user/payments?userid='+ localStorage.getItem("userId"),
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  }
+};
+
+axios(config)
+.then((res) => {
+  this.purchaseLength = res.data.length
+    console.log("werwerwerwerwer", res.data)
+            })
+.catch(function (error) {
+  console.log(error);
+});
 
 
 
@@ -1157,7 +1178,7 @@ window.location.href = "/"
 
 var config = {
   method: 'post',
-  url: "https://dga-express.com:8443/announcement/point?point="+this.selectedValue[idx]+"&announcementId="+ event.announcementDto.id,
+  url: this.$url+"/announcement/point?point="+this.selectedValue[idx]+"&announcementId="+ event.announcementDto.id,
   headers: { 
     'Content-Type': 'application/json', 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1187,7 +1208,7 @@ timer: 1500
         },
 
       deleteUser() {
-        this.loading = true;
+        
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
             confirmButton: "btn btn-success",
@@ -1198,20 +1219,20 @@ timer: 1500
   
         swalWithBootstrapButtons
           .fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Êtes-vous sûr?",
+            text: "Vous ne pourrez pas revenir en arrière !",
             icon: "warning",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
-            reverseButtons: true,
+            confirmButtonText: "Oui, supprimer !",
+            cancelButtonText: "Non, annulez !",
           })
           .then((result) => {
             if (result.isConfirmed) {
+              this.loading = true;
               var axios = require("axios");
               var config = {
                 method: "delete",
                 url:
-                  "https://dga-express.com:8443/delete/user/" +
+                  this.$url+"/delete/user/" +
                   localStorage.getItem("userId") +
                   "/users",
                 headers: {
@@ -1259,7 +1280,7 @@ timer: 1500
 
 var config = {
   method: 'post',
-  url: "https://dga-express.com:8443/announcement/point?point="+this.point+"&announcementId="+ id,
+  url: this.$url+"/announcement/point?point="+this.point+"&announcementId="+ id,
   headers: { 
     'Content-Type': 'application/json', 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1288,7 +1309,7 @@ axios(config)
   
         var config = {
           method: "post",
-          url: "https://dga-express.com:8443/user/comment/announcement",
+          url: this.$url+"/user/comment/announcement",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1333,7 +1354,7 @@ axios(config)
   
         var config = {
           method: "post",
-          url: "https://dga-express.com:8443/suggest",
+          url: this.$url+"/suggest",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1369,7 +1390,7 @@ axios(config)
   
         var config = {
           method: "get",
-          url: "https://dga-express.com:8443/user/transaction/" + this.code,
+          url: this.$url+"/user/transaction/" + this.code,
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1403,7 +1424,7 @@ axios(config)
   
       },
   
-      handleFileUpload(e) {
+      handlefileUpload(e) {
            this.loading = true;
         this.icon = e.target.files[0];
   
@@ -1414,7 +1435,7 @@ axios(config)
   
         var config = {
           method: "put",
-          url: "https://dga-express.com:8443/upload/profile/image",
+          url: this.$url+"/upload/profile/image",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1434,12 +1455,20 @@ axios(config)
       },
   
       updatepassword() {
-        Swal.fire({
-          title: "Do you want to save the changes?",
+        if(this.oldpassword==='' || this.newpassword===''|| this.secondPass===''){
+  Swal.fire("échec!", "remplissez tous les champs de texte!", "warning")
+}
+else if(this.secondPass !== this.newpassword){
+          Swal.fire("échec!", "Les mots de passe ne correspondent pas!", "warning")
+}
+else{
+
+  Swal.fire({
+          title: "Voulez-vous enregistrer les modifications ?",
           showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Save",
-          denyButtonText: `Don't save`,
+          showCancelButton: false,
+          confirmButtonText: "Sauvegarder",
+          denyButtonText:`Ne pas enregistrer`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
@@ -1448,7 +1477,7 @@ axios(config)
             var config = {
               method: "get",
               url:
-                "https://dga-express.com:8443/user/update/" +
+                this.$url+"/user/update/" +
                 this.oldpassword +
                 "/" +
                 this.newpassword +
@@ -1462,27 +1491,32 @@ axios(config)
             axios(config)
               .then(function (response) {
                 console.log(JSON.stringify(response.data));
-                Swal.fire("Saved!", "", "success");
+                Swal.fire("Enregistré!", "", "success");
          window.location.reload();
               })
               .catch(function (error) {
                 console.log(error);
-                Swal.fire("Failed!", "Something Went Wrong!.", "error");
+                Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
          window.location.reload();
               });
           } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "info");
+            Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
           }
         });
+
+}
+
       },
-  
       updateprofile() {
-        Swal.fire({
-          title: "Do you want to save the changes?",
+        if(this.firstName ==='' || this.lastName ==='' || this.phone ==='' || this.email ==='' ){
+          Swal.fire("échec!", "remplissez tous les champs de texte!", "warning")
+}else{
+  Swal.fire({
+          title: "Voulez-vous enregistrer les modifications ?",
           showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Save",
-          denyButtonText: `Don't save`,
+          showCancelButton: false,
+          confirmButtonText: "Sauvegarder",
+          denyButtonText: `Ne pas enregistrer`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
@@ -1506,7 +1540,7 @@ axios(config)
   
             var config = {
               method: "put",
-              url: "https://dga-express.com:8443/update/user",
+              url: this.$url+"/update/user",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1517,18 +1551,19 @@ axios(config)
             axios(config)
               .then(function (response) {
                 console.log(JSON.stringify(response.data));
-                Swal.fire("Saved!", "", "success");
+                Swal.fire("Enregistré!", "", "success");
          window.location.reload();
               })
               .catch(function (error) {
                 console.log(error);
-                Swal.fire("Failed!", "Something Went Wrong!.", "error");
+                Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
          window.location.reload();
               });
           } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "info");
+            Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
           }
         });
+}
       },
     },
   
@@ -1537,6 +1572,20 @@ axios(config)
   </script>
   <style lang="scss" scoped>
   /* User Cards */
+/* TABLETS */
+@media (max-width: 950px) {
+  .searchForm{
+    dispaly: none;
+  }
+}
+
+/* MOBILES */
+@media (max-width: 630px) {
+  .se{
+    display: none;
+    }
+}
+
   .swal-wide{
     width:40px !important;
     height: 30px !important;

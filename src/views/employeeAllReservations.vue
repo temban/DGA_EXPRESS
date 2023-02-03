@@ -1,5 +1,5 @@
 <template>
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
             <employeeNavbarVue />
 
         <div class="card card-hover" style="margin-left: 70px;margin-bottom:0px;">
@@ -15,7 +15,6 @@
                             <th class="font-w700">Document</th>
                             <th class="font-w700">Quantité réservée</th>
                             <th class="font-w700">Ordinateur</th>
-                            <th class="font-w700">Confirmation</th>
                             <th class="font-w700">Suivi</th>
                             <th class="font-w700">Actions</th>
                         </tr>
@@ -40,16 +39,12 @@
                             <td v-else>
                                 <i  class="fa fa-remove text-danger" style="font-size:25px;"></i>
                             </td> 
-                            <td>
-                                <span class="font-w600">
-                                    <span v-if="item.confirm"
-                                        class="badge badge-success font-weight-100">Confirmé</span>
-                                    <span v-else class="badge badge-warning font-weight-100">En attend...</span>
-                                </span>
-                            </td>
+
+                            
+                            
                             
                  
-                <td v-if="item.track === 'complete' && !item.paid"> 
+                <td v-if="item.track === 'complete' && !item.paid && item.confirm"> 
 
                     
                     <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(item)">
@@ -70,7 +65,13 @@
                   </a>
                   
                 </td>
-                <td v-else-if="item.track === 'complete' && item.paid">
+                <td v-else-if="item.confirm && item.track !== 'complete' && !item.paid ">
+                                <span class="font-w600">
+                                    <span 
+                                        class="badge badge-success font-weight-100">Confirmé</span>
+                                </span>
+                            </td>
+                <td v-else-if="item.track === 'complete' && item.paid && item.confirm">
                   <span class="badge badge-primary font-weight-100">Payé</span>
                 </td>
                 <td v-else>
@@ -284,10 +285,10 @@
 
                                                             <div class=" controls">
                                                                 <h6>Method de Paiement</h6>   
-                                                                <a v-if="cop" style="position:absolute; right:-163px; top:-4px"><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                <a v-if="cop" style="position:absolute; right:-163px; top:-2px"><i v-on:click="copyText()" class="fa fa-copy mye"
                                                                 style="font-size:28px;padding-bottom:10px; margin-top: 38px;color:green"></i> </a>
                                                                
-                                                                <a style="position:absolute; right:-163px; top:-4px" v-else><i v-on:click="copyText()" class="fa fa-copy mye"
+                                                                <a style="position:absolute; right:-163px; top:-2px" v-else><i v-on:click="copyText()" class="fa fa-copy mye"
                                                                 style="font-size:28px;padding-bottom:10px; margin-top: 38px;"></i> </a>
                                                                 
                                                                 <!-- <a @click="copyPaymentMethod()" >
@@ -328,7 +329,7 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -374,7 +375,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/reservations", requestOptions)
+        fetch(this.$url+"/reservations", requestOptions)
             .then(response => response.text())
             .then(result => { this.reservations = JSON.parse(result);})
             .catch(error => {console.log('error', error)
@@ -460,7 +461,7 @@ window.location.href="/employeeSendRevPaymentProof"
             var axios = require('axios');
             var config = {
                 method: 'get',
-                url: 'https://dga-express.com:8443/reservations/' + id,
+                url: this.$url+'/reservations/' + id,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -523,7 +524,7 @@ window.location.href="/employeeSendRevPaymentProof"
                     var axios = require('axios');
                     var config = {
                         method: 'delete',
-                        url: 'https://dga-express.com:8443/delete/' + id + '/reservations',
+                        url: this.$url+'/delete/' + id + '/reservations',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem('access-token')

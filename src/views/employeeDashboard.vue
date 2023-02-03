@@ -1,6 +1,6 @@
 <template>
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <div id="dashboardPage">
             <employeeNavbar />
 
@@ -207,16 +207,16 @@
                             <div class="stat2">
                                 <div class="info-user" style="width: 30%; height: 100%; display: flex;color:#fff;">
                                     <span>Achats</span>
-                                    <span>0</span>
+                                    <span>{{dp6 }}</span>
                                     <span><i class="fa fa-cart-arrow-down i"
                                             style="position: relative; left:-40%;"></i></span>
                                 </div>
                                 <div class="disp" style="position: relative; width: 40%;height: 100%;">
-                                    <span style="color:#fff;">0%</span>
+                                    <span style="color:#fff; font-size: 30px;">{{dp6}}</span>
                                     <svg style="position: absolute;">
                                         <circle cx="35" cy="35" r="35"></circle>
                                         <circle cx="35" cy="35" r="35"
-                                            :style="`stroke-dashoffset: calc(220 - (220 * ${1}}) / 100);`"></circle>
+                                            :style="`stroke-dashoffset: calc(220 - (220 * ${100}}) / 100);`"></circle>
                                     </svg>
                                     <span
                                         style="position: absolute; bottom:0px;right:-25px;font-size: 12px;color: #000;">disponible</span>
@@ -227,15 +227,15 @@
                             <div class="stat2">
                                 <div class="info-user" style="width: 30%; height: 100%; display: flex;color:#fff;">
                                     <span>Ventes</span>
-                                    <span>0</span>
+                                    <span>{{dp5}}</span>
                                     <span><i class="fa fa-money" style="position: relative; left:-40%;"></i></span>
                                 </div>
                                 <div class="disp" style="position: relative; width: 40%;height: 100%;">
-                                    <span style="color:#fff;">0%</span>
+                                    <span style="color:#fff; font-size: 30px;">{{dp5}}</span>
                                     <svg style="position: absolute;">
                                         <circle cx="35" cy="35" r="35"></circle>
                                         <circle cx="35" cy="35" r="35"
-                                            :style="`stroke-dashoffset: calc(220 - (220 * ${1}}) / 100);`"></circle>
+                                            :style="`stroke-dashoffset: calc(220 - (220 * ${100}}) / 100);`"></circle>
                                     </svg>
                                     <span
                                         style="position: absolute; bottom:0px;right:-25px;font-size: 12px;color: #000;">disponible</span>
@@ -342,7 +342,7 @@
                                     <img class="mon-profile" v-if="item.profileimgage == ``" src="@/assets/img/pp.png"
                                         alt="profile" />
                                     <img class="mon-profile" v-else
-                                        :src="`https://dga-express.com:8443/${item.profileimgage}`" alt="profile" />
+                                        v-bind:src="urel+`/${item.profileimgage}`" alt="profile" />
                                 </div>
                                 <div class="col2 text-uppercase">{{ item.firstName + " " + item.lastName }}</div>
                                 <div class="col3">{{ item.phone }}</div>
@@ -454,7 +454,7 @@
                 </div>
             </main>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -466,6 +466,10 @@ export default {
     },
     data() {
         return {
+            paid1:[],
+            paid2:[],
+            paid3:[],
+            urel: this.$url,
             pop: 'new',
             firstName: "",
             lastName: '',
@@ -477,11 +481,15 @@ export default {
             dp2: 0,
             dp3: 0,
             dp4: 0,
+            dp5: 0,
+            dp6: 0,
             loading: true,
             data: {},
             p1: 0,
             p2: 0,
             p3: 0,
+            p4: 0,
+            salePen: 0,
             anPen: 0,
             anCon: 0,
             rePen: 0,
@@ -507,10 +515,115 @@ export default {
         }
     },
      created() {
+
+        var axios = require('axios');
+
+var config1 = {
+  method: 'get',
+  url: this.$url+'/payments',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  }
+};
+
+axios(config1)
+.then((res) => {
+    this.dp5=res.data.length;
+console.log("all", this.dp5) 
+            })
+.catch(function (error) {
+  console.log(error);
+  Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Quelque chose s'est mal passé!",
+          })
+                  
+        localStorage.clear()
+        window.location.href = "/"
+});
+
+      var data = '';
+  
+      var config = {
+        method: 'get',
+        url: this.$url+"/articles",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+        },
+        data: data
+      };
+  
+      axios(config).then(res => {
+        let a=[];
+   for (let i = 0; i < res.data.length; i++) {     
+a.push(res.data[i].id)
+var axios = require('axios');
+          var config = {
+method: 'get',
+url: this.$url+'/destination/article?articleId='+ res.data[i].id,
+headers: { 
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+}
+};
+axios(config)
+.then((res) => {
+
+this.dp6+=res.data.length;
+console.log("all", this.dp6) 
+// for(let j=0; j<this.paid1.length; j++){
+//     this.paid2 = this.paid1[j].paid
+    
+// }
+// for(let j=0; j<this.paid2.length; j++){
+//     this.paid3 = this.paid2[j]
+    
+// }
+
+//    if(all.paid === true){
+//    let paidTrue = [];
+//    paidTrue = all.paid
+//     console.log("true", paidTrue)
+//    }
+   
+//    if(all.paid === false){
+//     let paidFalse = [];
+//     paidFalse = all.paid
+//     console.log("paidFalse", paidFalse)
+//    }
+        
+
+   //     if(){
+    // }
+  
+ 
+          })
+
+.catch(function (error) {
+console.log(error);
+});
+      }
+      
+      })
+        .catch(function (error) {
+          this.loading = false
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Quelque chose s'est mal passé!",
+          })
+          this.loading = false
+          console.log(error);
+        });
+
+
         var axiosprofile = require('axios');
 var configprofile = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -530,7 +643,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var config = {
             method: 'get',
-            url: 'https://dga-express.com:8443/statistics',
+            url: this.$url+'/statistics',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -589,7 +702,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var requestOptions0 = { method: 'GET', headers: myHeaders0, redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/users", requestOptions0)
+        fetch(this.$url+"/users", requestOptions0)
             .then(response => response.text())
             .then(result => {
                 for (let i = 0; i < JSON.parse(result).length; i++) {
@@ -606,12 +719,11 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
         var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-         fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+         fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length !== 0) {
                     this.subInfo = JSON.parse(result)[0]
-                    console.log(result);
                     this.use = this.use - this.employee.length
                 }
 
@@ -639,7 +751,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
                 redirect: 'follow'
             };
 
-            fetch("https://dga-express.com:8443/sub/informations", requestOptions)
+            fetch(this.$url+"/sub/informations", requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     console.log(result);
@@ -669,7 +781,7 @@ localStorage.setItem('pseudo', res.data.pseudo);
 
             var config = {
                 method: 'post',
-                url: 'https://dga-express.com:8443/signup',
+                url: this.$url+'/signup',
                 headers: {
                     'Content-Type': 'application/json'
                 },

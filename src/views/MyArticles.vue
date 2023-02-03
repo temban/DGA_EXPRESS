@@ -97,7 +97,7 @@
                                   ></i>
                                 </button>
                                 <img
-                                  :src="`https://dga-express.com:8443/article/image?file=${im}`"
+                                  v-bind:src="urel+`/article/image?file=${im}`"
                                   style="
                                     border-radius: 10px;
 
@@ -358,6 +358,7 @@ export default {
   name: "MyAnnoucements",
   data() {
     return {
+      urel:this.$url,
         error: false,
       loading: true,
       users: [],
@@ -404,7 +405,7 @@ export default {
     };
 
     fetch(
-      "https://dga-express.com:8443/user/" +
+      this.$url+"/user/" +
         JSON.parse(localStorage.getItem("infoUser")).id +
         "/articles/",
       requestOptions
@@ -417,17 +418,17 @@ export default {
           } else {
             this.articles = JSON.parse(result);
           }
+          this.articles.reverse();
         console.log('blaise' + result);
       })
       .catch((error) => {
+        console.log("error", error);
+        localStorage.clear()
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
         });
-        console.log("error", error);
-        this.error=true;
-        localStorage.clear()
         window.location.href = "/"
       });
   },
@@ -449,7 +450,7 @@ export default {
       var config = {
         method: "GET",
         url:
-          "https://dga-express.com:8443/delete/article/" +
+          this.$url+"/delete/article/" +
           Artid +
           "/image/" +
           name,
@@ -504,7 +505,7 @@ export default {
             };
 
             fetch(
-              "https://dga-express.com:8443/delete/article/" + id,
+              this.$url+"/delete/article/" + id,
               requestOptions
             )
               .then((response) => response.text())
@@ -551,7 +552,7 @@ export default {
       };
 
       fetch(
-        "https://dga-express.com:8443/article/paths/" + item.id,
+        this.$url+"/article/paths/" + item.id,
         requestOptions5
       )
         .then((response) => response.text())
@@ -607,7 +608,7 @@ export default {
             };
 
             fetch(
-              "https://dga-express.com:8443/delete/article/" + id,
+              this.$url+"/delete/article/" + id,
               requestOptions
             )
               .then((response) => response.text())

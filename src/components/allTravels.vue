@@ -18,7 +18,7 @@
           <span class="sr-only" >Loading...</span></div>
           </button>
         </div>
-        <div class="login-choice"><span>ou S'identifier avec</span></div>
+        <!-- <div class="login-choice"><span>ou S'identifier avec</span></div> -->
     </form>
     <!-- <div class="footer">
       <p>Vous n'avez pas de compte ? <a href="/Register"> <u style="color:blue">
@@ -192,8 +192,7 @@ Inscrivez-vous ici</u></a></p>
                               <div class="row">
                                 <div class="column1">
                                   <img v-if=" comment.booker.profileimgage !==''"
-                                    :src="
-                                      'https://dga-express.com:8443/' +
+                                  v-bind:src="urel+'/' +
                                       comment.booker.profileimgage
                                     "
                                     style="
@@ -251,7 +250,9 @@ Inscrivez-vous ici</u></a></p>
     <div>
       <lognavVue />
     </div>
-<div style="position:absolute; margin-left:-20px; width:1000px">
+
+
+<div class="searchForm">
   <form
       action="#"
       id="header-search-people"
@@ -479,7 +480,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 300000000dpi;  background-color: #000;
                     background-position: center;
@@ -498,19 +499,19 @@ Inscrivez-vous ici</u></a></p>
                     image-resolution: 3000000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
-                    background-repeat: no-repeat;
+                    background-repeat: no-repeat; 
                      max-width: 100%;
                       max-height: 100%;
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 300000000dpi;  background-color: #000;
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
-                     max-width: 100%;
+                     max-width: 100%; 
                       max-height: 100%;
                       height:190px; width: 190px;"/>
             </div>
@@ -794,6 +795,7 @@ export default {
   name: "allTravels",
   data() {
     return {
+      urel: this.$url,
       level:"",
       login:false,
         stars:'',
@@ -872,7 +874,7 @@ $grades.each(function() {
 
     var requestOptions1 = { method: "GET", redirect: "follow" };
 
-    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+    fetch(this.$url+"/sub/informations/view", requestOptions1)
       .then((response) => response.text())
       .then((result) => {
         if (JSON.parse(result).length !== 0) {
@@ -884,7 +886,7 @@ $grades.each(function() {
     this.$bus.$on("logged", () => {
       this.isLogged = this.checkIfIsLogged();
     }),
-      await fetch("https://dga-express.com:8443/announcements")
+      await fetch(this.$url+"/announcements")
         .then((response) => response.json())
         .then((data) => {
               if (data=="") {
@@ -968,7 +970,7 @@ $grades.each(function() {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/user/" +id2 + "/articles/", requestOptions)
+        fetch(this.$url+"/user/" +id2 + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articlelength = JSON.parse(result).length;
@@ -983,7 +985,7 @@ $grades.each(function() {
       var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "https://dga-express.com:8443/users/" + id2 + "/announcements",
+        url: this.$url+"/users/" + id2 + "/announcements",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1001,7 +1003,7 @@ $grades.each(function() {
       var axios3 = require("axios");
       var config3 = {
         method: "get",
-        url: "https://dga-express.com:8443/user/" + id2 + "/reservations",
+        url: this.$url+"/user/" + id2 + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1020,7 +1022,7 @@ $grades.each(function() {
       var axioscomment = require("axios");
       var configcomment = {
         method: "get",
-        url: "https://dga-express.com:8443/user/comments/" + id,
+        url: this.$url+"/user/comments/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1043,7 +1045,7 @@ $grades.each(function() {
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/announcement/" + id + "/users",
+        url: this.$url+"/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1054,7 +1056,7 @@ $grades.each(function() {
         .then((res) => {
           this.profileimgage = res.data.userDto.profileimgage;
           this.stars = res.data.userDto.stars;
-          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+          this.pic = this.$url+"/" + this.profileimgage;
           this.firstName = res.data.userDto.firstName;
           this.lastName = res.data.userDto.lastName;
           this.pseudo = res.data.userDto.pseudo;
@@ -1093,7 +1095,7 @@ $grades.each(function() {
         email: this.email,
         password: this.password,
       };
-      axios.post("https://dga-express.com:8443/signup", newUser);
+      axios.post(this.$url+"/signup", newUser);
       {
         this.$router.push("/");
       }
@@ -1104,7 +1106,7 @@ $grades.each(function() {
       this.login = true;
       event.preventDefault();
       var axios = require("axios");
-
+      let urel =  this.$url;
       var qs = require("qs");
       var data = qs.stringify({
         useremail: this.useremail,
@@ -1112,7 +1114,7 @@ $grades.each(function() {
       });
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/login",
+        url: this.urel+"/login",
         data: data,
       };
 
@@ -1126,7 +1128,7 @@ $grades.each(function() {
 
           var config0 = {
             method: "get",
-            url: "http://192.168.43.44:4000/profile",
+            url: urel+"/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1179,6 +1181,13 @@ body {
 	height: 100vh;
     font-family:  "Times New Roman", Times, serif;
     font-size: 16px;
+}
+
+
+.searchForm{
+position:absolute; 
+margin-left:-7rem; 
+width:1000px;
 }
     .grade {
   position: relative;
@@ -1573,108 +1582,7 @@ form {
   transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
 }
 
-@media (min-width: 991px) {
-  .styled-input.multi {
-    height: 70px;
-  }
-}
 
-@media (min-width: 768px) and (max-width: 990px) {
-  .styled-input.multi {
-    height: 60px;
-    padding: 8px 0;
-  }
-  .styled-input.multi > div input {
-    padding-top: 18px;
-  }
-  .styled-input.multi label {
-    padding: 7px 0 0;
-  }
-  .styled-input input#fn:valid ~ label,
-  .styled-input input#ln:valid ~ label,
-  .styled-input input#city[filled="true"]:valid ~ label,
-  .styled-input.multi input:focus ~ label,
-  .styled-input #select-state label {
-    top: -9px;
-  }
-  .styled-input.multi.error {
-    margin-bottom: 30px;
-  }
-  .styled-input label.error,
-  .styled-input input:focus ~ label.error,
-  .styled-input input#fn:valid ~ label.error,
-  .styled-input input#ln:valid ~ label.error {
-    font-size: 13px;
-    top: 53px;
-  }
-  .search-area .form-area button.serach-btn {
-    height: 60px;
-    padding: 0;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .examples [class^="col-"] {
-    padding: 0;
-  }
-
-  .styled-input.multi > div {
-    background-color: #fff;
-    margin-bottom: 10px;
-    display: block;
-    border: 1px solid #efefef;
-    border-radius: 3px;
-    -webkit-box-shadow: inset 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
-    width: 50%;
-    padding: 16px 16px 8px 11.2px;
-  }
-
-  .styled-input.multi {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background: transparent;
-    margin-bottom: 0;
-  }
-
-  .styled-input.multi > div label {
-    padding: 12px 0 0 12px;
-  }
-  .styled-input.multi > div input:valid ~ label,
-  .styled-input.multi > div input:focus ~ label,
-  .styled-input.multi #select-state > label {
-    padding-top: 15px;
-  }
-
-  .styled-input.multi > div input {
-    padding-left: 0;
-    padding-top: 2px;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
-  .styled-input select {
-    left: 0;
-    padding-top: 2px;
-  }
-
-  .styled-input.multi.error {
-    margin-bottom: 0;
-  }
-
-  .styled-input.multi > div.error {
-    margin-bottom: 30px;
-  }
-
-  .styled-input.multi > div.error label.error {
-    padding-top: 0;
-  }
-}
 
 /* Button */
 
@@ -1682,20 +1590,7 @@ form {
   padding-left: 5px;
 }
 
-@media (max-width: 991px) and (min-width: 768px) {
-  .no-pad-left-10 {
-    padding-left: 0px;
-    margin-left: -5px;
-    width: calc(16.66666667% + 5px);
-  }
-}
 
-@media (max-width: 767px) {
-  .no-pad-left-10 {
-    padding-left: 15px;
-    margin-left: 0;
-  }
-}
 
 .form-area button.serach-btn {
   border-radius: 6px;
@@ -1729,27 +1624,7 @@ form {
   outline: none;
 }
 
-@media only screen and (max-width: 991px) {
-  .form-area button.serach-btn {
-    font-size: 20px;
-    height: 60px;
-    padding: 0;
-  }
-}
 
-@media only screen and (max-width: 767px) {
-  .form-area button.serach-btn {
-    font-size: 22px;
-    padding: 7px 20px;
-    width: 100%;
-    height: 50px;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    margin-top: -12px;
-    margin-bottom: 20px;
-  }
-}
 .column1 {
     padding:20px 0 10px 20px;
 }
@@ -1846,4 +1721,8 @@ pan:before
     transform:rotate(405deg);
   }
 }
+
+
+
+
 </style>

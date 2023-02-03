@@ -29,6 +29,10 @@ const options = {
   pk: "pk_test_51LjiQQCZjIzC8XowgFCgtd8hxgeaam8Z6ZwVkQrT7Qt6wOAsLufjcyuzmgB9clmzP1Il6nJFJZqhnfqH70s0PnnO00TpSjOsk7",
 };
 
+// const options = {
+//   pk: "pk_live_51LjiQQCZjIzC8Xowo7DL6dtbHOCFIqLZGZaLRAGGQJby2NYhYazpdEnh6VLbleWanVEyzI6bs06pJFmITvMHOoJj00aYOvJIXQ",
+// };
+
 Vue.use(StripePlugin, options);
 Vue.use(EnlargeableImage)
 Vue.use(VueSSE);
@@ -48,7 +52,7 @@ Vue.use(VuePlaceAutocomplete);
 Vue.use(CustomGoogleAutocomplete)
 Vue.use(Flutterwave, { publicKey: 'FLWPUBK_TEST-a0a00e37f20612d7f45cee01bede0579-X' })
 
-
+Vue.prototype.$url = "https://dga-express.com:8443"
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue)
 Vue.use(Vuelidate)

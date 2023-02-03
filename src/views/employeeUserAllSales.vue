@@ -1,5 +1,5 @@
 <template>
-   <body id="landing" class="sidebar-open">
+   <div id="landing" class="sidebar-open">
         <div style="position:relative:; padding-bottom:120px;">
             <employeeNavbarVue />
             
@@ -72,7 +72,7 @@
       <!-- Fim tabela -->
  
 
-    </body>
+    </div>
 </template>
 <script>
 import Swal from "sweetalert2";
@@ -98,7 +98,7 @@ export default {
   
       var config = {
         method: 'get',
-        url: "https://dga-express.com:8443/articles",
+        url: this.$url+"/articles",
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -113,7 +113,7 @@ a.push(res.data[i].id)
 var axios = require('axios');
           var config = {
 method: 'get',
-url: 'https://dga-express.com:8443/destination/article?articleId='+ res.data[i].id,
+url: this.$url+'/destination/article?articleId='+ res.data[i].id,
 headers: { 
   'Content-Type': 'application/json',
   'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -123,17 +123,9 @@ axios(config)
 .then((res) => {
   for(let k =0; k<res.data.length; k++){
     this.AllPurches.push(res.data[k])
-    console.log("all id-======", this.AllPurches) 
+   
   }
-          
-              // for(let j=0 ; j<pat.length; j++){
-                  
-              //     for(let y=0 ; y<pat[j].length; y++)
-              //     {
-              //         console.log(pat[j][y]);
-              //         this.path.push(pat[j][y])
-              //     }
-              // }
+  console.log("payement", res.data)
           })
 
 .catch(function (error) {
@@ -155,73 +147,6 @@ console.log(error);
     },
   
 
-    mounted(){
-        var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer " + localStorage.getItem("access-token")
-    );
-
-    var requestOptions = { 
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(
-        "https://dga-express.com:8443/articles",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-            this.articles = JSON.parse(result);
-
-            for(let i=0; i<this.articles.length; i++){
-                this.articles[i].id
-                
-
-
-var axios = require("axios");
-
-var config = {
-  method: "get",
-  url: 'https://dga-express.com:8443/destination/article?articleId='+ this.articles[i].id,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("access-token"),
-  },
-};
-
-axios(config)
-  .then((res) => {
-      let Purches = res.data;
-      
-      for(let x=0; x<Purches.length; x++){
-        this.Purches.push(Purches[x])
-      }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-
-            }
-    
-        
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
-        console.log("error", error);
-        this.error=true
-        localStorage.clear()
-        window.location.href = "/"
-      });
-},
 methods:{
   sendPaymentProof(item){
 console.log("items", item)

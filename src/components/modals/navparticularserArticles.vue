@@ -30,8 +30,7 @@
     <template #button-content >
       <i class="fa fa-caret-down" style="font-size:25px; position:absolute;z-index: 2; top: 34px;
             bottom: 0;
-            left: 42px;
-            right: 0;"></i>
+            right: 95px;"></i>
      
     <button type="button" class="icon-button">
     <span class="material-icons">notifications</span>
@@ -101,11 +100,11 @@
 
 
 
-     
+<!--      
     <button type="button" class="icon-button">
     <span class="material-icons">mail</span>
     <span class="icon-button__badge" id="money">0</span>
-  </button>
+  </button> -->
 
 
 
@@ -156,8 +155,8 @@ S'identifier</button>
                       height:50px; width: 50px;"   />
 </div>
                                 </template>
-                                <b-dropdown-item href="/userDashboard">Manage Account</b-dropdown-item>
-                                <b-dropdown-item @click="singout">Logout</b-dropdown-item>
+                                <b-dropdown-item  href="/userDashboard">Gestion de compte</b-dropdown-item>
+                                <b-dropdown-item @click="singout" >Se déconnecter</b-dropdown-item>
                             </b-dropdown>
                         </div>
                     </b-collapse>
@@ -193,6 +192,7 @@ export default {
             newValidated:"",
       addReservation:"",
       confirmReservation:"",
+      profileimgage:"",
             subInfo:{},
             source: "",
             destination: "",
@@ -229,25 +229,119 @@ export default {
     },
 
     mounted(){
+    console.log("dfsdsddfgdfgdg",localStorage.getItem("notificationSizeValidated"))
     document.getElementById('span').style.display = 'none';
-    document.getElementById('money').style.display = 'none';
+    // document.getElementById('money').style.display = 'none';
     
     function notifications() {
-         
-      document.getElementById("money").innerHTML = localStorage.getItem("notificationSizeValidated")
-      if(localStorage.getItem("notificationSizeValidated") !== null){
-    document.getElementById('money').style.display = 'block';
-  } else{
-    document.getElementById('money').style.display = 'none';
-  }
-
-      if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
-    document.getElementById('span').style.display = 'block';
-  } else{
-    document.getElementById('span').style.display = 'none';
-  }
+         if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
+       document.getElementById('span').style.display = 'block';
+     } else{
+       document.getElementById('span').style.display = 'none';
+     }
+      
+   }setInterval(notifications, 1000)
    
-}setInterval(notifications, 1000)
+    var axios = require('axios');
+    let urel = this.$url;
+var config = {
+  method: 'get',
+  url: urel+'/profile',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  },
+};
+ axios(config)
+.then(res => {
+    this.userID  = res.data.id;
+    console.log('profile: ',res.data.id);
+
+    $(document).ready(function(){
+ var urlEndpoint =urel+'/subcribe?userId=' + res.data.id;
+ var accessPoint = new EventSource(urlEndpoint);
+
+
+ accessPoint.addEventListener("validationSuggest", function (event){
+  var newValidated = JSON.parse( event.data);
+   if (Notification.permission === "granted") {
+    
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+       }
+     })
+   }
+ 
+  
+  for(let i=0; i<newValidated.notificationSize; i++){
+  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
+  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
+  }
+  
+  })
+
+  accessPoint.addEventListener("addReservation", function (event){
+  var addReservation = JSON.parse( event.data);
+  console.log("travels",addReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "dinied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<addReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  addreservation(addReservation.notificationSize)
+  }
+  
+  })
+
+
+
+  accessPoint.addEventListener("confirmReservation", function (event){
+  var confirmReservation = JSON.parse( event.data);
+  console.log("confirmReservation",confirmReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+  for(let i=0; i<confirmReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  confirm(confirmReservation.notificationSize)
+  }
+  })
+})
+
+      })
+.catch(function (error) {
+  console.log(error);
+});
+
+
+
+
 
 
 
@@ -257,7 +351,7 @@ export default {
     
   } 
   else{
-    this.newValidated = 0;
+    this.newValidated = "0";
   } 
 
   if(localStorage.getItem("addreservation") !== null){
@@ -266,7 +360,7 @@ export default {
     this.notif = true;
   } 
   else{
-    this.addReservation = 0;
+    this.addReservation = "0";
   } 
   if(localStorage.getItem("confirmReservation") !== null){
     
@@ -274,7 +368,7 @@ export default {
     this.notif = true;
   } 
   else{
-    this.confirmReservation = 0;
+    this.confirmReservation = "0";
     
   } 
 
@@ -300,7 +394,7 @@ function myFunction() {
   y++;
  
  
-}setInterval(myFunction, 1000)
+}setInterval(myFunction, 100)
 
 // setTimeout(function(){
 //     window.location.reload();
@@ -362,120 +456,16 @@ function myFunction() {
             
         }
 
-        var axios = require('axios');
-var config = {
-  method: 'get',
-  url: 'https://dga-express.com:8443/profile',
-  headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-  },
-};
-
- axios(config)
-.then(res => {
-    this.userID  = res.data.id;
-    console.log('profile: ',res.data.id);
-
-    $(document).ready(function(){
- 
-
- var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=' + res.data.id;
- var accessPoint = new EventSource(urlEndpoint);
-
-
- accessPoint.addEventListener("validationSuggest", function (event){
-  var newValidated = JSON.parse( event.data);
-   if (Notification.permission === "granted") {
-    
-   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "denied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<newValidated.notificationSize; i++){
-  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
-  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
-  }
-  
-  })
-
-  accessPoint.addEventListener("addReservation", function (event){
-  var addReservation = JSON.parse( event.data);
-  console.log("travels",addReservation)
-
-   if (Notification.permission === "granted") {
-    
-   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "dinied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(addReservation.notificationSize, addReservation.newNotification[addReservation.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<addReservation.notificationSize; i++){
-  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
-  addreservation(addReservation.notificationSize)
-  }
-  
-  })
-
-
-
-  accessPoint.addEventListener("confirmReservation", function (event){
-  var confirmReservation = JSON.parse( event.data);
-  console.log("confirmReservation",confirmReservation)
-
-   if (Notification.permission === "granted") {
-    
-   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "denied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(confirmReservation.notificationSize, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<confirmReservation.notificationSize; i++){
-  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
-  confirm(confirmReservation.notificationSize)
-  }
-  
-  })
-})
-
-  
-      })
-.catch(function (error) {
-  console.log(error);
-});
-
-
 
 
 },
+
 
    async created() {
               var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -485,11 +475,13 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
+      this.pic=this.$url+'/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
 .catch(function (error) {
+//   localStorage.clear()
+// window.location.href = "/"
   console.log(error);
 });
 
@@ -497,7 +489,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
       this.isLogged = this.checkIfIsLogged();
     });
     this.tabFin = this.tabInit
-    await fetch("https://dga-express.com:8443/announcements")
+    await fetch(this.$url+"/announcements")
     .then(response => response.json())
     .then(data => {
         for (let  i= 0;  i< data.length; i++) {
@@ -515,7 +507,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
     
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+        fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -745,7 +737,10 @@ ul li ul li a {
 }
 
 .icon-button {
-    margin: 8px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 0px;
+  margin-right: 90px;
     position: relative;
     display: flex;
     align-items: center;

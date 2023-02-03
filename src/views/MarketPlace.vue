@@ -23,15 +23,5 @@ export default {
 };
 </script>
 <style>
-body {
-	background: url(../assets/img/e-commerce.jpg);
-  background-attachment: fixed;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	display: grid;
-	height: 100vh;
-    font-family:  "Times New Roman", Times, serif;
-    font-size: 16px;
-}
+
 </style>

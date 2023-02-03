@@ -8,7 +8,7 @@
       indicators
       img-width="1024"
       img-height="480"
-      style="text-shadow: 1px 1px 2px #333;"
+      style="text-shadow: 1px 1px 2px #333; "
     >
 
 
@@ -20,15 +20,15 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="80"
-            src="@/assets/img/pub-1.jpg"
+            src="@/assets/img/discount1.png"
             alt="image slot"
             style="
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
                      max-width: 100%;
-                      max-height: 100%;
-                      height:350px; width: 190px;" 
+                      max-height: 60%;
+                      height:130px; width: 190px;" 
 
             
           >
@@ -65,11 +65,11 @@
                     background-size: cover;
                     background-repeat: no-repeat;
                      max-width: 100%;
-                      max-height: 100%;
-                      height:350px; width: 190px;" 
+                      max-height: 60%;
+                      height:130px; width: 190px;" 
             width="1024"
             height="480"
-            src="@/assets/img/pub-2.jpg"
+            src="@/assets/img/1.jpg"
             alt="image slot"
           >
         </template>

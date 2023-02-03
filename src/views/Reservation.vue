@@ -23,7 +23,7 @@
                       height:300px; width: 300px;" />
                 </div>
 
-                <img v-else :src="'https://dga-express.com:8443/' + profileimgage" style="border-radius:55px;
+                <img v-else :src="this.$url+'/' + profileimgage" style="border-radius:55px;
                 image-resolution: -300000000dpi;  
                     background-position: center;
                     background-size: cover;
@@ -282,7 +282,7 @@ export default {
   async created() {
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+    fetch(this.$url+"/sub/informations/view", requestOptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -293,7 +293,7 @@ export default {
     var axios = require('axios');
     var config = {
       method: 'get',
-      url: 'https://dga-express.com:8443/announcement/' + this.id + '/users',
+      url: this.$url+'/announcement/' + this.id + '/users',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -430,7 +430,7 @@ export default {
 
           var config = {
             method: 'post',
-            url: 'https://dga-express.com:8443/addReservation',
+            url: this.$url+'/addReservation',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + localStorage.getItem('access-token')

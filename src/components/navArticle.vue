@@ -109,19 +109,6 @@
   </button> -->
 
 
-
-
-
-
-
-                        <a href="/Register"> <div v-if="isLogged === false" style="position:absolute; right:20px; top:25px;">
-<button type="button" class="btn btn-outline-primary">
-S'identifier</button>
-</div></a>
-          <a href="/Register"><div v-if="isLogged === false" style="position:absolute; right:145px; top:25px;">
-<button type="button" class="btn btn-outline-primary">Inscription</button>
-
-</div></a>
                         
                         <div v-if="isLogged === true">
                             <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -160,6 +147,15 @@ S'identifier</button>
                                 <b-dropdown-item  href="/userDashboard">Gestion de compte</b-dropdown-item>
     <b-dropdown-item @click="singout" >Se déconnecter</b-dropdown-item></b-dropdown>
                         </div>
+
+                        <div style="position:relative; display:flex; margin-right:-100px">  <a href="/Register"> <div v-if="isLogged === false" style="margin: 0 20px 0 10px">
+<button type="button" class="btn btn-outline-primary">
+S'identifier</button>
+</div></a>
+          <a href="/Register"><div v-if="isLogged === false">
+<button type="button" class="btn btn-outline-primary">Inscription</button>
+
+</div></a></div>
                     </b-collapse>
                 </b-container>
             </b-navbar>
@@ -230,25 +226,119 @@ export default {
     },
 
     mounted(){
+    console.log("dfsdsddfgdfgdg",localStorage.getItem("notificationSizeValidated"))
     document.getElementById('span').style.display = 'none';
-    document.getElementById('money').style.display = 'none';
+    // document.getElementById('money').style.display = 'none';
     
     function notifications() {
-         
-      document.getElementById("money").innerHTML = localStorage.getItem("notificationSizeValidated")
-      if(localStorage.getItem("notificationSizeValidated") !== null){
-    document.getElementById('money').style.display = 'block';
-  } else{
-    document.getElementById('money').style.display = 'none';
-  }
-
-      if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
-    document.getElementById('span').style.display = 'block';
-  } else{
-    document.getElementById('span').style.display = 'none';
-  }
+         if(localStorage.getItem("notificationSizeValidated") !== null|| localStorage.getItem("addreservation") !== null ||localStorage.getItem("confirmReservation") !== null){
+       document.getElementById('span').style.display = 'block';
+     } else{
+       document.getElementById('span').style.display = 'none';
+     }
+      
+   }setInterval(notifications, 1000)
    
-}setInterval(notifications, 1000)
+    var axios = require('axios');
+    let urel = this.$url;
+var config = {
+  method: 'get',
+  url: urel+'/profile',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
+  },
+};
+ axios(config)
+.then(res => {
+    this.userID  = res.data.id;
+    console.log('profile: ',res.data.id);
+
+    $(document).ready(function(){
+ var urlEndpoint =urel+'/subcribe?userId=' + res.data.id;
+ var accessPoint = new EventSource(urlEndpoint);
+
+
+ accessPoint.addEventListener("validationSuggest", function (event){
+  var newValidated = JSON.parse( event.data);
+   if (Notification.permission === "granted") {
+    
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
+       }
+     })
+   }
+ 
+  
+  for(let i=0; i<newValidated.notificationSize; i++){
+  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
+  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
+  }
+  
+  })
+
+  accessPoint.addEventListener("addReservation", function (event){
+  var addReservation = JSON.parse( event.data);
+  console.log("travels",addReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "dinied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+
+  
+  for(let i=0; i<addReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  addreservation(addReservation.notificationSize)
+  }
+  
+  })
+
+
+
+  accessPoint.addEventListener("confirmReservation", function (event){
+  var confirmReservation = JSON.parse( event.data);
+  console.log("confirmReservation",confirmReservation)
+
+   if (Notification.permission === "granted") {
+    
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+   
+   } else if (Notification.permission !== "denied") {
+     Notification.requestPermission().then(perm => {
+       if (perm === 'granted') {
+   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
+       }
+     })
+
+   }
+  for(let i=0; i<confirmReservation.notificationSize; i++){
+  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+  confirm(confirmReservation.notificationSize)
+  }
+  })
+})
+
+      })
+.catch(function (error) {
+  console.log(error);
+});
+
+
+
+
 
 
 
@@ -258,7 +348,7 @@ export default {
     
   } 
   else{
-    this.newValidated = 0;
+    this.newValidated = "0";
   } 
 
   if(localStorage.getItem("addreservation") !== null){
@@ -267,7 +357,7 @@ export default {
     this.notif = true;
   } 
   else{
-    this.addReservation = 0;
+    this.addReservation = "0";
   } 
   if(localStorage.getItem("confirmReservation") !== null){
     
@@ -275,7 +365,7 @@ export default {
     this.notif = true;
   } 
   else{
-    this.confirmReservation = 0;
+    this.confirmReservation = "0";
     
   } 
 
@@ -301,7 +391,7 @@ function myFunction() {
   y++;
  
  
-}setInterval(myFunction, 1000)
+}setInterval(myFunction, 100)
 
 // setTimeout(function(){
 //     window.location.reload();
@@ -363,120 +453,16 @@ function myFunction() {
             
         }
 
-        var axios = require('axios');
-var config = {
-  method: 'get',
-  url: 'https://dga-express.com:8443/profile',
-  headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-  },
-};
-
- axios(config)
-.then(res => {
-    this.userID  = res.data.id;
-    console.log('profile: ',res.data.id);
-
-    $(document).ready(function(){
- 
-
- var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=' + res.data.id;
- var accessPoint = new EventSource(urlEndpoint);
-
-
- accessPoint.addEventListener("validationSuggest", function (event){
-  var newValidated = JSON.parse( event.data);
-   if (Notification.permission === "granted") {
-    
-   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "denied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(newValidated.newNotification[newValidated.notificationSize-1].title, newValidated.newNotification[newValidated.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<newValidated.notificationSize; i++){
-  //  console.log("test",newSuggestion.newNotification[i].title, newSuggestion.newNotification[i].content)
-  validated(newValidated.notificationSize, newValidated.newNotification[newValidated.notificationSize-1].content)
-  }
-  
-  })
-
-  accessPoint.addEventListener("addReservation", function (event){
-  var addReservation = JSON.parse( event.data);
-  console.log("travels",addReservation)
-
-   if (Notification.permission === "granted") {
-    
-   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "denied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(addReservation.newNotification[addReservation.notificationSize-1].title, addReservation.newNotification[addReservation.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<addReservation.notificationSize; i++){
-  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
-  addreservation(addReservation.notificationSize)
-  }
-  
-  })
-
-
-
-  accessPoint.addEventListener("confirmReservation", function (event){
-  var confirmReservation = JSON.parse( event.data);
-  console.log("confirmReservation",confirmReservation)
-
-   if (Notification.permission === "granted") {
-    
-   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
-   
-   } else if (Notification.permission !== "denied") {
-     Notification.requestPermission().then(perm => {
-       if (perm === 'granted') {
-   notif(confirmReservation.newNotification[confirmReservation.notificationSize-1].title, confirmReservation.newNotification[confirmReservation.notificationSize-1].content)
-       }
-     })
-
-   }
-
-  
-  for(let i=0; i<confirmReservation.notificationSize; i++){
-  //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
-  confirm(confirmReservation.notificationSize)
-  }
-  
-  })
-})
-
-  
-      })
-.catch(function (error) {
-  console.log(error);
-});
-
-
 
 
 },
+
 
    async created() {
               var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -486,7 +472,7 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
+      this.pic=this.$url+'/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
@@ -498,7 +484,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
       this.isLogged = this.checkIfIsLogged();
     });
     this.tabFin = this.tabInit
-    await fetch("https://dga-express.com:8443/announcements")
+    await fetch(this.$url+"/announcements")
     .then(response => response.json())
     .then(data => {
         for (let  i= 0;  i< data.length; i++) {
@@ -509,6 +495,8 @@ localStorage.setItem('profileImage', res.data.profileimgage);
       //console.log( data[2].userDto.id);
     })
     .catch(err => {
+//       localStorage.clear()
+// window.location.href = "/"
       console.error(err);
     });
 
@@ -516,7 +504,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
     
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+        fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {

@@ -50,7 +50,7 @@
                     <table class="table v-middle">
                       <thead>
                         <tr class="bg-light">
-                          <th class="border-top-0">Nom et prénom</th>
+                          <th class="border-top-0">Nom</th>
                           <th class="border-top-0"> E-mail</th>
                           <th class="border-top-0"> Numéro</th>
                           <th class="border-top-0">Statut</th>
@@ -62,7 +62,7 @@
                         <tr v-for="user in searchResult" :key="user.id">
                           <td>
                             <div class="d-flex align-items-center">
-                              <div class="m-r-10"><a v-on:click="view(user.id)" data-target="#exampleModal"
+                              <div class="m-r-5"><a v-on:click="view(user.id)" data-target="#exampleModal"
                                   data-toggle="modal" style="border-radius:40px;text-transform: uppercase"
                                   class="btn btn-circle btn-primary text-white"
                                   >{{ user.firstName[0] + "" + user.lastName[0]
@@ -87,7 +87,7 @@
                 </td>
                           <td>
                             <form>
-                              <!-- <button  v-on:click="view(user.id)" data-target="#exampleModal" data-toggle="modal" style="height:45px; width:40px;  margin-right:5px;" type="button" class="btn btn-sm btn-info mr-1" disabled><i class="fa fa-eye" style="font-size:20px"></i></button>-->
+                              <!-- <button  v-on:click="view(user.id)" data-target="#examplemodal" data-toggle="modal" style="height:45px; width:40px;  margin-right:5px;" type="button" class="btn btn-sm btn-info mr-1" disabled><i class="fa fa-eye" style="font-size:20px"></i></button>-->
                               <router-link style="height:40px; width:80px;"
                               class="btn btn-large btn-primary mr-1"
                                 :to="{ name: 'employeeUserArticle', params: { id: user.id, firstName: user.firstName, lastName: user.lastName } }">Articles</router-link>
@@ -101,11 +101,11 @@
                               </router-link>
 
                           
-                              <button style="height:40px; width:100px; " v-on:click="Purches(user)" type="button"
-                              class="btn btn-large btn-success mr-1">Les Ventes</button>
+                              <button style="height:40px; width:70px; " v-on:click="Purches(user)" type="button"
+                              class="btn btn-large btn-success mr-1">Ventes</button>
 
-                              <button style="height:40px; width:150px;margin-left: 5px; position: relative;" v-on:click="PaymentHistory(user)" type="button"
-                              class="btn btn-large btn-secondary mr-1">Payment History</button>
+                              <button style="height:40px; width:95px;margin-left: 5px; position: relative;" v-on:click="PaymentHistory(user)" type="button"
+                              class="btn btn-large btn-secondary mr-1">Paiements</button>
 
 
                               <button v-if="user.status ==='ENABLED'" style="height:40px; width:40px; margin-left: 5px;" v-on:click="deleteUser(user.id)" type="button"
@@ -188,7 +188,7 @@
   
       var config = {
         method: 'get',
-        url: 'https://dga-express.com:8443/admin/users',
+        url: this.$url+'/admin/users',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -260,7 +260,7 @@ window.location.href="/employeeUserPurchase"
         var axios = require('axios');
         var config = {
           method: 'get',
-          url: 'https://dga-express.com:8443/users/' + id,
+          url: this.$url+'/users/' + id,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -274,7 +274,7 @@ window.location.href="/employeeUserPurchase"
             this.name = this.name1 + " " + this.name2;
             this.profileimgage = res.data.profileimgage;
             this.totalprice = res.data.totalprice;
-            this.pic = 'https://dga-express.com:8443/' + this.profileimgage
+            this.pic = this.$url+'/' + this.profileimgage
             //localStorage.setItem('refresh-token', refreshtoken);
             //localStorage.setItem('access-token', accesstoken);
           })
@@ -316,7 +316,7 @@ window.location.href="/employeeUserPurchase"
               redirect: 'follow'
             };
   
-            fetch("https://dga-express.com:8443/delete/user/" + id + "/users", requestOptions)
+            fetch(this.$url+"/delete/user/" + id + "/users", requestOptions)
               .then(response => response.text())
               .then(result => {
                 console.log(result)

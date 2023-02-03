@@ -8,7 +8,7 @@
         <div class="container">
 
             <b-container style="margin-left:32px; margin-bottom: 30px;background-color:white;">
-                <h3 class="mt-2 mb-3 float-left text-primary">Article with Message</h3>
+                <h3 class="mt-2 mb-3 float-left text-primary">Les Articles sur lesquels vous avez reçu des Messages</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -103,10 +103,11 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/user/" + JSON.parse(localStorage.getItem('infoUser')).id + "/articles/", requestOptions)
+        fetch(this.$url+"/user/" + JSON.parse(localStorage.getItem('infoUser')).id + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articles = JSON.parse(result);
+                this.articles.reverse()
             })
             .catch(error => {
                 Swal.fire({
@@ -128,7 +129,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/current/user/messages", requestOptions0)
+        fetch(this.$url+"/current/user/messages", requestOptions0)
             .then(response => response.text())
             .then(result => {
                 this.messages = JSON.parse(result)

@@ -1,6 +1,6 @@
 <template>
 
-  <body id="landing" class="sidebar-open">
+  <div id="landing" class="sidebar-open">
     <div id="dashboardPage">
       <employeeNavbarVue />
 
@@ -177,7 +177,7 @@ export default {
 
     var config = {
       method: 'get',
-      url: 'https://dga-express.com:8443/admin/users',
+      url: this.$url+'/admin/users',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -237,7 +237,7 @@ export default {
       var axios = require('axios');
       var config = {
         method: 'get',
-        url: 'https://dga-express.com:8443/users/' + id,
+        url: this.$url+'/users/' + id,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -251,7 +251,7 @@ export default {
           this.name = this.name1 + " " + this.name2;
           this.profileimgage = res.data.profileimgage;
           this.totalprice = res.data.totalprice;
-          this.pic = 'https://dga-express.com:8443/' + this.profileimgage
+          this.pic = this.$url+'/' + this.profileimgage
           //localStorage.setItem('refresh-token', refreshtoken);
           //localStorage.setItem('access-token', accesstoken);
         })
@@ -294,7 +294,7 @@ export default {
             redirect: 'follow'
           };
 
-          fetch("https://dga-express.com:8443/delete/user/" + id + "/users", requestOptions)
+          fetch(this.$url+"/delete/user/" + id + "/users", requestOptions)
             .then(response => response.text())
             .then(result => {
               console.log(result)

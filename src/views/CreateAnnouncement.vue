@@ -65,7 +65,7 @@ Ville de départ</label>
                   type="number"
                   name="mail"
                   id="input"
-                  placeholder="name@overwatch.com"
+                  placeholder="Price"
                 />
               </div>
 
@@ -182,7 +182,7 @@ Ville de départ</label>
     
          <div class="select" id="dvPassport1" style="display:none;" >
           <input id="credit-card-number" min="16" max="16" inputmode="numeric" v-model="paymentMethod" style="width: 250px;"
-                  class="input-text" placeholder="4242 4242 4242 4242 4242"/>
+                  class="input-text" placeholder="4242 4242 4242 4242"/>
 
         
     </div>
@@ -397,20 +397,20 @@ export default {
         subInfo:[],
         loading: false,
       modalShow: false, 
-      departuredate: "2022-11-13T09:30:10.925Z",
-      arrivaldate: "2022-12-13T09:30:10.925Z",
+      departuredate: "",
+      arrivaldate: "",
       departuretown: this.place,
       destinationtown: this.place,
-      quantity: 23,
+      quantity: "",
       computer: null,
-      restriction: "no bottles",
+      restriction: "",
       document: null,
       cni: "Empty",
       ticket: "Empty",
       tiket: "",
       covidtest: "",
       cni_p: "",
-      price: 200,
+      price: "",
       id: "",
       autocomplete: "",
     };
@@ -586,7 +586,7 @@ $('body').on('change', '#covid', function(evt) {
 
    var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+        fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -643,7 +643,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/covid/test/image/" +
+          this.$url+"/upload/covid/test/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -680,7 +680,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/passport/image/" +
+          this.$url+"/upload/passport/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -713,7 +713,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/tiket/image/" +
+          this.$url+"/upload/tiket/image/" +
           localStorage.getItem("AnnIdPic"),
         headers: {
           "Content-Type": "application/json",
@@ -788,16 +788,22 @@ this.loading=true;
 
     onSubmit(event) {
 
-   if(document.getElementById("input").value==='' && this.quantity=== '' && this.paymentMethod=== '' && document
-              .getElementById("destinationtown")=== '' && document
-              .getElementById("departuretown")=== ''){
-         Swal.fire("échec!", "remplissez tous les champs de texte!", "warning");
+   if(document.getElementById("input").value==='' || this.quantity=== '' || this.paymentMethod=== '' || document
+              .getElementById("destinationtown").value=== '' || document
+              .getElementById("departuretown").value=== '' || this.price===''){
+         Swal.fire("échec!", "remplissez tous les champs de texte!", "warning"). then(function() {
+          window.location.reload();
+});
       } 
       else if(this.restriction == '' ){
-         Swal.fire("échec!", "La restriction n'a pas été remplie!", "warning");
+         Swal.fire("échec!", "La restriction n'a pas été remplie!", "warning"). then(function() {
+          window.location.reload();
+});
       }
-      else if(document.getElementById("date").value=='' ){
-         Swal.fire("échec!", "La date n'a pas été remplie!", "warning");
+      else if(this.arrivaldate==='' || this.departuredate ===''){
+         Swal.fire("échec!", "La date n'a pas été remplie!", "warning"). then(function() {
+          window.location.reload();
+});
       }else{
       Swal.fire({
         title: "Complétez votre voyage",
@@ -849,7 +855,7 @@ this.loading=true;
 
           var config = {
             method: "post",
-            url: "https://dga-express.com:8443/createAnnouncement",
+            url: this.$url+"/createAnnouncement",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),

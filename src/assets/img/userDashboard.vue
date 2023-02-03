@@ -524,7 +524,7 @@
               >
               <img
                    :src="
-                  'https://dga-express.com:8443/' +
+                  this.$url+'/' +
                   user.announcementDto.userDto.profileimgage
                 "
                   style="width: 60px; height: 60px; border-radius: 30px"
@@ -688,7 +688,7 @@ like(id){
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/like/announcement/'+id,
+  url: this.$url+'/like/announcement/'+id,
   headers: { 
     'Content-Type': 'application/json', 
  Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -727,7 +727,7 @@ axios(config)
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/comment/"+user.id,
+        url: this.$url+"comment/"+user.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -778,7 +778,7 @@ axios(config)
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/suggest",
+        url: this.$url+"suggest",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -808,7 +808,7 @@ axios(config)
 
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/user/transaction/" + this.code,
+        url: this.$url+"user/transaction/" + this.code,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -846,7 +846,7 @@ axios(config)
 
       var config = {
         method: "put",
-        url: "https://dga-express.com:8443/upload/profile/image",
+        url: this.$url+"upload/profile/image",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -878,7 +878,7 @@ axios(config)
           var config = {
             method: "get",
             url:
-              "https://dga-express.com:8443/user/update/" +
+              this.$url+"user/update/" +
               this.oldpassword +
               "/" +
               this.newpassword +
@@ -933,7 +933,7 @@ axios(config)
 
           var config = {
             method: "put",
-            url: "https://dga-express.com:8443/update/user",
+            url: this.$url+"update/user",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -963,7 +963,7 @@ axios(config)
   var configs = {
       method: "get",
       url:
-        "https://dga-express.com:8443/user/" +
+        this.$url+"user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1003,7 +1003,7 @@ axios(config)
     var config0 = {
       method: "get",
       url:
-        "https://dga-express.com:8443/user/" +
+        this.$url+"user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1049,7 +1049,7 @@ axios(config)
     var config3 = {
       method: "get",
       url:
-        "https://dga-express.com:8443/user/" +
+        this.$url+"user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -1071,7 +1071,7 @@ axios(config)
     var config1 = {
       method: "get",
       url:
-        "https://dga-express.com:8443/users/" +
+        this.$url+"users/" +
         localStorage.getItem("userId") +
         "/announcements",
       headers: {
@@ -1091,7 +1091,7 @@ axios(config)
 
     var config = {
       method: "get",
-      url: "https://dga-express.com:8443/profile",
+      url: this.$url+"profile",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
@@ -1108,7 +1108,7 @@ axios(config)
         this.pseudo = res.data.pseudo;
         this.email = res.data.email;
         this.profileimgage = res.data.profileimgage;
-        this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+        this.pic = this.$url+"" + this.profileimgage;
         this.role_dtos_id = Object.values(res.data.roleDtos)[0];
         this.role_dtos_name = Object.values(res.data.roleDtos)[1];
 

@@ -196,7 +196,7 @@ export default {
     var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/search/paris/kumba/announcements',
+  url:this.$url+'/search/paris/kumba/announcements',
   headers: { 
     'Content-Type': 'application/json',
 'Authorization': 'Bearer '+ localStorage.getItem('access-token')
@@ -227,7 +227,7 @@ axios(config)
             var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/announcement/'+id+'/users',
+  url:this.$url+'/announcement/'+id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -273,7 +273,7 @@ axios(config)
         email: this.email,
         password: this.password
       }
-      axios.post('https://dga-express.com:8443/signup', newUser)
+      axios.post(this.$url+'/signup', newUser)
         {
           this.$router.push('/');
         }
@@ -292,7 +292,7 @@ var data = qs.stringify({
 });
 var config = {
   method: 'post',
-  url: 'https://dga-express.com:8443/login',
+  url:this.$url+'/login',
   headers: { 
     'Content-Type': 'application/x-www-form-urlencoded'
   },

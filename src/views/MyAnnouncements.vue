@@ -48,27 +48,7 @@
                             method="post"
                             novalidate=""
                           >
-                          <div class="form-group">
-                              <div class="controls">
-                                <h6>Ville de départ</h6>
-                                <input
-                                  v-model="departuretown"
-                                  id="contact-name"
-                                  name="contactName"
-                                  class="
-                                    form-control
-                                    requiredField
-                                    Highlighted-label
-                                  "
-                                  type="text"
-                                  readonly
-                                />
-                                <i
-                                  class="fa fa-map-marker"
-                                  style="margin-bottom: -30px"
-                                ></i>
-                              </div>
-                            </div>
+                        
                             <div class="form-group">
                               <div class="controls">
                                 <h6>Ville de destination</h6>
@@ -257,6 +237,7 @@
               <th scope="col">Qté</th>
               <th scope="col">Ordinateur</th>
               <th scope="col">Prix</th>
+              <th scope="col">Statut</th>
               <th style="margin-left: 40px" scope="col">Action</th>
             </tr>
           </thead>
@@ -281,6 +262,12 @@
                 <i class="fa fa-remove" style="font-size: 25px; color: red"></i>
               </td>
               <td>{{ user.price }}</td>
+              <td v-if="user.validation">
+<span class="badge badge-primary font-weight-100">Accepté</span>
+</td>
+<td v-else>
+<span class="badge badge-warning font-weight-100">En Cours...</span>
+</td>
               <td>
                 <form>
                   <!-- <button  v-on:click="view(user.id)" data-target="#exampleModal" data-toggle="modal" style="height:45px; width:40px;  margin-right:5px;" type="button" class="btn btn-sm btn-info mr-1" disabled><i class="fa fa-eye" style="font-size:20px"></i></button>-->
@@ -392,7 +379,7 @@ export default {
 
     //var requestOptions = { method: "GET", headers: myHeaders, redirect: "follow", };
 
-    //fetch( "https://dga-express.com:8443/passport/Screenshot_20220531-020256.png", requestOptions )
+    //fetch( this.$url+"/passport/Screenshot_20220531-020256.png", requestOptions )
     //  .then((response) => response.text())
     //  .then((result) => {
     //    console.log(result);
@@ -405,7 +392,7 @@ export default {
     var config = {
       method: "get",
       url:
-        "https://dga-express.com:8443/users/" +
+        this.$url+"/users/" +
         localStorage.getItem("userId") +
         "/announcements",
       headers: {
@@ -421,19 +408,18 @@ export default {
           } else {
              this.users = res.data.reverse();
           }
-        
+          console.log(res.data);
         this.loading = false;
           
       })
       .catch(function (error) {
+        console.log(error);
+        localStorage.clear()
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
+          text: "Quelque chose s'est mal passé !",
         });
-this.error=true
-        console.log(error);
-        localStorage.clear()
         window.location.href = "/"
       });
   },
@@ -454,7 +440,7 @@ this.error=true
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/announcement/" + id + "/users",
+        url: this.$url+"/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -475,11 +461,11 @@ this.error=true
           this.document = res.data.document;
           this.paymentMethod = res.data.paymentMethod;
           this.cni = res.data.cni;
-          this.passport = "https://dga-express.com:8443/passport/" + this.cni;
+          this.passport = this.$url+"/passport/" + this.cni;
           this.ticket = res.data.ticket;
-          this.tiket = "https://dga-express.com:8443/tiket/" + this.ticket;
+          this.tiket = this.$url+"/tiket/" + this.ticket;
           this.covidtest = res.data.covidtest;
-          this.covid = "https://dga-express.com:8443/covidTest/" + this.covidtest;
+          this.covid = this.$url+"/covidTest/" + this.covidtest;
           this.price = res.data.price;
           this.id = res.data.id;
           this.annlength = res.data.length;
@@ -532,7 +518,7 @@ this.error=true
             var axios = require("axios");
             var config = {
               method: "delete",
-              url: "https://dga-express.com:8443/delete/" + id + "/announcements",
+              url: this.$url+"/delete/" + id + "/announcements",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),

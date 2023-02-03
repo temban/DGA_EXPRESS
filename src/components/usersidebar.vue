@@ -46,19 +46,29 @@
                         </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="/MyPurches">
                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+
+
                         <span class="nav-text">
                             Mes Achats
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="/MyPaymentHistor">
+                    <a href="/MyPurchesHistory">
                         <i class="fa fa-money" aria-hidden="true"></i>
                         <span class="nav-text">
-                            Historique de paiement
+                            Historique d'achats
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/MyPaymentHistory">
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <span class="nav-text">
+                            Historique des paiements
                         </span>
                     </a>
                 </li>
@@ -243,5 +253,11 @@ nav.main-menu li.active>a,
     font-style: normal;
     font-weight: 300;
     src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+.fa-stack-3x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: right;
 }
 </style>

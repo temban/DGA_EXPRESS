@@ -63,7 +63,7 @@ onSubmit(event) {
       });
       var config = {
         method: 'post',
-        url: 'https://dga-express.com:8443/login',
+        url: this.$url+'/login',
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': true,
@@ -82,7 +82,7 @@ onSubmit(event) {
           
           var config0 = {
             method: 'get',
-            url: 'https://dga-express.com:8443/profile',
+            url: this.$url+'/profile',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + localStorage.getItem('access-token')

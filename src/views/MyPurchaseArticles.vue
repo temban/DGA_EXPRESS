@@ -5,10 +5,7 @@
     </div>
 <usersidebarVue/>
 
-<div class="container">
-      <b-container
-        style="margin-left: 32px; margin-bottom: 30px; background-color: white"
-      >
+<div style="margin-left:100px; margin-right:40px; margin-top:40px; margin-bottom:70px">
         <h3 class="mt-2 mb-3 float-left text-primary">Mes Ventes</h3>
         
         <table class="table table-striped">
@@ -19,6 +16,7 @@
               <th scope="col">Acheteur</th>
               <th scope="col">Article</th>
               <th scope="col">Quantité achetée</th>
+              <th scope="col">Date</th>
               <th scope="col">Paiement</th>
 
               <!-- <th scope="col">Actions</th> -->
@@ -33,16 +31,17 @@
               <td>{{ item.user.firstName + " " + item.user.lastName }}</td>
               <td>{{ item.article.name }}</td>
               <td>{{ item.quantity }}</td>
+              <td>{{ item.date }}</td>
               <td v-if="!item.paid" >
                   <span class="badge badge-warning font-weight-100">En cours..</span>
                 </td>
               <td v-else >
-                  <span class="badge badge-primary font-weight-100">Payé</span>
+                  <span class="badge badge-primary font-weight-100">vous avez été payé</span>
                 </td>
             </tr>
           </tbody>
         </table>
-      </b-container>
+    
       <!-- Fim tabela -->
     </div>
 <footerVue/>
@@ -86,7 +85,7 @@ export default {
     };
 
     fetch(
-      "https://dga-express.com:8443/user/" +
+      this.$url+"/user/" +
         JSON.parse(localStorage.getItem("infoUser")).id +
         "/articles/",
       requestOptions
@@ -104,7 +103,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: 'https://dga-express.com:8443/destination/article?articleId='+ this.articles[i].id,
+  url: this.$url+'/destination/article?articleId='+ this.articles[i].id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -119,7 +118,7 @@ axios(config)
         console.log('blaise', Purches[x]);
         this.Purches.push(Purches[x])
       }
-      
+      this.Purches.reverse();
   })
   .catch(function (error) {
     console.log(error);

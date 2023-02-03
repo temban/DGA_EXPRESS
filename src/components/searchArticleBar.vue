@@ -89,7 +89,7 @@ export default {
       redirect: 'follow'
     };
 
-    fetch("https://dga-express.com:8443/cathegories", requestOptions)
+    fetch(this.$url+"/cathegories", requestOptions)
       .then(response => response.text())
       .then(result => this.cates = JSON.parse(result))
       .catch(error => console.log('error', error));
@@ -245,6 +245,7 @@ form {
 }
 
 .styled-input select {
+  padding: 10px;
   width: 100%;
   background: transparent;
   border: 0;

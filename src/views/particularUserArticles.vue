@@ -8,7 +8,7 @@
   
   <script>
     import navparticularserArticlesVue from "../components/modals/navparticularserArticles.vue";
-  import footerVue from "@/components/footer.vue"
+  import footerVue from "@/components/footer.vue";
   import userArticlesVue from "../components/userArticles.vue";
   export default {
     name: "Annoucements",
@@ -16,7 +16,6 @@
         navparticularserArticlesVue,
       userArticlesVue,
       footerVue
-  
     }
   };
   </script>

@@ -85,8 +85,8 @@
                  v-model="art.location"
                   class="input-text"
                   type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="locatione"
+                  id="location"
                   placeholder="Location"
                 />
 
@@ -195,8 +195,6 @@
                       id="items1"
                       type="file"
                       @change="item1"
-                      accept="image/gif,application/pdf,
-                        image/jpeg, image/png"
                      
                     />
                     
@@ -253,7 +251,6 @@
                       id="items3"
                       type="file"
                       @change="item3"
-                      accept="image/*" 
                     />
                   </div>
  <div class="image-preview" v-if="pic3.length > 0">
@@ -436,7 +433,7 @@ ccInputElement.addEventListener('keydown', event => {
 
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
     .then(response => response.text())
     .then(result => {
         if (JSON.parse(result).length!==0) {
@@ -456,13 +453,13 @@ fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/cathegories", requestOptions)
+        fetch(this.$url+"/cathegories", requestOptions)
             .then(response => response.text())
             .then(result => this.cates = JSON.parse(result))
             .catch(error => console.log('error', error));
 
 
-        fetch("https://dga-express.com:8443/articles/" + this.id, requestOptions)
+        fetch(this.$url+"/articles/" + this.id, requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.art = JSON.parse(result)
@@ -492,7 +489,7 @@ data.append('articleId', this.id);
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/upload/main/article/image',
+  url: this.$url+'/upload/main/article/image',
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -521,7 +518,7 @@ data.append('file', this.pic3);
 
 var config = {
   method: 'put',
-   url: 'https://dga-express.com:8443/upload/article/images/'+this.id,
+   url: this.$url+'/upload/article/images/'+this.id,
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -551,7 +548,7 @@ data.append('file', this.pic2);
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/upload/article/images/'+this.id,
+  url: this.$url+'/upload/article/images/'+this.id,
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -627,7 +624,13 @@ await axios(config)
 
         onSubmit(event) {
 
-          Swal.fire({
+          if(document.getElementById("location").value==='' || this.art.name==='' || this.art.quantity === '' || this.art.description === '' || this.art.price==='' || this.art.paymentMethod==='' || this.art.cate===''){
+  Swal.fire("échec!", "remplissez tous les champs de texte!", "warning"). then(function() {
+          window.location.reload();
+});
+}else{
+  
+  Swal.fire({
   title: 'Souhaitez-vous enregistrer les modifications?',
   confirmButtonText: 'Envoyer',
   denyButtonText: `Annuler`,
@@ -650,7 +653,7 @@ await axios(config)
                         redirect: 'follow'
                     };
 
-                    fetch("https://dga-express.com:8443/update/article/", requestOptions)
+                    fetch(this.$url+"/update/article/", requestOptions)
                         .then(response => response.text())
                         .then(result => {
                           Swal.fire('Enregistrée!', '', 'success')
@@ -674,6 +677,9 @@ await axios(config)
                   Swal.fire('Les modifications ne sont pas enregistrées', '', 'info')
                 }
             })
+}
+
+
         }
     }
 }

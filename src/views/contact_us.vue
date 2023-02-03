@@ -37,7 +37,7 @@
                             <h4>Contactez-nous</h4>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
-                                <span>Yaoundé : +23767585149</span>
+                                <span>Yaoundé : +237675851499</span>
                             </div>
                             <div class="d-flex info_single align-items-center">
                                 <i class="fas fa-headset"></i>
@@ -111,7 +111,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/suggest",
+        url: this.$url+"/suggest",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

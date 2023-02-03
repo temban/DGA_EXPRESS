@@ -53,7 +53,7 @@ Ville de départ</label>
                   type="number"
                   name="mail"
                   id="mail"
-                  placeholder="name@overwatch.com"
+                  placeholder=""
                 />
               </div>
 
@@ -207,8 +207,6 @@ Ville de départ</label>
                       id="covidtest_p"
                       type="file"
                       @change="previewImage" 
-                      accept="image/gif,application/pdf,
-                        image/jpeg, image/png"
                      
                     />
                     
@@ -255,8 +253,6 @@ Ville de départ</label>
                       id="tiket"
                       type="file"
                       @change="previewImage1"
-                        accept="application/pdf,
-                        image/jpeg, image/png"
                     />
                   </div>
 
@@ -300,8 +296,6 @@ Ville de départ</label>
                       id="cni_p"
                       type="file"
                       @change="previewImage2"
-                      accept="image/gif,
-                        image/jpeg, image/png"
                     />
                   </div>
 
@@ -393,7 +387,7 @@ import usersidebarVue from "../components/usersidebar.vue";
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/announcement/'+this.id+'/users',
+  url: this.$url+'/announcement/'+this.id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -600,7 +594,7 @@ console.log('CNI file: ' + input.files.item(0).name);
 
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-     fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+     fetch(this.$url+"/sub/informations/view", requestOptions1)
          .then(response => response.text())
          .then(result => {
              if (JSON.parse(result).length!==0) {
@@ -643,7 +637,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/covid/test/image/" +this.id,
+          this.$url+"/upload/covid/test/image/" +this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -677,7 +671,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/passport/image/" +this.id,
+          this.$url+"/upload/passport/image/" +this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -709,7 +703,7 @@ this.loading=true;
       var config = {
         method: "put",
         url:
-          "https://dga-express.com:8443/upload/tiket/image/" + this.id,
+          this.$url+"/upload/tiket/image/" + this.id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -784,7 +778,18 @@ this.loading=true;
 
   onSubmit(event){
 
- Swal.fire({
+    if(this.price==='' || this.quantity=== '' || this.paymentMethod=== '' || document
+              .getElementById("destinationtown").value=== '' || document
+              .getElementById("departuretown").value=== '' ){
+         Swal.fire("échec!", "remplissez tous les champs de texte!", "warning")
+      } 
+      else if(this.restriction == '' ){
+         Swal.fire("échec!", "La restriction n'a pas été remplie!", "warning")
+      }
+      else if(this.arrivaldate==='' || this.departuredate ===''){
+         Swal.fire("échec!", "La date n'a pas été remplie!", "warning") }
+else{
+  Swal.fire({
   title: 'Souhaitez-vous enregistrer les modifications?',
   confirmButtonText: 'Envoyer',
   denyButtonText: `Don't save`,
@@ -831,7 +836,7 @@ var data = JSON.stringify(
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/update/announcement',
+  url: this.$url+'/update/announcement',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },
@@ -862,6 +867,8 @@ axios(config)
     Swal.fire('Les modifications ne sont pas enregistrées', '', 'info')
   }
 })
+}
+
  }
  }
     }

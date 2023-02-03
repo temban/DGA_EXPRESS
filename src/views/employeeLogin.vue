@@ -63,7 +63,7 @@ var data = qs.stringify({
 });
 var config = {
   method: 'post',
-  url: 'https://dga-express.com:8443/login',
+  url: this.$url+'/login',
   headers: { 
     'Content-Type': 'application/x-www-form-urlencoded'
   },

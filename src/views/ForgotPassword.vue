@@ -1,25 +1,7 @@
 
 <template>
     <body>
-      <!-- <div class="mt-1 mb-1">
-        <a  href="/"  style="
-                       
-                       background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: flex;
-  height: 170%;
-  width: 350%; 
-  margin-bottom: -25px;
-  margin-left: -80px;
-  position: relative;
-                     ">
-                       <img
-                          
-                          src="@/assets/img/home3.png"
-                        />
-      </a>  
-                          </div> -->
+
                         
                  <div class="header__logo">
                    <a href="/" class="sign__logo2-img">  </a>  
@@ -43,21 +25,24 @@
         <input type="checkbox" id="chk" aria-hidden="true" />
   
         <div class="signup">
-          <form  @submit="onLogin">
-            <h4>
-      Just provide your email<br> 
-      and we can do the rest
-    </h4>
+          <form>
+            <h3>
+                Entrez simplement votre<br> 
+                e-mail et nous ferons le reste
+    </h3>
     <formgroup>
-      <input type="text" name="email" />
-      <label for="email"><br>Email</label>
-      <span>enter your email</span>
+      <input type="text" id="email" name="email" v-model="email"/>
+      <label for="email"><br>E-mail</label>
+      <span>Entrer votre Email</span>
     </formgroup>
     
   
-    <button id="login-btn">Next</button>
-    <p>Did you remember? <a href="">Sign In</a></p>
-   
+    <button id="login-btn" type="button" @click="forgotPassword()">Envoyer  <div class="spinner-border text-light spinner-border-sm" role="status" v-if="login">
+          <span class="sr-only">Loading...</span></div></button>
+    <p>Vous souvenez-vous ?  <a href="/Register">
+  <span style="font-size:large; color: orangered;"> S'identifier ?</span>
+    </a></p>
+    <p style="font-size:larger">Assurez-vous que l'e-mail saisi est celui du compte que vous essayez de récupérer!</p>
           </form>
         </div>
       </div>
@@ -65,470 +50,45 @@
   </template>
   
   <script>
-  import $ from "jquery";
   import Swal from "sweetalert2";
   export default {
     name: "loginmodelVue",
     data() {
       return {
-        state2: false,
-        loginOn:false,
-          login:false,
-        loading: false,
-        modalShow: false,
-        useremail: "",
-        password: "",
-        passwordLogin:"",
-         firstName: "",
-        lastName: "",
-        pseudo: "",
-        tel: "",
-        condition: false,
-        state: false,
-        state1: false
+        email:"",
+        login: false,
       };
     },
     components: {
     },
-     mounted(){
-   
-   var input = document.getElementById("phone");
-      window.intlTelInput(input,({
-        // options here 
-      }));
-   
-      $(document).ready(function() {
-          $('.iti__flag-container').click(function() { 
-            var countryCode = $('.iti__selected-flag').attr('title');
-            countryCode = countryCode.replace(/[^0-9]/g,'')
-            $('#phone').val("+"+countryCode+" ");
-         });
-      });
-  
-  
-  
-      
-  let password = document.getElementById("pass");
-  let passwordStrength = document.getElementById("password-strength");
-  let lowUpperCase = document.querySelector(".low-upper-case i");
-  let number = document.querySelector(".one-number i");
-  let specialChar = document.querySelector(".one-special-char i");
-  let eightChar = document.querySelector(".eight-character i");
-  
-  password.addEventListener("keyup", function(){
-      let pass = document.getElementById("pass").value;
-      checkStrength(pass);
-  });
-  
-  
-  
-  
-  
-  function checkStrength(password) {
-      let strength = 0;
-  
-      //If password contains both lower and uppercase characters
-      if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
-          strength += 1;
-          lowUpperCase.classList.remove('fa-circle');
-          lowUpperCase.classList.add('fa-check');
-      } else {
-          lowUpperCase.classList.add('fa-circle');
-          lowUpperCase.classList.remove('fa-check');
-      }
-      //If it has numbers and characters
-      if (password.match(/([0-9])/)) {
-          strength += 1;
-          number.classList.remove('fa-circle');
-          number.classList.add('fa-check');
-      } else {
-          number.classList.add('fa-circle');
-          number.classList.remove('fa-check');
-      }
-      //If it has one special character
-      if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
-          strength += 1;
-          specialChar.classList.remove('fa-circle');
-          specialChar.classList.add('fa-check');
-      } else {
-          specialChar.classList.add('fa-circle');
-          specialChar.classList.remove('fa-check');
-      }
-      //If password is greater than 7
-      if (password.length > 7) {
-          strength += 1;
-          eightChar.classList.remove('fa-circle');
-          eightChar.classList.add('fa-check');
-      } else {
-          eightChar.classList.add('fa-circle');
-          eightChar.classList.remove('fa-check');   
-      }
-  
-      // If value is less than 2
-      if (strength < 2) {
-          passwordStrength.classList.remove('progress-bar-warning');
-          passwordStrength.classList.remove('progress-bar-success');
-          passwordStrength.classList.add('progress-bar-danger');
-          passwordStrength.style = 'width: 10%';
-      } else if (strength == 3) {
-          passwordStrength.classList.remove('progress-bar-success');
-          passwordStrength.classList.remove('progress-bar-danger');
-          passwordStrength.classList.add('progress-bar-warning');
-          passwordStrength.style = 'width: 60%';
-      } else if (strength == 4) {
-          passwordStrength.classList.remove('progress-bar-warning');
-          passwordStrength.classList.remove('progress-bar-danger');
-          passwordStrength.classList.add('progress-bar-success');
-          passwordStrength.style = 'width: 100%';
-      }
-  }
-      },
     methods: {
   
-      toggle(){
-      if(this.state){
-          document.getElementById("pass").setAttribute("type","password");
-          this.state = false;
-      }else{
-          document.getElementById("pass").setAttribute("type","text")
-          this.state = true;
-      }
-    },
-  
-    toggle1(){
-      if(this.state1){
-          document.getElementById("pass1").setAttribute("type","password");
-          this.state1 = false;
-      }else{
-          document.getElementById("pass1").setAttribute("type","text")
-          this.state1 = true;
-      }
-    },
-    toggle2(){
-      if(this.state2){
-          document.getElementById("pass2").setAttribute("type","password");
-          this.state2 = false;
-      }else{
-          document.getElementById("pass2").setAttribute("type","text")
-          this.state2 = true;
-      }
-    },
-       signup(event) {
-        if(document.getElementById("phone").value==0){
-           Swal.fire("Failed!", "Input your Phone Number!", "warning");
+       forgotPassword() {
+        if(document.getElementById("email").value==0){
+           Swal.fire("Échec !", "Entrez votre e-mail !", "warning");
         }
-        else if(document.getElementById("imput").value==0){
-           Swal.fire("Failed!", "please fill all inputes!", "warning");
+        else{
+this.login = true;
+var axios = require('axios');
+
+var config = {
+  method: 'put',
+  url: this.$url+'/reset/password?emailAddress='+ this.email,
+  headers: { }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  Swal.fire("Succès !", "Vous allez recevoir un nouveau mot de passe par e-mail !","warning");
+})
+.catch(function (error) {
+    Swal.fire("Échec !", "", "warning");
+    window.location.reload()
+  console.log(error);
+});
+
         }
-        else if(document.getElementById("imput1").value==0){
-           Swal.fire("Failed!", "Input your E-mail!", "warning");
-        }
-        else if(this.condition==false){
-           Swal.fire("Failed!", "Accept Terms and Conditions!", "warning");
-        }
-        else if(this.password != this.confPassword) {
-           Swal.fire("Failed!", "Password does not match!", "warning");
-        }
-        else if(document.getElementById("pass").value==0) {
-           Swal.fire("Failed!", "Password is Empty!", "warning");
-        }
-        else if(document.getElementById("pass1").value==0) {
-           Swal.fire("Failed!", "Password is Empty!", "warning");
-        }
-        else{ 
-        this.loginOn = true;
-        let onLogin =()=>{
-         event.preventDefault();
-        var axios = require("axios");
-  
-        var qs = require("qs");
-        var data = qs.stringify({
-          useremail: this.useremail,
-          password: this.password,
-        });
-        var config = {
-          method: "post",
-          url: "https://dga-express.com:8443/login",
-          data: data,
-        };
-  
-        axios(config)
-          .then(function (response) {
-            const temp = response.data;
-            const refreshtoken = Object.values(temp)[0];
-            const accesstoken = Object.values(temp)[1];
-            localStorage.setItem("refresh-token", refreshtoken);
-            localStorage.setItem("access-token", accesstoken);
-  
-            var config0 = {
-              method: "get",
-              url: "https://dga-express.com:8443/profile",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("access-token"),
-              },
-            };
-  
-            axios(config0)
-              .then((res) => {
-                let a = res.data;
-                if (a.pseudo == "DGA-EMPLOYEE" || a.pseudo == "Admin") {
-                  window.location.href = "/employeeDashboard";
-                } else {
-                  console.log(a);
-                  window.location.href = "/userDashboard";
-                  //window.location.reload()
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-            this.$bus.$emit("logged", "User logged");
-          })
-          .catch(function (error) {
-            if (error.response.status === 500) {
-              Swal.fire(
-                "Login Failed!",
-                "Please Check Your Credentials!.",
-                "error"
-              );
-            }
-            if (error.response.status === 401) {
-              Swal.fire("Login Failed!", "User Does Not Exist!.", "error");
-            }
-            if (error.response.status === 404) {
-              Swal.fire("Failed!", "Something Went Wrong!.", "error");
-            }
-            console.log(error);
-          }); 
-        }
-  
-        var axios = require("axios");
-        var data = JSON.stringify({
-          "firstName": this.firstName,
-          "lastName": this.lastName,
-          "pseudo": this.pseudo,
-          "phone": this.tel,
-          "profileimgage": "",
-          "email": this.useremail,
-          "password": this.password,
-        });
-  
-        var config = {
-          method: "post",
-          url: "https://dga-express.com:8443/signup",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: data,
-        };
-  
-        axios(config)
-          .then(function (response) {
-                 if (response.status === 200) {
-              onLogin();
-            }
-              this.loading = false;
-             this.load = true;
-            console.log(JSON.stringify(response));
-            
-              
-            //window.location.href = "/";
-          })
-          .catch(function (error) {
-            console.log(error);
-            if (error.response.status === 500) {
-              Swal.fire("Registration Failed!", "User Already Exist!.", "error");
-            }
-            if (error.response.status === 404) {
-              Swal.fire("Failed!", "Something Went Wrong!.", "error");
-            }
-          });
-   
-        }
-      },
-  //signup(event) {
-  //      this.login = true;
-  
-  //      let onLogin =()=>{
-  //       event.preventDefault();
-  //      var axios = require("axios");
-  
-  //      var qs = require("qs");
-  //      var data = qs.stringify({
-  //        useremail: this.useremail,
-  //        password: this.password,
-  //      });
-  //      var config = {
-  //        method: "post",
-  //        url: "https://dga-express.com:8443/login",
-  //        data: data,
-  //      };
-  
-  //      axios(config)
-  //        .then(function (response) {
-  //          const temp = response.data;
-  //          const refreshtoken = Object.values(temp)[0];
-  //          const accesstoken = Object.values(temp)[1];
-  //          localStorage.setItem("refresh-token", refreshtoken);
-  //          localStorage.setItem("access-token", accesstoken);
-  
-  //          var config0 = {
-  //            method: "get",
-  //            url: "https://dga-express.com:8443/profile",
-  //            headers: {
-  //              "Content-Type": "application/json",
-  //              Authorization: "Bearer " + localStorage.getItem("access-token"),
-  //            },
-  //          };
-  
-  //          axios(config0)
-  //            .then((res) => {
-  //              let a = res.data;
-  //              if (a.pseudo == "DGA-EMPLOYEE" || a.pseudo == "Admin") {
-  //                window.location.href = "/employeeDashboard";
-  //              } else {
-  //                console.log(a);
-  //                window.location.href = "/userDashboard";
-  //                //window.location.reload()
-  //              }
-  //            })
-  //            .catch(function (error) {
-  //              console.log(error);
-  //            });
-  //          this.$bus.$emit("logged", "User logged");
-  //        })
-  //        .catch(function (error) {
-  //          if (error.response.status === 500) {
-  //            Swal.fire(
-  //              "Login Failed!",
-  //              "Please Check Your Credentials!.",
-  //              "error"
-  //            );
-  //          }
-  //          if (error.response.status === 401) {
-  //            Swal.fire("Login Failed!", "User Does Not Exist!.", "error");
-  //          }
-  //          if (error.response.status === 404) {
-  //            Swal.fire("Failed!", "Something Went Wrong!.", "error");
-  //          }
-  //          console.log(error);
-  //        }); 
-  //      }
-  
-  //      var axios = require("axios");
-  //      var data = JSON.stringify({
-  //        "firstName": this.firstName,
-  //        "lastName": this.lastName,
-  //        "pseudo": this.pseudo,
-  //        "phone": this.tel,
-  //        "profileimgage": "",
-  //        "email": this.useremail,
-  //        "password": this.password,
-  //      });
-  
-  //      var config = {
-  //        method: "post",
-  //        url: "https://dga-express.com:8443/signup",
-  //        headers: {
-  //          "Content-Type": "application/json",
-  //        },
-  //        data: data,
-  //      };
-  
-  //      axios(config)
-  //        .then(function (response) {
-  //               if (response.status === 200) {
-  //            Swal.fire("Registration success", "welcome", "success");
-  //            onLogin();
-  //          }
-  //            this.loading = false;
-  //           this.load = true;
-  //          console.log(JSON.stringify(response));
-            
-              
-  //          //window.location.href = "/";
-  //        })
-  //        .catch(function (error) {
-  //          console.log(error);
-  //          if (error.response.status === 500) {
-  //            Swal.fire("Registration Failed!", "User Already Exist!.", "error");
-  //          }
-  //          if (error.response.status === 404) {
-  //            Swal.fire("Failed!", "Something Went Wrong!.", "error");
-  //          }
-  //        });
-  //    },
-  
-  
-  
-  
-  
-      onLogin(event) {
-        this.login = true;
-        event.preventDefault();
-        var axios = require("axios");
-  
-        var qs = require("qs");
-        var data = qs.stringify({
-          useremail: this.useremail,
-          password: this.passwordLogin,
-        });
-        var config = {
-          method: "post",
-          url: "https://dga-express.com:8443/login",
-          data: data,
-        };
-  
-        axios(config)
-          .then(function (response) {
-            const temp = response.data;
-            const refreshtoken = Object.values(temp)[0];
-            const accesstoken = Object.values(temp)[1];
-            localStorage.setItem("refresh-token", refreshtoken);
-            localStorage.setItem("access-token", accesstoken);
-  
-            var config0 = {
-              method: "get",
-              url: "https://dga-express.com:8443/profile",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("access-token"),
-              },
-            };
-  
-            axios(config0)
-              .then((res) => {
-                let a = res.data;
-                if (a.pseudo == "DGA-EMPLOYEE" || a.pseudo == "Admin") {
-                  window.location.href = "/employeeDashboard";
-                } else {
-                  console.log(a);
-                  window.location.href = "/userDashboard";
-                  //window.location.reload()
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-            this.$bus.$emit("logged", "User logged");
-          })
-          .catch(function (error) {
-            if (error.response.status === 500) {
-              Swal.fire(
-                "Login Failed!",
-                "Please Check Your Credentials!.",
-                "error"
-              );
-            }
-            if (error.response.status === 401) {
-              Swal.fire("Login Failed!", "User Does Not Exist!.", "error");
-            }
-            if (error.response.status === 404) {
-              Swal.fire("Failed!", "Something Went Wrong!.", "error");
-            }
-            console.log(error);
-          });
       },
     },
   };
@@ -727,14 +287,14 @@ h2, img {
   font-weight: 10;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
 }
-h4{
+h3{
+    
   text-align: center;
+  height: 70px;
   color:black;
-  font-size: 1.1em;
-  font-family: times;
-  font-style:normal;
+  font-size: 1.5em;
   line-height: 130%;
- opacity: .6;
+ margin-top: 40px;
 }
 
 form { 
@@ -750,32 +310,34 @@ form {
 
 formgroup {
   position: relative;
-  width: 90%;
+  width: 100%;
   justify-content: center;
   display: block;
-  margin-top: 10em;
+  margin-top: 3em;
   font-size: 1em;
 }
 formgroup input {
   width: 100%;
+  height: 50px;
   border: none;
   border-bottom: 1px solid #888888;
   padding: 8px 0;
-  font-size: inherit !important;
-  margin-bottom: 13px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding-left: 10px;
   outline: none;
   opacity: 0.7;
-  font-weight: 600;
+  font-weight: 400;
 }
 formgroup input:focus {
   opacity: 1;
-  border-bottom: 2px solid #F71442;
-  color: #F71442;
+  border-bottom: 2px solid #f74d14;
+  color: #f77a14;
 }
 formgroup label {
   position: absolute;
-  font-size: 0.8em;
-  top: -1em;
+  font-size: 1.2em;
+  top: -2em;
   left: 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -785,13 +347,13 @@ formgroup label {
 }
 formgroup span {
   position: absolute;
-  top: -1em;
-  left: -500px;
+  top: -1.5em;
+  left: -400px;
   opacity: 0;
   color: #333333;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 1em;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
@@ -825,7 +387,7 @@ formgroup input:focus ~ span {
   -webkit-box-shadow: 0px 3px 21px rgba(255, 100, 0, 0.7);
           box-shadow: 0px 3px 21px rgba(255, 100, 0, 0.7);
   background: -webkit-gradient(linear, left top, right top, from(#F98340), to(#F71442));
-  background: linear-gradient(to right, #F98340, #F71442);
+  background: linear-gradient(to right, #F98340, #f45474);
   background-size: 100%;
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -864,10 +426,12 @@ formgroup input:focus ~ span {
 }
 
 p {
-  color: white;
+    margin-top: 20px;
+  color: rgb(0, 0, 0);
   text-align: center;
 }
 p a {
+
   color: inherit;
   text-decoration: none;
   font-weight: bold;

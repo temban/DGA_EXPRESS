@@ -1,6 +1,6 @@
 <template>
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <div id="dashboardPage">
             <employeeNavbarVue />
  <div v-if="loading" style="background:rgba(0,0,0,0.3);height:100vh;width:100vw;position:fixed;top:0;left:0;z-index: 100;"> 
@@ -214,7 +214,7 @@
                 </div>
             </main>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -255,7 +255,7 @@ export default {
         var config3 = {
             method: "get",
             url:
-                "https://dga-express.com:8443/user/" +
+                this.$url+"/user/" +
                 localStorage.getItem("userId") +
                 "/reservations",
             headers: {
@@ -276,7 +276,7 @@ export default {
         var config1 = {
             method: "get",
             url:
-                "https://dga-express.com:8443/users/" +
+                this.$url+"/users/" +
                 localStorage.getItem("userId") +
                 "/announcements",
             headers: {
@@ -295,7 +295,7 @@ export default {
 
         var config = {
             method: "get",
-            url: "https://dga-express.com:8443/profile",
+            url: this.$url+"/profile",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
@@ -314,7 +314,7 @@ export default {
                 this.pseudo = res.data.pseudo;
                 this.profileimgage = res.data.profileimgage;
                 if (this.profileimgage !== "") {
-                    this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+                    this.pic = this.$url+"/" + this.profileimgage;
                 }
                 this.role_dtos_id = Object.values(res.data.roleDtos)[0];
                 this.role_dtos_name = Object.values(res.data.roleDtos)[1];
@@ -339,7 +339,7 @@ this.loading = true;
 
             var config = {
                 method: "put",
-                url: "https://dga-express.com:8443/upload/profile/image",
+                url: this.$url+"/upload/profile/image",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -360,11 +360,11 @@ this.loading = true;
 
         updatepassword() {
             Swal.fire({
-                title: "Do you want to save the changes?",
+                title: "Enregistrer les modifications ? ",
                 showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: "Save",
-                denyButtonText: `Don't save`,
+                showCancelButton: false,
+                confirmButtonText: "Sauvegarder",
+                denyButtonText: `Ne pas enregistrer`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -372,7 +372,7 @@ this.loading = true;
                     var config = {
                         method: "get",
                         url:
-                            "https://dga-express.com:8443/user/update/" +
+                            this.$url+"/user/update/" +
                             this.oldpassword +
                             "/" +
                             this.newpassword +
@@ -386,26 +386,26 @@ this.loading = true;
                     axios(config)
                         .then(function (response) {
                             console.log(JSON.stringify(response.data));
-                            Swal.fire("Saved!", "", "success");
+                            Swal.fire("Sauvegardé!", "", "success");
                             window.location.reload();
                         })
                         .catch(function (error) {
                             console.log(error);
-                            Swal.fire("Failed!", "Something Went Wrong!.", "error");
+                            Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
                         });
                 } else if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
+                    Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
                 }
             });
         },
 
         updateprofile() {
             Swal.fire({
-                title: "Do you want to save the changes?",
+                title: "Enregistrer les modifications ? ",
                 showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: "Save",
-                denyButtonText: `Don't save`,
+                showCancelButton: false,
+                confirmButtonText: "Sauvegarder",
+                denyButtonText: `Ne pas enregistrer`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -428,7 +428,7 @@ this.loading = true;
 
                     var config = {
                         method: "put",
-                        url: "https://dga-express.com:8443/update/user",
+                        url: this.$url+"/update/user",
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -439,14 +439,14 @@ this.loading = true;
                     axios(config)
                         .then(function (response) {
                             console.log(JSON.stringify(response.data));
-                            Swal.fire("Saved!", "", "success");
+                            Swal.fire("Sauvegardé!", "", "success");
                         })
                         .catch(function (error) {
                             console.log(error);
-                            Swal.fire("Failed!", "Something Went Wrong!.", "error");
+                            Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
                         });
                 } else if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
+                    Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
                 }
             });
         },

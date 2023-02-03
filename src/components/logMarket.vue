@@ -123,7 +123,7 @@ export default {
            var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -133,7 +133,7 @@ var config = {
  axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='https://dga-express.com:8443/'+ this.profileimgage,
+      this.pic=this.$url+'/'+ this.profileimgage,
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })

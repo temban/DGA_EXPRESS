@@ -1,7 +1,7 @@
 <template>
 
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <div style="position:relative:; padding-bottom:120px;">
             <employeeNavbarVue />
             
@@ -11,9 +11,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;width:1000px">
-                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
+                  <a v-bind:href="urel+'/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
+                  <img v-bind:src="urel+'/bill/image?file=' + this.receipt" style="
                       background-position: center;
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -71,7 +71,7 @@
       </b-container>
       <!-- Fim tabela -->
     </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -79,7 +79,7 @@ import employeeNavbarVue from '../components/employeeNavbar.vue'
 export default{
     data() {
     return {
-      
+      urel:this.$url,
         lastname: localStorage.getItem("UserPaymentLN"),
         firstname:localStorage.getItem("UserPaymentFN"),
         receipt:"",
@@ -99,7 +99,7 @@ export default{
         var axios = require('axios');
         var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/bills/paths/' + localStorage.getItem("UserPaymentId"),
+  url: this.$url+'/bills/paths/' + localStorage.getItem("UserPaymentId"),
   headers: { 
     'Content-Type': 'application/json'
   }

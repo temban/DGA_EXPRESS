@@ -1,5 +1,5 @@
 <template>
-   <body id="landing" class="sidebar-open">
+   <div id="landing" class="sidebar-open">
         <div style="position:relative:; padding-bottom:120px;">
             <employeeNavbarVue />
             
@@ -17,8 +17,12 @@
           <thead>
             <tr>
               <th scope="col">Adresse de Livraison</th>
-              <th scope="col">Acheteurs</th>
-              <th scope="col">Articles</th>
+              <th scope="col">Acheteur</th>
+              <th scope="col">Article</th>
+              <th scope="col">prix</th>
+              <th scope="col">Quantité achetée</th>
+              <th scope="col">Paiement</th>
+              
               <!-- <th scope="col">Actions</th> -->
             </tr>
           </thead>
@@ -28,8 +32,16 @@
           <tbody style="text-transform: capitalize">
             <tr v-for="item in Purches" v-bind:key="item.id">
               <td>{{ item.address }}</td>
-              <td>{{ item.user.firstName + " " + item.user.lastName }}</td>
+              <td>{{ item.article.user.firstName + " " + item.article.user.lastName }}</td>
               <td>{{ item.article.name }}</td>
+              <td>{{ item.article.price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td v-if="!item.paid" >
+                  <span class="badge badge-warning font-weight-100">En cours..</span>
+                </td>
+              <td v-else >
+                  <span class="badge badge-primary font-weight-100">le vendeur a été payé</span>
+                </td>
               <td>
                 <!-- <form>
 
@@ -66,7 +78,7 @@
       <!-- Fim tabela -->
     </div>
 
-    </body>
+    </div>
 </template>
 <script>
 import Swal from "sweetalert2";
@@ -91,7 +103,7 @@ export default {
   
       var config = {
         method: 'get',
-        url: 'https://dga-express.com:8443/admin/users',
+        url: this.$url+'/admin/users',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -109,7 +121,7 @@ export default {
         var axios = require('axios');
             var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/bills/paths/'+res.data[i].id,
+  url: this.$url+'/bills/paths/'+res.data[i].id,
   headers: { 
     'Content-Type': 'application/json'
   }
@@ -175,7 +187,7 @@ axios(config)
     };
 
     fetch(
-      "https://dga-express.com:8443/user/" +
+      this.$url+"/user/" +
         localStorage.getItem("UserPurchesId") +
         "/articles/",
       requestOptions
@@ -193,7 +205,7 @@ var axios = require("axios");
 
 var config = {
   method: "get",
-  url: 'https://dga-express.com:8443/destination/article?articleId='+ this.articles[i].id,
+  url: this.$url+'/destination/article?articleId='+ this.articles[i].id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),

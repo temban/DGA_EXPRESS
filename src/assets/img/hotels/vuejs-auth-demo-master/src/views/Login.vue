@@ -51,12 +51,12 @@ var data = qs.stringify({
   'useremail': this.useremail,
   'password': this.password 
 });
-axios.get('https://dga-express.com:8443/announcements').then(function (response) {
+axios.get(this.$url+'/announcements').then(function (response) {
   console.log(JSON.stringify(response.data));
 })
 var config = {
   method: 'post',
-  url: 'https://dga-express.com:8443/login',
+  url: this.$url+'/login',
   headers: { 
     'Content-Type': 'application/x-www-form-urlencoded'
   },

@@ -14,12 +14,12 @@
         <div class="messages" >
           <div id="topic-1" class="message-topic">NB</div>
           <div id="message-1" class="message-content">
-            <span>Une commission de 15% sera déduite sur le montant de chaque vente effectuée sur la plateforme DGA EXPRESS</span>
+            <span>Une commission de 6% sera déduite sur le montant de chaque vente effectuée sur la plateforme DGA EXPRESS</span>
           </div>
           
         </div>
       </div>
-      <hr>
+      <hr> 
     </div>
      
  <b-container>
@@ -143,7 +143,7 @@ nom d'article"
     </div>
                 </div>
 
-  </div>
+              </div>
 
               <div class="form-footer">
                 <label
@@ -182,9 +182,6 @@ nom d'article"
                       id="items1"
                       type="file"
                       @change="item1"
-                      accept="image/gif,application/pdf,
-                        image/jpeg, image/png"
-                     
                     />
                     
                   </div>
@@ -240,7 +237,6 @@ nom d'article"
                       id="items3"
                       type="file"
                       @change="item3"
-                      accept="image/*" 
                     />
                   </div>
  <div class="image-preview" v-if="pic3.length > 0">
@@ -299,9 +295,9 @@ export default {
       modalShow: false,
       name: '',
       location: "",
-      quantity: 1,
+      quantity: "",
       price: "",
-      description: 'for men',
+      description: '',
       cathegory: {},
       cate: {},
       cates: [],
@@ -425,7 +421,7 @@ ccInputElement.addEventListener('keydown', event => {
 
     var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
     .then(response => response.text())
     .then(result => {
         if (JSON.parse(result).length!==0) {
@@ -444,7 +440,7 @@ fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
       redirect: 'follow'
     };
 
-    fetch("https://dga-express.com:8443/cathegories", requestOptions)
+    fetch(this.$url+"/cathegories", requestOptions)
       .then(response => response.text())
       .then(result => this.cates = JSON.parse(result))
       .catch(error => {console.log('error', error)
@@ -468,7 +464,7 @@ data.append('articleId', localStorage.getItem('PostIdPic'));
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/upload/main/article/image',
+  url: this.$url+'/upload/main/article/image',
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -497,7 +493,7 @@ data.append('file', this.pic3);
 
 var config = {
   method: 'put',
-   url: 'https://dga-express.com:8443/upload/article/images/'+localStorage.getItem('PostIdPic'),
+   url: this.$url+'/upload/article/images/'+localStorage.getItem('PostIdPic'),
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -528,7 +524,7 @@ data.append('file', this.pic2);
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/upload/article/images/'+localStorage.getItem('PostIdPic'),
+  url: this.$url+'/upload/article/images/'+localStorage.getItem('PostIdPic'),
   headers: { 
     'Content-Type': 'application/json', 
 'Authorization': 'Bearer ' + localStorage.getItem('access-token'),
@@ -603,7 +599,12 @@ await axios(config)
     },
 
     onSubmit(event) {
-      Swal.fire({
+if(document.getElementById("location").value==='' || this.name==='' || this.quantity === '' || this.description === '' || this.price==='' || this.paymentMethod==='' || this.cate===''){
+  Swal.fire("échec!", "remplissez tous les champs de texte!", "warning"). then(function() {
+          window.location.reload();
+});
+}else{
+  Swal.fire({
        title: "Complétez votre publication",
         text: "Pour compléter votre publication, ajoutez les images requis !",
         icon: "warning",
@@ -640,7 +641,7 @@ await axios(config)
             redirect: 'follow'
           };
 
-          fetch("https://dga-express.com:8443/add/article", requestOptions)
+          fetch(this.$url+"/add/article", requestOptions)
             .then(response => response.text())
             .then(result => {
                 let a=JSON.parse(result);
@@ -662,6 +663,9 @@ await axios(config)
 
         }
       })
+}
+
+   
     }
   },
   watch: {

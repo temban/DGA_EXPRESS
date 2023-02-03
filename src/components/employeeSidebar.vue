@@ -60,8 +60,8 @@
           </a>
         </li>
         <li class="has-subnav">
-          <a href="#" @click="removeemployeeSuggest">
-            <i class="fa fa-question" aria-hidden="true"> <span class="icon-button__badge" id="suggest">{{suggest}}</span></i>
+          <a href="/employeeSuggest" @click="removeemployeeSuggest">
+            <i class="fa fa-question" aria-hidden="true"> <span class="icon-button__badge" id="suggest">{{this.suggest}}</span></i>
             <span class="nav-text"> Toutes les suggestions </span>
           </a>
         </li>
@@ -84,15 +84,75 @@ export default {
   name: "employeeSidebar",
   data() {
         return {
-          suggest:'',
+          
+          suggest:'', 
           travel:'',
           articleData:[],
         }
     },
 mounted(){
+  console.log("notificationSizeTravel", localStorage.getItem("notificationSizeTravel"))
+  console.log("notificationSizeSuggest", localStorage.getItem("notificationSizeSuggest"))
   document.getElementById('travel').style.display = 'none';
     document.getElementById('suggest').style.display = 'none';
     
+
+    $(document).ready(function(){
+   var urlEndpoint = 'https://dga-express.com:8443/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325';
+   var accessPoint = new EventSource(urlEndpoint);
+
+
+   accessPoint.addEventListener("LatesNews", function (event){
+    var newSuggestion = JSON.parse( event.data);
+
+     if (Notification.permission === "granted") {
+      
+     notif(newSuggestion.newNotification[newSuggestion.notificationSize-1].title, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
+     
+     } else if (Notification.permission !== "denied") {
+       Notification.requestPermission().then(perm => {
+         if (perm === 'granted') {
+     notif(newSuggestion.notificationSize, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
+         }
+       })
+
+     }
+
+  
+    for(let i=0; i<newSuggestion.notificationSize; i++){
+     console.log("test", newSuggestion.notificationSize)
+    suggest(newSuggestion.notificationSize, newSuggestion.newNotification[i].content)
+    }
+    
+    })
+
+    accessPoint.addEventListener("announcementNews", function (event){
+    var newTravels = JSON.parse( event.data);
+    console.log("travels",newTravels)
+
+     if (Notification.permission === "granted") {
+      
+     notif(newTravels.newNotification[newTravels.notificationSize-1].title, newTravels.newNotification[newTravels.notificationSize-1].content)
+     
+     } else if (Notification.permission !== "dinied") {
+       Notification.requestPermission().then(perm => {
+         if (perm === 'granted') {
+     notif(newTravels.notificationSize, newTravels.newNotification[newTravels.notificationSize-1].content)
+         }
+       })
+
+     }
+
+    
+    for(let i=0; i<newTravels.notificationSize; i++){
+    //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
+    travel(newTravels.notificationSize)
+    }
+    
+    })
+})
+
+
     function notifications() {
          
       document.getElementById("travel").innerHTML = localStorage.getItem("notificationSizeTravel")
@@ -162,7 +222,7 @@ function myFunction() {
             var para = document.createElement("p");
             para.innerHTML =content;
             localStorage.setItem("notificationSizeSuggest", para.innerHTML =content);
-            
+            console.log("dfdfsfsfsfsdf", para.innerHTML =content)
             x.appendChild(para); 
             document.getElementById("pack").appendChild(x)
             
@@ -188,71 +248,12 @@ function myFunction() {
 
 
 
-$(document).ready(function(){
-
-var userID = "1b6bad9d-8e08-4c0c-9f32-7aa544996a64";
-  $("#userspan").text(userID);
-   var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=ae6043af-4db2-45a5-ab43-e2b6927f3325';
-   var accessPoint = new EventSource(urlEndpoint);
-
-
-   accessPoint.addEventListener("LatesNews", function (event){
-    var newSuggestion = JSON.parse( event.data);
-
-     if (Notification.permission === "granted") {
-      
-     notif(newSuggestion.newNotification[newSuggestion.notificationSize-1].title, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
-     
-     } else if (Notification.permission !== "denied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-     notif(newSuggestion.notificationSize, newSuggestion.newNotification[newSuggestion.notificationSize-1].content)
-         }
-       })
-
-     }
-
-  
-    for(let i=0; i<newSuggestion.notificationSize; i++){
-     console.log("test", newSuggestion.notificationSize)
-    suggest(newSuggestion.notificationSize, newSuggestion.newNotification[i].content)
-    }
-    
-    })
-
-    accessPoint.addEventListener("announcementNews", function (event){
-    var newTravels = JSON.parse( event.data);
-    console.log("travels",newTravels)
-
-     if (Notification.permission === "granted") {
-      
-     notif(newTravels.newNotification[newTravels.notificationSize-1].title, newTravels.newNotification[newTravels.notificationSize-1].content)
-     
-     } else if (Notification.permission !== "dinied") {
-       Notification.requestPermission().then(perm => {
-         if (perm === 'granted') {
-     notif(newTravels.notificationSize, newTravels.newNotification[newTravels.notificationSize-1].content)
-         }
-       })
-
-     }
-
-    
-    for(let i=0; i<newTravels.notificationSize; i++){
-    //  console.log("travels",newTravels.newNotification[i].title, newTravels.newNotification[i].content)
-    travel(newTravels.notificationSize)
-    }
-    
-    })
-})
-
     
 
 },
   methods: {
     removeemployeeSuggest(){
       window.localStorage.removeItem('notificationSizeSuggest');
-      window.location.href = "/employeeSuggest";
     },
     removeemployeeAllTravels(){
       window.localStorage.removeItem('notificationSizeTravel');

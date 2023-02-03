@@ -24,12 +24,12 @@
             </div>
             <div v-else>
               <a
-                :src="'https://dga-express.com:8443/' + profileimgage"
+                v-bind:src="urel+'/' + profileimgage"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  :src="'https://dga-express.com:8443/' + profileimgage"
+                  v-bind:src="urel+'/' + profileimgage"
                   style="
                     image-resolution: 3000000000dpi;
                     background-color: #000;
@@ -116,17 +116,13 @@
                     />
                   </div>
                   <div v-else>
-                    <a
-                      :src="
-                        'https://dga-express.com:8443/' +
+                    <a v-bind:src="urel+'/' +
                         user.sendermessage.profileimgage
                       "
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <img
-                        :src="
-                          'https://dga-express.com:8443/' +
+                      <img v-bind:src="urel+'/' +
                           user.sendermessage.profileimgage
                         "
                         style="
@@ -216,7 +212,7 @@
                   <div v-else>
                     <a :href="pic" target="_blank" rel="noopener noreferrer">
                       <img
-                        :src="'https://dga-express.com:8443/' + profileimgage"
+                        v-bind:src="urel+'/' + profileimgage"
                         style="
                           margin-left: 10px;
                           image-resolution: 3000000000dpi;
@@ -292,6 +288,7 @@ export default {
 
   data() {
     return {
+      urel: this.$url,
       id: "",
       loading: true,
       users: [],
@@ -314,7 +311,7 @@ export default {
     var config1 = {
       method: "get",
       url:
-        "https://dga-express.com:8443/chat/messages/" +
+        this.$url+"/chat/messages/" +
         localStorage.getItem("receiver-id"),
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +344,7 @@ export default {
             var config = {
               method: "delete",
               url:
-                "https://dga-express.com:8443/delete/message/" + id + "/messages",
+                this.$url+"/delete/message/" + id + "/messages",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -518,7 +515,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/add/message",
+        url: this.$url+"/add/message",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

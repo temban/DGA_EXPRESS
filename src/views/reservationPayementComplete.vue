@@ -30,7 +30,7 @@
     <div class="top-container">
         
         <img v-if="profile ===''" src="@/assets/img/hotels/59710428.png" class="img-fluid profile-image" width="70">
-        <img v-else :src="'https://dga-express.com:8443/' + profile" class="img-fluid profile-image" width="70">
+        <img v-else v-bind:src="urel+'/' + profile" class="img-fluid profile-image" width="70">
         <div class="ml-3">
             <h2 class="name">{{firstname+ " " +lastname}}</h2>
             <p class="mail">{{email}}</p>
@@ -126,6 +126,7 @@ export default{
         firstname:localStorage.getItem("firstName"),
         email:localStorage.getItem("email"),
         profile:localStorage.getItem("profileImage"),
+        urel: this.$url,
     };
   },
   components: {

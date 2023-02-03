@@ -1,7 +1,7 @@
 <template>
 
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <div style="position:relative:; padding-bottom:160px;">
             <employeeNavbarVue />
         
@@ -14,9 +14,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;width:1000px">
-                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
+                  <a v-bind:href="urel+'/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
+                  <img v-bind:src="urel+'/bill/image?file=' + this.receipt" style="
                       background-position: center; 
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -54,8 +54,8 @@
      </thead>
      <tbody style="text-transform: capitalize">
        <tr v-for="pay in strip" :key="pay.id">
-        <img v-if="pay.user.profileimgage !== ''" :src="
-                  'https://dga-express.com:8443/' +
+        <img v-if="pay.user.profileimgage !== ''" v-bind:src="
+                  urel+'/' +
                   pay.user.profileimgage
                 " style="width: 60px; height: 60px; border-radius: 30px" />
                 <img v-else src="@/assets/img/hotels/59710428.png"
@@ -76,7 +76,7 @@
 
  
     
-    </body>
+</div>
 </template>
 
 <script>
@@ -85,6 +85,7 @@ import Swal from 'sweetalert2';
 export default{
     data() {
     return {
+      urel: this.$url,
         receipt:"",
         login1:false,
         userIds:[],
@@ -104,7 +105,7 @@ export default{
 
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/payments',
+  url: this.$url+'/payments',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

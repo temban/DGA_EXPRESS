@@ -73,7 +73,7 @@ Inscrivez-vous ici</u></a></p>
             <div class="card ma-cart" style="border-radius: 15px; padding:-90px">
               <div class="card-body text-left">
                 <img class="d-block img-fluid w-100 imgSlide"
-                  :src="`https://dga-express.com:8443/article/image?file=${item.mainImage}`" alt="image slot">
+                  v-bind:src="urel+`/article/image?file=${item.mainImage}`" alt="image slot">
 
                 <span class="mb-1 art-title">{{  item.name  }}</span><br />
                 <span class="mb-1 art-0 text-muted"><i class="fa fa-chevron-down text-warning"></i> {{
@@ -104,7 +104,7 @@ Inscrivez-vous ici</u></a></p>
                     style="height:35px; float:left ;" class="btn btn-outline-primary btn-floating">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </button>
-                  <button v-if="infoUser.id !== item.user.id" @click="tchat(item, item.user)"
+                  <button  v-if="isLogged === true && infoUser.id !== item.user.id" @click="tchat(item, item.user)"
                     style="height:35px; float:left ;" class="btn btn-outline-primary btn-floating ml-1">
                     <i class="fa fa-comment" aria-hidden="true"></i>
                   </button>
@@ -118,8 +118,7 @@ Inscrivez-vous ici</u></a></p>
                   <button v-if="isLogged === false" v-b-modal.modal-multi-4 type="button"
                     style="height:38px; width:50%;  float:right ;"
                     class="btn btn-outline-warning btn-rounded btn-sm btn-floating">
-                    S'identifier
-                  </button>
+                    Acheter                  </button>
 
                 </div>
 
@@ -156,7 +155,7 @@ Inscrivez-vous ici</u></a></p>
                               <b-carousel-slide v-for="(top, id) in path" class="my-img" v-bind:key="id">
                                 <template #img class="img">
                                   <img class="d-block img-fluid w-100 my-img0"
-                                    :src="`https://dga-express.com:8443/article/image?file=${top}`" alt="image slot">
+                                    v-bind:src="urel+`/article/image?file=${top}`" alt="image slot">
                                 </template>
                               </b-carousel-slide>
                             </b-carousel>
@@ -236,8 +235,10 @@ Inscrivez-vous ici</u></a></p>
                             <tbody style="text-transform: capitalize">
                               <tr v-for="(item, idx) in basket" v-bind:key="idx">
                                 <td>{{  item.name.slice(0, 14)  }}...</td>
-                                <td><input style="position:relative; max-width: 30px; color:#000" @change="newTotal" type="number" v-model="quantities[idx]" min="1"
-                                    :max="item.quantity"></td>
+                                <td><input style="position:relative; max-width: 50px; color:#000" 
+                                  @change="newTotal" type="number" v-model="quantities[idx]" min="1"
+                                  oninput="javascript: if (this.value > this.max) this.value = this.value.slice(0, this.max);"
+                                  :max="item.quantity"> </td>
                                 <td>{{  item.quantity  }}</td>
                                 <td>{{  item.price  }}</td>
                                 <td @click="remov(idx)" class="btn text-danger close">&times;</td>
@@ -291,6 +292,7 @@ export default {
   name: "allTravels",
   data() {
     return {
+      urel: this.$url,
       login:false,
       infoUser: {},
       errors: false,
@@ -336,7 +338,7 @@ export default {
   async mounted() {
     var requestoptions1 = { method: 'GET', redirect: 'follow' };
 
-    fetch("https://dga-express.com:8443/sub/informations/view", requestoptions1)
+    fetch(this.$url+"/sub/informations/view", requestoptions1)
       .then(response => response.text())
       .then(result => {
         if (JSON.parse(result).length !== 0) {
@@ -360,7 +362,7 @@ export default {
       this.isLogged = this.checkIfIsLogged()
     }),
 
-      await fetch("https://dga-express.com:8443/articles/available")
+      await fetch(this.$url+"/articles/available")
         .then(response => response.json())
         .then((data) => {
           console.log("wasasdasdsdasd",data);
@@ -372,7 +374,8 @@ export default {
             this.allArticles = data.reverse();
             for (let p = 0; p < this.allArticles.length; p++) {
               if (
-                this.allArticles[p].mainImage !== ""
+                this.allArticles[p].mainImage !== "",
+                this.allArticles[p].quantity > 0
               ) {
                 this.articles.push(this.allArticles[p]);
                 
@@ -484,7 +487,7 @@ if( this.subInfo.currency === "XAF"){
         redirect: 'follow'
       };
 
-      fetch("https://dga-express.com:8443/article/paths/" + item.id, requestoptions5)
+      fetch(this.$url+"/article/paths/" + item.id, requestoptions5)
         .then(response => response.text())
         .then(result => {
           this.path = JSON.parse(result)
@@ -508,7 +511,7 @@ if( this.subInfo.currency === "XAF"){
         email: this.email,
         password: this.password
       }
-      axios.post('https://dga-express.com:8443/signup', newUser)
+      axios.post(this.$url+'/signup', newUser)
       {
         this.$router.push('/');
       }
@@ -518,7 +521,7 @@ if( this.subInfo.currency === "XAF"){
       this.login = true;
       event.preventDefault();
       var axios = require("axios");
-
+      let urel =  this.$url;
       var qs = require("qs");
       var data = qs.stringify({
         useremail: this.useremail,
@@ -526,7 +529,7 @@ if( this.subInfo.currency === "XAF"){
       });
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/login",
+        url: this.$url+"/login",
         data: data,
       };
 
@@ -540,7 +543,7 @@ if( this.subInfo.currency === "XAF"){
 
           var config0 = {
             method: "get",
-            url: "https://dga-express.com:8443/profile",
+            url: urel+"/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -592,7 +595,7 @@ if( this.subInfo.currency === "XAF"){
     //   });
     //   var config = {
     //     method: 'post',
-    //     url: 'https://dga-express.com:8443/login',
+    //     url: this.$url+'/login',
     //     headers: {
     //       'Content-Type': 'application/x-www-form-urlencoded'
     //     },

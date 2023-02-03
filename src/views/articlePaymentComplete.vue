@@ -30,7 +30,7 @@
     <div class="top-container">
         
         <img v-if="profile ===''" src="@/assets/img/hotels/59710428.png" class="img-fluid profile-image" width="70">
-        <img v-else :src="'https://dga-express.com:8443/' + profile" class="img-fluid profile-image" width="70">
+        <img v-else v-bind:src="urel+'/' + profile" class="img-fluid profile-image" width="70">
         <div class="ml-3">
             <h2 class="name">{{firstname+ " " +lastname}}</h2>
             <p class="mail">{{email}}</p>
@@ -117,6 +117,7 @@ import html2pdf from "html2pdf.js";
 export default{
     data() {
     return {
+        urel:this.$url,
         id: JSON.parse(localStorage.getItem("artPayment")).id,
         currency:JSON.parse(localStorage.getItem("artPayment")).currency,
         description:JSON.parse(localStorage.getItem("artPayment")).description,

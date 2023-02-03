@@ -1,5 +1,5 @@
 <template>
-<body id="landing" class="sidebar-open">
+<div id="landing" class="sidebar-open">
     <div id="dashboardPage">
         <employeeNavbarVue/>
 
@@ -322,7 +322,6 @@
                  <th scope="col">Documents</th>
               <th scope="col"> Quantité réservée</th>
                  <th scope="col">Ordinateur</th>
-               <th scope="col">Confirmation</th>
                <th class="font-w700">Suivi</th>
           <th  scope="col"> Action</th>
         </tr>
@@ -341,20 +340,19 @@
                <td  v-if="user.computer">{{user.quantityComputer}}</td>
                
                <td  v-else><i class="fa fa-remove" style="font-size:25px;color:red"></i></td> 
-                 <td v-if="user.confirm">
-                              <span class="badge badge-success font-weight-100">Confirmé</span>
-                            </td>
-                              <td v-else>
-                              <span class="badge badge-warning font-weight-100">En cours...</span>
-                            </td>
 
-                            <td v-if="user.track === 'complete' && !user.paid"> 
+
+                        
+
+                    
+  
+                              <td v-if="user.track === 'complete' && !user.paid && user.confirm"> 
 
                     
 <a type="submit" name="learn" value="myimage" style="border-radius: 30px" @click="sendPaymentProof(user)">
 <img src="@/assets/img/hotels/pay.jpg" class="rounded-circle img-fluid" style="
-    image-resolution: 3000000dpi; 
-    background-color: #000; 
+    image-resolution: 3000000dpi;
+    background-color: #000;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -369,7 +367,13 @@
 </a>
 
 </td>
-<td v-else-if="user.track === 'complete' && user.paid">
+<td v-else-if="user.confirm && user.track !== 'complete' && !user.paid ">
+            <span class="font-w600">
+                <span 
+                    class="badge badge-success font-weight-100">Confirmé</span>
+            </span>
+        </td>
+<td v-else-if="user.track === 'complete' && user.paid && user.confirm">
 <span class="badge badge-primary font-weight-100">Payé</span>
 </td>
 <td v-else>
@@ -412,7 +416,7 @@
 
         </main>
     </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -462,7 +466,7 @@ cop: false,
 
 var config = {
   method: 'get', 
-  url: 'https://dga-express.com:8443/user/'+this.id+'/reservations',
+  url: this.$url+'/user/'+this.id+'/reservations',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') }
@@ -527,7 +531,7 @@ lockedRev(){
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/reservations/'+id,
+  url: this.$url+'/reservations/'+id,
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -591,7 +595,7 @@ swalWithBootstrapButtons.fire({
 var axios = require('axios');
 var config = {
   method: 'delete',
-  url: 'https://dga-express.com:8443/delete/'+id+'/reservations',
+  url: this.$url+'/delete/'+id+'/reservations',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token')}

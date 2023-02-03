@@ -1,147 +1,107 @@
 <template>
-
-
     <div>
         <div style="margin-left: 60px">
       <lognavVue />
     </div>
 <usersidebarVue/>
 
-        <h3 style="position:relative; text-align: center;">Historique d'achat
-   </h3>      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
- 
-      <div style="height: 550px;width:1000px">
-                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
+<div style="margin-left:100px; margin-right:40px; margin-top:40px; margin-bottom:70px">
+        <h3 class="mt-2 mb-3 float-left text-primary">Achats effectués par moi</h3>
+        
+        <table class="table table-striped">
+            
+          <thead>
+            <tr>
+              <th scope="col">Mon adresse de livraison</th>
+              <th scope="col">Vandeur</th>
+              <th scope="col">Article</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Date</th>
+              <th scope="col">Quantité achetée</th>
+              <th scope="col">Paiement</th>
 
-                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
-                      background-position: center; 
-                      background-size: cover;
-                      background-repeat: no-repeat;
-                       max-width: 99.5%;
-                        max-height: 100%;
-                        height: 550px;width:800px">
-                          </a>
-                  </div>
-                  <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-            <!-- <button @click="but()" id="demo">but</button> -->
-
+              <!-- <th scope="col">Actions</th> -->
+            </tr>
+          </thead>
+          <th colspan="8"><div v-if="error" > 
+                   <tableEmptyVue/>
+                   </div> </th>    
+          <tbody style="text-transform: capitalize">
+            <tr v-for="item in Purches" v-bind:key="item.id">
+              <td>{{ item.address }}</td>
+              <td>{{ item.article.user.firstName + " " + item.article.user.lastName }}</td>
+              <td>{{ item.article.name }}</td>
+              <td>{{ item.article.price }}</td>
+              <td>{{ item.date }}</td>
+              <td>{{ item.quantity }}</td>
+              <td v-if="!item.paid" >
+                  <span class="badge badge-warning font-weight-100">En cours..</span>
+                </td>
+              <td v-else >
+                  <span class="badge badge-primary font-weight-100">le vendeur a été payé</span>
+                </td>
+            </tr>
+          </tbody>
+        </table>
     
-          <!--  -->
-    <div class="container" style="position: relative; margin-bottom: 50px" >
- 
-   <table class="table table-striped">
-     <thead>
-       <tr>
-         <th scope="col">Identifiant de transaction</th>
-         <th scope="col">Date</th>
-         <th scope="col">Montant</th>
-         <th scope="col">Operation</th>
-       </tr>
-     </thead>
-     <tbody style="text-transform: capitalize">
-       <tr v-for="pay in strip" :key="pay.id">
-         <td>{{pay.id}}</td>
-         <td>{{pay.date}}</td>
-         <td>{{pay.amount/100}} <span style="color:blue">{{pay.currency}}</span></td>
-         <td>{{pay.description}}</td>
-       </tr>
-     </tbody>
-   </table>
-
- <!-- Fim tabela -->
-</div>
+      <!-- Fim tabela -->
+    </div>
 <footerVue/>
 
-</div>
+    </div>
 </template>
 <script>
-import Swal from "sweetalert2";
 import footerVue from "@/components/footer.vue";
 import lognavVue from "../components/lognav.vue";
 import usersidebarVue from "../components/usersidebar.vue";
-export default{
+export default {
+    name: "Home",
+
     data() {
     return {
-        receipt:"",
-        login1:false,
-        userIds:[],
-        ids:[],
-        path: [],
-        Pay:[],
-        strip:[]
-    }; 
+        articles:[],
+        Purches:[],
+      
+    };
   },
-  components: {
+    components: {
         lognavVue,
     usersidebarVue,
     footerVue,
     },
 
-  
-  mounted(){
-    var axios = require('axios');
+
+    mounted(){
+
+
+var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://dga-express.com:8443/user/payments?userid='+ localStorage.getItem("userId"),
-  headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer ' + localStorage.getItem('access-token')
-  }
+  method: "get",
+  url: this.$url+'/user/destinations?userid='+ JSON.parse(localStorage.getItem("infoUser")).id,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("access-token"),
+  },
 };
 
 axios(config)
-.then((res) => {
-    let pat = []
-    pat.push(res.data)
-    for(let i = 0; i<pat.length; i++){
-        for(let y=0 ; y<pat[i].length; y++)
-                    {
-                        console.log(pat[i][y]);
-                        this.strip.push(pat[i][y])
-                    }
-    }
-            })
-.catch(function (error) {
-  console.log(error);
-  Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "Quelque chose s'est mal passé!",
-          })
-          localStorage.clear()
+  .then((res) => {
+      let Purches = res.data;
+      
+      for(let x=0; x<Purches.length; x++){
+        console.log('blaise', Purches[x]);
+        this.Purches.push(Purches[x])
+      }
+      this.Purches.reverse()
+      console.log("jj",this.Purches);
+  })
+  .catch(function (error) {
+    console.log(error);
+    localStorage.clear()
         window.location.href = "/"
-});
+  });
 
-
-  }, 
-  methods: {
-    view(path){
- this.receipt =path;
- console.log( this.receipt)
-    }
-  }
-   }
+}
+}
 </script>
-<style>
-
-</style>
-
-
-
-
-
-
-
-
-
-

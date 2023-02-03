@@ -1,7 +1,7 @@
 <template>
 
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <div style="position:relative:; padding-bottom:160px;">
             <employeeNavbarVue />
         
@@ -14,9 +14,9 @@
     <div class="modal-content">
  
       <div style="height: 550px;width:1000px">
-                  <a :href="'https://dga-express.com:8443/bill/image?file=' + this.receipt" target="_blank">
+                  <a :href=" urel+'/bill/image?file=' + this.receipt" target="_blank">
 
-                  <img :src="'https://dga-express.com:8443/bill/image?file=' + this.receipt" style="
+                  <img :src="urel+'/bill/image?file=' + this.receipt" style="
                       background-position: center;
                       background-size: cover;
                       background-repeat: no-repeat;
@@ -81,7 +81,7 @@
 </div>
 
     
-    </body>
+</div>
 </template>
 
 <script>
@@ -90,6 +90,7 @@ import Swal from 'sweetalert2';
 export default{
     data() {
     return {
+      urel: this.$url,
         receipt:"",
         login1:false,
         userIds:[],
@@ -109,7 +110,7 @@ export default{
   
       var config = {
         method: 'get',
-        url: 'https://dga-express.com:8443/admin/users',
+        url: this.$url+'/admin/users',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -127,7 +128,7 @@ console.log("uders",res.data[i].id )
         var axios = require('axios');
             var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/bills/paths/'+res.data[i].id,
+  url: this.$url+'/bills/paths/'+res.data[i].id,
   headers: { 
     'Content-Type': 'application/json'
   }
@@ -180,7 +181,7 @@ axios(config)
 
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/payments',
+  url: this.$url+'/payments',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')

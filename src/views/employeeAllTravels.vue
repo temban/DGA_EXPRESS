@@ -1,6 +1,6 @@
 <template>
 
-  <body id="landing" class="sidebar-open">
+  <div id="landing" class="sidebar-open">
     <div id="dashboardPage">
       <employeeNavbarVue />
     </div>
@@ -163,7 +163,7 @@
     </div>
     <div class="card card-hover" style="margin-left: 70px; margin-bottom: 0px">
       <div class="card-body" style="margin-top: 90px; margin-left: 50px">
-        <h4 class="card-title fs-3 text-primary">All travels</h4>
+        <h4 class="card-title fs-3 text-primary">Tous les voyages</h4>
         <table class="
             table table-striped table-hover table-borderless table-vcenter
             font-size-sm
@@ -237,7 +237,7 @@
         </table>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -290,18 +290,22 @@ export default {
     };
 
     fetch(
-      "https://dga-express.com:8443/admin/dashboard/announcements",
+      this.$url+"/admin/dashboard/announcements",
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
         this.announces = JSON.parse(result);
+        this.announces.reverse();
       })
       .catch((error) =>{  console.log("error", error)
             
       localStorage.clear()
         window.location.href = "/"
     });
+
+
+    
 
   },
   methods: {
@@ -330,7 +334,7 @@ export default {
             var axios = require("axios");
             var config = {
               method: "delete",
-              url: "https://dga-express.com:8443/delete/" + id + "/announcements",
+              url: this.$url+"/delete/" + id + "/announcements",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -368,7 +372,7 @@ export default {
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/announcement/" + id + "/users",
+        url: this.$url+"/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -390,11 +394,11 @@ export default {
           this.document = res.data.document;
           this.paymentMethod = res.data.paymentMethod;
           this.cni = res.data.cni;
-          this.passport = "https://dga-express.com:8443/passport/" + this.cni;
+          this.passport = this.$url+"/passport/" + this.cni;
           this.ticket = res.data.ticket;
-          this.tiket = "https://dga-express.com:8443/tiket/" + this.ticket;
+          this.tiket = this.$url+"/tiket/" + this.ticket;
           this.covidtest = res.data.covidtest;
-          this.covid = "https://dga-express.com:8443/covidTest/" + this.covidtest;
+          this.covid = this.$url+"/covidTest/" + this.covidtest;
           this.price = res.data.price;
           this.id = res.data.id;
  
@@ -421,7 +425,7 @@ export default {
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/admin/dashboard/validation/'+ id,
+  url: this.$url+'/admin/dashboard/validation/'+ id,
   headers: { 
     Authorization: "Bearer " + localStorage.getItem("access-token"),
      'Content-Type': 'application/json',

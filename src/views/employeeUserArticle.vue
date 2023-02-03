@@ -1,6 +1,6 @@
 <template>
 
-    <body id="landing" class="sidebar-open">
+    <div id="landing" class="sidebar-open">
         <employeeNavbarVue />
 
         <div class="card card-hover" style="margin-left: 70px;margin-bottom:0px;">
@@ -68,7 +68,7 @@
                                         <section id="contact" class="gray-bg padding-top-bottom">
                                             <div class="container bootstrap snippets bootdey">
                                                 <div class="im" style="width:100%;display: flex;flex-wrap: wrap;">
-                                                    <img v-for="(im,id) in path" v-bind:key="id" :src="`https://dga-express.com:8443/article/image?file=${im}`" style="height: 180px;width: 180px;margin: 5px;border: 2px solid #fff;"/>
+                                                    <img v-for="(im,id) in path" v-bind:key="id" :src="this.$url+`/article/image?file=${im}`" style="height: 180px;width: 180px;margin: 5px;border: 2px solid #fff;"/>
                                                 </div>
                                                 <div class="row">
                                                     <form id="Highlighted-form" class="col-sm-6 col-sm-offset-3">
@@ -205,7 +205,7 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
@@ -248,7 +248,7 @@ export default {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/user/"+this.id+"/articles/", requestOptions0)
+        fetch(this.$url+"/user/"+this.id+"/articles/", requestOptions0)
             .then(response => response.text())
             .then(result => { this.articles = JSON.parse(result); })
             .catch(error => {
@@ -290,11 +290,11 @@ window.location.href="/employeeSendArtPaymentProof"
                 redirect: 'follow'
             };
 
-            fetch("https://dga-express.com:8443/article/paths/" + item.id, requestOptions5)
+            fetch(this.$url+"/article/paths/" + item.id, requestOptions5)
                 .then(response => response.text())
                 .then(result => {
                     this.path = JSON.parse(result)
-                    console.log(`https://dga-express.com:8443/article/image?file=${this.path[0]}`);
+                    console.log(this.$url+`/article/image?file=${this.path[0]}`);
                 })
                 .catch(error => console.log('error', error));
         },
@@ -328,7 +328,7 @@ window.location.href="/employeeSendArtPaymentProof"
                         redirect: 'follow'
                     };
 
-                    fetch("https://dga-express.com:8443/delete/article/" + id, requestOptions)
+                    fetch(this.$url+"/delete/article/" + id, requestOptions)
                         .then(response => response.text())
                         .then(result => {
                             console.log(result)

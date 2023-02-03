@@ -80,7 +80,7 @@ export default {
         var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -93,11 +93,13 @@ var config = {
     this.pseudo = res.data.pseudo
     this.firstName = res.data.firstName;
     this.lastName = res.data.lastName;
-      this.pic='https://dga-express.com:8443/'+ res.data.profileimgage;
+      this.pic=this.$url+'/'+ res.data.profileimgage;
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
 .catch(function (error) {
+//     localStorage.clear()
+// window.location.href = "/"
   console.log(error);
 });
 

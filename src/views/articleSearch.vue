@@ -75,7 +75,7 @@ Inscrivez-vous ici</u></a></p>
               <div class="card ma-cart" style="border-radius: 15px; padding:-90px">
                 <div class="card-body text-left">
                   <img class="d-block img-fluid w-100 imgSlide"
-                    :src="`https://dga-express.com:8443/article/image?file=${item.mainImage}`" alt="image slot">
+                    :src="urel+`/article/image?file=${item.mainImage}`" alt="image slot">
   
                   <span class="mb-1 art-title">{{  item.name  }}</span><br />
                   <span class="mb-1 art-0 text-muted"><i class="fa fa-chevron-down text-warning"></i> {{
@@ -104,7 +104,7 @@ Inscrivez-vous ici</u></a></p>
                     <button v-if="isLogged === true && infoUser.id !== item.user.id" @click="addToCard(item)"
                     v-b-modal.modal-multi-4 type="button" style="height:38px; float:right ;"
                     class="btn btn-warning btn-rounded btn-sm btn-floating">
-                    + À la carte
+                    + <i class="fa fa-shopping-cart" style="font-size:20px;color:blue"></i>
                   </button>
                   <button v-if="isLogged === false" v-b-modal.modal-multi-Art type="button"
                     style="height:38px; width:50%;  float:right ;"
@@ -147,7 +147,7 @@ Inscrivez-vous ici</u></a></p>
                                 <b-carousel-slide v-for="(top, id) in path" class="my-img" v-bind:key="id">
                                   <template #img class="img">
                                     <img class="d-block img-fluid w-100 my-img0"
-                                      :src="`https://dga-express.com:8443/article/image?file=${top}`" alt="image slot">
+                                      :src="urel+`/article/image?file=${top}`" alt="image slot">
                                   </template>
                                 </b-carousel-slide>
                               </b-carousel>
@@ -273,8 +273,8 @@ Inscrivez-vous ici</u></a></p>
     </div>
   </template>
   <script>
+  import navArticleVue from "../components/modals/navparticularserArticles.vue";
     import NothingFoundVue from "../components/NothingFound.vue";
-  import navArticleVue from "../components/navArticle.vue";
 import footerVue from "@/components/footer.vue"
   // import pageNotFoundNoDataVue from "./pageNotFoundNoData.vue";
   // import pageNotFoundVue from "./pageNotFound.vue"
@@ -318,6 +318,7 @@ import footerVue from "@/components/footer.vue"
         catId: this.$route.params.catId,
         ArtName: this.$route.params.ArtName,
         NothingFoundVue: false,
+        urel:this.$url,
       }
     },
     components: {
@@ -336,7 +337,7 @@ import footerVue from "@/components/footer.vue"
       
       var requestOptions1 = { method: 'GET', redirect: 'follow' };
   
-      fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+      fetch(this.$url+"/sub/informations/view", requestOptions1)
         .then(response => response.text())
         .then(result => {
           if (JSON.parse(result).length !== 0) {
@@ -358,7 +359,7 @@ import footerVue from "@/components/footer.vue"
       this.$bus.$on('logged', () => {
         this.isLogged = this.checkIfIsLogged()
       }),
-        await fetch("  https://dga-express.com:8443/search/cathegoies/"+ this.catId+"/articles/"+ this.ArtName)
+        await fetch(this.$url+"/search/cathegoies/"+ this.catId+"/articles/"+ this.ArtName)
           .then(response => response.json())
           .then((data) => {
             if (data == "") {
@@ -487,7 +488,7 @@ if( this.subInfo.currency === "XAF"){
           redirect: 'follow'
         };
   
-        fetch("https://dga-express.com:8443/article/paths/" + item.id, requestOptions5)
+        fetch(this.$url+"/article/paths/" + item.id, requestOptions5)
           .then(response => response.text())
           .then(result => {
             this.path = JSON.parse(result)
@@ -511,7 +512,7 @@ if( this.subInfo.currency === "XAF"){
           email: this.email,
           password: this.password
         }
-        axios.post('https://dga-express.com:8443/signup', newUser)
+        axios.post(this.$url+'/signup', newUser)
         {
           this.$router.push('/');
         }
@@ -529,7 +530,7 @@ if( this.subInfo.currency === "XAF"){
         });
         var config = {
           method: 'post',
-          url: 'https://dga-express.com:8443/login',
+          url: this.$url+'/login',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },

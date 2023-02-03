@@ -147,7 +147,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/signup",
+        url: this.$url+"/signup",
         headers: {
           "Content-Type": "application/json",
         },

@@ -62,7 +62,8 @@
                         <div class="row">
                           <form id="Highlighted-form" class="col-sm-6 col-sm-offset-3">
                             <input v-model="annDtouserDtoId" type="hidden" />
-                            <div class="form-group" v-if="confirm && userId !== annDtouserDtoId &&
+
+                            <div class="form-group" v-if="paidReservation === true && confirm === true && userId !== annDtouserDtoId &&
                             annDtoStatus === 'ENABLED'">
                               <div class="controls">
 
@@ -76,6 +77,7 @@
                                     style="font-size:25px;padding-bottom:13px; margin-top: 37px;margin-left: -5px;"></i> </a>
                               </div>
                             </div>
+
                             <!-- End name input -->
                             <div class="form-group">
                               <div class="controls">
@@ -382,13 +384,13 @@
           <thead>
             <tr>
               <th scope="col">Voyageur</th>
-              <th scope="col">la Source</th>
+              <th scope="col">Départ</th>
               <th scope="col">Destination</th>
+              <th scope="col">Réservateur</th>
               <th scope="col">Doc</th>
               <th scope="col">Qté réservée</th>
               <th scope="col">ordinateur</th>
               <th scope="col">Statut</th>
-              <th scope="col">Paiement</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -403,8 +405,8 @@
 
               <a v-on:click="view1(user.announcementDto.id, user.announcementDto.userDto.id)"
                 data-target="#exampleModal12" data-toggle="modal">
-                <img v-if="user.announcementDto.userDto.profileimgage !== ''" :src="
-                  'https://dga-express.com:8443/' +
+                <img v-if="user.announcementDto.userDto.profileimgage !== ''" v-bind:src="
+                  urel+'/' +
                   user.announcementDto.userDto.profileimgage
                 " style="width: 60px; height: 60px; border-radius: 30px" />
                 <img v-else src="@/assets/img/hotels/59710428.png"
@@ -413,6 +415,8 @@
 
               <td>{{  user.announcementDto.departuretown.slice(0, 14) }}...</td>
               <td>{{  user.announcementDto.destinationtown.slice(0, 14)  }}...</td>
+              <td>{{  user.userDto.firstName+ " "+ user.userDto.lastName}}</td>
+
               <td v-if="user.documents" >
                 <div style="position:relative;margin-left:15px">{{user.quantityDocument}}</div> 
               </td>
@@ -428,7 +432,12 @@
                 <i class="fa fa-remove" style="font-size: 25px; color: red"></i>
               </td>
 
-              <td v-if="userId !== user.userDto.id && user.confirm && user.track !== 'complete'">
+
+              <td v-if="userId === user.announcementDto.userDto.id && user.paid && user.track == 'complete'  && user.confirm">
+                <span  class="badge badge-primary font-weight-100">vous avez été payés</span>
+
+              </td>
+              <td v-else-if="userId !== user.userDto.id &&user.confirm && user.track !== 'complete'">
                 <span class="badge badge-success font-weight-100">Confirmé</span>
               </td>
               <td v-else-if="userId !== user.userDto.id && user.confirm && user.track === 'complete'">
@@ -438,6 +447,9 @@
               <td v-else-if="userId === user.userDto.id && user.track === 'complete'" >
                 <span class="badge badge-primary font-weight-100">Achevé</span>
             </td>
+            <td v-else-if="userId === user.userDto.id && user.confirm && user.paidReservation">
+                <span class="badge badge-primary font-weight-100">Ok</span>
+              </td>
               <td v-else-if="userId === user.userDto.id && user.confirm">
              
                 <a type="submit" name="learn" value="myimage" style="border-radius: 30px" v-b-modal.modal-multi-payment @click="beforPay(user)"   
@@ -449,7 +461,7 @@
                       background-size: cover;
                       background-repeat: no-repeat;
                       max-width: 100%;
-                      max-height: 100%;
+                      max-height: 100%; 
                       height: 60px;
                       width: 55px;
                       margin-bottom: -10px;
@@ -461,19 +473,7 @@
 
               </td>
               <td v-else>
-                <span class="badge badge-warning font-weight-100">En attente...</span>
-              </td>
-              <td v-if="userId === user.announcementDto.userDto.id && user.paid">
-                <span  class="badge badge-primary font-weight-100">vous avez été payés</span>
-
-              </td>
-              <td v-else-if="userId !== user.announcementDto.userDto.id && user.paid">
-                <span  class="badge badge-primary font-weight-100">Le voyageur a été payé</span>
-
-              </td>
-              <td v-else>
-                <span  class="badge badge-warning font-weight-100">EN ATTENTE...</span>
-
+                <span class="badge badge-warning font-weight-100">Attente de confirmation</span>
               </td>
             
               <td>
@@ -583,6 +583,8 @@ export default {
   name: "MyReservations",
   data() {
     return {
+      paidReservation:"",
+      urel:this.$url,
       firstName:"",
       revlength:"",
       pcPrice:"",
@@ -637,6 +639,7 @@ export default {
   },
 mounted(){
   window.localStorage.removeItem('addreservation');
+  window.localStorage.removeItem('confirmReservation');
 },
   async created() {
     var axios = require("axios");
@@ -644,7 +647,7 @@ mounted(){
     var config = {
       method: "get",
       url:
-        "https://dga-express.com:8443/user/" +
+        this.$url+"/user/" +
         localStorage.getItem("userId") +
         "/reservations",
       headers: {
@@ -658,9 +661,9 @@ mounted(){
         if (res.data == "") {
           this.error = true
         } else {
-          this.users = res.data;
+          this.users = res.data.reverse();
         }
-
+ console.log("paiy", this.users)
         this.loading = false;
       })
       .catch(function (error) {
@@ -693,7 +696,7 @@ mounted(){
           var axios = require("axios");
           var config = {
             method: "get",
-            url: "https://dga-express.com:8443/reservations/" + id,
+            url: this.$url+"/reservations/" + id,
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -706,7 +709,7 @@ mounted(){
               var data0 = JSON.stringify(res.data);
               var config0 = {
                 method: "put",
-                url: "https://dga-express.com:8443/update/reseravtion",
+                url: this.$url+"/update/reseravtion",
                 headers: {
                   "Content-Type": "application/json",
                   Authorization:
@@ -766,7 +769,7 @@ var data = JSON.stringify(
 
 var config = {
   method: 'put',
-  url: 'https://dga-express.com:8443/update/announcement',
+  url: this.$url+'/update/announcement',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer '+ localStorage.getItem('access-token') },
@@ -818,7 +821,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/reservations/" + id,
+        url: this.$url+"/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -916,7 +919,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/reservations/" + id,
+        url: this.$url+"/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1028,7 +1031,7 @@ axios(config)
         redirect: 'follow'
       };
 
-      fetch("https://dga-express.com:8443/user/" + id2 + "/articles/", requestOptions)
+      fetch(this.$url+"/user/" + id2 + "/articles/", requestOptions)
         .then(response => response.text())
         .then(result => {
           this.articlelength = JSON.parse(result).length;
@@ -1043,7 +1046,7 @@ axios(config)
       var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "https://dga-express.com:8443/users/" + id2 + "/announcements",
+        url: this.$url+"/users/" + id2 + "/announcements",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1061,7 +1064,7 @@ axios(config)
       var axios3 = require("axios");
       var config3 = {
         method: "get",
-        url: "https://dga-express.com:8443/user/" + id2 + "/reservations",
+        url: this.$url+"/user/" + id2 + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1080,7 +1083,7 @@ axios(config)
       var axioscomment = require("axios");
       var configcomment = {
         method: "get",
-        url: "https://dga-express.com:8443/user/comments/" + id,
+        url: this.$url+"/user/comments/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1103,7 +1106,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/announcement/" + id + "/users",
+        url: this.$url+"/announcement/" + id + "/users",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1114,7 +1117,7 @@ axios(config)
         .then((res) => {
           this.profileimgage = res.data.userDto.profileimgage;
           this.stars = res.data.userDto.stars;
-          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+          this.pic = this.$url+"/" + this.profileimgage;
           this.firstName = res.data.userDto.firstName;
           this.lastName = res.data.userDto.lastName;
           this.pseudo = res.data.userDto.pseudo;
@@ -1137,7 +1140,7 @@ axios(config)
       var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/reservations/" + id,
+        url: this.$url+"/reservations/" + id,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1149,7 +1152,7 @@ axios(config)
           
           var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
   .then((response) => response.text())
   .then((result) => {
       this.subInfo = JSON.parse(result)[0];
@@ -1181,10 +1184,11 @@ fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
           this.annDtouserDtoId = res.data.announcementDto.userDto.id;
           this.profileimgage = res.data.announcementDto.userDto.profileimgage;
           this.totalprice = res.data.totalprice;
-          this.pic = "https://dga-express.com:8443/" + this.profileimgage;
+          this.pic = this.$url+"/" + this.profileimgage;
           this.receiver = res.data.receiver;
           this.cardNumber =  res.data.receivernumbercni;
           this.tel =  res.data.tel;
+          this.paidReservation = res.data.paidReservation,
 
           this.docPric = res.data.quantityDocument * this.subInfo.documentPrice;
           this.pcPrice = res.data.quantityComputer * this.subInfo.computerPrice;
@@ -1218,13 +1222,14 @@ this.beforPay();
 
       var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
 .then((response) => response.text())
 .then((result) => {
 this.subInfo = JSON.parse(result)[0];
 this.subInfo.computerPrice;
 this.subInfo.documentPrice;
-
+console.log("revPayId",item.id);
+    localStorage.setItem("revPayId",item.id);
 console.log("sub",this.subInfo.currency,   this.subInfo.documentPrice, this.subInfo.computerPrice)
 
 if( this.subInfo.currency ==="XAF"){
@@ -1232,7 +1237,7 @@ if( this.subInfo.currency ==="XAF"){
 var axios = require("axios");
 var config = {
   method: "get",
-  url: "https://dga-express.com:8443/reservations/" + item.id,
+  url: this.$url+"/reservations/" + item.id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1260,7 +1265,7 @@ axios(config)
 var axios1 = require("axios");
 var config1 = {
   method: "get",
-  url: "https://dga-express.com:8443/reservations/" + item.id,
+  url: this.$url+"/reservations/" + item.id,
   headers: {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1293,6 +1298,7 @@ axios1(config1)
 
 
       this.totalPrice = this.total_Rev;
+      this.revPayId = item.id;
      this.departuretown = item.announcementDto.departuretown;
      this.destinationtown = item.announcementDto.destinationtown;
      this.departuredate = item.announcementDto.departuredate;
@@ -1341,7 +1347,7 @@ axios1(config1)
 
           var requestOptions1 = { method: "GET", redirect: "follow" };
 
-fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+fetch(this.$url+"/sub/informations/view", requestOptions1)
   .then((response) => response.text())
   .then((result) => {
     this.subInfo = JSON.parse(result)[0];
@@ -1355,7 +1361,7 @@ if( this.subInfo.currency ==="XAF"){
     var axios = require("axios");
       var config = {
         method: "get",
-        url: "https://dga-express.com:8443/reservations/" + this.payRvId,
+        url: this.$url+"/reservations/" + this.payRvId,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1380,7 +1386,7 @@ if( this.subInfo.currency ==="XAF"){
   var axios1 = require("axios");
       var config1 = {
         method: "get",
-        url: "https://dga-express.com:8443/reservations/" + this.payRvId,
+        url: this.$url+"/reservations/" + this.payRvId,
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1475,7 +1481,7 @@ if( this.subInfo.currency ==="XAF"){
 
       var config = {
         method: "delete",
-        url: "https://dga-express.com:8443/user/" + id + "/reservations",
+        url: this.$url+"/user/" + id + "/reservations",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("access-token"),

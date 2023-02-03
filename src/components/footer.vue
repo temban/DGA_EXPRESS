@@ -31,7 +31,7 @@
                 <div class="col-lg-4">
                     <div class="">
                         <h6 class="footer-heading text-uppercase text-white">Contactez-Nous</h6>
-                        <p class="contact-info mt-4">Yaoundé : +237 67 58 51 49</p>
+                        <p class="contact-info mt-4">Yaoundé : +237 67 58 51 499</p>
                         <p class="contact-info"> Douala : +237 67 87 86 731</p>
                         <p class="contact-info">Namur : +32 465 853 983</p>
                         <p class="contact-info">Bruxelle : +32 465 860 367</p>

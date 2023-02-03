@@ -358,7 +358,7 @@ function myFunction() {
         var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -373,7 +373,7 @@ var config = {
     $(document).ready(function(){
  
 
- var urlEndpoint ='https://dga-express.com:8443/subcribe?userId=' + res.data.id;
+ var urlEndpoint =this.$url+'/subcribe?userId=' + res.data.id;
  var accessPoint = new EventSource(urlEndpoint);
 
 
@@ -468,7 +468,7 @@ var config = {
  var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/profile',
+  url: this.$url+'/profile',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -478,7 +478,7 @@ var config = {
 await axios(config)
 .then(res => {
     this.profileimgage = res.data.profileimgage;
-      this.pic='https://dga-express.com:8443/'+ this.profileimgage,
+      this.pic=this.$url+'/'+ this.profileimgage,
     console.log('profile: ',res.data.profileimgage);
 localStorage.setItem('profileImage', res.data.profileimgage);
       })
@@ -487,7 +487,7 @@ localStorage.setItem('profileImage', res.data.profileimgage);
 });
 var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+        fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -510,7 +510,7 @@ var requestOptions1 = { method: 'GET', redirect: 'follow' };
       this.isLogged = this.checkIfIsLogged();
     });
     this.tabFin = this.tabInit
-    await fetch("https://dga-express.com:8443/announcements")
+    await fetch(this.$url+"/announcements")
       .then(response => response.json())
       .then(data => {
         for (let i = 0; i < data.length; i++) {

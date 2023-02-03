@@ -173,7 +173,7 @@ Inscrivez-vous ici</u></a></p>
                                 <div class="column1">
                                  <img v-if=" comment.booker.profileimgage !==''"
                                     :src="
-                                      'https://dga-express.com:8443/' +
+                                      this.$url+'/' +
                                       comment.booker.profileimgage
                                     "
                                     style="
@@ -270,9 +270,9 @@ Inscrivez-vous ici</u></a></p>
                      max-width: 100%;
                       max-height: 100%;
                       height:190px; width: 190px;"  />
-            </div>
+            </div> 
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -297,7 +297,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -419,7 +419,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -444,7 +444,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -568,7 +568,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -593,7 +593,7 @@ Inscrivez-vous ici</u></a></p>
                       height:190px; width: 190px;"  />
             </div>
             <div v-else class="mt-1 mb-1">
-              <img :src="'https://dga-express.com:8443/'+user.userDto.profileimgage"
+              <img v-bind:src="urel+'/'+user.userDto.profileimgage"
                 class="rounded-circle img-fluid" style="border-radius: 160px;
                     image-resolution: 844300000dpi;  background-color: #000;
                     background-position: center;
@@ -837,6 +837,7 @@ import Swal from 'sweetalert2'
       name: "announcementsVue",
     data() {
       return {
+        urel: this.$url,
         level:"",
         login:false,
         articlelength:'',
@@ -878,9 +879,11 @@ import Swal from 'sweetalert2'
      components: {
       
   },
+  
 
  
     async mounted() {
+      console.log("yyyyyyy", this.urel)
       var $grades = $('.grade');
 
 $grades.each(function() {
@@ -907,7 +910,7 @@ $grades.each(function() {
         
           var requestOptions1 = { method: 'GET', redirect: 'follow' };
 
-        fetch("https://dga-express.com:8443/sub/informations/view", requestOptions1)
+        fetch(this.$url+"/sub/informations/view", requestOptions1)
             .then(response => response.text())
             .then(result => {
                 if (JSON.parse(result).length!==0) {
@@ -919,7 +922,7 @@ $grades.each(function() {
 
    
 
-    await fetch("https://dga-express.com:8443/announcements")
+    await fetch(this.$url+"/announcements")
     .then(response => response.json())
     .then(data => {
         this.loading = false
@@ -952,7 +955,7 @@ $grades.each(function() {
             redirect: 'follow'
         };
 
-        fetch("https://dga-express.com:8443/user/" + id2 + "/articles/", requestOptions)
+        fetch(this.$url+"/user/" + id2 + "/articles/", requestOptions)
             .then(response => response.text())
             .then(result => {
                 this.articlelength = JSON.parse(result).length;
@@ -967,7 +970,7 @@ $grades.each(function() {
 
     var configcomment = {
       method: "get",
-      url: "https://dga-express.com:8443/user/comments/" + id,
+      url: this.$url+"/user/comments/" + id,
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -990,10 +993,7 @@ $grades.each(function() {
 var axios3 = require("axios");
     var config3 = {
       method: "get",
-      url:
-        "https://dga-express.com:8443/user/" +
-       id2 +
-        "/reservations",
+      url:  this.$url+"/user/" + id2 + "/reservations",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1012,9 +1012,7 @@ var axios3 = require("axios");
  var axios1 = require("axios");
     var config1 = {
       method: "get",
-      url:
-        "https://dga-express.com:8443/users/" +
-        id2+"/announcements",
+      url: this.$url+"/users/" + id2+"/announcements",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1031,7 +1029,7 @@ var axios3 = require("axios");
 
 var config = {
   method: 'get',
-  url: 'https://dga-express.com:8443/announcement/'+id+'/users',
+  url: this.$url+'/announcement/'+id+'/users',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'Bearer ' + localStorage.getItem('access-token')
@@ -1042,7 +1040,7 @@ axios(config)
 .then(res => {
   this.level= res.data.userDto.level;
        this.profileimgage= res.data.userDto.profileimgage;
-          this.pic = 'https://dga-express.com:8443/'+  this.profileimgage,
+          this.pic = this.$url+'/'+  this.profileimgage,
         this.AnnUserId = res.data.userDto.id;
         this.firstName = res.data.userDto.firstName;
         this.lastName = res.data.userDto.lastName;
@@ -1083,7 +1081,7 @@ axios(config)
         email: this.email,
         password: this.password
       }
-      axios.post('https://dga-express.com:8443/signup', newUser)
+      axios.post(this.$url+'/signup', newUser)
         {
           this.$router.push('/login');
         }
@@ -1093,7 +1091,7 @@ axios(config)
       this.login = true;
       event.preventDefault();
       var axios = require("axios");
-
+      let urel =  this.$url;
       var qs = require("qs");
       var data = qs.stringify({
         useremail: this.useremail,
@@ -1101,7 +1099,7 @@ axios(config)
       });
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/login",
+        url: this.$url+"/login",
         data: data,
       };
 
@@ -1115,7 +1113,7 @@ axios(config)
 
           var config0 = {
             method: "get",
-            url: "https://dga-express.com:8443/profile",
+            url: urel+"/profile",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("access-token"),
@@ -1167,7 +1165,7 @@ axios(config)
 // });
 // var config = {
 //   method: 'post',
-//   url: 'https://dga-express.com:8443/login',
+//   url: this.$url+'/login',
 //   headers: { 
 //     'Content-Type': 'application/x-www-form-urlencoded'
 //   },

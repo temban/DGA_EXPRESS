@@ -42,10 +42,24 @@ position: relative;
     </a>            
       <input type="checkbox" id="chk" aria-hidden="true" />
 
+
+
+
       <div class="signup">
         <form  @submit="onLogin">
           <label for="chk" aria-hidden="true" >S'identifier</label>
-          <input v-model="useremail" type="email" name="email" placeholder="E-mail" required=" Please Insert Your E-mail!" />
+          <input v-model="useremail" type="email" name="email" placeholder="E-mail"/>
+<div style="position:relative; margin-bottom:4px; margin-right:30px; float: right;">
+ <!--begin::Link-->
+ <router-link to="/forgot-password" >
+  <span style="font-size:large; color: orangered;"> Mot de passe oublié ?</span>
+          </router-link>
+</div>
+           
+
+
+
+
           <input
           v-model="passwordLogin"
           id="pass2"
@@ -93,7 +107,7 @@ position: relative;
                 required=""
               />
               <input 
-              id="imput"
+              id="pseudo"
               style="margin-top:-12px" 
                v-model="pseudo" type="name" 
                name="txt" placeholder="Pseudo" 
@@ -410,25 +424,34 @@ function checkStrength(password) {
   },
      signup(event) {
       if(document.getElementById("phone").value==0){
-         Swal.fire("Failed!", "Input your Phone Number!", "warning");
+         Swal.fire("Échec !", "Entrez votre numéro de téléphone !", "warning");
       }
       else if(document.getElementById("imput").value==0){
-         Swal.fire("Failed!", "please fill all inputes!", "warning");
+         Swal.fire("Échec !", "veuillez remplir tous les champs!", "warning");
       }
       else if(document.getElementById("imput1").value==0){
-         Swal.fire("Failed!", "Input your E-mail!", "warning");
+         Swal.fire("Échec !", "Entrez votre E-mail !", "warning");
       }
+      else if(document.getElementById("pseudo").value==0){
+         Swal.fire("Échec !", "Entrez votre pseudo !", "warning");
+      }
+      // else if(document.getElementById("pseudo").value=="Admin"){
+      //    Swal.fire("Échec !", "Entrez un autre pseudo!", "warning");
+      // }
+      // else if(document.getElementById("pseudo").value=='DGA-EMPLOYEE'){
+      //    Swal.fire("Échec !", "Entrez un autre pseudo!", "warning");
+      // }
       else if(this.condition==false){
-         Swal.fire("Failed!", "Accept Terms and Conditions!", "warning");
+         Swal.fire("Échec !", "Accepter les conditions générales !", "warning");
       }
       else if(this.password != this.confPassword) {
-         Swal.fire("Failed!", "Password does not match!", "warning");
+         Swal.fire("Échec !", "Le mot de passe ne correspond pas !", "warning");
       }
       else if(document.getElementById("pass").value==0) {
-         Swal.fire("Failed!", "Password is Empty!", "warning");
+         Swal.fire("Échec !", "Mot de passe vide !", "warning");
       }
       else if(document.getElementById("pass1").value==0) {
-         Swal.fire("Failed!", "Password is Empty!", "warning");
+         Swal.fire("Échec !", "Mot de passe vide !", "warning");
       }
       else{ 
       this.loginOn = true;
@@ -443,7 +466,7 @@ function checkStrength(password) {
       });
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/login",
+        url: this.$url+"/login",
         data: data,
       };
 
@@ -455,7 +478,7 @@ function checkStrength(password) {
           localStorage.setItem("refresh-token", refreshtoken);
           localStorage.setItem("access-token", accesstoken);
 
-          var config0 = {
+          var config0 = { 
             method: "get",
             url: "https://dga-express.com:8443/profile",
             headers: {
@@ -483,16 +506,16 @@ function checkStrength(password) {
         .catch(function (error) {
           if (error.response.status === 500) {
             Swal.fire(
-              "Login Failed!",
-              "Please Check Your Credentials!.",
+              "Échec de la connexion!",
+              "Veuillez vérifier vos informations d'identification !",
               "error"
             );
           }
           if (error.response.status === 401) {
-            Swal.fire("Login Failed!", "User Does Not Exist!.", "error");
+            Swal.fire("Échec de la connexion !", "L'utilisateur n'existe pas !", "error");
           }
           if (error.response.status === 404) {
-            Swal.fire("Failed!", "Something Went Wrong!.", "error");
+            Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
           }
           console.log(error);
         }); 
@@ -511,7 +534,7 @@ function checkStrength(password) {
 
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/signup",
+        url: this.$url+"/signup",
         headers: {
           "Content-Type": "application/json",
         },
@@ -533,10 +556,10 @@ function checkStrength(password) {
         .catch(function (error) {
           console.log(error);
           if (error.response.status === 500) {
-            Swal.fire("Registration Failed!", "User Already Exist!.", "error");
+            Swal.fire("Échec de l'enregistrement !", "L'utilisateur existe déjà !", "error");
           }
           if (error.response.status === 404) {
-            Swal.fire("Failed!", "Something Went Wrong!.", "error");
+            Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
           }
         });
  
@@ -671,7 +694,7 @@ function checkStrength(password) {
       });
       var config = {
         method: "post",
-        url: "https://dga-express.com:8443/login",
+        url: this.$url+"/login",
         data: data,
       };
 
@@ -711,16 +734,16 @@ function checkStrength(password) {
         .catch(function (error) {
           if (error.response.status === 500) {
             Swal.fire(
-              "Login Failed!",
-              "Please Check Your Credentials!.",
+              "Échec de la connexion!",
+              "Veuillez vérifier vos informations d'identification !",
               "error"
             );
           }
           if (error.response.status === 401) {
-            Swal.fire("Login Failed!", "User Does Not Exist!.", "error");
+            Swal.fire("Échec de la connexion !", "L'utilisateur n'existe pas !", "error")
           }
           if (error.response.status === 404) {
-            Swal.fire("Failed!", "Something Went Wrong!.", "error");
+            Swal.fire("Échec !", "Quelque chose s'est mal passé !", "error");
           }
           console.log(error);
         });
